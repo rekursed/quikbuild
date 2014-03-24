@@ -41,6 +41,13 @@ class Store
      */
     protected $store_name;
     
+
+    
+             /**
+     * @ORM\OneToMany(targetEntity="Cart", mappedBy="store",cascade={"remove"})
+     */
+    protected $carts;
+    
        /**
      * @Gedmo\Slug(fields={"store_name"})
      * @ORM\Column(length=128, unique=true, nullable=false)
@@ -1157,5 +1164,38 @@ return $enabled;
     public function getViewed()
     {
         return $this->viewed;
+    }
+
+    /**
+     * Add carts
+     *
+     * @param \Zeteq\MarketBundle\Entity\Cart $carts
+     * @return Store
+     */
+    public function addCart(\Zeteq\MarketBundle\Entity\Cart $carts)
+    {
+        $this->carts[] = $carts;
+    
+        return $this;
+    }
+
+    /**
+     * Remove carts
+     *
+     * @param \Zeteq\MarketBundle\Entity\Cart $carts
+     */
+    public function removeCart(\Zeteq\MarketBundle\Entity\Cart $carts)
+    {
+        $this->carts->removeElement($carts);
+    }
+
+    /**
+     * Get carts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCarts()
+    {
+        return $this->carts;
     }
 }

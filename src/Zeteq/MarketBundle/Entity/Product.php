@@ -192,6 +192,30 @@ class Product
      */
     private $image;
     
+    
+    
+    
+    
+    
+        
+        /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="parent")
+     */
+    private $variations;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="variations")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    private $parent;
+    
+    
+    
+    
+    
+    
+    
+    
     public function __toString() {
         return $this->getName();
     }
@@ -875,5 +899,61 @@ protected function getUploadRootDir()
     public function getMetaKeywords()
     {
         return $this->meta_keywords;
+    }
+
+    /**
+     * Add variations
+     *
+     * @param \Zeteq\MarketBundle\Entity\Product $variations
+     * @return Product
+     */
+    public function addVariation(\Zeteq\MarketBundle\Entity\Product $variations)
+    {
+        $this->variations[] = $variations;
+    
+        return $this;
+    }
+
+    /**
+     * Remove variations
+     *
+     * @param \Zeteq\MarketBundle\Entity\Product $variations
+     */
+    public function removeVariation(\Zeteq\MarketBundle\Entity\Product $variations)
+    {
+        $this->variations->removeElement($variations);
+    }
+
+    /**
+     * Get variations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVariations()
+    {
+        return $this->variations;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Zeteq\MarketBundle\Entity\Product $parent
+     * @return Product
+     */
+    public function setParent(\Zeteq\MarketBundle\Entity\Product $parent = null)
+    {
+        $this->parent = $parent;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Zeteq\MarketBundle\Entity\Product 
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

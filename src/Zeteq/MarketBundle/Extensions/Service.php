@@ -40,23 +40,47 @@ class Service {
         
         return 'Tk.';
     }
+
     
-    public function getCart()
+    public function getCarts(){
+        
+        $session = $this->container->get('session');
+            $session_cart = $session->get('carts');
+        if(!$session_cart){
+            $arr = array();
+            $session->set('carts',$arr);
+        }
+        
+        return $session_cart;
+    }
+    public function getCart($store_slug)
     {
 
 
 $session = $this->container->get('session');
 
         
-        $cid = $session->get('cart_id');
-        if(!$cid){
+        $session_cart = $session->get('carts');
+        if(!$session_cart){
+            $arr = array();
+            $session->set('carts',$arr);
+        }
+       
+        if(isset($session_cart[$store_slug])){
+        $store_cart_id = $session_cart[$store_slug];
+            
+        }
+        else{
+            $store = $this->em->getRepository('ZeteqMarketBundle:Store')->findOneBySlug($store_slug);
             $c = New Cart();
+            $c->setStore($store);
             $this->em->persist($c);
             $this->em->flush();
-            $session->set('cart_id',$c->getId());
-            $cid = $session->get('cart_id');
+            $session_cart[$store_slug] = $c->getId();
+            $session->set('carts',$session_cart);
+            $store_cart_id = $c->getId();
         }
-        $cart = $this->em->getRepository('ZeteqMarketBundle:Cart')->findOneById($cid);
+        $cart = $this->em->getRepository('ZeteqMarketBundle:Cart')->findOneById($store_cart_id);
         return $cart;
         
     }
@@ -73,6 +97,23 @@ $session = $this->container->get('session');
         return $as;
     }
 
+    
+        public function getParentCategories() {
+        try {
+
+            $query = $this->em->createQuery('SELECT a from ZeteqMarketBundle:ProductCategory a WHERE a.is_parent=true AND a.enabled=1 ')
+           
+                    ;
+            $as = $query->getResult();
+        } catch (\Doctrine\Orm\NoResultException $e) {
+            $as = false;
+        }
+
+        return $as;
+    }
+    
+    
+    
     public function getEnabledProductSections() {
         try {
 

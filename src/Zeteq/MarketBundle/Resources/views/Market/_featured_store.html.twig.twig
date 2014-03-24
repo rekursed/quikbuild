@@ -1,0 +1,19 @@
+
+                    <div class="visible-lg">
+                    <h5 class="section_header"><i class="fa fa-thumbs-up"> </i> Featured Stores</h5>
+                    <div class="row">
+
+                            {% for store in service.getFeaturedStores()%}
+                        <div class="col-md-6">                       
+                            <div class="feat_store_div" style="">
+                                <a href="{{path('store_show',{'slug':store.slug})}}">
+                                    <img style="height:100px;width:100px" class="img-responsive "  src="{{asset(store.getProfileImageWebPath()  )  }}"/>
+                                </a>  <br/> 
+
+                                <a class="feat_store_div_a" href="{{path('store_show',{'slug':store.slug})}}">  {{store.getStoreName()}}</a>  
+                            </div>          
+
+                        </div>               
+{% endfor %}
+                    </div>
+                </div>

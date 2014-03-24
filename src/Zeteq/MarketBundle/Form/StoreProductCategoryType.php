@@ -16,6 +16,7 @@ class StoreProductCategoryType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('parent')
             ->add('enabled')
             ->add('description')
 

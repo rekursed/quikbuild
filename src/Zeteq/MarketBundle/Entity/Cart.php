@@ -154,6 +154,15 @@ class Cart
      * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart",cascade={"remove"})
      */
     protected $cart_items;
+    
+    
+            /**
+     * @ORM\ManyToOne(targetEntity="Store", inversedBy="carts")
+     * @ORM\JoinColumn(name="store_id", referencedColumnName="id",nullable=false)
+     */
+    protected $store;
+    
+    
      
      /**
      * @ORM\ManyToOne(targetEntity="PaymentMethod", inversedBy="carts")
@@ -849,5 +858,28 @@ return        $sm = $this->getShippingMethod()->getCost();
     public function getShippingMethod()
     {
         return $this->shipping_method;
+    }
+
+    /**
+     * Set store
+     *
+     * @param \Zeteq\MarketBundle\Entity\Store $store
+     * @return Cart
+     */
+    public function setStore(\Zeteq\MarketBundle\Entity\Store $store)
+    {
+        $this->store = $store;
+    
+        return $this;
+    }
+
+    /**
+     * Get store
+     *
+     * @return \Zeteq\MarketBundle\Entity\Store 
+     */
+    public function getStore()
+    {
+        return $this->store;
     }
 }

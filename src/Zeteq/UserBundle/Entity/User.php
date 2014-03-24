@@ -84,7 +84,14 @@ class User implements AdvancedUserInterface, \Serializable
      */
     protected $stores;
     
-        
+       
+     /**
+     * @ORM\Column(type="integer")
+     */
+    private $my_store_id;
+    
+    
+    
     /**
      * @ORM\OneToOne(targetEntity="Zeteq\MarketBundle\Entity\Cart", mappedBy="user")
      */
@@ -418,5 +425,28 @@ class User implements AdvancedUserInterface, \Serializable
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    /**
+     * Set my_store_id
+     *
+     * @param integer $myStoreId
+     * @return User
+     */
+    public function setMyStoreId($myStoreId)
+    {
+        $this->my_store_id = $myStoreId;
+    
+        return $this;
+    }
+
+    /**
+     * Get my_store_id
+     *
+     * @return integer 
+     */
+    public function getMyStoreId()
+    {
+        return $this->my_store_id;
     }
 }

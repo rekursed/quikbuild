@@ -1,4 +1,17 @@
- body{padding-top:120px}
+#sa_second_menu i{
+    font-size:18px;
+}
+a.sa_sm_a{
+    text-align: center;
+}
+.sm_ul a{
+    text-align: center;
+}
+.sm_ul i{
+    font-size:18px;
+    display:block
+}
+body{padding-top:120px}
  
     .ul_route_params li{
         list-style:none;

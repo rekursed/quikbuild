@@ -48,6 +48,8 @@ class CartItem
      * @ORM\JoinColumn(name="cart_id", referencedColumnName="id",nullable=false)
      */
     protected $cart;
+    
+
 
 
     

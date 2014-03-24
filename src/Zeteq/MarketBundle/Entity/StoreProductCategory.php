@@ -62,7 +62,17 @@ class StoreProductCategory
     protected $store;
 
 
+        
+        /**
+     * @ORM\OneToMany(targetEntity="StoreProductCategory", mappedBy="parent")
+     */
+    private $children;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="StoreProductCategory", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id",nullable=true)
+     */
+    private $parent;
 
     /**
      * Constructor
@@ -262,5 +272,61 @@ return $ep;
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add children
+     *
+     * @param \Zeteq\MarketBundle\Entity\StoreProductCategory $children
+     * @return StoreProductCategory
+     */
+    public function addChildren(\Zeteq\MarketBundle\Entity\StoreProductCategory $children)
+    {
+        $this->children[] = $children;
+    
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \Zeteq\MarketBundle\Entity\StoreProductCategory $children
+     */
+    public function removeChildren(\Zeteq\MarketBundle\Entity\StoreProductCategory $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Zeteq\MarketBundle\Entity\StoreProductCategory $parent
+     * @return StoreProductCategory
+     */
+    public function setParent(\Zeteq\MarketBundle\Entity\StoreProductCategory $parent = null)
+    {
+        $this->parent = $parent;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Zeteq\MarketBundle\Entity\StoreProductCategory 
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

@@ -1,0 +1,8 @@
+                    <div class="visible-lg"> 
+                        <ul class="list-group">
+                            <li class="list-group-item active">Browse Stores </li>
+                        {% for section in service.getEnabledStoreSections() %}
+                            <li class="list-group-item"><i class="fa fa-chevron-right" style="font-size: 10px;padding-right: 5px;color: #C3C3C3;"></i> <a href="{{path('storesection_show',{'slug':section.getSlug()})}}">{{section.getName()}}</a></li>        
+                        {% endfor %}
+                        </ul>
+                    </div>

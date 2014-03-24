@@ -21,8 +21,12 @@ class CartController extends Controller
     public function indexAction()
     {
  $em = $this->getDoctrine()->getManager();
-   $cart = $this->get('service')->getCart();    
-        return $this->render('ZeteqMarketBundle:Cart:index.html.twig',array('cart'=>$cart));
+   $carts = $this->get('service')->getCarts();   
+   $mycarts = array();
+   foreach($carts as $cart){
+    $mycarts[] = $em->getRepository('ZeteqMarketBundle:Cart')->findOneById($cart);
+   }
+        return $this->render('ZeteqMarketBundle:Cart:index.html.twig',array('mycarts'=>$mycarts));
         
     }
     
@@ -75,11 +79,11 @@ class CartController extends Controller
   
     }
     
-    public function add_itemAction($product_slug,  Request $request)
+    public function add_itemAction($product_slug,$store_slug,  Request $request)
     {
         $quantity =    $request->request->get('quantity',1);
           $em = $this->getDoctrine()->getManager();
-  $cart = $this->get('service')->getCart();  
+  $cart = $this->get('service')->getCart($store_slug);  
         
         $product = $em->getRepository('ZeteqMarketBundle:Product')->findOneBySlug($product_slug);
  
@@ -105,7 +109,16 @@ class CartController extends Controller
         $em->flush();
         }
         
-                return $this->render('ZeteqMarketBundle:Cart:index.html.twig',array('cart'=>$cart));
+        
+        
+           $carts = $this->get('service')->getCarts();   
+   $mycarts = array();
+   foreach($carts as $cart){
+    $mycarts[] = $em->getRepository('ZeteqMarketBundle:Cart')->findOneById($cart);
+   }
+   
+   
+                return $this->render('ZeteqMarketBundle:Cart:index.html.twig',array('mycarts'=>$mycarts, 'cart'=>$cart));
         
     }
     

@@ -9,7 +9,7 @@ cart_remove_item:
     pattern:  /remove_item/{id}
     defaults: { _controller: "ZeteqMarketBundle:Cart:remove_item" }    
 cart_add_item:
-    pattern:  /add_item/{product_slug}
+    pattern:  /add_item/{product_slug}/{store_slug}
     defaults: { _controller: "ZeteqMarketBundle:Cart:add_item" }
     
 cart_checkout:

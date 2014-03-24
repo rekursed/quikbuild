@@ -40,8 +40,12 @@ class ProductCategory
    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
-    protected $enabled;
+    protected $enabled= true;
 
+       /**
+     * @ORM\Column(type="boolean",nullable=true)
+     */
+    protected $is_parent= true;
 
      
      /**
@@ -62,7 +66,20 @@ class ProductCategory
      * @ORM\ManyToMany(targetEntity="Product",mappedBy="categories")
      *
      */
-    protected $products;    
+    protected $products;   
+    
+    
+        
+        /**
+     * @ORM\OneToMany(targetEntity="ProductCategory", mappedBy="parent")
+     */
+    private $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ProductCategory", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id",nullable=true)
+     */
+    private $parent;
     
     
     
@@ -270,5 +287,84 @@ return $enabled_products;
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add children
+     *
+     * @param \Zeteq\MarketBundle\Entity\ProductCategory $children
+     * @return ProductCategory
+     */
+    public function addChildren(\Zeteq\MarketBundle\Entity\ProductCategory $children)
+    {
+        $this->children[] = $children;
+    
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \Zeteq\MarketBundle\Entity\ProductCategory $children
+     */
+    public function removeChildren(\Zeteq\MarketBundle\Entity\ProductCategory $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Zeteq\MarketBundle\Entity\ProductCategory $parent
+     * @return ProductCategory
+     */
+    public function setParent(\Zeteq\MarketBundle\Entity\ProductCategory $parent = null)
+    {
+        $this->parent = $parent;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Zeteq\MarketBundle\Entity\ProductCategory 
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set is_parent
+     *
+     * @param boolean $isParent
+     * @return ProductCategory
+     */
+    public function setIsParent($isParent)
+    {
+        $this->is_parent = $isParent;
+    
+        return $this;
+    }
+
+    /**
+     * Get is_parent
+     *
+     * @return boolean 
+     */
+    public function getIsParent()
+    {
+        return $this->is_parent;
     }
 }

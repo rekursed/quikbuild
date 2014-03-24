@@ -9,7 +9,9 @@ Cart -- Halal Needs
     <h1>Shopping Cart</h1>
 </div>
 
-{% if cart.getCount() >0 %}
+{% if mycarts %}
+{% for cart in mycarts %}
+{% if cart.getCount() >0%}
 <table class="table table-bordered table-responsive table-striped table-hover">
     <tr>
     <th>sl</th>
@@ -51,7 +53,8 @@ Cart -- Halal Needs
  
 <a class="btn btn-info btn-lg" href="{{path('cart_checkout')}}">Checkout</a>
 <a class="btn btn-danger btn-lg" href="{{path('cart_clear')}}">Clear Cart</a> 
-
+{%endif %}
+{%endfor%}
 {% else %}
 <div class="alert alert-warning">Your shopping cart is empty</div>
 {%endif %}

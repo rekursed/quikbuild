@@ -19,11 +19,12 @@ class ProductCategoryType extends AbstractType
             ->add('slug')
                 ->add('enabled')
             ->add('description','ckeditor')
-            
-                ->add('product_section', 'genemu_jqueryselect2_entity', array(
-                    'class' => 'ZeteqMarketBundle:ProductSection',
+                 ->add('is_parent')
+                ->add('parent', 'genemu_jqueryselect2_entity', array(
+                    'class' => 'ZeteqMarketBundle:ProductCategory',
                     'property' => 'name',
                     'multiple' => false,
+                    'required'=>false
                 ))
         ;
     }
