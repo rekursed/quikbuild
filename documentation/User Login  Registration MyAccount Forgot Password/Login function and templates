@@ -1,0 +1,46 @@
+The login function is located inside the UserBundle > SecurityController > LoginAction
+
+It uses the template View>Security>Login.html.twig
+
+Login.html.twig extends the default Layout located at Market>Layout.html.twig .  But it overrides the sidebar by extending the block middle_container
+
+Login Register and Forgot Password related routes are located inside app>config>rounting.yml
+
+login:
+    path:   /login
+    defaults:  { _controller: ZeteqUserBundle:Security:login }
+login_check:
+    path:   /admin/login_check
+logout:
+    path:   /logout   
+    
+register:
+    pattern:  /register
+    defaults: { _controller: "ZeteqUserBundle:User:register" }
+register_success:
+    pattern:  /register_success
+    defaults: { _controller: "ZeteqUserBundle:User:register_success" }
+registersave:
+    pattern:  /registersave
+    defaults: { _controller: "ZeteqUserBundle:User:registersave" }
+activate_user:
+    pattern:  /activate_user/{rand_string}
+    defaults: { _controller: "ZeteqUserBundle:User:activate_user" }
+
+
+
+forgot_password:
+    pattern:  /forgot-password
+    defaults: { _controller: "ZeteqUserBundle:User:forgot_password" }
+reset_password:
+    pattern:  /reset-password
+    defaults: { _controller: "ZeteqUserBundle:User:reset_password" }
+
+reset_password_link:
+    pattern:  /reset-password-link/tmp/{tmp}
+    defaults: { _controller: "ZeteqUserBundle:User:reset_password_link" }
+save_new_password:
+    pattern:  /save-new-password}
+    defaults: { _controller: "ZeteqUserBundle:User:save_new_password" }
+
+

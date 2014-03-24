@@ -1,0 +1,44 @@
+ body{padding-top:120px}
+ 
+    .ul_route_params li{
+        list-style:none;
+        border:solid 1px black;
+        background:white;
+        margin-right: 10px;
+        float:left;
+        width:22%;
+        height:300px;
+        margin-bottom:20px;
+        text-align: center;
+        padding-top:20px;
+        overflow: hidden;
+    }
+    
+        .ul_route_params li img{
+        max-height:150px;
+        max-width: 90%;
+        margin:auto;
+        
+        }
+        
+        
+        #form_fixed_top_menu{
+            
+            margin-top:50px;
+             z-index:1;
+        }
+        
+        .sa_index_header{
+            margin-bottom: 20px;
+        }
+        
+        #store_admin_header_menu{
+            background:brown;
+            padding-top:7px;
+            padding-bottom: 7px;
+        }
+        #store_admin_header_menu a{
+            color:white;
+            font-size:17px;
+            
+        }

@@ -1,0 +1,91 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+
+{% block title %}Login{% endblock %}
+ 
+{% block middle_container %}
+
+   <style type="text/css">
+
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+
+    </style>
+
+    
+    
+    <div class="row">
+        <div class="col-md-8">
+        
+            <div class="">
+                <h2><i class="fa fa-users"></i> Seller's register</h2>
+                <div class=" "><h4>Create your online store and start selling now. Registration is a simple process and lets you create
+                unlimited stores.</h4>
+                <a class="btn btn-primary" href="{{path('register')}}">Become a seller <i class="fa fa-chevron-circle-right"></i></a>
+                </div>
+            </div>
+            <div class=""><h2><i class="fa fa-user"></i> Customer's register</h2>
+                 <div class="">
+                     <h4>Having a customer account allows you to manage or orders,view past purchases and checkout faster.Create an account now</h4>
+              <a class="btn btn-primary pull" href="{{path('myaccount_register')}}"> Register now <i class="fa fa-chevron-circle-right"></i></a>
+                 </div>
+             </div>
+        
+        </div>
+        <div class="col-md-4">
+        <div style="text-align:center">
+{% if error %}
+    <div style="font-weight:bold;padding:10px;color:red">{{ error.message }}</div>
+{% endif %}
+    <h2>Sign in</h2>
+    </div>
+<form class="form-signin" action="{{ path('login_check') }}" method="post">
+ <h2 class="form-signin-heading"></h2>
+ 
+    <input type="text" id="username" name="_username" value="{{ last_username }}"  class="form-control" placeholder="Username" required autofocus/>
+
+    <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required/>
+        <label class="checkbox">
+          <input type="checkbox" value="remember_me"> Remember me
+        </label>
+    {#
+        If you want to control the URL the user is redirected to on success (more details below)
+        <input type="hidden" name="_target_path" value="/account" />
+    #}
+
+    <button  class="btn btn-lg btn-primary btn-block" type="submit">login <i class="fa fa-sign-in"></i></button>
+      <div style="text-align: center;margin-top:10px;">  <a href="{{path('forgot_password')}}">Forgot your password?</a></div>
+</form>
+    
+
+        </div>
+    </div>
+    
+
+{% endblock %}
+
+
+ 
+

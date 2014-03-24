@@ -1,0 +1,18 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: marketplace
+    database_user: root
+    database_password: 
+    mailer_transport: sendmail
+    mailer_host: /usr/sbin/sendmail
+    mailer_user: abcd
+    mailer_password: abcd
+    locale: en
+    secret: djf039uejf093fj320932u0983
+    email: halalneeds@gmail.com
+    email_name: Halal Needs
+    web: halalneeds.com
+    site_name: Halal Needs

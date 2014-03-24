@@ -1,0 +1,27 @@
+page:
+    pattern:  /
+    defaults: { _controller: "ZeteqMarketBundle:Page:index" }
+
+
+page_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqMarketBundle:Page:new" }
+
+page_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqMarketBundle:Page:create" }
+    requirements: { _method: post }
+
+page_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:Page:edit" }
+
+page_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqMarketBundle:Page:update" }
+    requirements: { _method: post|put }
+
+page_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:Page:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,30 @@
+shippingmethod:
+    pattern:  /
+    defaults: { _controller: "ZeteqMarketBundle:ShippingMethod:index" }
+
+shippingmethod_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ZeteqMarketBundle:ShippingMethod:show" }
+
+shippingmethod_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqMarketBundle:ShippingMethod:new" }
+
+shippingmethod_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqMarketBundle:ShippingMethod:create" }
+    requirements: { _method: post }
+
+shippingmethod_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:ShippingMethod:edit" }
+
+shippingmethod_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqMarketBundle:ShippingMethod:update" }
+    requirements: { _method: post|put }
+
+shippingmethod_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:ShippingMethod:delete" }
+    requirements: { _method: post|delete }

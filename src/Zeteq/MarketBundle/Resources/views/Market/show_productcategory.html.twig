@@ -1,0 +1,30 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+
+
+{% block title %}
+{{entity.getName()}}
+{% endblock %}
+
+{% block content %}
+
+<ol class="breadcrumb">
+    <li><a href="{{path('home')}}">Home</a></li>
+   <li class="active">{{entity}}</li>
+
+</ol>
+<div class="page-header">
+    <h1> {{ entity.name }} </h1>
+    </div>
+
+            <div class="row">   
+  {% for product in products%}
+
+                    
+       {{ include('ZeteqMarketBundle:Market:_product.html.twig',{'product': product})  }}                   
+
+                   {%if loop.index%4 == 0%}
+              </div><div class="row">
+              {% endif %}
+
+        {%endfor%}  </div>
+{% endblock %}

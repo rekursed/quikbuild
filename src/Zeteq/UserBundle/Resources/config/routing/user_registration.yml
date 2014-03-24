@@ -1,0 +1,12 @@
+register:
+    pattern:  /register
+    defaults: { _controller: "ZeteqUserBundle:UserRegistration:register" }
+register_success:
+    pattern:  /register_success
+    defaults: { _controller: "ZeteqUserBundle:UserRegistration:register_success" }
+registersave:
+    pattern:  /registersave
+    defaults: { _controller: "ZeteqUserBundle:UserRegistration:registersave" }
+activate_user:
+    pattern:  /activate_user/{rand_string}
+    defaults: { _controller: "ZeteqUserBundle:UserRegistration:activate_user" }

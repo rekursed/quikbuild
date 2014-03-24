@@ -1,0 +1,1 @@
+ssh -C dhakatow@dhakatowel.com mysqldump -u dhakatow_ze --password=ze3536 dhakatow_halalneeds | mysql -u root --password="" -D dhakatow_halalneeds

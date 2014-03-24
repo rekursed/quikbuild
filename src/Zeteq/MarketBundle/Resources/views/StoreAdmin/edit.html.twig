@@ -1,0 +1,69 @@
+{% extends 'ZeteqMarketBundle:StoreAdmin:store_admin_layout.html.twig' %}
+
+ 
+
+{% block content -%}
+
+<div style="" class="sa_index_header"><h2><a href="{{path('store_admin')}}">Stores </a>  <span class="fa fa-caret-right"></span> 
+
+{{store.getStoreName()}}
+   </h2>
+  </div>
+
+
+
+<ul class="nav nav-tabs nav-justified" style="margin-bottom:40px;">
+    
+    <li  class="active"><a href="{{ path('store_admin_edit', { 'id': store.id }) }}"><i class="fa fa-pencil"></i> Edit</a> </li>
+<li  class="">  <a href="{{ path('storeadmin_product', { 'store_id': store.id }) }}"><i class="fa fa-shopping-cart"></i> Products</a> </li>
+<li><a href="{{ path('storeproductcategory', { 'store_id': store.id }) }}"><i class="fa fa-archive"></i> Categories</a> </li>
+<li  class=""><a href="{{ path('storeadmin_page', { 'store_id': store.id }) }}"><i class="fa fa-file-o"></i> Pages</a> </li>
+</ul>
+
+
+{{ form_start(edit_form) }}
+    
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+ 
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+
+ 
+               <button class="btn btn-danger" type="submit">Save</button>
+                       <a  class="btn btn-success navbar-btn"  href="{{ path('store_admin') }}">
+            Back to the list
+        </a>
+    <a  class="btn btn-info navbar-btn"  href="{{ path('store_show',{'slug':store.slug}) }}">
+Go to store        </a>
+               
+        </div><!-- /.navbar-collapse -->
+      </nav>
+    
+    {{ form_errors(edit_form) }}
+    <div class="well">
+        <h4 >Profile Image</h4>    
+    <img style="height:150px;" src="{{ asset(edit_form.vars.value.getProfileImageWebPath()) }}"/>
+    
+    {{ form_widget(edit_form.profile_image) }}
+    </div>
+
+   <div class="well">
+       <h4>Cover Photo</h4>
+    <img style="height:150px;" src="{{ asset(edit_form.vars.value.getCoverphotoWebPath()) }}"/>
+    
+    {{ form_widget(edit_form.coverphoto_image) }}
+
+</div>
+{{ form_end(edit_form) }}
+ 
+{% endblock %}

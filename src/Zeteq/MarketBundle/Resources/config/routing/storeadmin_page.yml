@@ -1,0 +1,30 @@
+storeadmin_page:
+    pattern:  /list/{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminPage:index" }
+
+storeadmin_page_batch_delete:
+    pattern:  /batch_delete
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminPage:batch_delete" }
+
+storeadmin_page_new:
+    pattern:  /new/{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminPage:new" }
+
+storeadmin_page_create:
+    pattern:  /create/{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminPage:create" }
+    requirements: { _method: post }
+
+storeadmin_page_edit:
+    pattern:  /{id}/edit/{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminPage:edit" }
+
+storeadmin_page_update:
+    pattern:  /{id}/update/
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminPage:update" }
+    requirements: { _method: post|put }
+
+storeadmin_page_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminPage:delete" }
+ 

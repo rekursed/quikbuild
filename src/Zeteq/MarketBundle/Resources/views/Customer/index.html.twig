@@ -1,0 +1,81 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Customer list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Billing_first_name</th>
+                <th>Billing_last_name</th>
+                <th>Billing_email</th>
+                <th>Billing_address</th>
+                <th>Billing_city</th>
+                <th>Billing_state</th>
+                <th>Billing_postalcode</th>
+                <th>Billing_country</th>
+                <th>Billing_phone</th>
+                <th>Shipping_first_name</th>
+                <th>Shipping_last_name</th>
+                <th>Shipping_email</th>
+                <th>Shipping_address</th>
+                <th>Shipping_city</th>
+                <th>Shipping_state</th>
+                <th>Shipping_postalcode</th>
+                <th>Shipping_country</th>
+                <th>Shipping_phone</th>
+                <th>Shipping_billing_same</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('customer_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.billingfirstname }}</td>
+                <td>{{ entity.billinglastname }}</td>
+                <td>{{ entity.billingemail }}</td>
+                <td>{{ entity.billingaddress }}</td>
+                <td>{{ entity.billingcity }}</td>
+                <td>{{ entity.billingstate }}</td>
+                <td>{{ entity.billingpostalcode }}</td>
+                <td>{{ entity.billingcountry }}</td>
+                <td>{{ entity.billingphone }}</td>
+                <td>{{ entity.shippingfirstname }}</td>
+                <td>{{ entity.shippinglastname }}</td>
+                <td>{{ entity.shippingemail }}</td>
+                <td>{{ entity.shippingaddress }}</td>
+                <td>{{ entity.shippingcity }}</td>
+                <td>{{ entity.shippingstate }}</td>
+                <td>{{ entity.shippingpostalcode }}</td>
+                <td>{{ entity.shippingcountry }}</td>
+                <td>{{ entity.shippingphone }}</td>
+                <td>{{ entity.shippingbillingsame }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('customer_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('customer_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('customer_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

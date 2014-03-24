@@ -1,0 +1,112 @@
+ZeteqMarketBundle_sale:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/sale.yml"
+    prefix:   /admin/sale
+
+
+ZeteqMarketBundle_productimage:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/productimage.yml"
+    prefix:   /productimage
+
+ZeteqMarketBundle_paymentmethod:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/paymentmethod.yml"
+    prefix:   /admin/paymentmethod
+ZeteqMarketBundle_shippingmethod:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/shippingmethod.yml"
+    prefix:   /admin/shippingmethod
+
+
+
+
+ZeteqMarketBundle_customer:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/customer.yml"
+    prefix:   /customer
+
+zeteq_cart:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/cart.yml"
+    prefix:   /cart/
+myaccount:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/myaccount.yml"
+    prefix:   /
+    
+    
+ZeteqMarketBundle_storeadmin_page:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/storeadmin_page.yml"
+    prefix:   /store_admin/page
+ZeteqMarketBundle_page:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/page.yml"
+    prefix:   /admin/page
+
+zeteq_user:
+    resource: "@ZeteqUserBundle/Resources/config/routing.yml"
+    prefix:   /admin/
+
+zeteq_user_register:
+    resource: "@ZeteqUserBundle/Resources/config/routing/user_registration.yml"
+    prefix:   /
+    
+    
+zeteq_user_login:
+    resource: "@ZeteqUserBundle/Resources/config/routing/login.yml"
+    prefix:   /
+zeteq_user_forgot_password:
+    resource: "@ZeteqUserBundle/Resources/config/routing/forgot_password.yml"
+    prefix:   /
+
+
+
+zeteq_market:
+    resource: "@ZeteqMarketBundle/Resources/config/routing.yml"
+    prefix:   /
+
+ZeteqMarketBundle_storeadmin:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/storeadmin.yml"
+    prefix:   /store_admin
+ZeteqMarketBundle_storeadmin_product:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/storeadmin_product.yml"
+    prefix:   /store_admin/product
+
+
+ZeteqMarketBundle_storeproductcategory:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/storeproductcategory.yml"
+    prefix:   /store_admin/storeproductcategory
+
+
+ZeteqMarketBundle_store:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/store.yml"
+    prefix:   /admin/store
+
+ZeteqMarketBundle_storesection:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/storesection.yml"
+    prefix:   /admin/storesection
+
+ZeteqMarketBundle_storecategory:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/storecategory.yml"
+    prefix:   /admin/storecategory
+
+ZeteqMarketBundle_productsection:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/productsection.yml"
+    prefix:   /admin/productsection
+
+ZeteqMarketBundle_productcategory:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/productcategory.yml"
+    prefix:   /admin/productcategory
+
+ZeteqMarketBundle_product:
+    resource: "@ZeteqMarketBundle/Resources/config/routing/product.yml"
+    prefix:   /admin/product
+ZeteqUserBundle_user:
+    resource: "@ZeteqUserBundle/Resources/config/routing/user.yml"
+    prefix:   /admin/user
+ZeteqUserBundle_role:
+    resource: "@ZeteqUserBundle/Resources/config/routing/role.yml"
+    prefix:   /admin/role
+
+
+
+
+
+
+_imagine:
+    resource: .
+    type:     imagine
+    

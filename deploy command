@@ -1,0 +1,24 @@
+
+sudo chmod -R 755 /home/ze/www/halalneeds
+php composer.phar dump-autoload --optimize
+php app/console plum:deploy hostmonster --no-debug
+sudo chmod -R 777 /home/ze/www/halalneeds
+
+
+
+
+
+
+local to online
+
+
+mysqldump -u root --password="" --host=localhost -C dhakatow_halalneeds | ssh dhakatow@dhakatowel.com "mysql -u dhakatow_ze --password=ze3536 dhakatow_halalneeds"
+
+
+
+mysqldump -u cart_cartexcel --password=vigilant09 --host=localhost -C cart_shomokalin | ssh dhakatow@dhakatowel.com "mysql -u dhakatow_ze --password=ze3536 dhakatow_shomokalin"
+
+
+
+online to local
+ssh -C dhakatow@dhakatowel.com mysqldump -u dhakatow_ze --password=ze3536 dhakatow_halalneeds | mysql -u root --password="" -D dhakatow_halalneeds

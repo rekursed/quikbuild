@@ -1,0 +1,34 @@
+cart_index:
+    pattern:  /index
+    defaults: { _controller: "ZeteqMarketBundle:Cart:index" }
+
+cart_update_quantity:
+    pattern:  /update_quantity
+    defaults: { _controller: "ZeteqMarketBundle:Cart:update_quantity" }
+cart_remove_item:
+    pattern:  /remove_item/{id}
+    defaults: { _controller: "ZeteqMarketBundle:Cart:remove_item" }    
+cart_add_item:
+    pattern:  /add_item/{product_slug}
+    defaults: { _controller: "ZeteqMarketBundle:Cart:add_item" }
+    
+cart_checkout:
+    pattern:  /checkout
+    defaults: { _controller: "ZeteqMarketBundle:Cart:checkout" }
+    
+cart_checkout_update:
+    pattern:  /checkout/update
+    defaults: { _controller: "ZeteqMarketBundle:Cart:checkout_update" }
+cart_preview:
+    pattern:  /checkout/preview
+    defaults: { _controller: "ZeteqMarketBundle:Cart:preview" }
+    
+cart_confirm:
+    pattern:  /checkout/confirm
+    defaults: { _controller: "ZeteqMarketBundle:Cart:confirm" }
+cart_clear:
+    pattern:  /cart/clear
+    defaults: { _controller: "ZeteqMarketBundle:Cart:clear" }
+    
+    
+    

@@ -1,0 +1,36 @@
+security:
+    encoders:
+        Zeteq\UserBundle\Entity\User:
+            algorithm:        sha1
+            encode_as_base64: false
+            iterations:       1
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        administrators:
+            entity: { class: ZeteqUserBundle:User}
+
+    firewalls:
+        admin_area:
+            remember_me:
+                key:      "%secret%"
+                lifetime: 31536000 # 365 days in seconds
+                path:     /
+                domain:   ~ # Defaults to the current domain from $_SERVER
+            pattern:    ^/
+            anonymous: true
+            form_login:
+                login_path:  login
+                check_path:  login_check     
+            logout:
+                path: logout
+                target: /
+    access_control:
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/store_admin, roles: [ROLE_ADMIN,ROLE_STORE] }
+        - { path: ^/efconnect, role: ROLE_ADMIN }
+        - { path: ^/elfinder, role: ROLE_ADMIN }
+        - { path: ^/myaccount, roles: ROLE_CUSTOMER }

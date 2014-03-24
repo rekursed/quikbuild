@@ -1,0 +1,31 @@
+{% extends 'ZeteqMarketBundle:Market:store_layout.html.twig' %}
+{% block title %}
+{{entity.getName()}}
+{% endblock %}
+{% block content %}
+<div>
+    <h1>{{entity.getName()}}</h1>
+     {%if is_admin%} 
+<a style="margin-bottom:4px;" class="pull-right badge " href="{{path('storeproductcategory_new',{'store_id':store.getId()})}}"><i class="fa fa-plus"></i>new category</a>
+    <a style="margin-bottom:4px;" class="pull-right badge " href="{{path('storeadmin_product_new',{'store_id':store.getId()})}}"><i class="fa fa-plus"></i>new product</a>
+<a style="margin-bottom:4px;" class="pull-right badge " href="{{path('storeproductcategory_edit',{'id':entity.id, 'store_id':store.getId()})}}"><i class="fa fa-plus"></i>edit category</a>
+  {% endif%}
+     </div>
+     <hr/>
+
+
+
+           <div class="row">   
+  {% for product in entity.getEnabledProducts()%}
+
+                          {{ include('ZeteqMarketBundle:Market:_product_store.html.twig',{'product': product})  }}    
+                
+
+                   {%if loop.index%4 == 0%}
+              </div><div class="row">
+              {% endif %}
+
+        {%endfor%}  </div>
+    
+ 
+{% endblock %}

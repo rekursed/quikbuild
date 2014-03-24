@@ -1,0 +1,11 @@
+/web/upload/
+.arch-params
+.bzr
+_darcs
+.git
+.hg
+.monotone
+.svn
+CVS
+
+

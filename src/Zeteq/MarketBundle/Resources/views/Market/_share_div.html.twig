@@ -1,0 +1,33 @@
+        <div id="share_div" class="well well-sm">
+            <div class="row">
+            <div class="col-md-3">
+                        <a class="btn btn-primary btn-sm" 
+               style="pull-left" href="#" 
+  onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 
+      'facebook-share-dialog', 
+      'width=626,height=436'); 
+    return false;">
+                <span class="icon icon-facebook-sign"></span>
+Facebook Share
+</a>
+                </div>  <div class="col-md-3">
+                                    <div  class="twit_div pull-right" >
+<a href="https://twitter.com/share" class="twitter-share-button" data-via="Shomokalin" data-size="large">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                </div>
+                    </div></div>
+            <div class="col-md-7" style="padding-top:5px">
+            <div class="fb-like" data-href="http://{{app.request.host}}{{cp}}" data-width="330" data-show-faces="false" data-send="true"></div>
+ 
+
+            </div>
+
+          
+
+                </div>
+                
+
+ 
+        </div>

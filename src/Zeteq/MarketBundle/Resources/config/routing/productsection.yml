@@ -1,0 +1,30 @@
+productsection:
+    pattern:  /
+    defaults: { _controller: "ZeteqMarketBundle:ProductSection:index" }
+
+productsection_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ZeteqMarketBundle:ProductSection:show" }
+
+productsection_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqMarketBundle:ProductSection:new" }
+
+productsection_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqMarketBundle:ProductSection:create" }
+    requirements: { _method: post }
+
+productsection_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:ProductSection:edit" }
+
+productsection_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqMarketBundle:ProductSection:update" }
+    requirements: { _method: post|put }
+
+productsection_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:ProductSection:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,31 @@
+home:
+    pattern:  /
+    defaults: { _controller: ZeteqMarketBundle:Market:index }
+admin:
+    pattern:  /admin
+    defaults: { _controller: ZeteqMarketBundle:Admin:admin }
+store_show:
+    pattern:  /store/{slug}
+    defaults: { _controller: "ZeteqMarketBundle:Market:show_store" }
+product_show:
+    pattern:  /product/{slug}
+    defaults: { _controller: "ZeteqMarketBundle:Market:show_product" }
+
+storecategory_show:
+    pattern:  /store_category/{slug}
+    defaults: { _controller: "ZeteqMarketBundle:Market:show_storecategory" }
+    
+page_show:
+    pattern:  /store/{store_slug}/page-show/{slug}
+    defaults: { _controller: "ZeteqMarketBundle:Market:show_page" }
+ 
+storesection_show:
+    pattern:  /store_sections/{slug}
+    defaults: { _controller: "ZeteqMarketBundle:Market:show_storesection" }
+productcategory_show:
+    pattern:  /category/{slug}
+    defaults: { _controller: "ZeteqMarketBundle:Market:show_productcategory" }
+
+storeproductcategory_show:
+    pattern:  /store_product_category/{slug}
+    defaults: { _controller: "ZeteqMarketBundle:Market:show_storeproductcategory" }

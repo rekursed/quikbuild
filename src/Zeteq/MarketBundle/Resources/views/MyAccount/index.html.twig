@@ -1,0 +1,34 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+
+{% block title %}My Account{% endblock %}
+ 
+{% block content %}
+
+<div class=""><h1>My Account</h1></div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="well">
+            <a href="{{path('myaccount_edit_shipping_address')}}">Shipping Address</a>
+        </div>
+    </div>
+        
+            <div class="col-md-4">
+        <div class="well">
+            <a href="{{path('myaccount_edit_billing_address')}}">Billing Address</a>
+        </div>
+    </div>
+        
+        
+</div>
+ 
+  dsf   
+  {{user.getId()}}
+
+{% endblock %}
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+
+
+{% block title %}
+Home -- Marketplace
+{% endblock %}
+{% block content %}
+
+<div >
+
+    {{include(service.getSlot(12))}}
+</div>
+
+
+<div id="featured" class="tab-pane active">
+    <div class="row">   
+  {% for product in service.getEnabledProducts() | slice(0,12)%}
+
+       {{ include('ZeteqMarketBundle:Market:_product.html.twig',{'product': product})  }}             
+
+                   {%if loop.index%4 == 0%}
+    </div>
+
+    <div class="row">
+              {% endif %}
+
+        {%endfor%}  </div>
+</div>
+
+
+
+
+
+<div class=""> {#************WEEKLY FREEBIES**************#}
+        {{include(service.getSlot(14))}}
+</div>
+
+<div class="visible-lg visible-md visible-sm"> {#************SPECIAL DISCOUNTED OFFERS**************#}
+        {{include(service.getSlot(13))}}
+</div>
+
+<div class=""> {#************PROMOTIONALS**************#}
+        {{include(service.getSlot(15))}}
+</div>
+
+
+<hr/>
+{% endblock %}
+
+
+
+
+
+

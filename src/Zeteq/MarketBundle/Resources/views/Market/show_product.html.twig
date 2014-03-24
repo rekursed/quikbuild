@@ -1,0 +1,159 @@
+{% extends 'ZeteqMarketBundle:Market:store_layout.html.twig' %}
+
+
+{% block title %}
+{{product.getName()}} -- HalalNeeds.Com{% endblock %}
+
+ {% block meta_description %} {{product.getMetaDescription()}}  {% endblock %}  
+ {% block meta_keywords %}{{product.getMetaKeywords()}}{% endblock %} 
+
+
+{% block fb_og_title %}   {{product.getName()}}  {% endblock %} 
+{% block og_image %} http://{{web}}{{asset(product.getWebPath() )  }} {% endblock %} 
+{% block og_url %} http://{{web}}/product/{{product.getSlug()}} {% endblock %} 
+{% block og_description %}{{product.getMetaDescription()}}  {% endblock %} 
+
+{% block twitter_title %}     {{product.getName()}}   {% endblock %} 
+{% block twitter_description %} {{product.getMetaDescription()}}   {% endblock %} 
+{% block twitter_image %} http://{{web}}{{asset(product.getWebPath() )  }} {% endblock %} 
+
+
+{% block content %}
+              {% set cp =  path(app.request.attributes.get('_route'), 
+        app.request.attributes.get('_route_params')) %}   
+
+<div class="">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="pull-left">{{product.getStore().getStoreName()}} / {% for spc in product.getStoreProductCategories()%} {{spc}} {%endfor%} </h4>
+
+{% if is_admin %} <a class="btn btn-danger btn-lg pull-right" href="{{path('storeadmin_product_edit',{'store_id':store.getId(),'id':product.getId()})}}"><i class="fa fa-pencil-square"></i> Edit this product</a>{% endif %}
+            <br clear="all"/>
+        </div></div>
+    <hr/>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-sm-12 col-xs-12" style="">
+        <div style="padding-top:10px;width: 100%;margin: 0 auto">
+            <a  data-slide-to="0" data-toggle="modal" data-target="#myModal" href="#">   
+                <img class="img-responsive"  src="{{asset(product.getWebPath() )  }}"/>
+            </a>
+        </div>
+
+        <div class=""><h5>More Images</h5></div>
+        <div class="row">    
+
+{%for ai in product.getProductImages()%}
+
+            <div class="col-md-4  col-sm-3 col-xs-3"> 
+                <a  data-slide-to="{{loop.index}}" data-toggle="modal" data-target="#myModal" href="#">   
+                    <img class="img-responsive" style="width:100%"  src="{{asset(ai.getWebPath() )  }}"/>
+                </a>
+            </div>
+
+
+                        {%if loop.index%3 == 0%}
+        </div><div class="row">
+              {% endif %}
+ {% endfor%}
+        </div> 
+
+    </div>
+
+
+    <div class="col-md-8"><h2>{{ product.name }}</h2>
+        <div class="well well-sm">
+
+            <div class="fb-like" data-href="http://{{web}}/product/{{product.getSlug()}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+
+            <a href="//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.flickr.com%2Fphotos%2Fkentbrew%2F6851755809%2F&media=http%3A%2F%2Ffarm8.staticflickr.com%2F7027%2F6851755809_df5b2051c9_z.jpg&description={{product.getName() | url_encode() }}" data-pin-do="buttonPin" data-pin-config="beside"><img src="http://{{web}}{{asset(product.getWebPath() )  }}" /></a>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+            <script>!function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = p + '://platform.twitter.com/widgets.js';
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, 'script', 'twitter-wjs');</script>   
+
+
+            <!-- Place this tag where you want the +1 button to render. -->
+            <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div>
+
+            <!-- Place this tag after the last +1 button tag. -->
+            <script type="text/javascript">
+                (function() {
+                    var po = document.createElement('script');
+                    po.type = 'text/javascript';
+                    po.async = true;
+                    po.src = 'https://apis.google.com/js/platform.js';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(po, s);
+                })();
+            </script>
+
+        </div>     
+        <div>{{product.getDescription()}}</div>
+        <div><h4>Price: TK. {{product.getPrice()}} </h4></div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Product Images</h4>
+            </div>
+            <div class="modal-body">
+
+                <div data-ride="carousel" class="carousel slide" id="carousel-example-generic">
+                    <ol class="carousel-indicators">
+                        <li class="" data-slide-to="0" data-target="#carousel-example-generic"></li>
+                        <li data-slide-to="1" data-target="#carousel-example-generic" class=""></li>
+                        <li data-slide-to="2" data-target="#carousel-example-generic" class="active"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img style="max-width:80%;max-height: 400px;margin:auto;"  class="img-responsive"  src="{{asset(product.getWebPath() )  }}"/>
+                        </div>
+                {%for ai in product.getProductImages()%}
+                        <div class="item ">
+                            <img  class="img-responsive" style="max-width:80%;max-height: 400px;margin:auto;"  src="{{asset(ai.getWebPath() )  }}"/>
+                        </div>
+                 {% endfor%}
+                    </div>
+                    <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a data-slide="next" href="#carousel-example-generic" class="right carousel-control">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+
+
+
+
+
+
+
+{% endblock %}

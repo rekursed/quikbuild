@@ -1,0 +1,15 @@
+{% extends 'ZeteqAdminBundle:Default:admin_layout.html.twig' %}
+
+{% block content -%}
+    <h1>ProductImage edit</h1>
+
+    {{ form(edit_form) }}
+
+        <div style="padding-top:10px;padding-bottom:10px;">
+        <a href="{{ path('productimage') }}">
+               <span class="glyphicon glyphicon-chevron-left"></span>   Back to the list
+        </a>
+</div>
+    {{ form(delete_form) }}
+
+{% endblock %}

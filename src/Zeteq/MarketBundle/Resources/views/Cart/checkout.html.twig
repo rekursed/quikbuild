@@ -1,0 +1,169 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+
+
+{% block title %}
+Checkout
+{% endblock %}
+{% block middle_container %}
+
+
+
+
+<script>
+
+    $(document).ready(function(){
+        
+                  if($("#zeteq_marketbundle_cart_address_shipping_billing_same").prop('checked') ){
+                { $("#shipping_div input,#shipping_div select").attr('disabled','disabled');}
+           
+
+        }
+            else{
+    
+             $("#shipping_div input,#shipping_div select").removeAttr('disabled');
+            }
+        
+        
+        
+        
+        
+        $("#zeteq_marketbundle_cart_address_shipping_billing_same").click(function(){
+         
+            
+            if($(this).prop('checked') ){
+                 $("#shipping_div input,#shipping_div select").attr('disabled','disabled');
+           
+
+        }
+            else{
+    
+             $("#shipping_div input,#shipping_div select").removeAttr('disabled');
+            }
+        
+        
+        });
+        
+
+        
+        
+    });
+    </script>
+
+<div class="page-header">
+    <h1>Shopping Cart</h1>
+</div>
+
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+<div class="row">
+<div class="col-md-8 ">
+<div class="row">
+    <div class="col-md-6 "><h4>Billing Address</h4>
+        <h5 style="font-weight:bold;padding:4px">* All fields are required</h5>
+        <div class="well">
+
+            <div class="row">
+
+        <div class="col-md-6">{{ form_row(form.billing_first_name) }}</div>
+        <div class="col-md-6"> {{ form_row(form.billing_last_name) }}</div>
+</div>                    
+
+                    {{ form_row(form.billing_address) }}
+      
+                        <div class="row">
+
+        <div class="col-md-6">     {{ form_row(form.billing_city) }}</div>
+        <div class="col-md-6"> {{ form_row(form.billing_state) }} </div>
+</div>  
+            
+                                    <div class="row">
+
+ 
+        <div class="col-md-6">    {{ form_row(form.billing_postalcode) }}</div>
+</div>  
+                
+                    
+                  
+                   {{ form_row(form.billing_email) }}
+                    {{ form_row(form.billing_phone) }}
+        </div></div>
+        
+        
+    
+        
+        <div  class="col-md-6">
+            
+            <h4>Shipping Address</h4>
+            <label for="zeteq_marketbundle_cart_address_shipping_billing_same">
+               
+                <span style="float:left"> {{ form_widget(form.shipping_billing_same) }}</span>
+                 <span style="float:left;padding:2px;padding-left:4px">Ship to the billing address</span>
+            </label>
+            <div class="well" id="shipping_div">
+                
+                    
+                                <div class="row">
+
+        <div class="col-md-6">{{ form_row(form.shipping_first_name) }}</div>
+        <div class="col-md-6"> {{ form_row(form.shipping_last_name) }}</div>
+</div>  
+                    
+               {{ form_row(form.shipping_address) }}          
+                    
+                                            <div class="row">
+
+        <div class="col-md-6">     {{ form_row(form.shipping_city) }}</div>
+        <div class="col-md-6"> {{ form_row(form.shipping_state) }} </div>
+</div>  
+            
+                                    <div class="row">
+
+
+        <div class="col-md-6">    {{ form_row(form.shipping_postalcode) }}</div>
+</div>  
+
+                    {{ form_row(form.shipping_email) }}
+               
+
+                    {{ form_row(form.shipping_phone) }}                    
+                    
+                    </div></div>
+ 
+</div></div>
+  <div class="col-md-4 ">
+    <div class="col-md-12"><h4>Payment Method</h4><div class="well">{{ form_row(form.payment_method) }}  </div></div>
+        <div class="col-md-12">  <h4>Shipping Method</h4><div class="well"> {{ form_row(form.shipping_method) }}</div></div>
+        <div style="padding:20px;text-align: center">
+            <button class="btn btn-warning btn-lg" type="submit" >Preview and Place Order</button>
+            </div>
+  </div>
+        
+      
+  </div>
+  
+    
+     
+ 
+
+
+ 
+
+{{ form_end(form) }}
+ 
+ 
+ 
+{% block stylesheets %}
+{{parent()}}
+{{ form_stylesheet(form) }}
+{% endblock %}
+
+{% block javascripts %}
+{{parent()}}    {{ form_javascript(form) }}
+{% endblock %}
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+Mail settings are located in app>config>parameters.yml
+
+email sending settings
+    mailer_transport: gmail
+    mailer_host: null
+    mailer_user: halalneeds@gmail.com
+    mailer_password: 4M570ENTycNK
+
+email  will be sent from this address
+    email: halalneeds@gmail.com
+    email_name: Halal Needs

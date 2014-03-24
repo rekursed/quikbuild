@@ -1,0 +1,30 @@
+sale:
+    pattern:  /
+    defaults: { _controller: "ZeteqMarketBundle:Sale:index" }
+
+sale_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ZeteqMarketBundle:Sale:show" }
+
+sale_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqMarketBundle:Sale:new" }
+
+sale_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqMarketBundle:Sale:create" }
+    requirements: { _method: post }
+
+sale_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:Sale:edit" }
+
+sale_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqMarketBundle:Sale:update" }
+    requirements: { _method: post|put }
+
+sale_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:Sale:delete" }
+

@@ -1,0 +1,12 @@
+
+                  <div class="btn-group pull-right">
+
+                {%- for action in record_actions %}
+
+                   
+                        <a class="btn btn-default" href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity.id }) }}" }}">{{ action }}</a>
+                   
+
+                {%- endfor %}
+
+                </div>

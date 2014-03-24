@@ -1,0 +1,33 @@
+{% extends 'ZeteqMarketBundle:Market:store_layout.html.twig' %}
+
+
+{% block title %}
+{{store.getStoreName()}} -- HalalNeeds.com
+{% endblock %}
+{% block content %}
+
+  <div class=" ">
+ 
+ 
+            <div class="row">   
+  {% for product in store.getEnabledProducts()%}
+       {{ include('ZeteqMarketBundle:Market:_product_store.html.twig',{'product': product})  }}     
+                
+
+                   {%if loop.index%4 == 0%}
+              </div><div class="row">
+              {% endif %}
+
+        {%endfor%}  </div>
+     
+ 
+ 
+   
+    </div> 
+
+ 
+
+
+ 
+
+{% endblock %}

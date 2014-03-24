@@ -1,0 +1,30 @@
+customer:
+    pattern:  /
+    defaults: { _controller: "ZeteqMarketBundle:Customer:index" }
+
+customer_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ZeteqMarketBundle:Customer:show" }
+
+customer_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqMarketBundle:Customer:new" }
+
+customer_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqMarketBundle:Customer:create" }
+    requirements: { _method: post }
+
+customer_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:Customer:edit" }
+
+customer_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqMarketBundle:Customer:update" }
+    requirements: { _method: post|put }
+
+customer_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:Customer:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,47 @@
+{% extends 'ZeteqMarketBundle:Admin:admin_layout.html.twig' %}
+
+{% block content -%}
+    <h1>Page list</h1>
+
+    <table class="table table-hover table-responsive table-striped records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Enabled</th>
+                <th>Body</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('page_edit', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.title }}</td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.slug }}</td>
+                <td>{{ entity.enabled }}</td>
+                <td>{{ entity.body }}</td>
+                <td>
+                <ul>
+ 
+                    <li>
+                        <a href="{{ path('page_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('page_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

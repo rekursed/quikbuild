@@ -1,0 +1,69 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Lists all {{ entity }} entities.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/", name="{{ route_name_prefix }}")
+     * @Method("GET")
+     * @Template()
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function indexAction()
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        $em = $this->getDoctrine()->getManager();
+
+     $source = new Entity('{{ bundle }}:{{ entity }}');
+ 
+
+         $grid = $this->get('grid');
+        $grid->setSource($source);
+        $grid->setLimits(array(10,25,50,100,1000));
+        $title= "excel";
+        $fileName = "pages.xls";
+        $grid->addExport(new ExcelExport($title, $fileName));
+
+        
+        $rowActionDelete = new RowAction('delete', '{{ route_name_prefix }}_delete',true);   
+        $rowAction = new RowAction('edit', '{{ route_name_prefix }}_edit');
+
+ 
+        $grid->addRowAction($rowAction);    
+        $grid->addRowAction($rowActionDelete);    
+
+        $callback = '{{ bundle }}\{{ entity }}Controller::delete';
+
+
+        $grid->addMassAction(new DeleteMassAction());
+    $grid->hideColumns(array(
+        
+    'id'));
+
+
+
+
+
+        $grid->isReadyForRedirect();
+        
+        
+
+
+
+{% endblock method_body %}
+
+{% block method_return %}
+{% if 'annotation' == format %}
+        return array(
+            'entities' => $entities,
+        );
+{% else %}
+return $grid->getGridResponse('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:index.html.twig');
+{% endif %}
+{% endblock method_return %}
+    }

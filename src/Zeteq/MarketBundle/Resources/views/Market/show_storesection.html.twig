@@ -1,0 +1,50 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+
+
+{% block title %}
+{{entity.getName()}}
+{% endblock %}
+{% block content %}
+
+<ol class="breadcrumb">
+    <li><a href="{{path('home')}}">Home</a></li>
+    <li class="active">{{entity}}</li>
+
+</ol>
+
+
+<div class="page-header">
+    <h1 class="header_h1">{{ entity.name }}</h1>
+</div>
+    {% for cat in entity.getStoreCategories() %}
+<div class="col-md-4" >
+    <div class="store_blocks">
+
+        <h4><a href="{{path('storecategory_show',{'slug':cat.getSlug()})}}">{{cat.getName()}} ({{cat.getEnabledStores().count()}}) </a></h4>
+
+{% for store in cat.getEnabledStores() | slice(0,6) %}
+    {% if(loop.index ==1 )%}
+        <div class="ss_first_store" style="text-align: center">
+            <a href="{{path("store_show",{'slug':store.slug})}}">  <img class="img-thumbnail thmb-cstm"  src="{{asset(store.getProfileImageWebPath())  }}"/>  </a>  
+            <h3>      <a href="{{path("store_show",{'slug':store.slug})}}">{{store.getStoreName()}}</a></h3>
+        </div>    
+{% else%}
+
+
+
+
+        <h6>
+            <a href="{{path("store_show",{'slug':store.slug})}}">{{store.getStoreName()}}</a>
+        </h6>
+
+
+    {% endif%}
+{% endfor %}
+        <h6> <a href="{{path('storecategory_show',{'slug':cat.getSlug()})}}">View all stores in this category <i class="fa fa-chevron-circle-right"></i></a></h6>
+
+
+
+    </div></div>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'ZeteqMarketBundle:Admin:admin_layout.html.twig' %}
+
+
+{% block title %}
+Admin
+{% endblock %}
+{% block content %}
+    <h1>Product list</h1>
+
+ <table class="table table-hover table-responsive table-striped record_properties">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th></th>
+                <th>Name</th>
+                <th>Enabled</th>
+                <th>Featured</th>
+                
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('product_edit', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><img style="height:40px;" src="{{asset(entity.getWebPath())}}"/></td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.enabled }}</td>
+                <td>{{ entity.featured }}</td>
+                <td>{{ entity.price }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('product_show', { 'slug': entity.slug }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('product_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('product_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

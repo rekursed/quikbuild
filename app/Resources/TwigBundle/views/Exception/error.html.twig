@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<head>
+ <link rel="shortcut icon" href="{{asset(siteinfo.getSite().getFaviconWebPath() )}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+
+    <title>{% block title %}  {{siteinfo.getSite().getTitle()}}  {% endblock %}</title>
+ 
+
+
+<!-- for Google -->
+<meta name="description" content="{% block meta_description %}        {{siteinfo.getSite().getMetaDescription()}}   {% endblock %}" />     
+<meta name="keywords" content=" {% block meta_keywords %}    {{siteinfo.getSite().getMetaKeywords()}} {% endblock %}" />
+
+
+<meta name="copyright" content="    {{siteinfo.getSite().getMetaCopyright()}} " />
+<meta name="application-name" content="    {{siteinfo.getSite().getMetaApplication()}} " />
+
+
+
+<!-- for Facebook -->          
+<meta property="og:title" content="{% block og_title %}      {{siteinfo.getSite().getFacebookTitle()}}   {% endblock %}" />
+<meta property="og:type" content="    {{siteinfo.getSite().getFacebookType()}} " />
+<meta property="og:image" content="{% block og_image %}    {{siteinfo.getSite().getFacebookImage()}} {% endblock %}" />
+<meta property="og:url" content="{% block og_url %}    {{siteinfo.getSite().getFacebookUrl()}} {% endblock %}" />
+<meta property="og:description" content="{% block og_description %}    {{siteinfo.getSite().getFacebookDescription()}} {% endblock %}" />
+<meta property="fb:app_id" content="    {{siteinfo.getSite().getFacebookAppId()}} " />
+
+<!-- for Twitter -->          
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="{% block twitter_title %}{{siteinfo.getSite().getFacebookTitle()}}"{% endblock %} />
+<meta name="twitter:description" content="{% block twitter_description %}{{siteinfo.getSite().getFacebookDescription()}}{% endblock %}" />
+<meta name="twitter:image" content="{% block twitter_image %}{{siteinfo.getSite().getFacebookImage()}}{% endblock %}" />
+
+
+
+
+
+        {% block javascripts %}
+    <script src="{{ asset('js/jquery-1.9.1.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap-3.0.0/dist/js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery.form.js') }}"  type="text/javascript"></script>
+
+
+
+
+
+
+
+    
+        {% endblock %}
+
+        {% block stylesheets %}
+
+        <link href="{{ asset('bootstrap-3.0.0/dist/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+            <!--[if lt IE 9]>
+
+      <script src="{{ asset('bootstrap-3.0.0/assets/js/respond.min.js') }}"></script>
+    <![endif]-->
+        
+        <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />   
+        {% endblock %}
+
+ 
+
+
+        </head>
+
+
+
+        <body>
+ 
+
+
+  {% block body %}
+
+ 
+    
+    
+     
+            <div id="main_container" class="container" style="" >
+
+
+
+                 
+
+
+
+
+                    <div id="cover_area" class="">
+       
+
+                        <a href="{{path('home')}}">
+                            <h1>{{siteinfo.getSite().getName()}}</h1>
+                            <h4>{{siteinfo.getSite().getSlogan()}}</h4>
+                        </a>
+                        
+                    </div> 
+
+
+             
+
+ 
+
+             
+
+            
+                    <div id="middle_container" style="min-height: 600px; ">
+                        <div class="row">
+       
+  <div class="col-md-12">    
+      
+      
+{% block content %}
+<div style="padding:40px;text-align:center">
+<h1>Sorry the page that you were looking for can't be found</h1>
+<a href="{{path('home')}}">Go to homepage</a>
+</div>
+{% endblock %}
+      
+      
+      </div>
+
+
+                    </div></div>
+                
+
+
+{% endblock %}
+
+
+
+
+                          <div id="footer" style="">
+                              <div id="copyright">              
+                                  <h6>
+                                      Use of this Site is subject to express Terms of Use. By using this Site, you signify that you agree to be bound by Our Terms of Use. Copyright © 1999 - 2013 All other marks, images, logos, text are the property of their respective owners.</h6>
+<h6>Designed by <a href="http://zeteq.com">Zeteq Systems</a></h6>
+</div>
+                </div>
+
+
+       
+
+
+    
+                    </div>
+    
+  
+ 
+   
+    
+ 
+
+
+         
+  
+
+
+                </body>
+            </html>
+
+
+

@@ -1,0 +1,29 @@
+store_read_excel:
+    pattern:  /store_read_excel/
+    defaults: { _controller: "ZeteqMarketBundle:Store:read_excel" }
+store:
+    pattern:  /
+    defaults: { _controller: "ZeteqMarketBundle:Store:index" }
+
+store_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqMarketBundle:Store:new" }
+
+store_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqMarketBundle:Store:create" }
+    requirements: { _method: post }
+
+store_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:Store:edit" }
+
+store_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqMarketBundle:Store:update" }
+    requirements: { _method: post|put }
+
+store_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:Store:delete" }
+

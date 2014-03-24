@@ -1,0 +1,36 @@
+storeadmin_batch_delete:
+    pattern:  /batch_delete
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:batch_delete" }
+storeadmin_read_excel:
+    pattern:  /read_excel/{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:read_excel" }
+storeadmin_product:
+    pattern:  /{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:index" }
+
+storeadmin_product_show:
+    pattern:  /{id}/{store_id}/show
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:show" }
+
+storeadmin_product_new:
+    pattern:  /{store_id}/new
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:new" }
+
+storeadmin_product_create:
+    pattern:  /create/{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:create" }
+    requirements: { _method: post }
+
+storeadmin_product_edit:
+    pattern:  /{id}/{store_id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:edit" }
+
+storeadmin_product_update:
+    pattern:  /{id}/{store_id}/update
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:update" }
+    requirements: { _method: post|put }
+
+storeadmin_product_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:delete" }
+

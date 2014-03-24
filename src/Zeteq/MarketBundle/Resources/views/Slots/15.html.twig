@@ -1,0 +1,57 @@
+{#<style>
+
+.cover {
+    background-color: #FFFFCF;
+    height: 315px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: all 0.2s ease-in-out 0s;
+    width: 250px;
+    z-index: 2000;
+    cursor: pointer;
+}
+    .cover:hover{
+        opacity: .5;
+    }
+
+</style>#}
+
+<div style="margin-bottom: 10px; text-align: left;">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">PROMOTIONALS</div>
+        <div class="panel-body">
+
+            <div  class="row">
+                <div class="col-md-4 col-sm-4 col-xs-4">
+
+                    <img id="img1" class="img-responsive" src="{{asset('upload/images/ad1.jpg')}}">
+                    <div class="cover"></div>
+                </div>
+
+                <div class="col-md-8 col-sm-8 col-xs-8">
+                    <div class="">
+                        <img class="img-responsive visible-lg" src="{{asset('upload/images/ad2.jpg')}}" style="height: 315px;">
+                        <img class="img-responsive visible-sm" src="{{asset('upload/images/ad2.jpg')}}" style="height: 264px;">
+                        <img class="img-responsive visible-xs" src="{{asset('upload/images/ad2.jpg')}}" style="height: 83px;">
+                    <div class="cover"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{#<script>
+    $(document).ready(function(){
+        $('#img1').hover(function(){
+            
+          $('.cover').fadeIn('fast');
+      },function(){
+          $('.cover').fadeOut('fast');
+        });
+    });
+</script>#}

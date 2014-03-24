@@ -1,0 +1,30 @@
+paymentmethod:
+    pattern:  /
+    defaults: { _controller: "ZeteqMarketBundle:PaymentMethod:index" }
+
+paymentmethod_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ZeteqMarketBundle:PaymentMethod:show" }
+
+paymentmethod_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqMarketBundle:PaymentMethod:new" }
+
+paymentmethod_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqMarketBundle:PaymentMethod:create" }
+    requirements: { _method: post }
+
+paymentmethod_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:PaymentMethod:edit" }
+
+paymentmethod_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqMarketBundle:PaymentMethod:update" }
+    requirements: { _method: post|put }
+
+paymentmethod_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:PaymentMethod:delete" }
+    requirements: { _method: post|delete }

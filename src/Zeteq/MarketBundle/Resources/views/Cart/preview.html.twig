@@ -1,0 +1,84 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+
+
+{% block title %}
+Cart -- Halal Needs
+{% endblock %}
+{% block middle_container %}
+<div class="page-header">
+    <h1>Preview & Confirm order</h1>
+</div>
+<div class="row">
+    <div class="col-md-8 ">
+        
+        <h4>Products</h4>
+    <table class="table table-bordered  table-responsive table-striped table-hover">
+        
+        <tr><th></th><th>Product</th><th style="text-align:right">Price</th> 
+            <th style="text-align:center">Quantity</th><th  style="text-align:right">Subtotal</th></tr>
+ {% for item in cart.getCartItems()%}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{item.getProduct().getName()}}</td>
+            <td style="text-align:right">{{service.getCurrencySymbol()}} {{item.getProduct().getPrice()}}</td>
+            <td style="text-align:center">{{item.getQuantity()}}</td>
+            <td style="text-align:right">{{service.getCurrencySymbol()}} {{item.getTotal()}}</td>    
+        
+        
+        </tr>
+    {% endfor%}
+        <tr><td  style="text-align:right" colspan=4> Sub Total</td><td style="text-align:right">{{service.getCurrencySymbol()}}{{cart.getSubTotal()}}</td></tr>
+       <tr><td style="text-align:right" colspan=4> Shipping cost</td><td style="text-align:right">{{service.getCurrencySymbol()}}{{cart.getShippingCost()}}</td></tr>
+        <tr><td style="text-align:right" colspan=4>Total</td><td style="text-align:right">{{service.getCurrencySymbol()}}{{cart.getTotal()}}</td></tr>      
+    </table>
+            
+            
+            <h4>Payment Method</h4>
+            <div class="well">
+        <h4>            {{cart.getPaymentMethod()}}</h4>
+            {{cart.getPaymentMethod().getDescription()}}
+            </div>
+            <div class="well"><a class="btn btn-info" href="{{path('cart_checkout')}}">Go Back</a>
+<a class="btn btn-info" href="{{path('cart_confirm')}}">Confirm</a></div>
+    </div>
+    
+        
+        
+        <div class="col-md-3 col-md-offset-1">
+            <div class="row">
+                <h4>Bill to</h4>
+                <div class="">
+                    <table class="table table-bordered table-responsive">
+                        <tr><td>{{cart.getBillingFirstName()}} {{cart.getBillingLastName()}}</td></tr>
+                      <tr><td>{{cart.getBillingAddress()}} </td></tr>
+                      <tr><td>{{cart.getBillingCity()}} {{cart.getBillingState()}} {{cart.getBillingPostalcode()}} {{cart.getBillingCountry()}} </td></tr>
+                                                 <tr><td>{{cart.getBillingEmail()}} {{cart.getBillingPhone()}}  </td></tr>
+                                   
+                    </table>
+                </div>
+            </div>
+                
+                            <div class="row">
+                <h4>Ship to</h4>
+                <div class="">
+                    <table class="table  table-bordered  table-responsive">
+                        <tr><td>{{cart.getShippingFirstName()}} {{cart.getShippingLastName()}}</td></tr>
+                      <tr><td>{{cart.getShippingAddress()}} </td></tr>
+                      <tr><td>{{cart.getShippingCity()}} {{cart.getShippingState()}} {{cart.getShippingPostalcode()}} {{cart.getShippingCountry()}} </td></tr>
+                                                 <tr><td>{{cart.getShippingEmail()}} {{cart.getShippingPhone()}}  </td></tr>
+                                   
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>
+
+ 
+
+{% endblock %}
+
+
+
+
+
+

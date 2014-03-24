@@ -1,0 +1,30 @@
+productimage:
+    pattern:  /
+    defaults: { _controller: "ZeteqMarketBundle:ProductImage:index" }
+
+productimage_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ZeteqMarketBundle:ProductImage:show" }
+
+productimage_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqMarketBundle:ProductImage:new" }
+
+productimage_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqMarketBundle:ProductImage:create" }
+    requirements: { _method: post }
+
+productimage_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:ProductImage:edit" }
+
+productimage_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqMarketBundle:ProductImage:update" }
+    requirements: { _method: post|put }
+
+productimage_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:ProductImage:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,33 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+
+
+{% block title %}
+{{entity.getName()}}
+{% endblock %}
+{% block content %}
+<ol class="breadcrumb">
+    <li><a href="{{path('home')}}">Home</a></li>
+    <li><a href="{{path('storesection_show',{'slug':entity.getStoreSection().slug})}}">{{entity.getStoreSection()}}</a></li>
+    <li class="active">{{entity}}</li>
+
+</ol>
+<div class="page-header">
+    <h1>{{ entity.name }}</h1>
+</div>
+
+{% for store in entity.getEnabledStores() %}
+ 
+    <div class="col-md-2">
+        <div class="store_category_stores">
+        <a href="{{path('store_show',{'slug':store.slug}) }}">  <img class="" style="width:99%;margin:auto"  src="{{asset(store.getProfileImageWebPath())  }}"/>  </a>  
+  <h6>      <a href="{{path("store_show",{'slug':store.slug})}}">{{store.getStoreName()}}</a></h6>
+    </div>    
+ </div>
+    
+ 
+{% endfor %}
+ 
+    
+    
+
+{% endblock %}

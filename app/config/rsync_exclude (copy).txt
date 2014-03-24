@@ -1,0 +1,16 @@
+/web/upload/
+/web/upload/*
+/web/media/*
+/web/media/
+/app/config/config.yml
+/app/config/parameter.yml
+.arch-params
+.bzr
+_darcs
+.git
+.hg
+.monotone
+.svn
+CVS
+
+

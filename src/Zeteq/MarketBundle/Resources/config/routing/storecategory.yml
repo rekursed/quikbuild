@@ -1,0 +1,27 @@
+storecategory:
+    pattern:  /
+    defaults: { _controller: "ZeteqMarketBundle:StoreCategory:index" }
+
+
+storecategory_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqMarketBundle:StoreCategory:new" }
+
+storecategory_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqMarketBundle:StoreCategory:create" }
+    requirements: { _method: post }
+
+storecategory_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:StoreCategory:edit" }
+
+storecategory_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqMarketBundle:StoreCategory:update" }
+    requirements: { _method: post|put }
+
+storecategory_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:StoreCategory:delete" }
+    requirements: { _method: post|delete }

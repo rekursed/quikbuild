@@ -1,0 +1,7 @@
+parameters:
+#    zeteq_user.example.class: Zeteq\UserBundle\Example
+
+services:
+#    zeteq_user.example:
+#        class: %zeteq_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,112 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Customer</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
+                <td>{{ entity.created|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Updated</th>
+                <td>{{ entity.updated|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Billing_first_name</th>
+                <td>{{ entity.billingfirstname }}</td>
+            </tr>
+            <tr>
+                <th>Billing_last_name</th>
+                <td>{{ entity.billinglastname }}</td>
+            </tr>
+            <tr>
+                <th>Billing_email</th>
+                <td>{{ entity.billingemail }}</td>
+            </tr>
+            <tr>
+                <th>Billing_address</th>
+                <td>{{ entity.billingaddress }}</td>
+            </tr>
+            <tr>
+                <th>Billing_city</th>
+                <td>{{ entity.billingcity }}</td>
+            </tr>
+            <tr>
+                <th>Billing_state</th>
+                <td>{{ entity.billingstate }}</td>
+            </tr>
+            <tr>
+                <th>Billing_postalcode</th>
+                <td>{{ entity.billingpostalcode }}</td>
+            </tr>
+            <tr>
+                <th>Billing_country</th>
+                <td>{{ entity.billingcountry }}</td>
+            </tr>
+            <tr>
+                <th>Billing_phone</th>
+                <td>{{ entity.billingphone }}</td>
+            </tr>
+            <tr>
+                <th>Shipping_first_name</th>
+                <td>{{ entity.shippingfirstname }}</td>
+            </tr>
+            <tr>
+                <th>Shipping_last_name</th>
+                <td>{{ entity.shippinglastname }}</td>
+            </tr>
+            <tr>
+                <th>Shipping_email</th>
+                <td>{{ entity.shippingemail }}</td>
+            </tr>
+            <tr>
+                <th>Shipping_address</th>
+                <td>{{ entity.shippingaddress }}</td>
+            </tr>
+            <tr>
+                <th>Shipping_city</th>
+                <td>{{ entity.shippingcity }}</td>
+            </tr>
+            <tr>
+                <th>Shipping_state</th>
+                <td>{{ entity.shippingstate }}</td>
+            </tr>
+            <tr>
+                <th>Shipping_postalcode</th>
+                <td>{{ entity.shippingpostalcode }}</td>
+            </tr>
+            <tr>
+                <th>Shipping_country</th>
+                <td>{{ entity.shippingcountry }}</td>
+            </tr>
+            <tr>
+                <th>Shipping_phone</th>
+                <td>{{ entity.shippingphone }}</td>
+            </tr>
+            <tr>
+                <th>Shipping_billing_same</th>
+                <td>{{ entity.shippingbillingsame }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('customer') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('customer_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'ZeteqMarketBundle:Market:store_layout.html.twig' %}
+
+
+
+{% block title %}
+{{page.title}}
+{% endblock %}
+{% block content %}
+<div class="header">
+<h1>{{page.getTitle()}}</h1>
+</div>
+{{page.getBody()|raw}}
+ 
+
+  
+{% endblock %}

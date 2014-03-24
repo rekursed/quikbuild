@@ -1,0 +1,66 @@
+{% extends 'ZeteqMarketBundle:Admin:admin_layout.html.twig' %}
+
+
+{% block title %}
+Edit Store Category --Main Admin
+{% endblock %}
+
+
+{% block stylesheets %}
+{{parent()}}
+{{ form_stylesheet(edit_form) }}
+{% endblock %}
+
+{% block javascripts %}
+{{parent()}}    {{ form_javascript(edit_form) }}
+{% endblock %}
+
+
+
+
+{% block content %}
+
+{{ form_start(edit_form) }}
+    
+    <nav id="form_fixed_top_menu"  class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        
+        <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav_collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+                
+                    <a class="navbar-brand">Store Category update</a>
+ 
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="nav_collapse" class="collapse navbar-collapse">
+
+
+            
+               <button class="btn btn-danger pull-right navbar-btn" type="submit">Save</button>
+                       <a style="margin-right: 10px"  class="btn btn-info navbar-btn pull-right"  href="{{ path('storecategory') }}">
+            Back to the list
+        </a>
+                                       <a style="margin-right: 10px"  class="btn btn-success navbar-btn pull-right"  href="{{ path('storecategory_new') }}">
+                   
+                           Create another Store Category
+        </a> 
+      
+        </div><!-- /.navbar-collapse -->
+        
+        </div>
+      </nav>
+    
+    
+ {{ form_errors(edit_form) }}
+
+   {{ form_end(edit_form) }}
+
+  
+{% endblock %}

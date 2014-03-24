@@ -1,0 +1,29 @@
+storeproductcategory_batch_delete:
+    pattern:  /batch_delete
+    defaults: { _controller: "ZeteqMarketBundle:StoreProductCategory:batch_delete" }
+storeproductcategory:
+    pattern:  /{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreProductCategory:index" }
+
+storeproductcategory_new:
+    pattern:  /new/{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreProductCategory:new" }
+
+storeproductcategory_create:
+    pattern:  /create/{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreProductCategory:create" }
+    requirements: { _method: post }
+
+storeproductcategory_edit:
+    pattern:  /{id}/edit/{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreProductCategory:edit" }
+
+storeproductcategory_update:
+    pattern:  /{id}/update/
+    defaults: { _controller: "ZeteqMarketBundle:StoreProductCategory:update" }
+    requirements: { _method: post|put }
+
+storeproductcategory_delete:
+    pattern:  /{id}/delete/
+    defaults: { _controller: "ZeteqMarketBundle:StoreProductCategory:delete" }
+ 

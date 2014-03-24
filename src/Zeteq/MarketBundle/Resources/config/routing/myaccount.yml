@@ -1,0 +1,31 @@
+myaccount:
+    pattern:  /myaccount
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:index" }
+myaccount_edit_shipping_address:
+    pattern:  /myaccount/edit_shipping_address
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:edit_shipping_address" }
+myaccount_update_shipping_address:
+    pattern:  /myaccount/update_shipping_address
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:update_shipping_address" }
+    
+myaccount_edit_billing_address:
+    pattern:  /myaccount/edit_billing_address
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:edit_billing_address" }
+myaccount_update_billing_address:
+    pattern:  /myaccount/update_billing_address
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:update_billing_address" }
+
+
+myaccount_register:
+    pattern:  /customer_register
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:register" }
+myaccount_register_success:
+    pattern:  /customer_register_success
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:register_success" }
+myaccount_registersave:
+    pattern:  /customer_registersave
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:registersave" }
+myaccount_activate_user:
+    pattern:  /activate_customer/{rand_string}
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:activate_user" }
+

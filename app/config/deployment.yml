@@ -1,0 +1,9 @@
+servers:
+    hostmonster:
+        host: dhakatowel.com
+        user: dhakatow
+        dir: /home5/dhakatow/public_html/halalneeds
+        port: 22
+#        password: vigilant
+        options: # Server options, override the globals
+            dry_run: %kernel.debug%

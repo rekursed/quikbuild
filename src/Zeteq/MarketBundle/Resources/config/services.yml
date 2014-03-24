@@ -1,0 +1,11 @@
+services:
+    service:
+        class:  Zeteq\MarketBundle\Extensions\Service
+        arguments: ['@doctrine.orm.entity_manager','@session','@service_container']
+ 
+    twig.extension.service:
+        class: Zeteq\MarketBundle\Extensions\ServiceExtension
+        arguments: ["@service"]
+        tags:
+            - { name: twig.extension }
+
