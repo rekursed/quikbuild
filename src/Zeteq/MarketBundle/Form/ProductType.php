@@ -34,7 +34,7 @@ class ProductType extends AbstractType {
                 ->add('meta_keywords')
                 ->add('description', 'ckeditor')
                 
-                
+                ->add('additional_info','ckeditor')
   
                             
                             

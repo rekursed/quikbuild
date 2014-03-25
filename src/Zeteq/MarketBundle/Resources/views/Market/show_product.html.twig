@@ -102,10 +102,220 @@
         </div>     
         <div>{{product.getDescription()}}</div>
         <div><h4>Price: TK. {{product.getPrice()}} </h4></div>
+        <div>
+            {%for a in 1..product.getAverageRating()[0]%}
+            <span class="glyphicon glyphicon-star"></span>
+            {%endfor%}
+            {%for a in product.getAverageRating()[0]..4%}
+            <span class="glyphicon glyphicon-star-empty"></span>
+            {%endfor%}
+            ({{product.getAverageRating()[1]}})
+        </div>
+
+
+
+
+
     </div>
 </div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="bs-example bs-example-tabs">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a data-toggle="tab" href="#info">Additional info</a></li>
+                <li><a data-toggle="tab" href="#rating">
+
+                      {%for a in 1..product.getAverageRating()[0]%}
+                        <span class="glyphicon glyphicon-star"></span>
+            {%endfor%}
+            {%for a in product.getAverageRating()[0]..4%}
+                        <span class="glyphicon glyphicon-star-empty"></span>
+            {%endfor%}
+                        ({{product.getAverageRating()[1]}})
+
+                    </a></li>
+                <li class="active"><a data-toggle="tab" href="#ship">Shipping & policies</a></li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div id="info" class="tab-pane fade in active">
+                    <p>{{product.getAdditionalInfo()}}</p>
+                </div>
+                <div id="ship" class="tab-pane fade">
+                </div>
+                <div id="rating" class="tab-pane fade">
+                    <br/>
+                    <div style="margin-bottom:10px"> 
+                        <form id='prForm' method='post' action='{{path('product_rating_submit')}}' >
 
 
+                            <div class='well well-sm star_div'>
+
+                                <a class='star_rating' id='1'> <span class='glyphicon glyphicon-star'></span></a>
+                                <a class='star_rating' id='2'><span class='glyphicon glyphicon-star'></span></a>
+                                <a class='star_rating' id='3'><span class='glyphicon glyphicon-star'></span></a>
+                                <a class='star_rating' id='4'><span class='glyphicon glyphicon-star'></span></a>
+                                <a class='star_rating' id='5'><span class='glyphicon glyphicon-star'></span></a>
+                            </div>
+                            <style>
+                                a.star_rating{padding:3px;font-size: 16px;
+                                              cursor: pointer;color:silver;
+
+                                }
+                                a.star_rating:hover{color:black;}
+                                a.star_rating_hover{color:black}
+                                a.star_selected{
+                                    color:red;
+                                }
+                            </style>
+                            <script>
+                                $(document).ready(function() {
+
+
+                                    $('a.star_rating').hover(
+                                            function() {
+
+                                                $(this).prevAll().addClass('star_rating_hover');
+                                            },
+                                            function() {
+
+                                                $(this).prevAll().removeClass('star_rating_hover');
+                                            }
+
+
+                                    );
+
+                                    $('a.star_rating').click(function(e) {
+
+                                        e.preventDefault();
+                                        $('.star_rating').removeClass('star_selected');
+                                        $(this).addClass('star_selected');
+                                        $(this).prevAll().addClass('star_selected');
+
+                                        var rating = $(this).attr('id');
+                                        $("#rating_val").val(rating);
+                                    });
+
+                                });//doc
+                            </script>
+
+                            <div class='form-group'>                                
+                                <input id='rating_val' class='form-control' type='hidden' name='rating'/>
+                            </div>
+                            <input type='hidden' value='{{product.slug}}' name='slug'/>
+                            <div class='form-group'>
+                                <label>Comment:</label> 
+                                <textarea name='comment' class='form-control'></textarea>
+                            </div>
+
+                            <input class='btn btn-default' type="submit" value="Submit"/>
+                        </form>
+                    </div>
+                    <div>
+                            {%for rating in product.getEnabledProductRatings()%}
+                        <div class="row">
+
+                            <div class='well star_div'>
+
+                                <h4>
+                                    {%if rating.getUser()%}
+                                        {{rating.user}}
+                                    {%else%}
+                                    Annonymous
+                                    {%endif%}
+                                    <small>{{rating.created|date('D ,d M Y')}}</small> </h4>
+                                <div>
+                                    {%for  i in 1..rating.getRoundedRating()%}
+
+                                    <a class='star_rating_show star_selected' id='1'><i class='fa fa-star'></i></a>
+                                    {%endfor%}
+                                    {%if rating.hasHalfStar()!=0%}
+                                    <a class='star_rating_show star_selected' id='1'><i class='fa fa-star-half'></i></a>
+
+                                        {%endif%}
+
+                                    <style>
+                                        a.star_rating_show{padding:3px;font-size: 16px;
+                                                           cursor: pointer;color:silver;
+
+                                        }                                   
+                                        a.star_selected{
+                                            color:red;
+                                        }
+                                    </style>
+
+                                </div>
+                                <p>{{rating.comment}}</p>
+                            </div>
+                        </div>
+                            {%endfor%}
+
+                    </div>
+                   {# <script>
+                        // wait for the DOM to be loaded 
+                        $(document).ready(function() {
+
+                            var options = {
+                                target: '#subs_result',
+                                clearForm: true,
+                            };
+
+
+                            $('#prForm').ajaxForm(options);
+                        });
+                    </script> #}
+                </div>
+                <div id="dropdown1" class="tab-pane fade">
+                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+                </div>
+                <div id="dropdown2" class="tab-pane fade">
+                    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="bs-example bs-example-tabs">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a data-toggle="tab" href="#home">Related Products</a></li>
+
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div id="home" class="tab-pane fade in active"> 
+                    <div class="row">
+                    {%for var in product.getRelatedProducts()%}
+
+                        <div class="col-sm-6 ">
+                            <div class="thumbnail">
+                                <img data-src="holder.js/300x200" alt="..." src="{{asset(var.getWebPath())}}">
+                                <div class="caption">
+                                    <h3>{{var.name}}</h3>
+                                    <p><div>
+                                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span> (45) [rating is commented here]
+                                        {#{%for a in 1..var.getAverageRating()[0]%}
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        {%endfor%}
+                                        {%for a in var.getAverageRating()[0]..4%}
+                                        <span class="glyphicon glyphicon-star-empty"></span>
+                                        {%endfor%}
+                                        ({{var.getAverageRating()[1]}})#}
+                                    </div></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {%if loop.index %2 == 0 or loop.last%}
+                    </div><div class="row">
+                        {%endif%}
+
+                    {%endfor%}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -132,10 +342,10 @@
                  {% endfor%}
                     </div>
                     <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
+                        <i class="fa fa-chevron-circle-left"></i> 
                     </a>
                     <a data-slide="next" href="#carousel-example-generic" class="right carousel-control">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
+                        <i class="fa fa-chevron-circle-right"></i> 
                     </a>
                 </div>
 
@@ -143,8 +353,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>               
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

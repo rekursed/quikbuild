@@ -29,3 +29,7 @@ productcategory_show:
 storeproductcategory_show:
     pattern:  /store_product_category/{slug}
     defaults: { _controller: "ZeteqMarketBundle:Market:show_storeproductcategory" }
+    
+product_rating_submit:
+    pattern:  /product/submit/product_rating_submit
+    defaults: { _controller: "ZeteqMarketBundle:Market:product_rating_submit" }

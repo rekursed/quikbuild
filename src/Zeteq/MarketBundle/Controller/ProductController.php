@@ -18,6 +18,8 @@ use APY\DataGridBundle\Grid\Action\DeleteMassAction;
  *
  */
 class ProductController extends Controller {
+    
+    
 
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();

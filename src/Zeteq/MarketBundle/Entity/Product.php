@@ -119,9 +119,14 @@ class Product {
     protected $product_images;
 
     /**
-     * @ORM\Column(type="text",  nullable=false)
+     * @ORM\Column(type="text",  nullable=true)
      */
     protected $description;
+
+    /**
+     * @ORM\Column(type="text",  nullable=true)
+     */
+    protected $additional_info;
 
     /**
      * @ORM\Column(type="string",length=150, nullable=false)
@@ -129,7 +134,7 @@ class Product {
     protected $meta_description;
 
     /**
-     * @ORM\Column(type="text",  nullable=false)
+     * @ORM\Column(type="text",  nullable=true)
      */
     protected $meta_keywords;
 
@@ -241,6 +246,31 @@ class Product {
     }
 
     /////////image uploading end
+
+    public function getAverageRating() {
+        if ($this->getProductRatings()->count() == 0) {
+            return 0;
+        }
+        $var = 0;
+        $count = 0;
+        foreach ($this->getProductRatings() as $value) {
+            if($value->getEnabled()== TRUE){
+            $var = $var + $value->getRating();
+            $count++;
+            }
+        }
+        $avg[0] = $var / $count;
+        $avg[1] = $count;
+        return $avg;
+    }
+
+    public function hasHalfStar() {
+        $var = $this->getAverageRating();
+        if (ceil($var[0]) != $var[0]) {
+            return 1;
+        }
+        return 0;
+    }
 
     /**
      * Constructor
@@ -845,6 +875,72 @@ class Product {
      */
     public function getParent() {
         return $this->parent;
+    }
+
+    /**
+     * Add product_ratings
+     *
+     * @param \Zeteq\MarketBundle\Entity\ProductRating $productRatings
+     * @return Product
+     */
+    public function addProductRating(\Zeteq\MarketBundle\Entity\ProductRating $productRatings) {
+        $this->product_ratings[] = $productRatings;
+
+        return $this;
+    }
+
+    /**
+     * Remove product_ratings
+     *
+     * @param \Zeteq\MarketBundle\Entity\ProductRating $productRatings
+     */
+    public function removeProductRating(\Zeteq\MarketBundle\Entity\ProductRating $productRatings) {
+        $this->product_ratings->removeElement($productRatings);
+    }
+
+    /**
+     * Get product_ratings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProductRatings() {
+        return $this->product_ratings;
+    }
+
+    /**
+     * Get product_ratings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEnabledProductRatings() {
+        $var = array();
+        foreach ($this->product_ratings as $value) {
+            if ($value->getEnabled() == TRUE) {
+                $var[] = $value;
+            }
+        }
+        return $var;
+    }
+
+    /**
+     * Set additional_info
+     *
+     * @param string $additionalInfo
+     * @return Product
+     */
+    public function setAdditionalInfo($additionalInfo) {
+        $this->additional_info = $additionalInfo;
+
+        return $this;
+    }
+
+    /**
+     * Get additional_info
+     *
+     * @return string 
+     */
+    public function getAdditionalInfo() {
+        return $this->additional_info;
     }
 
 }

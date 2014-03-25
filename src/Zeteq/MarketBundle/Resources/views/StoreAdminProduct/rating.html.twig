@@ -1,0 +1,53 @@
+{% extends 'ZeteqMarketBundle:StoreAdmin:store_admin_layout.html.twig' %}
+
+
+{% block content -%}
+
+<div style="" class="sa_index_header"><h2><a href="{{path('store_admin')}}">Stores </a>  <span class="fa fa-caret-right"></span> 
+
+{{store.getStoreName()}}
+    </h2>
+</div>
+
+
+
+<ul class="nav nav-tabs nav-justified" style="margin-bottom:40px;">
+    <li  class=""><a href="{{ path('store_admin_edit', { 'id': store.id }) }}"><i class="fa fa-pencil"></i> Edit</a> </li>
+    <li  class="active">  <a href="{{ path('storeadmin_product', { 'store_id': store.id }) }}"><i class="fa fa-shopping-cart"></i> Products</a> </li>
+    <li><a href="{{ path('storeproductcategory', { 'store_id': store.id }) }}"><i class="fa fa-archive"></i> Categories</a> </li>
+    <li  class=""><a href="{{ path('storeadmin_page', { 'store_id': store.id }) }}"><i class="fa fa-file-o"></i> Pages</a> </li>
+</ul>
+
+
+<nav class="navbar navbar-default">
+
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <p class="navbar-text">Batch product upload</p>
+        <form method="post" enctype="multipart/form-data"  action="{{path('storeadmin_read_excel',{'store_id':store.getId()})}}"  class="navbar-form navbar-left">
+            <div class="form-group">
+                <input type="file" name="uploadedfile" class="">
+            </div>
+            <button class="btn btn-default" type="submit">Submit</button>
+        </form>
+
+
+        <a class="btn  btn-success navbar-btn pull-right" href="{{ path('storeadmin_product_new',{'store_id': store.id}) }}">
+            Create a new entry
+        </a>
+    </div>
+</nav>
+{{ratings|length}}
+{%for var in ratings%}
+{{var.id}}
+{%endfor%}
+
+
+    {% endblock %}

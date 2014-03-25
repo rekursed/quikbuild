@@ -155,6 +155,8 @@ class Store
      */
     protected $store_category;
     
+    
+    
      /**
      * @ORM\OneToMany(targetEntity="Product", mappedBy="store",cascade={"remove"})
      */

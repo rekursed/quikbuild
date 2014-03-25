@@ -14,15 +14,15 @@ class Service {
     protected $em;
     private $session;
     private $container;
-    function __construct(EntityManager $em,$session,$service_container) 
-    {
+
+    function __construct(EntityManager $em, $session, $service_container) {
 
         $this->em = $em;
         $this->session = $session;
         $this->container = $service_container;
     }
-    
-        public function getSlot($id) {
+
+    public function getSlot($id) {
 //        try {
 //
 //            $query = $this->em->createQuery('SELECT a from ZeteqPageBundle:Slot a where a.id=:id ')
@@ -34,58 +34,53 @@ class Service {
 
         return 'ZeteqMarketBundle:Slots:' . $id . '.html.twig';
     }
-    
-    public function getCurrencySymbol()
-    {
-        
+
+    public function getCurrencySymbol() {
+
         return 'Tk.';
     }
 
-    
-    public function getCarts(){
-        
+    public function getCarts() {
+
         $session = $this->container->get('session');
-            $session_cart = $session->get('carts');
-        if(!$session_cart){
+        $session_cart = $session->get('carts');
+        if (!$session_cart) {
             $arr = array();
-            $session->set('carts',$arr);
+            $session->set('carts', $arr);
         }
-        
+
         return $session_cart;
     }
-    public function getCart($store_slug)
-    {
+
+    public function getCart($store_slug) {
 
 
-$session = $this->container->get('session');
+        $session = $this->container->get('session');
 
-        
+
         $session_cart = $session->get('carts');
-        if(!$session_cart){
+        if (!$session_cart) {
             $arr = array();
-            $session->set('carts',$arr);
+            $session->set('carts', $arr);
         }
-       
-        if(isset($session_cart[$store_slug])){
-        $store_cart_id = $session_cart[$store_slug];
-            
-        }
-        else{
+
+        if (isset($session_cart[$store_slug])) {
+            $store_cart_id = $session_cart[$store_slug];
+        } else {
             $store = $this->em->getRepository('ZeteqMarketBundle:Store')->findOneBySlug($store_slug);
             $c = New Cart();
             $c->setStore($store);
             $this->em->persist($c);
             $this->em->flush();
             $session_cart[$store_slug] = $c->getId();
-            $session->set('carts',$session_cart);
+            $session->set('carts', $session_cart);
             $store_cart_id = $c->getId();
         }
         $cart = $this->em->getRepository('ZeteqMarketBundle:Cart')->findOneById($store_cart_id);
         return $cart;
-        
     }
-    
-     public function getFeaturedStores() {
+
+    public function getFeaturedStores() {
         try {
 
             $query = $this->em->createQuery('SELECT a from ZeteqMarketBundle:Store a where a.featured =1 and a.enabled=1 and a.approved=1 ');
@@ -97,13 +92,12 @@ $session = $this->container->get('session');
         return $as;
     }
 
-    
-        public function getParentCategories() {
+    public function getParentCategories() {
         try {
 
             $query = $this->em->createQuery('SELECT a from ZeteqMarketBundle:ProductCategory a WHERE a.is_parent=true AND a.enabled=1 ')
-           
-                    ;
+
+            ;
             $as = $query->getResult();
         } catch (\Doctrine\Orm\NoResultException $e) {
             $as = false;
@@ -111,9 +105,7 @@ $session = $this->container->get('session');
 
         return $as;
     }
-    
-    
-    
+
     public function getEnabledProductSections() {
         try {
 
@@ -125,7 +117,7 @@ $session = $this->container->get('session');
 
         return $as;
     }
-    
+
     public function getEnabledStoreSections() {
         try {
 
@@ -137,8 +129,7 @@ $session = $this->container->get('session');
 
         return $as;
     }
-    
-    
+
     public function getEnabledProducts() {
         try {
 
@@ -150,7 +141,7 @@ $session = $this->container->get('session');
 
         return $as;
     }
-    
+
     public function getHomeImage($id) {
         try {
 
@@ -163,11 +154,11 @@ $session = $this->container->get('session');
 
         return $as;
     }
-    
+
     public function getHomeSlideImage() {
         try {
 
-            $query = $this->em->createQuery('SELECT a from ZeteqFrontBundle:HomeSlideImage a where a.enabled =1 order by a.sort DESC');    
+            $query = $this->em->createQuery('SELECT a from ZeteqFrontBundle:HomeSlideImage a where a.enabled =1 order by a.sort DESC');
             $as = $query->getResult();
         } catch (\Doctrine\Orm\NoResultException $e) {
             $as = false;
@@ -175,4 +166,5 @@ $session = $this->container->get('session');
 
         return $as;
     }
+
 }

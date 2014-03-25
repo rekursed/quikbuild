@@ -28,6 +28,12 @@ class ProductMainType extends AbstractType
                 ->add('enabled')
                ->add('approved')
                 ->add('description','ckeditor')
+                ->add('additional_info','ckeditor')
+                ->add('related_products', 'genemu_jqueryselect2_entity', array(
+                    'class' => 'ZeteqMarketBundle:Product',
+                    'property' => 'name',
+                    'multiple' => true,
+                ))
                 ->add('categories', 'genemu_jqueryselect2_entity', array(
                     'class' => 'ZeteqMarketBundle:ProductCategory',
                     'property' => 'name',

@@ -44,7 +44,8 @@ class ProductRating {
      * @ORM\Column(type="boolean",nullable=true)
      */
     protected $enabled;
-
+    
+    
     /**
      * @ORM\ManyToOne(targetEntity="Product", inversedBy="product_ratings")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id",nullable=false)
@@ -74,4 +75,152 @@ class ProductRating {
     }
 
    
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return ProductRating
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     * @return ProductRating
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string 
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set rating
+     *
+     * @param float $rating
+     * @return ProductRating
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
+    
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return float 
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     * @return ProductRating
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \Zeteq\MarketBundle\Entity\Product $product
+     * @return ProductRating
+     */
+    public function setProduct(\Zeteq\MarketBundle\Entity\Product $product)
+    {
+        $this->product = $product;
+    
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \Zeteq\MarketBundle\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Zeteq\UserBundle\Entity\User $user
+     * @return ProductRating
+     */
+    public function setUser(\Zeteq\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Zeteq\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

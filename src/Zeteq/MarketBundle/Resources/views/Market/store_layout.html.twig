@@ -155,7 +155,7 @@
 
                 <ul id="tn_right_menu" class="nav navbar-nav pull-right">
 
-                    <li><a href="{{path('cart_index')}}"><span class="glyphicon glyphicon-shopping-cart"></span>Cart({{service.getCart().getCount()}})</a></li>
+                    <li><a href="{{path('cart_index')}}"><span class="glyphicon glyphicon-shopping-cart"></span>Cart({{service.getCart(store.getSlug()).getCount()}})</a></li>
 
 {% if is_granted('ROLE_CUSTOMER') %}    <li><a href="{{path('myaccount')}}">My Account</a></li>{% endif %}
 
