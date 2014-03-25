@@ -1,0 +1,39 @@
+<div class="bs-example">
+    <div data-ride="carousel" class="carousel slide" id="carousel-example-captions">
+        <ol class="carousel-indicators">
+           {# <li class="" data-slide-to="0" data-target="#carousel-example-captions"></li>
+            <li data-slide-to="1" data-target="#carousel-example-captions" class=""></li>
+            <li data-slide-to="2" data-target="#carousel-example-captions" class=""></li>#}
+        </ol>
+        <div class="carousel-inner">
+            {%for image  in service.getHomeSlideImage()%}
+            <div class="item {%if loop.index==1%} active {%endif%}">
+                <img alt="900x500" style="width:100%; height: 500px"  data-src="holder.js/100%x500/auto/#777:#777" src="{{asset(image.getWebPath())}}">
+                <div class="carousel-caption">
+                    {{image.body |raw}}
+                </div>
+            </div>
+            {%endfor%}
+           {# <div class="item next left">
+                <img alt="900x500" data-src="holder.js/100%x500/auto/#666:#666" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNjY2O2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+OTAweDUwMDwvdGV4dD48L3N2Zz4=">
+                <div class="carousel-caption">
+                    <h3>Second slide label</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+            <div class="item">
+                <img alt="900x500" data-src="holder.js/100%x500/auto/#555:#5555" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzU1NSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNTU1NTtmb250LXdlaWdodDpib2xkO2ZvbnQtc2l6ZTo1NnB4O2ZvbnQtZmFtaWx5OkFyaWFsLEhlbHZldGljYSxzYW5zLXNlcmlmO2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjkwMHg1MDA8L3RleHQ+PC9zdmc+">
+                <div class="carousel-caption">
+                    <h3>Third slide label</h3>
+                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                </div>
+            </div>#}
+        </div>
+        <a data-slide="prev" href="#carousel-example-captions" class="left carousel-control">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a data-slide="next" href="#carousel-example-captions" class="right carousel-control">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</div>

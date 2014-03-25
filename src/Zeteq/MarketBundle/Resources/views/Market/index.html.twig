@@ -5,10 +5,14 @@
 Home -- Marketplace
 {% endblock %}
 {% block content %}
-
+<div class="well well-sm">
+ {{ include('ZeteqMarketBundle:Market:_home_slide.html.twig')  }} 
+</div>
 <div >
 
-    {{include(service.getSlot(12))}}
+   {# {{include(service.getSlot(12))}}#}
+
+    {{ include('ZeteqMarketBundle:Market:_home_image.html.twig')  }}  
 </div>
 
 

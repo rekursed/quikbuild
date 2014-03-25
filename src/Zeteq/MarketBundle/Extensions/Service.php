@@ -150,4 +150,29 @@ $session = $this->container->get('session');
 
         return $as;
     }
+    
+    public function getHomeImage($id) {
+        try {
+
+            $query = $this->em->createQuery('SELECT a from ZeteqFrontBundle:HomeImage a where a.enabled =1 and a.id = ?1');
+            $query->setParameter(1, $id);
+            $as = $query->getResult();
+        } catch (\Doctrine\Orm\NoResultException $e) {
+            $as = false;
+        }
+
+        return $as;
+    }
+    
+    public function getHomeSlideImage() {
+        try {
+
+            $query = $this->em->createQuery('SELECT a from ZeteqFrontBundle:HomeSlideImage a where a.enabled =1 order by a.sort DESC');    
+            $as = $query->getResult();
+        } catch (\Doctrine\Orm\NoResultException $e) {
+            $as = false;
+        }
+
+        return $as;
+    }
 }

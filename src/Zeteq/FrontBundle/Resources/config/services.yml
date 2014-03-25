@@ -1,0 +1,7 @@
+parameters:
+#    zeteq_front.example.class: Zeteq\FrontBundle\Example
+
+services:
+#    zeteq_front.example:
+#        class: %zeteq_front.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 
 namespace Zeteq\MarketBundle\Entity;
 
@@ -13,10 +12,10 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
  * @ORM\Entity
  * @ORM\Table(name="product")
  * @ORM\HasLifecycleCallbacks
-  * @ORM\Entity(repositoryClass="Zeteq\MarketBundle\Entity\ProductRepository")
-  */
-class Product
-{
+ * @ORM\Entity(repositoryClass="Zeteq\MarketBundle\Entity\ProductRepository")
+ */
+class Product {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -24,10 +23,8 @@ class Product
      * @GRID\Column(filterable=false)
      */
     protected $id;
-    
-    
-    
-         /**
+
+    /**
      * @var datetime $created
      *
      * @Gedmo\Timestampable(on="create")
@@ -42,64 +39,59 @@ class Product
      * @ORM\Column(type="datetime")
      */
     private $updated;
-    
-   
- 
-    
 
-     /**
+    /**
      * @ORM\Column(type="string",length=130,  nullable=false)
-      *   @GRID\Column(operatorsVisible=false)
+     *   @GRID\Column(operatorsVisible=false)
      */
     protected $name;
-         
-   /**
+
+    /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=128, unique=true, nullable=true)
-   */
-    private $slug;  
-    
-
-       /**
-     * @ORM\Column(type="boolean",nullable=true)
      */
-    protected $out_of_stock;  
-    
+    private $slug;
+
     /**
      * @ORM\Column(type="boolean",nullable=true)
      */
-    protected $approved;    
-    
-   /**
+    protected $out_of_stock;
+
+    /**
+     * @ORM\Column(type="boolean",nullable=true)
+     */
+    protected $approved;
+
+    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
     protected $enabled;
 
-   /**
+    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
     protected $featured;
-     
-       /**
+
+    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
     protected $clearance;
-    
-    
-       /**
+
+    /**
      * @ORM\Column(type="float",nullable=true)
      * @GRID\Column(filterable=false)
      */
     protected $price;
-    
-       /**
+
+    /**
      * @ORM\Column(type="float",nullable=true)
      */
     protected $clearance_price;
 
-
-
-
+    /**
+     * @ORM\OneToMany(targetEntity="ProductRating", mappedBy="product",cascade={"persist","remove"})
+     */
+    protected $product_ratings;
 
     /**
      * @ORM\ManyToMany(targetEntity="Product", mappedBy="related_products")
@@ -115,9 +107,7 @@ class Product
      */
     private $related_products;
 
-
-
-         /**
+    /**
      * @ORM\OneToMany(targetEntity="CartItem", mappedBy="product",cascade={"persist"})
      */
     protected $cart_items;
@@ -128,46 +118,37 @@ class Product
      */
     protected $product_images;
 
-    
-    
-    
-     /**
+    /**
      * @ORM\Column(type="text",  nullable=false)
      */
     protected $description;
-    
-      /**
+
+    /**
      * @ORM\Column(type="string",length=150, nullable=false)
      */
     protected $meta_description;
-    
-         /**
+
+    /**
      * @ORM\Column(type="text",  nullable=false)
      */
     protected $meta_keywords;
-    
-    
-    
-    
-    
-        /**
+
+    /**
      * @ORM\ManyToMany(targetEntity="ProductCategory", inversedBy="products" ,cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
-      * @ORM\OrderBy({"name" = "ASC"})
-    * @GRID\Column(field="categories.name",filter="select", operatorsVisible=false, title="Category")
+     * @ORM\OrderBy({"name" = "ASC"})
+     * @GRID\Column(field="categories.name",filter="select", operatorsVisible=false, title="Category")
      */
     protected $categories;
-    
 
-
-        /**
+    /**
      * @ORM\ManyToMany(targetEntity="StoreProductCategory", inversedBy="products" ,cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
-      * @ORM\OrderBy({"name" = "ASC"})
+     * @ORM\OrderBy({"name" = "ASC"})
 
      */
     protected $store_product_categories;
-        
+
     /**
      * @ORM\ManyToOne(targetEntity="Store", inversedBy="products")
      * @ORM\JoinColumn(name="store_id", referencedColumnName="id",nullable=false)
@@ -175,30 +156,22 @@ class Product
      */
     protected $store;
 
-    
-    //////////image uploading begin
-    
-    
 
- /**
+    //////////image uploading begin
+
+    /**
      * @ORM\Column(type="string", length=100,nullable=true)
      */
     protected $image_path;
-    
+
     /**
      * @var string $image
      * @Assert\File( maxSize = "5024k", mimeTypesMessage = "Please upload a valid Image")
      * @ORM\Column(name="image", type="string", length=255,nullable=true)
      */
     private $image;
-    
-    
-    
-    
-    
-    
-        
-        /**
+
+    /**
      * @ORM\OneToMany(targetEntity="Product", mappedBy="parent")
      */
     private $variations;
@@ -208,107 +181,81 @@ class Product
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      */
     private $parent;
-    
-    
-    
-    
-    
-    
-    
-    
+
     public function __toString() {
         return $this->getName();
     }
-    
-public function getWebPath() 
-{
-        return  'upload/product/images/'.$this->getStore()->getId().'/'. $this->image_path;
-}
-    
 
-public function getFullImagePath() 
-{
-return   $this->getUploadRootDir(). $this->image_path;
-}
- 
-protected function getUploadRootDir() 
-{
+    public function getWebPath() {
+        return 'upload/product/images/' . $this->getStore()->getId() . '/' . $this->image_path;
+    }
+
+    public function getFullImagePath() {
+        return $this->getUploadRootDir() . $this->image_path;
+    }
+
+    protected function getUploadRootDir() {
         // the absolute directory path where uploaded documents should be saved
-        return __DIR__ . '/../../../../public_html/upload/product/images/'.$this->getStore()->getId().'/';
-}
- 
+        return __DIR__ . '/../../../../public_html/upload/product/images/' . $this->getStore()->getId() . '/';
+    }
 
-
-   /**
+    /**
      * @ORM\PrePersist()
      */
-    public function uploadpersistImage() 
-{
+    public function uploadpersistImage() {
         // the file property can be empty if the field is not required
         if (null === $this->image) {
             return;
-		}
+        }
 
-        
-        $this->image->move($this->getUploadRootDir(),$this->image->getClientOriginalName());
+
+        $this->image->move($this->getUploadRootDir(), $this->image->getClientOriginalName());
 
         $this->setImagePath($this->image->getClientOriginalName());
-         $this->setImage('');
+        $this->setImage('');
     }
- 
-    
-       /**
+
+    /**
      * @ORM\PreUpdate()
      */
-    
     public function uploadupdateImage() {
 
-            if (null === $this->image) {
+        if (null === $this->image) {
             return;
         }
-        
-       $this->image->move($this->getUploadRootDir(), $this->image->getClientOriginalName());
-       $this->setImagePath($this->image->getClientOriginalName());
-         $this->setImage('');
-        
+
+        $this->image->move($this->getUploadRootDir(), $this->image->getClientOriginalName());
+        $this->setImagePath($this->image->getClientOriginalName());
+        $this->setImage('');
     }
- 
+
     /**
      * @ORM\PreRemove()
      */
-    public function removeImage()
-    {
-        try{
-       unlink($this->getFullImagePath());
-        }catch(\Exception $e){
+    public function removeImage() {
+        try {
+            unlink($this->getFullImagePath());
+        } catch (\Exception $e) {
             
         }
     }
 
-
-
-    
     /////////image uploading end
 
-  
-
- 
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->store_product_categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -318,10 +265,9 @@ protected function getUploadRootDir()
      * @param \DateTime $created
      * @return Product
      */
-    public function setCreated($created)
-    {
+    public function setCreated($created) {
         $this->created = $created;
-    
+
         return $this;
     }
 
@@ -330,8 +276,7 @@ protected function getUploadRootDir()
      *
      * @return \DateTime 
      */
-    public function getCreated()
-    {
+    public function getCreated() {
         return $this->created;
     }
 
@@ -341,10 +286,9 @@ protected function getUploadRootDir()
      * @param \DateTime $updated
      * @return Product
      */
-    public function setUpdated($updated)
-    {
+    public function setUpdated($updated) {
         $this->updated = $updated;
-    
+
         return $this;
     }
 
@@ -353,8 +297,7 @@ protected function getUploadRootDir()
      *
      * @return \DateTime 
      */
-    public function getUpdated()
-    {
+    public function getUpdated() {
         return $this->updated;
     }
 
@@ -364,10 +307,9 @@ protected function getUploadRootDir()
      * @param string $name
      * @return Product
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -376,8 +318,7 @@ protected function getUploadRootDir()
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -387,10 +328,9 @@ protected function getUploadRootDir()
      * @param boolean $enabled
      * @return Product
      */
-    public function setEnabled($enabled)
-    {
+    public function setEnabled($enabled) {
         $this->enabled = $enabled;
-    
+
         return $this;
     }
 
@@ -399,8 +339,7 @@ protected function getUploadRootDir()
      *
      * @return boolean 
      */
-    public function getEnabled()
-    {
+    public function getEnabled() {
         return $this->enabled;
     }
 
@@ -410,10 +349,9 @@ protected function getUploadRootDir()
      * @param string $description
      * @return Product
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -422,8 +360,7 @@ protected function getUploadRootDir()
      *
      * @return string 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -433,10 +370,9 @@ protected function getUploadRootDir()
      * @param string $imagePath
      * @return Product
      */
-    public function setImagePath($imagePath)
-    {
+    public function setImagePath($imagePath) {
         $this->image_path = $imagePath;
-    
+
         return $this;
     }
 
@@ -445,8 +381,7 @@ protected function getUploadRootDir()
      *
      * @return string 
      */
-    public function getImagePath()
-    {
+    public function getImagePath() {
         return $this->image_path;
     }
 
@@ -456,10 +391,9 @@ protected function getUploadRootDir()
      * @param string $image
      * @return Product
      */
-    public function setImage($image)
-    {
+    public function setImage($image) {
         $this->image = $image;
-    
+
         return $this;
     }
 
@@ -468,8 +402,7 @@ protected function getUploadRootDir()
      *
      * @return string 
      */
-    public function getImage()
-    {
+    public function getImage() {
         return $this->image;
     }
 
@@ -479,10 +412,9 @@ protected function getUploadRootDir()
      * @param \Zeteq\MarketBundle\Entity\ProductCategory $categories
      * @return Product
      */
-    public function addCategorie(\Zeteq\MarketBundle\Entity\ProductCategory $categories)
-    {
+    public function addCategorie(\Zeteq\MarketBundle\Entity\ProductCategory $categories) {
         $this->categories[] = $categories;
-    
+
         return $this;
     }
 
@@ -491,8 +423,7 @@ protected function getUploadRootDir()
      *
      * @param \Zeteq\MarketBundle\Entity\ProductCategory $categories
      */
-    public function removeCategorie(\Zeteq\MarketBundle\Entity\ProductCategory $categories)
-    {
+    public function removeCategorie(\Zeteq\MarketBundle\Entity\ProductCategory $categories) {
         $this->categories->removeElement($categories);
     }
 
@@ -501,8 +432,7 @@ protected function getUploadRootDir()
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCategories()
-    {
+    public function getCategories() {
         return $this->categories;
     }
 
@@ -512,10 +442,9 @@ protected function getUploadRootDir()
      * @param \Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories
      * @return Product
      */
-    public function addStoreProductCategorie(\Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories)
-    {
+    public function addStoreProductCategorie(\Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories) {
         $this->store_product_categories[] = $storeProductCategories;
-    
+
         return $this;
     }
 
@@ -524,8 +453,7 @@ protected function getUploadRootDir()
      *
      * @param \Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories
      */
-    public function removeStoreProductCategorie(\Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories)
-    {
+    public function removeStoreProductCategorie(\Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories) {
         $this->store_product_categories->removeElement($storeProductCategories);
     }
 
@@ -534,8 +462,7 @@ protected function getUploadRootDir()
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getStoreProductCategories()
-    {
+    public function getStoreProductCategories() {
         return $this->store_product_categories;
     }
 
@@ -545,10 +472,9 @@ protected function getUploadRootDir()
      * @param \Zeteq\MarketBundle\Entity\Store $store
      * @return Product
      */
-    public function setStore(\Zeteq\MarketBundle\Entity\Store $store)
-    {
+    public function setStore(\Zeteq\MarketBundle\Entity\Store $store) {
         $this->store = $store;
-    
+
         return $this;
     }
 
@@ -557,8 +483,7 @@ protected function getUploadRootDir()
      *
      * @return \Zeteq\MarketBundle\Entity\Store 
      */
-    public function getStore()
-    {
+    public function getStore() {
         return $this->store;
     }
 
@@ -568,10 +493,9 @@ protected function getUploadRootDir()
      * @param boolean $featured
      * @return Product
      */
-    public function setFeatured($featured)
-    {
+    public function setFeatured($featured) {
         $this->featured = $featured;
-    
+
         return $this;
     }
 
@@ -580,8 +504,7 @@ protected function getUploadRootDir()
      *
      * @return boolean 
      */
-    public function getFeatured()
-    {
+    public function getFeatured() {
         return $this->featured;
     }
 
@@ -591,10 +514,9 @@ protected function getUploadRootDir()
      * @param boolean $clearance
      * @return Product
      */
-    public function setClearance($clearance)
-    {
+    public function setClearance($clearance) {
         $this->clearance = $clearance;
-    
+
         return $this;
     }
 
@@ -603,8 +525,7 @@ protected function getUploadRootDir()
      *
      * @return boolean 
      */
-    public function getClearance()
-    {
+    public function getClearance() {
         return $this->clearance;
     }
 
@@ -614,10 +535,9 @@ protected function getUploadRootDir()
      * @param integer $price
      * @return Product
      */
-    public function setPrice($price)
-    {
+    public function setPrice($price) {
         $this->price = $price;
-    
+
         return $this;
     }
 
@@ -626,8 +546,7 @@ protected function getUploadRootDir()
      *
      * @return integer 
      */
-    public function getPrice()
-    {
+    public function getPrice() {
         return $this->price;
     }
 
@@ -637,10 +556,9 @@ protected function getUploadRootDir()
      * @param boolean $clearancePrice
      * @return Product
      */
-    public function setClearancePrice($clearancePrice)
-    {
+    public function setClearancePrice($clearancePrice) {
         $this->clearance_price = $clearancePrice;
-    
+
         return $this;
     }
 
@@ -649,8 +567,7 @@ protected function getUploadRootDir()
      *
      * @return boolean 
      */
-    public function getClearancePrice()
-    {
+    public function getClearancePrice() {
         return $this->clearance_price;
     }
 
@@ -660,10 +577,9 @@ protected function getUploadRootDir()
      * @param string $slug
      * @return Product
      */
-    public function setSlug($slug)
-    {
+    public function setSlug($slug) {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
@@ -672,8 +588,7 @@ protected function getUploadRootDir()
      *
      * @return string 
      */
-    public function getSlug()
-    {
+    public function getSlug() {
         return $this->slug;
     }
 
@@ -683,10 +598,9 @@ protected function getUploadRootDir()
      * @param boolean $approved
      * @return Product
      */
-    public function setApproved($approved)
-    {
+    public function setApproved($approved) {
         $this->approved = $approved;
-    
+
         return $this;
     }
 
@@ -695,8 +609,7 @@ protected function getUploadRootDir()
      *
      * @return boolean 
      */
-    public function getApproved()
-    {
+    public function getApproved() {
         return $this->approved;
     }
 
@@ -706,10 +619,9 @@ protected function getUploadRootDir()
      * @param \Zeteq\MarketBundle\Entity\CartItem $cartItems
      * @return Product
      */
-    public function addCartItem(\Zeteq\MarketBundle\Entity\CartItem $cartItems)
-    {
+    public function addCartItem(\Zeteq\MarketBundle\Entity\CartItem $cartItems) {
         $this->cart_items[] = $cartItems;
-    
+
         return $this;
     }
 
@@ -718,8 +630,7 @@ protected function getUploadRootDir()
      *
      * @param \Zeteq\MarketBundle\Entity\CartItem $cartItems
      */
-    public function removeCartItem(\Zeteq\MarketBundle\Entity\CartItem $cartItems)
-    {
+    public function removeCartItem(\Zeteq\MarketBundle\Entity\CartItem $cartItems) {
         $this->cart_items->removeElement($cartItems);
     }
 
@@ -728,8 +639,7 @@ protected function getUploadRootDir()
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCartItems()
-    {
+    public function getCartItems() {
         return $this->cart_items;
     }
 
@@ -739,10 +649,9 @@ protected function getUploadRootDir()
      * @param \Zeteq\MarketBundle\Entity\ProductImage $productImages
      * @return Product
      */
-    public function addProductImage(\Zeteq\MarketBundle\Entity\ProductImage $productImages)
-    {
+    public function addProductImage(\Zeteq\MarketBundle\Entity\ProductImage $productImages) {
         $this->product_images[] = $productImages;
-    
+
         return $this;
     }
 
@@ -751,8 +660,7 @@ protected function getUploadRootDir()
      *
      * @param \Zeteq\MarketBundle\Entity\ProductImage $productImages
      */
-    public function removeProductImage(\Zeteq\MarketBundle\Entity\ProductImage $productImages)
-    {
+    public function removeProductImage(\Zeteq\MarketBundle\Entity\ProductImage $productImages) {
         $this->product_images->removeElement($productImages);
     }
 
@@ -761,8 +669,7 @@ protected function getUploadRootDir()
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getProductImages()
-    {
+    public function getProductImages() {
         return $this->product_images;
     }
 
@@ -772,10 +679,9 @@ protected function getUploadRootDir()
      * @param boolean $outOfStock
      * @return Product
      */
-    public function setOutOfStock($outOfStock)
-    {
+    public function setOutOfStock($outOfStock) {
         $this->out_of_stock = $outOfStock;
-    
+
         return $this;
     }
 
@@ -784,8 +690,7 @@ protected function getUploadRootDir()
      *
      * @return boolean 
      */
-    public function getOutOfStock()
-    {
+    public function getOutOfStock() {
         return $this->out_of_stock;
     }
 
@@ -795,10 +700,9 @@ protected function getUploadRootDir()
      * @param \Zeteq\MarketBundle\Entity\Product $productsRelatedToMe
      * @return Product
      */
-    public function addProductsRelatedToMe(\Zeteq\MarketBundle\Entity\Product $productsRelatedToMe)
-    {
+    public function addProductsRelatedToMe(\Zeteq\MarketBundle\Entity\Product $productsRelatedToMe) {
         $this->products_related_to_me[] = $productsRelatedToMe;
-    
+
         return $this;
     }
 
@@ -807,8 +711,7 @@ protected function getUploadRootDir()
      *
      * @param \Zeteq\MarketBundle\Entity\Product $productsRelatedToMe
      */
-    public function removeProductsRelatedToMe(\Zeteq\MarketBundle\Entity\Product $productsRelatedToMe)
-    {
+    public function removeProductsRelatedToMe(\Zeteq\MarketBundle\Entity\Product $productsRelatedToMe) {
         $this->products_related_to_me->removeElement($productsRelatedToMe);
     }
 
@@ -817,8 +720,7 @@ protected function getUploadRootDir()
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getProductsRelatedToMe()
-    {
+    public function getProductsRelatedToMe() {
         return $this->products_related_to_me;
     }
 
@@ -828,10 +730,9 @@ protected function getUploadRootDir()
      * @param \Zeteq\MarketBundle\Entity\Product $relatedProducts
      * @return Product
      */
-    public function addRelatedProduct(\Zeteq\MarketBundle\Entity\Product $relatedProducts)
-    {
+    public function addRelatedProduct(\Zeteq\MarketBundle\Entity\Product $relatedProducts) {
         $this->related_products[] = $relatedProducts;
-    
+
         return $this;
     }
 
@@ -840,8 +741,7 @@ protected function getUploadRootDir()
      *
      * @param \Zeteq\MarketBundle\Entity\Product $relatedProducts
      */
-    public function removeRelatedProduct(\Zeteq\MarketBundle\Entity\Product $relatedProducts)
-    {
+    public function removeRelatedProduct(\Zeteq\MarketBundle\Entity\Product $relatedProducts) {
         $this->related_products->removeElement($relatedProducts);
     }
 
@@ -850,8 +750,7 @@ protected function getUploadRootDir()
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRelatedProducts()
-    {
+    public function getRelatedProducts() {
         return $this->related_products;
     }
 
@@ -861,10 +760,9 @@ protected function getUploadRootDir()
      * @param string $metaDescription
      * @return Product
      */
-    public function setMetaDescription($metaDescription)
-    {
+    public function setMetaDescription($metaDescription) {
         $this->meta_description = $metaDescription;
-    
+
         return $this;
     }
 
@@ -873,8 +771,7 @@ protected function getUploadRootDir()
      *
      * @return string 
      */
-    public function getMetaDescription()
-    {
+    public function getMetaDescription() {
         return $this->meta_description;
     }
 
@@ -884,10 +781,9 @@ protected function getUploadRootDir()
      * @param string $metaKeywords
      * @return Product
      */
-    public function setMetaKeywords($metaKeywords)
-    {
+    public function setMetaKeywords($metaKeywords) {
         $this->meta_keywords = $metaKeywords;
-    
+
         return $this;
     }
 
@@ -896,8 +792,7 @@ protected function getUploadRootDir()
      *
      * @return string 
      */
-    public function getMetaKeywords()
-    {
+    public function getMetaKeywords() {
         return $this->meta_keywords;
     }
 
@@ -907,10 +802,9 @@ protected function getUploadRootDir()
      * @param \Zeteq\MarketBundle\Entity\Product $variations
      * @return Product
      */
-    public function addVariation(\Zeteq\MarketBundle\Entity\Product $variations)
-    {
+    public function addVariation(\Zeteq\MarketBundle\Entity\Product $variations) {
         $this->variations[] = $variations;
-    
+
         return $this;
     }
 
@@ -919,8 +813,7 @@ protected function getUploadRootDir()
      *
      * @param \Zeteq\MarketBundle\Entity\Product $variations
      */
-    public function removeVariation(\Zeteq\MarketBundle\Entity\Product $variations)
-    {
+    public function removeVariation(\Zeteq\MarketBundle\Entity\Product $variations) {
         $this->variations->removeElement($variations);
     }
 
@@ -929,8 +822,7 @@ protected function getUploadRootDir()
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getVariations()
-    {
+    public function getVariations() {
         return $this->variations;
     }
 
@@ -940,10 +832,9 @@ protected function getUploadRootDir()
      * @param \Zeteq\MarketBundle\Entity\Product $parent
      * @return Product
      */
-    public function setParent(\Zeteq\MarketBundle\Entity\Product $parent = null)
-    {
+    public function setParent(\Zeteq\MarketBundle\Entity\Product $parent = null) {
         $this->parent = $parent;
-    
+
         return $this;
     }
 
@@ -952,8 +843,8 @@ protected function getUploadRootDir()
      *
      * @return \Zeteq\MarketBundle\Entity\Product 
      */
-    public function getParent()
-    {
+    public function getParent() {
         return $this->parent;
     }
+
 }

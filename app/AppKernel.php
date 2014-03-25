@@ -28,7 +28,7 @@ class AppKernel extends Kernel
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),           
             new APY\DataGridBundle\APYDataGridBundle(),   
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
-            
+            new Zeteq\FrontBundle\ZeteqFrontBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

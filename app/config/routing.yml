@@ -1,3 +1,19 @@
+ZeteqFrontBundle_homeslidegallery:
+        resource: "@ZeteqFrontBundle/Resources/config/routing/homeslidegallery.yml"
+        prefix:   /homeslidegallery
+
+ZeteqFrontBundle_homeslideimage:
+        resource: "@ZeteqFrontBundle/Resources/config/routing/homeslideimage.yml"
+        prefix:   /homeslideimage
+
+ZeteqFrontBundle_homeimage:
+        resource: "@ZeteqFrontBundle/Resources/config/routing/homeimage.yml"
+        prefix:   /homeimage
+
+zeteq_front:
+    resource: "@ZeteqFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ZeteqMarketBundle_sale:
     resource: "@ZeteqMarketBundle/Resources/config/routing/sale.yml"
     prefix:   /admin/sale

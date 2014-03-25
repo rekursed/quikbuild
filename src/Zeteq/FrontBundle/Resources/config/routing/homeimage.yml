@@ -1,0 +1,30 @@
+homeimage:
+    pattern:  /
+    defaults: { _controller: "ZeteqFrontBundle:HomeImage:index" }
+
+homeimage_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ZeteqFrontBundle:HomeImage:show" }
+
+homeimage_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqFrontBundle:HomeImage:new" }
+
+homeimage_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqFrontBundle:HomeImage:create" }
+    requirements: { _method: post }
+
+homeimage_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqFrontBundle:HomeImage:edit" }
+
+homeimage_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqFrontBundle:HomeImage:update" }
+    requirements: { _method: post|put }
+
+homeimage_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqFrontBundle:HomeImage:delete" }
+

@@ -1,0 +1,30 @@
+homeslideimage:
+    pattern:  /
+    defaults: { _controller: "ZeteqFrontBundle:HomeSlideImage:index" }
+
+homeslideimage_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ZeteqFrontBundle:HomeSlideImage:show" }
+
+homeslideimage_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqFrontBundle:HomeSlideImage:new" }
+
+homeslideimage_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqFrontBundle:HomeSlideImage:create" }
+    requirements: { _method: post }
+
+homeslideimage_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqFrontBundle:HomeSlideImage:edit" }
+
+homeslideimage_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqFrontBundle:HomeSlideImage:update" }
+    requirements: { _method: post|put }
+
+homeslideimage_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqFrontBundle:HomeSlideImage:delete" }
+
