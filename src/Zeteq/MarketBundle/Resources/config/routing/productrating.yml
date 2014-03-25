@@ -1,0 +1,30 @@
+productrating:
+    pattern:  /
+    defaults: { _controller: "ZeteqMarketBundle:ProductRating:index" }
+
+productrating_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ZeteqMarketBundle:ProductRating:show" }
+
+productrating_new:
+    pattern:  /new
+    defaults: { _controller: "ZeteqMarketBundle:ProductRating:new" }
+
+productrating_create:
+    pattern:  /create
+    defaults: { _controller: "ZeteqMarketBundle:ProductRating:create" }
+    requirements: { _method: post }
+
+productrating_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ZeteqMarketBundle:ProductRating:edit" }
+
+productrating_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ZeteqMarketBundle:ProductRating:update" }
+    requirements: { _method: post|put }
+
+productrating_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:ProductRating:delete" }
+

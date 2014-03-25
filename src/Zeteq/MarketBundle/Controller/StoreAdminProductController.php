@@ -7,12 +7,54 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Zeteq\MarketBundle\Entity\Store;
 use Zeteq\MarketBundle\Entity\Product;
 use Zeteq\MarketBundle\Form\ProductType;
+use \Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Product controller.
  *
  */
 class StoreAdminProductController extends Controller {
+
+    /**
+     * Deletes a Product entity.
+     *
+     */
+    public function rating_deleteAction(Request $request, $id) {
+
+
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('ZeteqMarketBundle:ProductRating')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Product Rating entity.');
+        }
+       
+        $em->remove($entity);
+        $em->flush();
+
+
+        return new JsonResponse(array('val' => 1));
+    }
+    
+    /**
+     * Edits an existing Product entity.
+     *
+     */
+    public function rating_approveAction( $id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ZeteqMarketBundle:ProductRating')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
+        }
+        
+        $entity->setEnabled(true);
+       $em->flush();
+
+      return new JsonResponse(array('val' => 1));
+    }
 
     /**
      * Lists all Product entities.
@@ -31,20 +73,23 @@ class StoreAdminProductController extends Controller {
                 ->getQuery();
 
         $products = $query->getResult();
+
         $ratings = array();
         foreach ($products as $p) {
+
             foreach ($p->getProductRatings() as $rate) {
-                if($rate->getEnabled()==FALSE){
-                    $ratings[]=$rate;
-                }                
+
+
+                if ($rate->getEnabled() == FALSE) {
+                    $ratings[] = $rate;
+                }
             }
-            
         }
-        
+
         return $this->render('ZeteqMarketBundle:StoreAdminProduct:rating.html.twig', array(
                     'entities' => $products,
                     'store' => $store,
-                    'ratings'=>$ratings,
+                    'ratings' => $ratings,
         ));
     }
 

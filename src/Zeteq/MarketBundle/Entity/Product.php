@@ -254,14 +254,18 @@ class Product {
         $var = 0;
         $count = 0;
         foreach ($this->getProductRatings() as $value) {
-            if($value->getEnabled()== TRUE){
-            $var = $var + $value->getRating();
-            $count++;
+            if ($value->getEnabled() == TRUE) {
+                $var = $var + $value->getRating();
+                $count++;
             }
         }
-        $avg[0] = $var / $count;
-        $avg[1] = $count;
-        return $avg;
+        if ($count < 0) {
+            $avg[0] = $var / $count;
+            $avg[1] = $count;
+            return $avg;
+        } else {
+            return 0;
+        }
     }
 
     public function hasHalfStar() {

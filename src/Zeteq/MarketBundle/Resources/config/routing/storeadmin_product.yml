@@ -37,3 +37,10 @@ storeadmin_product_delete:
 storeadmin_product_rating:
     pattern:  /{store_id}/ratings
     defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:ratingIndex" }
+    
+storeadmin_product_rating_delete:
+    pattern:  /rating/{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:rating_delete" }
+storeadmin_product_rating_approve:
+    pattern:  /rating/{id}/approve
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdminProduct:rating_approve" }

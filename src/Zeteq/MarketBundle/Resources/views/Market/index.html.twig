@@ -14,9 +14,15 @@ Home -- Marketplace
 
     {{ include('ZeteqMarketBundle:Market:_home_image.html.twig')  }}  
 </div>
+<div>
+    {{ include('ZeteqMarketBundle:Market:_featured_store.html.twig')  }} 
+</div>
 
+<div>
+    {{ include('ZeteqMarketBundle:Market:_featured_product.html.twig')  }} 
+</div>
 
-<div id="featured" class="tab-pane active">
+{#<div id="featured" class="tab-pane active">
     <div class="row">   
   {% for product in service.getEnabledProducts() | slice(0,12)%}
 
@@ -29,22 +35,22 @@ Home -- Marketplace
               {% endif %}
 
         {%endfor%}  </div>
-</div>
+</div>#}
 
 
 
 
 
 <div class=""> {#************WEEKLY FREEBIES**************#}
-        {{include(service.getSlot(14))}}
+        {#{{include(service.getSlot(14))}}#}
 </div>
 
 <div class="visible-lg visible-md visible-sm"> {#************SPECIAL DISCOUNTED OFFERS**************#}
-        {{include(service.getSlot(13))}}
+   {#     {{include(service.getSlot(13))}}#}
 </div>
 
 <div class=""> {#************PROMOTIONALS**************#}
-        {{include(service.getSlot(15))}}
+       {# {{include(service.getSlot(15))}}#}
 </div>
 
 

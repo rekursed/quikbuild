@@ -103,6 +103,7 @@
         <div>{{product.getDescription()}}</div>
         <div><h4>Price: TK. {{product.getPrice()}} </h4></div>
         <div>
+            {%if product.getAverageRating()[0] is defined%}
             {%for a in 1..product.getAverageRating()[0]%}
             <span class="glyphicon glyphicon-star"></span>
             {%endfor%}
@@ -110,6 +111,7 @@
             <span class="glyphicon glyphicon-star-empty"></span>
             {%endfor%}
             ({{product.getAverageRating()[1]}})
+            {%endif%}
         </div>
 
 
@@ -124,15 +126,17 @@
             <ul class="nav nav-tabs" id="myTab">
                 <li class="active"><a data-toggle="tab" href="#info">Additional info</a></li>
                 <li><a data-toggle="tab" href="#rating">
-
+                    {%if product.getAverageRating()[0] is defined%}
                       {%for a in 1..product.getAverageRating()[0]%}
                         <span class="glyphicon glyphicon-star"></span>
-            {%endfor%}
-            {%for a in product.getAverageRating()[0]..4%}
+                        {%endfor%}
+                        {%for a in product.getAverageRating()[0]..4%}
                         <span class="glyphicon glyphicon-star-empty"></span>
-            {%endfor%}
+                        {%endfor%}
                         ({{product.getAverageRating()[1]}})
-
+                        {%else%}
+                        <span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span>
+                {%endif%}
                     </a></li>
                 <li class="active"><a data-toggle="tab" href="#ship">Shipping & policies</a></li>
             </ul>
@@ -250,7 +254,7 @@
                             {%endfor%}
 
                     </div>
-                   {# <script>
+                    <script>
                         // wait for the DOM to be loaded 
                         $(document).ready(function() {
 
@@ -262,14 +266,9 @@
 
                             $('#prForm').ajaxForm(options);
                         });
-                    </script> #}
+                    </script> 
                 </div>
-                <div id="dropdown1" class="tab-pane fade">
-                    <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-                </div>
-                <div id="dropdown2" class="tab-pane fade">
-                    <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
-                </div>
+
             </div>
         </div>
     </div>
@@ -285,12 +284,13 @@
                     {%for var in product.getRelatedProducts()%}
 
                         <div class="col-sm-6 ">
-                            <div class="thumbnail">
-                                <img data-src="holder.js/300x200" alt="..." src="{{asset(var.getWebPath())}}">
-                                <div class="caption">
-                                    <h3>{{var.name}}</h3>
-                                    <p><div>
-                                        <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span> (45) [rating is commented here]
+                            <a href="{{path('product_show',{'slug':var.slug})}}">
+                                <div class="thumbnail">
+                                    <img data-src="holder.js/300x200" alt="..." src="{{asset(var.getWebPath())}}">
+                                    <div class="caption">
+                                        <h3>{{var.name}}</h3>
+                                        <p><div>
+                                            <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span> (45) [rating is commented here]
                                         {#{%for a in 1..var.getAverageRating()[0]%}
                                         <span class="glyphicon glyphicon-star"></span>
                                         {%endfor%}
@@ -298,10 +298,10 @@
                                         <span class="glyphicon glyphicon-star-empty"></span>
                                         {%endfor%}
                                         ({{var.getAverageRating()[1]}})#}
-                                    </div></p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                                        </div></p>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
 
                         {%if loop.index %2 == 0 or loop.last%}

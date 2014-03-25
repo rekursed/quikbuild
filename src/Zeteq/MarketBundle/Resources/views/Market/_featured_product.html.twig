@@ -1,0 +1,113 @@
+{#
+                    <div class="visible-lg">
+                    <h5 class="section_header"><i class="fa fa-thumbs-up"> </i> Featured Products</h5>
+                    <div class="row">
+{% for product in service.getFeaturedProducts()%}
+                        <div class="col-md-6">                       
+                            <div class="feat_product_div" style="">
+                                <a href="{{path('product_show',{'slug':product.slug})}}">
+                                    <img style="height:100px;width:100px" class="img-responsive "  src="{{asset(product.getProfileImageWebPath()  )  }}"/>
+                                </a>  <br/> 
+
+                                <a class="feat_product_div_a" href="{{path('product_show',{'slug':product.slug})}}">  {{product.getProductName()}}</a>  
+                            </div>          
+
+                        </div>               
+{% endfor %}
+                    </div>
+                </div>#}
+
+
+
+
+{%set var = ((((service.getEnabledProducts()|length)/4) +0.5)|number_format)%}
+
+
+<div style=" background:#fff; padding: 20px; height: 320px" class="carousel slide"  data-ride="carousel" id="carousel-div">
+
+
+  {#  <ol class="carousel-indicators"  style="margin-bottom: -20px;"> 
+
+
+            {% for i in 0..var-1 %}
+            {%if i == 0%}
+        <li data-target="#carousel-div" data-slide-to="0" class="active"></li>
+          {%else %}
+        <li data-target="#carousel-div" data-slide-to="{{i}}" class="active"></li>
+
+            {% endif %}
+            {% endfor %}
+    </ol>
+#}
+
+
+
+    <div class="carousel-inner">
+        {% for product in service.getEnabledProducts() %}
+        {%if  (loop.index-1)%4 == 0%}
+        <div class="item {% if loop.index ==1 %} active {% endif %} ">
+            <div class="container ">
+                <div class="row">
+                    {%endif%}
+                    {#<div class="col-md-3 ">
+                        <div class="col-md-6">
+                            <img class="img-responsive thumbnail"  src="{{asset(product.getFirstImage() ) }}"/>          
+                        </div>
+                        <div class="col-md-6">
+
+                            <h4>
+                                <a href="{{path('product_show',{'slug':product.slug})}}"> {{product.title}}</a>
+                            </h4>
+                            <p>{{product.overview|slice(0, 45)}}<p>
+                        </div>
+                    </div>#}
+                    <div class="col-md-3 top_blocks">          
+                        <div style="position:relative">
+                            <a href="{{path('product_show',{'slug':product.slug})}}"> 
+                                <span class="carousel_title_a" style="display:block;width:100%;text-shadow: 1px 1px 1px black">
+                                    <img class="img-responsive " style="height:200px"  src="{{asset(product.getWebPath() ) }}"/> 
+                                </span>
+
+                        </div>
+
+                       {# <div class="top_stats">
+                            <span class="pull-left"><span class="glyphicon glyphicon-eye-open"> </span> {{product.viewed}}</span>
+                            <span class="pull-right">{{product.created|date("d M Y")}} </span>
+                            <br clear="all">
+                        </div>#}
+
+
+                        <div class="top_news">
+
+                            <span href="{{path('product_show',{'slug':product.slug})}}" class="" style="font-weight:600; letter-spacing: 0px;color:#000;font-size:16px;"> 
+                                {{product.name}}
+                            </span>
+                            </a>
+                            {#<a href="{{path('front_author_show',{'slug':product.author.slug})}}"> 
+                                <span  class="" style="display:block;font-size:10px;font-weight:bold;color:#A6A6A6;font-weight: 200">
+                                {{product.author}}
+
+                                </span>
+                            </a>
+#}
+
+                        </div>  
+                    </div>
+                    {%if loop.index%4 == 0 or loop.last == true%}
+                </div>
+            </div>
+        </div>
+        {%endif%}
+        {% endfor %}
+    </div>
+
+    {#<a class="left carousel-control" data-slide="prev" href="#carousel-div">
+        <span class="glyphicon glyphicon-chevron-left"> &nbsp;</span>  &nbsp; </a>
+
+    <a class="right carousel-control" data-slide="next" href="#carousel-div"> <span class="glyphicon glyphicon-chevron-right"> &nbsp;			</span>  &nbsp; </a>
+#}
+</div>
+
+
+
+

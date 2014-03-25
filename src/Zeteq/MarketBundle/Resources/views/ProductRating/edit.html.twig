@@ -1,0 +1,57 @@
+{% extends 'ZeteqMarketBundle:Admin:admin_layout.html.twig' %}
+
+ {% block title %}
+Edit ProductRating --Admin
+{% endblock %}
+
+{% block content -%}
+{{ form_start(edit_form) }} 
+
+
+   <nav id="form_fixed_top_menu"  class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        
+        <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav_collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+                
+                    <a class="navbar-brand">ProductRating update</a>
+ 
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div id="nav_collapse" class="collapse navbar-collapse">
+
+                 <a style="margin-right: 10px"  class="btn btn-success navbar-btn pull-right" onclick="return confirm('Are you sure');"  href=" {{ path('productrating_delete',{'id':edit_form.vars.value.getId()}) }}">
+                   
+                     <span class="glyphicon glyphicon-remove"></span> Delete
+        </a> 
+            
+        
+                       <a style="margin-right: 10px"  class="btn btn-info navbar-btn pull-right"  href="{{ path('productrating') }}">
+            Back to the list
+        </a>
+   <a style="margin-right: 10px"  class="btn btn-info navbar-btn pull-right"  href=" {{ path('productrating_new') }} ">
+                   
+                           Create another entity
+        </a> 
+               
+       <button  style="margin-right: 10px"  class="btn btn-warning pull-right navbar-btn" type="submit">Save</button>
+      
+        </div><!-- /.navbar-collapse -->
+        
+        </div>
+      </nav>
+ 
+
+ {{ form_errors(edit_form) }} 
+
+   {{ form_end(edit_form) }} 
+
+{% endblock %}
+

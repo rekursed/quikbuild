@@ -44,10 +44,75 @@
         </a>
     </div>
 </nav>
-{{ratings|length}}
-{%for var in ratings%}
-{{var.id}}
-{%endfor%}
+<form method="post" action="{{path('storeadmin_batch_delete')}}"> 
+    <div class="btn-group">
+
+        <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure?')"><i class="fa fa-trash-o"></i> Delete selected</button>
+
+    </div>
+    <hr/>
+
+    <table class="table table-hover table-responsive table-striped record_properties">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Product Name</th>
+                <th> Comment</th>
+                <th> Rating</th>
+
+
+                <th style="text-align:center">Enabled</th>
+
+
+
+                <th style="text-align:right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for var in ratings  %}
+            <tr>
+                <td>{{var.id}}</td>
+                <td>{{var.product.name}}</td>
+                <td>{{var.comment}}</td>
+                <td>{{var.rating}}</td>
+
+                <td style="text-align:center">{% if var.enabled %}<i class="fa fa-check"></i>{% else%}<i class="fa fa-minus-circle"></i>{%endif%}</td>
+                <td style="text-align:right">
+                    <div class="btn-group">
+                        <a class="btn btn-success btn-sm" href="{{ path('storeadmin_product_rating_approve', { 'id': var.id }) }}"><i class="fa fa-check"></i> Approve</a>
+
+                        <a onclick="return confirm('are you sure?')"  class="btn btn-danger btn-sm"  href="{{ path('storeadmin_product_rating_delete',{'id': var.getId()}) }}">
+                            <span class="glyphicon glyphicon-remove"></span>   Delete
+                        </a>
+                        <a class="btn btn-default btn-sm" href="{{ path('product_show', { 'slug': var.product.slug }) }}"><i class="fa fa-desktop"></i> Show Product</a>
+
+
+                    </div>
+{# <td><input type="checkbox" name="prod[]" value="{{entity.getId()}}" class="chk"></td>
+                <td><img style="height:40px;" src="{{asset(entity.getWebPath())}}"/></td>
+                <td>{{ entity.name }}</td>
+                <td style="text-align:center">{% if entity.approved %}<i class="fa fa-check"></i>{% else%}<i class="fa fa-minus-circle"></i>{%endif%}</td>
+                <td style="text-align:center">{% if entity.enabled %}<i class="fa fa-check"></i>{% else%}<i class="fa fa-minus-circle"></i>{%endif%}</td>
+
+                <td>{{service.getCurrencySymbol()}}  {{ entity.price }}</td>
+                <td style="text-align:right">
+                    <div class="btn-group">
+                        <a class="btn btn-default btn-sm" href="{{ path('product_show', { 'slug': entity.slug }) }}"><i class="fa fa-desktop"></i> show</a>
+                        <a class="btn btn-default btn-sm"  href="{{ path('storeadmin_product_edit', { 'id': entity.id,'store_id':entity.getStore().getId() }) }}"><span class="glyphicon glyphicon-edit"></span> edit</a>
+                        <a onclick="return confirm('are you sure?')"  class="btn btn-danger btn-sm"  href="{{ path('storeadmin_product_delete',{'id': entity.getId()}) }}">
+                            <span class="glyphicon glyphicon-remove"></span>   Delete
+                        </a>
+
+                    </div>
+                </td>#}
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</form>
+
 
 
     {% endblock %}
