@@ -11,18 +11,18 @@
     <li><a href="{{path('home')}}">Home</a></li>
   {%if entity.getParent() %}
       {%if entity.getParent().getParent() %}
-    
+
           {%if entity.getParent().getParent().getParent() %}
-    
+
     <li class="active">     <a href="{{path('productcategory_show',{'slug':entity.getParent().getParent().getParent().getSlug()})}}">{{entity.getParent().getParent().getParent()}}</a></li>    
 {%endif %}
-    
-    
- <li class="active">        <a href="{{path('productcategory_show',{'slug':entity.getParent().getParent().getSlug()})}}">{{entity.getParent().getParent()}}</a></li>    
+
+
+    <li class="active">        <a href="{{path('productcategory_show',{'slug':entity.getParent().getParent().getSlug()})}}">{{entity.getParent().getParent()}}</a></li>    
 {%endif %}
-    
-    
- <li class="active">        <a href="{{path('productcategory_show',{'slug':entity.getParent().getSlug()})}}">{{entity.getParent()}}</a></li>    
+
+
+    <li class="active">        <a href="{{path('productcategory_show',{'slug':entity.getParent().getSlug()})}}">{{entity.getParent()}}</a></li>    
 {%endif %}
     <li class="active">        <a href="{{path('productcategory_show',{'slug':entity.getSlug()})}}">{{entity}}</a></li>
 
@@ -30,36 +30,43 @@
 <div class="row">
     <div class="col-md-3">
               {% for child1 in entity.getChildren() %}
-                                                        <li>
-                                                            <a href="{{path('productcategory_show',{'slug':child1.getSlug()})}}">{{ child1.getName() }}</a>
-                                                        </li>
+        <li>
+            <a href="{{path('productcategory_show',{'slug':child1.getSlug()})}}">{{ child1.getName() }}</a>
+        </li>
                                                  {% endfor %}
     </div>
     <div class="col-md-9">
         <div class="page-header">
-    <h1> {{ entity.name }} </h1>
-</div>
-        
-        
-                   <div class="row">   
+            <h1><span>
+                    {%if entity.getImagePath() !=''  %}
+                    <img class="img-responsive img-thumbnail" style="max-width: 100px; max-height: 100px " src="{{asset(entity.getWebPath())}}"/> 
+                    {%else%}
+                    <i class="fa fa-wrench fa-3x"></i>
+                    {%endif%}
+                </span> 
+            {{ entity.name }} </h1>
+        </div>
+
+
+        <div class="row">   
   {% for product in products%}
 
-                    
+
        {{ include('ZeteqMarketBundle:Market:_product.html.twig',{'product': product})  }}                   
 
                    {%if loop.index%4 == 0%}
-              </div><div class="row">
+        </div><div class="row">
               {% endif %}
 
         {%endfor%}  </div>
-        
-        
-        
-        
+
+
+
+
     </div>
 </div>
 
 
 
- 
+
 {% endblock %}

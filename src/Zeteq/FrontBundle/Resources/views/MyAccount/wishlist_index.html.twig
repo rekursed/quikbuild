@@ -1,0 +1,50 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+ {% block title %}
+Wishlist -- Admin
+{% endblock %}
+
+
+{% block content -%}
+
+<br>
+<div class="container prodshowback">
+    <h1>Wishlist</h1>
+
+
+    <div class="table">
+    {%for wl in wishlist%}
+        <div class="row">
+
+  {{ include('ZeteqFrontBundle:MyAccount:_wishbox.html.twig',{'product': wl.getProduct(),'wl':wl})  }}
+              {%if loop.index%4 == 0%}
+        </div>
+
+        <div class="row">
+              {% endif %}
+    {%endfor%}
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    $(".a_remove").click(function() {
+
+        var id = $(this).attr('id');
+
+        var href = $(this).attr("href");
+        $.ajax({
+            type: "POST", // or GET
+            url: href,
+            data: "someData=someThing&someMore=somethingElse",
+            success: function(data) {
+
+                $("#div_" + id).hide();
+            }
+        });
+        return false; // stop the browser following the link
+    });
+</script>
+
+{% endblock %}

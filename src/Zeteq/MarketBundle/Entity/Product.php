@@ -161,7 +161,22 @@ class Product {
      */
     protected $store;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="parent")
+     */
+    private $variations;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="variations")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="FavoriteItem", mappedBy="product")
+     */
+    private $favorite_items;
+    
     //////////image uploading begin
 
     /**
@@ -175,17 +190,6 @@ class Product {
      * @ORM\Column(name="image", type="string", length=255,nullable=true)
      */
     private $image;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Product", mappedBy="parent")
-     */
-    private $variations;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="variations")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-     */
-    private $parent;
 
     public function __toString() {
         return $this->getName();
@@ -945,6 +949,36 @@ class Product {
      */
     public function getAdditionalInfo() {
         return $this->additional_info;
+    }
+
+    /**
+     * Add favorite_items
+     *
+     * @param \Zeteq\MarketBundle\Entity\FavoriteItem $favoriteItems
+     * @return Product
+     */
+    public function addFavoriteItem(\Zeteq\MarketBundle\Entity\FavoriteItem $favoriteItems) {
+        $this->favorite_items[] = $favoriteItems;
+
+        return $this;
+    }
+
+    /**
+     * Remove favorite_items
+     *
+     * @param \Zeteq\MarketBundle\Entity\FavoriteItem $favoriteItems
+     */
+    public function removeFavoriteItem(\Zeteq\MarketBundle\Entity\FavoriteItem $favoriteItems) {
+        $this->favorite_items->removeElement($favoriteItems);
+    }
+
+    /**
+     * Get favorite_items
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteItems() {
+        return $this->favorite_items;
     }
 
 }

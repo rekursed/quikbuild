@@ -1,0 +1,51 @@
+{% extends 'ZeteqMarketBundle:Market:myaccount_layout.html.twig' %}
+ {% block title %}
+Favorite Stores
+{% endblock %}
+
+
+{% block content -%}
+
+<br>
+<div class="container prodshowback">
+    <h1>Favorite Stores</h1>
+
+
+    <div class="table">
+        <div class="row">
+    {%for wl in fav%}
+
+
+  {{ include('ZeteqMarketBundle:Market:_store.html.twig',{'store': wl.getStore(),'fav':wl.id})  }}
+              {%if loop.index%4 == 0 or loop.last %}
+        </div>
+
+        <div class="row">
+              {% endif %}
+    {%endfor%}
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    $(".a_remove").click(function() {
+
+        var id = $(this).attr('id');
+
+        var href = $(this).attr("href");
+        $.ajax({
+            type: "POST", // or GET
+            url: href,
+            data: "someData=someThing&someMore=somethingElse",
+            success: function(data) {
+
+                $("#div_" + id).hide();
+            }
+        });
+        return false; // stop the browser following the link
+    });
+</script>
+
+{% endblock %}

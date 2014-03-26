@@ -1,0 +1,32 @@
+{% extends 'ZeteqMarketBundle:Market:myaccount_layout.html.twig' %}
+
+{% block title %}Edit Settings{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Edit Setting</h1>
+    {{form_start(edit_form)}}
+    {{form_errors(edit_form)}}
+		{{ form_row(edit_form.billing_first_name)}}
+                {{ form_row(edit_form.billing_last_name)}}
+                {{ form_row(edit_form.billing_email)}}
+                {{ form_row(edit_form.billing_address)}}
+                {{ form_row(edit_form.billing_city)}}
+                {{ form_row(edit_form.billing_state)}}
+                {{ form_row(edit_form.billing_postalcode)}}
+                {{ form_row(edit_form.billing_country)}}
+                {{ form_row(edit_form.billing_phone)}}
+
+                {{ form_row(edit_form.shipping_first_name)}}
+                {{ form_row(edit_form.shipping_last_name)}}
+                {{ form_row(edit_form.shipping_email)}}
+                {{ form_row(edit_form.shipping_address)}}
+                {{ form_row(edit_form.shipping_city)}}
+                {{ form_row(edit_form.shipping_state)}}
+                {{ form_row(edit_form.shipping_postalcode)}}
+                {{ form_row(edit_form.shipping_country)}}
+                {{ form_row(edit_form.shipping_phone)}}
+                {{ form_row(edit_form.shipping_billing_same)}}
+    {{form_end(edit_form)}}
+</div>
+{% endblock %}

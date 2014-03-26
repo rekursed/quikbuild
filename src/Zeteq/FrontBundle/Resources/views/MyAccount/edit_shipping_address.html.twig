@@ -1,0 +1,17 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+
+{% block title %}Edit Shipping Address{% endblock %}
+
+{% block content %}
+<br>
+<div class="container prodshowback">
+    <h1>Edit Shipping Address</h1>
+    <br>
+
+    {{ form(edit_form) }}
+
+    <a href="{{ path('myaccount') }}">
+        Back to Account Settings
+    </a>
+</div>
+{% endblock %}

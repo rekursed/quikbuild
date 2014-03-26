@@ -4,10 +4,13 @@
 {% block title %}
 Home -- Marketplace
 {% endblock %}
-{% block content %}
-<div class="well well-sm">
+{%block slider%}
+
  {{ include('ZeteqMarketBundle:Market:_home_slide.html.twig')  }} 
-</div>
+
+{%endblock%}
+{% block content %}
+
 <div >
 
    {# {{include(service.getSlot(12))}}#}

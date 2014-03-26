@@ -181,6 +181,11 @@ class Store
     protected $user;
     
     
+    /**
+     * @ORM\OneToMany(targetEntity="FavoriteStore", mappedBy="store")
+     */
+    private $favorite_stores;
+    
     
     
     
@@ -1199,5 +1204,38 @@ return $enabled;
     public function getCarts()
     {
         return $this->carts;
+    }
+
+    /**
+     * Add favorite_stores
+     *
+     * @param \Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores
+     * @return Store
+     */
+    public function addFavoriteStore(\Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores)
+    {
+        $this->favorite_stores[] = $favoriteStores;
+    
+        return $this;
+    }
+
+    /**
+     * Remove favorite_stores
+     *
+     * @param \Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores
+     */
+    public function removeFavoriteStore(\Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores)
+    {
+        $this->favorite_stores->removeElement($favoriteStores);
+    }
+
+    /**
+     * Get favorite_stores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteStores()
+    {
+        return $this->favorite_stores;
     }
 }

@@ -1,0 +1,26 @@
+<div id="div_{{wl.id}}" style="margin-bottom:20px;" class="col-sm-6 col-md-3">
+
+
+    <div class="thumbnail" style="height:360px; position: relative">
+        <div style="position: absolute; right:0">
+            <a id="{{wl.id}}" class=" a_remove" href="{{path('myaccount_wishlist_delete',{'id':wl.getId()})}}" style="color:red"> <i class="fa fa-times-circle"></i> </a>
+        </div>
+        <a href="{{path('product_show',{'slug':product.slug})}}">  
+            <img class="img-responsive" style="width:180px;height:180px;margin:auto" src="{{asset(product.getFirstImage() )  }}"/></a>
+        <div style="text-align: center;height:100px" class="caption">
+            <h5 style="font-size:12px">        {{product.getName()}}</h5>
+            <h6>{{service.getCurrencySymbol()}} <span style='text-decoration:{%if product.getClearance()%} line-through {%endif%}'>{{product.getRegularPrice()}}</span> {%if product.getClearance()%}</h6> <h6>{{service.getCurrencySymbol()}} {{product.getPrice()}} {%endif%} </h6>
+
+        </div>
+        <div style="text-align:center">
+            <a href="{{path('cart_add_item',{'product_slug':product.getSlug(),'quantity':1})}}" class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-shopping-cart"></span> 
+                Add to cart
+            </a> 
+        </div>
+
+
+    </div>
+
+
+</div>

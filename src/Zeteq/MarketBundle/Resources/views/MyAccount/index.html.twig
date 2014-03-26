@@ -1,7 +1,7 @@
-{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+{% extends 'ZeteqMarketBundle:Market:myaccount_layout.html.twig' %}
 
 {% block title %}My Account{% endblock %}
- 
+
 {% block content %}
 
 <div class=""><h1>My Account</h1></div>
@@ -11,18 +11,38 @@
             <a href="{{path('myaccount_edit_shipping_address')}}">Shipping Address</a>
         </div>
     </div>
-        
-            <div class="col-md-4">
+
+    <div class="col-md-4">
         <div class="well">
             <a href="{{path('myaccount_edit_billing_address')}}">Billing Address</a>
         </div>
     </div>
-        
-        
+    <div class="col-md-4">
+        <div class="well">
+            <a href="{{path('myaccount_edit_billing_address')}}">Billing Address</a>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <a style="text-align: center" href="{{path('view_favorite_item')}}">
+            <div class="well">
+                <i class="fa fa-gift fa-2x"></i>  &nbspFavorite Products
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a style="text-align: center" href="{{path('view_favorite_store')}}">
+            <div class="well">
+                <i class="fa fa-trophy fa-2x"></i> &nbsp  Favorite Store
+            </div>
+        </a>
+    </div>
+
+
 </div>
- 
-  dsf   
-  {{user.getId()}}
+
+
 
 {% endblock %}
 

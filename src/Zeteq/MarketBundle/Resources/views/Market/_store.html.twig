@@ -1,0 +1,16 @@
+<hr/>
+
+<div class="media">
+    <a href="#" class="pull-left">
+        <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 80px; height: 80px;" src="{{asset(store.getProfileImageWebPath())}}">
+    </a>
+    <div class="media-body" style="position: relative">
+        <h4 class="media-heading">{{store}}</h4>
+        {{store.description}}
+         <div style="position: absolute; top: 0; right: 0">
+           {%if fav is defined%}
+            <a href="{{path('favorite_store_delete',{'id':fav})}}" class="btn btn-danger ajax_link" role="button"><i class="fa fa-chain-broken"></i></a> 
+            {%endif%}
+        </div>
+    </div>
+</div>

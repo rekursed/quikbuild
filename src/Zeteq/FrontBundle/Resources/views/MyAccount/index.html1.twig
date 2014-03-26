@@ -1,0 +1,66 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+<br>
+<div class="container prodshowback">
+
+    <div style="display: inline-block;margin-bottom: 20px; color: #777777">
+        <h1 style="display: inline-block; color: #333333"> My Account</h1>  &nbsp;&nbsp;
+    {{user.getUserName}} ({{user.getEmail()}})
+    </div>
+    <br>
+    <div class="row">
+
+        <div class="col-md-4">
+            <a href="{{path('myaccount_edit_shipping_address')}}">
+                <div class="well btn-acc">
+                    Shipping Address
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{path('myaccount_edit_billing_address')}}">
+                <div class="well btn-acc">
+                    Billing Address
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{path('myaccount_reset_password')}}">
+                <div class="well btn-acc">
+                    Reset Password
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{path('myaccount_view_wishlist')}}">
+                <div class="well btn-acc">
+                    Wishlist
+                </div>
+            </a>
+
+        </div>
+        <div class="col-md-4">
+            <a href="{{path('myaccount_view_salelist')}}">
+                <div class="well btn-acc">
+                    Salelist
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+

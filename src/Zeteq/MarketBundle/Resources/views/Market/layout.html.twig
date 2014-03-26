@@ -134,8 +134,27 @@
 
                 <ul id="tn_right_menu" class="nav navbar-nav pull-right" style=" margin-top: 5px;">
 
-    {% if is_granted('ROLE_CUSTOMER') %}    <li><a href="{{path('myaccount')}}"><i class="fa fa-dashboard"></i> My Account</a></li>{% endif %}
-      {% if is_granted('ROLE_STORE') %}    <li><a href="{{path('store_admin_edit',{'id':app.user.getMyStoreId()})}}"><i class="fa fa-gear"></i> Store Admin</a></li>{% endif %}
+    {% if is_granted('ROLE_CUSTOMER') %} 
+                    <li><a href="{{path('myaccount')}}"><i class="fa fa-dashboard"></i> My Account</a></li>
+                   {# <div class="btn-group">
+                        <button  href="{{path('myaccount')}}" class="btn btn-default" type="button">My Account</button>
+                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul role="menu" class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>#}
+
+{% endif %}
+      {% if is_granted('ROLE_STORE') %}    <li><a href="{{path('store_admin_edit',{'id':app.user.getMyStoreId()})}}"><i class="fa fa-gear"></i> Store Admin</a></li>
+
+        {% endif %}
         {% if is_granted('ROLE_ADMIN') %}   <li><a href="{{path('admin')}}"><i class="fa fa-gears"></i> Main Admin</a></li>{% endif %}
 
 
@@ -223,7 +242,8 @@
     {% endblock mainmenu %}
 
 
-
+{%block slider%}
+{%endblock%}
 
     <div id="main_container" class="container" style="" >
 
@@ -237,11 +257,12 @@
 
 
 
+{%block middle_content%}
 
 {% block content %}
 
 {% endblock %}
-
+{%endblock%}
                 </div>
 
 

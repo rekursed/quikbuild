@@ -5,7 +5,7 @@
         <h5 style="font-size:12px">        {{product.getName()}}</h5>
         <h6>{{service.getCurrencySymbol()}} {{product.getPrice()}}</h6>
   </div>
-                <div style="text-align:center"><a href="{{path('cart_add_item',{'product_slug':product.getSlug(),'quantity':1})}}" class="btn btn-primary" role="button">Buy</a> 
+                <div style="text-align:center"><a href="{{path('cart_add_item',{'product_slug':product.getSlug(),'quantity':1,'store_slug':product.store.slug})}}" class="btn btn-primary" role="button">Buy</a> 
             </div>
      
     </div>

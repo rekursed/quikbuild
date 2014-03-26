@@ -1,5 +1,7 @@
-<?php 
+<?php
+
 // src/Acme/UserBundle/Entity/User.php
+
 namespace Zeteq\UserBundle\Entity;
 
 use Zeteq\MarketBundle\Entity\Store;
@@ -7,10 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 use Zeteq\MarketBundle\Entity\Cart;
 use Zeteq\MarketBundle\Entity\Customer;
 use APY\DataGridBundle\Grid\Mapping as GRID;
@@ -23,9 +23,8 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
  * @UniqueEntity(fields="email", message="Sorry, this email address is already in use.")
  * 
  */
+class User implements AdvancedUserInterface, \Serializable {
 
-class User implements AdvancedUserInterface, \Serializable
-{
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -38,11 +37,11 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(type="string", length=25, unique=false, nullable=true)
      */
     private $username;
-    
-         /**
+
+    /**
      * @ORM\Column(type="string", length=225,nullable=true)
      */
-    private $activation_code;    
+    private $activation_code;
 
     /**
      * @ORM\Column(type="string", length=32)
@@ -62,7 +61,6 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $password;
 
-
     /**
      * @ORM\Column(type="string", length=60, unique=true)
      *   @GRID\Column(operatorsVisible=false)
@@ -73,104 +71,95 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
-    
-       /**
+
+    /**
      * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
      */
     private $roles;
-    
-          /**
+
+    /**
      * @ORM\OneToMany(targetEntity="Zeteq\MarketBundle\Entity\Store", mappedBy="user",cascade={"persist"})
      */
     protected $stores;
-    
-       
-     /**
-     * @ORM\Column(type="integer")
+
+    /**
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $my_store_id;
-    
-    
-    
+
     /**
      * @ORM\OneToOne(targetEntity="Zeteq\MarketBundle\Entity\Cart", mappedBy="user")
      */
     private $cart;
-    
-            
+
     /**
      * @ORM\OneToOne(targetEntity="Zeteq\MarketBundle\Entity\Customer", mappedBy="user")
      */
     private $customer;
-    
 
-    public function __toString()
-    {
+    /**
+     * @ORM\OneToMany(targetEntity="Zeteq\MarketBundle\Entity\FavoriteItem", mappedBy="user")
+     *
+     */
+    private $favorite_items;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Zeteq\MarketBundle\Entity\FavoriteStore", mappedBy="user")
+     *
+     */
+    private $favorite_stores;
+
+    public function __toString() {
         return $this->email;
     }
-    
-        public function isAccountNonExpired()
-    {
+
+    public function isAccountNonExpired() {
         return true;
     }
 
-    public function isAccountNonLocked()
-    {
+    public function isAccountNonLocked() {
         return true;
     }
 
-    public function isCredentialsNonExpired()
-    {
+    public function isCredentialsNonExpired() {
         return true;
     }
 
-    public function isEnabled()
-    {
+    public function isEnabled() {
         return $this->isActive;
     }
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->isActive = true;
         $this->salt = md5(uniqid(null, true));
-          $this->roles = new ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
 
-    
-    
-    
-    
-    
-    
     /**
      * @inheritDoc
      */
-    public function getUsername()
-    {
+    public function getUsername() {
         return $this->username;
     }
 
     /**
      * @inheritDoc
      */
-    public function getSalt()
-    {
+    public function getSalt() {
         return $this->salt;
     }
 
     /**
      * @inheritDoc
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
     /**
      * @inheritDoc
      */
-    public function getRoles()
-    {
+    public function getRoles() {
 
         return $this->roles->toArray();
     }
@@ -178,15 +167,14 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @inheritDoc
      */
-    public function eraseCredentials()
-    {
+    public function eraseCredentials() {
+        
     }
 
     /**
      * @see \Serializable::serialize()
      */
-    public function serialize()
-    {
+    public function serialize() {
         return serialize(array(
             $this->id,
         ));
@@ -195,11 +183,10 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @see \Serializable::unserialize()
      */
-    public function unserialize($serialized)
-    {
+    public function unserialize($serialized) {
         list (
-            $this->id,
-        ) = unserialize($serialized);
+                $this->id,
+                ) = unserialize($serialized);
     }
 
     /**
@@ -207,8 +194,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -218,10 +204,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param string $username
      * @return User
      */
-    public function setUsername($username)
-    {
+    public function setUsername($username) {
         $this->username = $username;
-    
+
         return $this;
     }
 
@@ -231,10 +216,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param string $salt
      * @return User
      */
-    public function setSalt($salt)
-    {
+    public function setSalt($salt) {
         $this->salt = $salt;
-    
+
         return $this;
     }
 
@@ -244,10 +228,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param string $password
      * @return User
      */
-    public function setPassword($password)
-    {
+    public function setPassword($password) {
         $this->password = $password;
-    
+
         return $this;
     }
 
@@ -257,10 +240,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param string $email
      * @return User
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
-    
+
         return $this;
     }
 
@@ -269,8 +251,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return string 
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -280,10 +261,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param boolean $isActive
      * @return User
      */
-    public function setIsActive($isActive)
-    {
+    public function setIsActive($isActive) {
         $this->isActive = $isActive;
-    
+
         return $this;
     }
 
@@ -292,8 +272,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return boolean 
      */
-    public function getIsActive()
-    {
+    public function getIsActive() {
         return $this->isActive;
     }
 
@@ -303,10 +282,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param \Zeteq\UserBundle\Entity\Role $roles
      * @return User
      */
-    public function addRole(\Zeteq\UserBundle\Entity\Role $roles)
-    {
+    public function addRole(\Zeteq\UserBundle\Entity\Role $roles) {
         $this->roles[] = $roles;
-    
+
         return $this;
     }
 
@@ -315,8 +293,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @param \Zeteq\UserBundle\Entity\Role $roles
      */
-    public function removeRole(\Zeteq\UserBundle\Entity\Role $roles)
-    {
+    public function removeRole(\Zeteq\UserBundle\Entity\Role $roles) {
         $this->roles->removeElement($roles);
     }
 
@@ -326,10 +303,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param string $activationCode
      * @return User
      */
-    public function setActivationCode($activationCode)
-    {
+    public function setActivationCode($activationCode) {
         $this->activation_code = $activationCode;
-    
+
         return $this;
     }
 
@@ -338,12 +314,9 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return string 
      */
-    public function getActivationCode()
-    {
+    public function getActivationCode() {
         return $this->activation_code;
     }
-
-
 
     /**
      * Add stores
@@ -351,10 +324,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param \Zeteq\MarketBundle\Entity\Store $stores
      * @return User
      */
-    public function addStore(\Zeteq\MarketBundle\Entity\Store $stores)
-    {
+    public function addStore(\Zeteq\MarketBundle\Entity\Store $stores) {
         $this->stores[] = $stores;
-    
+
         return $this;
     }
 
@@ -363,8 +335,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @param \Zeteq\MarketBundle\Entity\Store $stores
      */
-    public function removeStore(\Zeteq\MarketBundle\Entity\Store $stores)
-    {
+    public function removeStore(\Zeteq\MarketBundle\Entity\Store $stores) {
         $this->stores->removeElement($stores);
     }
 
@@ -373,13 +344,9 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getStores()
-    {
+    public function getStores() {
         return $this->stores;
     }
-
-   
-
 
     /**
      * Set cart
@@ -387,10 +354,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param \Zeteq\MarketBundle\Entity\Cart $cart
      * @return User
      */
-    public function setCart(\Zeteq\MarketBundle\Entity\Cart $cart = null)
-    {
+    public function setCart(\Zeteq\MarketBundle\Entity\Cart $cart = null) {
         $this->cart = $cart;
-    
+
         return $this;
     }
 
@@ -399,8 +365,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return \Zeteq\MarketBundle\Entity\Cart 
      */
-    public function getCart()
-    {
+    public function getCart() {
         return $this->cart;
     }
 
@@ -410,10 +375,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param \Zeteq\MarketBundle\Entity\Cart $customer
      * @return User
      */
-    public function setCustomer(\Zeteq\MarketBundle\Entity\Customer $customer = null)
-    {
+    public function setCustomer(\Zeteq\MarketBundle\Entity\Customer $customer = null) {
         $this->customer = $customer;
-    
+
         return $this;
     }
 
@@ -422,8 +386,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return \Zeteq\MarketBundle\Entity\Customer 
      */
-    public function getCustomer()
-    {
+    public function getCustomer() {
         return $this->customer;
     }
 
@@ -433,10 +396,9 @@ class User implements AdvancedUserInterface, \Serializable
      * @param integer $myStoreId
      * @return User
      */
-    public function setMyStoreId($myStoreId)
-    {
+    public function setMyStoreId($myStoreId) {
         $this->my_store_id = $myStoreId;
-    
+
         return $this;
     }
 
@@ -445,8 +407,75 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return integer 
      */
-    public function getMyStoreId()
-    {
+    public function getMyStoreId() {
         return $this->my_store_id;
+    }
+
+
+
+    /**
+     * Add favorite_items
+     *
+     * @param \Zeteq\MarketBundle\Entity\FavoriteItem $favoriteItems
+     * @return User
+     */
+    public function addFavoriteItem(\Zeteq\MarketBundle\Entity\FavoriteItem $favoriteItems)
+    {
+        $this->favorite_items[] = $favoriteItems;
+    
+        return $this;
+    }
+
+    /**
+     * Remove favorite_items
+     *
+     * @param \Zeteq\MarketBundle\Entity\FavoriteItem $favoriteItems
+     */
+    public function removeFavoriteItem(\Zeteq\MarketBundle\Entity\FavoriteItem $favoriteItems)
+    {
+        $this->favorite_items->removeElement($favoriteItems);
+    }
+
+    /**
+     * Get favorite_items
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteItems()
+    {
+        return $this->favorite_items;
+    }
+
+    /**
+     * Add favorite_stores
+     *
+     * @param \Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores
+     * @return User
+     */
+    public function addFavoriteStore(\Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores)
+    {
+        $this->favorite_stores[] = $favoriteStores;
+    
+        return $this;
+    }
+
+    /**
+     * Remove favorite_stores
+     *
+     * @param \Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores
+     */
+    public function removeFavoriteStore(\Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores)
+    {
+        $this->favorite_stores->removeElement($favoriteStores);
+    }
+
+    /**
+     * Get favorite_stores
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFavoriteStores()
+    {
+        return $this->favorite_stores;
     }
 }

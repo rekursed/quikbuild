@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 
 namespace Zeteq\MarketBundle\Entity;
 
@@ -13,9 +12,10 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
 /**
  * @ORM\Entity
  * @ORM\Table(name="product_category")
-  */
-class ProductCategory
-{
+ * @ORM\HasLifecycleCallbacks
+ */
+class ProductCategory {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -24,36 +24,34 @@ class ProductCategory
      */
     protected $id;
 
-     /**
+    /**
      * @ORM\Column(type="string",length=130,  nullable=false)
-      *   @GRID\Column(operatorsVisible=false)
-      * 
+     *   @GRID\Column(operatorsVisible=false)
+     * 
      */
     protected $name;
-         
-   /**
+
+    /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=128, unique=true, nullable=true)
-   */
-    private $slug;  
-    
-   /**
+     */
+    private $slug;
+
+    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
-    protected $enabled= true;
+    protected $enabled = true;
 
-       /**
+    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
-    protected $is_parent= true;
+    protected $is_parent = true;
 
-     
-     /**
+    /**
      * @ORM\Column(type="text",  nullable=false)
      */
     protected $description;
-    
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="ProductSection", inversedBy="product_categories")
      * @ORM\JoinColumn(name="product_section_id", referencedColumnName="id",nullable=false)
@@ -61,16 +59,13 @@ class ProductCategory
      */
     protected $product_section;
 
-    
     /**
      * @ORM\ManyToMany(targetEntity="Product",mappedBy="categories")
      *
      */
-    protected $products;   
-    
-    
-        
-        /**
+    protected $products;
+
+    /**
      * @ORM\OneToMany(targetEntity="ProductCategory", mappedBy="parent")
      */
     private $children;
@@ -80,70 +75,115 @@ class ProductCategory
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id",nullable=true)
      */
     private $parent;
-    
-    
-    
-        public function getEnabledProducts()
-    {
-  //      return $this->products;
-        
- $products = $this->getProducts();
 
-$criteria = Criteria::create()
-    ->where(Criteria::expr()->eq("enabled", "1"))
-//    ->orderBy(array("created" => Criteria::ASC))
- //   ->setFirstResult(0)
-  //  ->setMaxResults(20)
-;
+    //////////image uploading begin
 
-$enabled_products = $products->matching($criteria);
-return $enabled_products;       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    /**
+     * @ORM\Column(type="string", length=100,nullable=true)
+     */
+    protected $image_path;
+
+    /**
+     * @var string $image
+     * @Assert\File( maxSize = "5024k", mimeTypesMessage = "Please upload a valid Image")
+     * @ORM\Column(name="image", type="string", length=255,nullable=true)
+     */
+    private $image;
+
+    public function getWebPath() {
+        return 'upload/category/images/' . $this->getId() . '/' . $this->image_path;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+    public function getFullImagePath() {
+        return $this->getUploadRootDir() . $this->image_path;
+    }
+
+    protected function getUploadRootDir() {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__ . '/../../../../public_html/upload/category/images/' . $this->getId() . '/';
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function uploadpersistImage() {
+        // the file property can be empty if the field is not required
+        if (null === $this->image) {
+            return;
+        }
+
+
+        $this->image->move($this->getUploadRootDir(), $this->image->getClientOriginalName());
+
+        $this->setImagePath($this->image->getClientOriginalName());
+        $this->setImage('');
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function uploadupdateImage() {
+
+        if (null === $this->image) {
+            return;
+        }
+
+        $this->image->move($this->getUploadRootDir(), $this->image->getClientOriginalName());
+        $this->setImagePath($this->image->getClientOriginalName());
+        $this->setImage('');
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function removeImage() {
+        try {
+            unlink($this->getFullImagePath());
+        } catch (\Exception $e) {
+            
+        }
+    }
+
+    /////////image uploading end
+
+    public function getEnabledProducts() {
+        //      return $this->products;
+
+        $products = $this->getProducts();
+
+        $criteria = Criteria::create()
+                ->where(Criteria::expr()->eq("enabled", "1"))
+//    ->orderBy(array("created" => Criteria::ASC))
+        //   ->setFirstResult(0)
+        //  ->setMaxResults(20)
+        ;
+
+        $enabled_products = $products->matching($criteria);
+        return $enabled_products;
+    }
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    
-    
-        public function __toString() {
+    public function __toString() {
         return $this->getName();
     }
+
     /**
      * Set description
      *
      * @param string $description
      * @return Store
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -152,8 +192,7 @@ return $enabled_products;
      *
      * @return string 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -163,10 +202,9 @@ return $enabled_products;
      * @param string $name
      * @return ProductCategory
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -175,8 +213,7 @@ return $enabled_products;
      *
      * @return string 
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -186,10 +223,9 @@ return $enabled_products;
      * @param boolean $enabled
      * @return ProductCategory
      */
-    public function setEnabled($enabled)
-    {
+    public function setEnabled($enabled) {
         $this->enabled = $enabled;
-    
+
         return $this;
     }
 
@@ -198,8 +234,7 @@ return $enabled_products;
      *
      * @return boolean 
      */
-    public function getEnabled()
-    {
+    public function getEnabled() {
         return $this->enabled;
     }
 
@@ -209,10 +244,9 @@ return $enabled_products;
      * @param \Zeteq\MarketBundle\Entity\ProductSection $productSection
      * @return ProductCategory
      */
-    public function setProductSection(\Zeteq\MarketBundle\Entity\ProductSection $productSection)
-    {
+    public function setProductSection(\Zeteq\MarketBundle\Entity\ProductSection $productSection) {
         $this->product_section = $productSection;
-    
+
         return $this;
     }
 
@@ -221,28 +255,26 @@ return $enabled_products;
      *
      * @return \Zeteq\MarketBundle\Entity\ProductSection 
      */
-    public function getProductSection()
-    {
+    public function getProductSection() {
         return $this->product_section;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Add products
      *
      * @param \Zeteq\MarketBundle\Entity\Product $products
      * @return ProductCategory
      */
-    public function addProduct(\Zeteq\MarketBundle\Entity\Product $products)
-    {
+    public function addProduct(\Zeteq\MarketBundle\Entity\Product $products) {
         $this->products[] = $products;
-    
+
         return $this;
     }
 
@@ -251,8 +283,7 @@ return $enabled_products;
      *
      * @param \Zeteq\MarketBundle\Entity\Product $products
      */
-    public function removeProduct(\Zeteq\MarketBundle\Entity\Product $products)
-    {
+    public function removeProduct(\Zeteq\MarketBundle\Entity\Product $products) {
         $this->products->removeElement($products);
     }
 
@@ -261,8 +292,7 @@ return $enabled_products;
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getProducts()
-    {
+    public function getProducts() {
         return $this->products;
     }
 
@@ -272,10 +302,9 @@ return $enabled_products;
      * @param string $slug
      * @return ProductCategory
      */
-    public function setSlug($slug)
-    {
+    public function setSlug($slug) {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
@@ -284,8 +313,7 @@ return $enabled_products;
      *
      * @return string 
      */
-    public function getSlug()
-    {
+    public function getSlug() {
         return $this->slug;
     }
 
@@ -295,10 +323,9 @@ return $enabled_products;
      * @param \Zeteq\MarketBundle\Entity\ProductCategory $children
      * @return ProductCategory
      */
-    public function addChildren(\Zeteq\MarketBundle\Entity\ProductCategory $children)
-    {
+    public function addChildren(\Zeteq\MarketBundle\Entity\ProductCategory $children) {
         $this->children[] = $children;
-    
+
         return $this;
     }
 
@@ -307,8 +334,7 @@ return $enabled_products;
      *
      * @param \Zeteq\MarketBundle\Entity\ProductCategory $children
      */
-    public function removeChildren(\Zeteq\MarketBundle\Entity\ProductCategory $children)
-    {
+    public function removeChildren(\Zeteq\MarketBundle\Entity\ProductCategory $children) {
         $this->children->removeElement($children);
     }
 
@@ -317,8 +343,7 @@ return $enabled_products;
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getChildren()
-    {
+    public function getChildren() {
         return $this->children;
     }
 
@@ -328,10 +353,9 @@ return $enabled_products;
      * @param \Zeteq\MarketBundle\Entity\ProductCategory $parent
      * @return ProductCategory
      */
-    public function setParent(\Zeteq\MarketBundle\Entity\ProductCategory $parent = null)
-    {
+    public function setParent(\Zeteq\MarketBundle\Entity\ProductCategory $parent = null) {
         $this->parent = $parent;
-    
+
         return $this;
     }
 
@@ -340,8 +364,7 @@ return $enabled_products;
      *
      * @return \Zeteq\MarketBundle\Entity\ProductCategory 
      */
-    public function getParent()
-    {
+    public function getParent() {
         return $this->parent;
     }
 
@@ -351,10 +374,9 @@ return $enabled_products;
      * @param boolean $isParent
      * @return ProductCategory
      */
-    public function setIsParent($isParent)
-    {
+    public function setIsParent($isParent) {
         $this->is_parent = $isParent;
-    
+
         return $this;
     }
 
@@ -363,8 +385,50 @@ return $enabled_products;
      *
      * @return boolean 
      */
-    public function getIsParent()
-    {
+    public function getIsParent() {
         return $this->is_parent;
     }
+
+    /**
+     * Set image_path
+     *
+     * @param string $imagePath
+     * @return ProductCategory
+     */
+    public function setImagePath($imagePath) {
+        $this->image_path = $imagePath;
+
+        return $this;
+    }
+
+    /**
+     * Get image_path
+     *
+     * @return string 
+     */
+    public function getImagePath() {
+        return $this->image_path;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return ProductCategory
+     */
+    public function setImage($image) {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string 
+     */
+    public function getImage() {
+        return $this->image;
+    }
+
 }

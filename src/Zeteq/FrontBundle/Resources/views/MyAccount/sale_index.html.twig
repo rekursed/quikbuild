@@ -1,0 +1,51 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+ {% block title %}
+Sales
+{% endblock %}
+
+
+{% block content -%}
+
+<br>
+<div class="container prodshowback">
+    <h1>Salelist</h1>
+
+    <div class="container">
+        <table class="table table-responsive table-hover">
+            <tr>
+                <th>#</th>
+                <th >Order Number</th>
+                <th >Created Date</th>
+                <th >Shipping Status</th>
+                <th ></th>
+            </tr>
+    {%for sa in sales%}
+            <tr>
+                <td>
+                {{loop.index}}
+                </td>
+                <td>
+
+{{sa.getOrderNumber()}} 
+                </td>
+                <td>
+{{sa.getCreated()|date('d M ,y')}}
+                </td>
+                <td>
+{% if sa.getIsShipped()%} Shipped {%else%} Waiting to be Shipped 
+            {%endif%}
+                </td>
+                <td>
+                    <a class="btn btn-info" href="{{path('myaccount_view_order',{'id':sa.getId} )}}">View Order Invoice</a>
+                </td>
+
+            </tr>
+    {%endfor%}
+        </table>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

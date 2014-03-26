@@ -274,7 +274,7 @@
                         <h4 style="font-size: 16px;"> email: {{store.getEmail()}} </h4>
                         <h4 style="font-size: 16px;"> phone: {{store.getPhone()}} </h4>
 
-
+                         <a class="btn btn-success ajax_link" href="{{path('add_to_favorite_store',{'slug':store.slug})}}">Add Store to Favorite</a>
        {%if store.getFacebookPage() != "" %}<a href="{{store.getFacebookPage()}}"><i class="icon-facebook"></i></a>{% endif %}
        {%if store.getTwitter() != "" %}<a href="{{store.getTwitter()}}"><i class="icon-twitter"></i></a>{% endif %}
        {%if store.getGooglePlus() != "" %}<a href="{{store.getGooglePlus()}}"><i class="icon-google-plus-sign"></i></a>{% endif %}

@@ -28,4 +28,51 @@ myaccount_registersave:
 myaccount_activate_user:
     pattern:  /activate_customer/{rand_string}
     defaults: { _controller: "ZeteqMarketBundle:MyAccount:activate_user" }
+    
+    
+    
+myaccount_edit_settings:
+    pattern:  /myaccount/edit_settings
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:edit_settings" }
 
+myaccount_update_settings:
+    pattern:  /myaccount/update_settings
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:update_settings" }
+    
+    
+
+myaccount_view_order:
+    pattern:  /myaccount/order/{id}
+    defaults: { _controller: "ZeteqFrontBundle:MyAccount:view_order" }
+myaccount_view_salelist:
+    pattern:  /myaccount/salelist
+    defaults: { _controller: "ZeteqFrontBundle:MyAccount:view_salelist" }
+    
+    
+favorite_store_delete:
+    pattern:  /myaccount/favorite_store/{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:favorite_store_delete" }
+    
+view_favorite_store:
+    pattern:  /myaccount/favorite_store
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:view_favorite_store" }
+    
+add_to_favorite_store:
+    pattern:  /store/favorite_store/{slug}
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:add_to_favorite_store" }
+    
+    
+    
+add_to_favorite_item:
+    pattern:  /store/favorite_item/{slug}
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:add_to_favorite_item" }
+    
+    
+
+favorite_item_delete:
+    pattern:  /myaccount/favorite_item/{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:favorite_item_delete" }
+view_favorite_item:
+    pattern:  /myaccount/favorite_item
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:view_favorite_item" }    
+    

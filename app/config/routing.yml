@@ -1,3 +1,7 @@
+#ZeteqMarketBundle_myaccount:
+#        resource: "@ZeteqFrontBundle/Resources/config/routing/myaccount.yml"
+#        prefix:   /
+
 ZeteqMarketBundle_productrating:
         resource: "@ZeteqMarketBundle/Resources/config/routing/productrating.yml"
         prefix:   /productrating

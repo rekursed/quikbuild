@@ -43,7 +43,9 @@
                 <img class="img-responsive"  src="{{asset(product.getWebPath() )  }}"/>
             </a>
         </div>
-
+        <div>
+            <a class="btn btn-danger ajax_link" href="{{path('add_to_favorite_item',{'slug':product.slug})}}">Add to Favorite</a>
+        </div>
         <div class=""><h5>More Images</h5></div>
         <div class="row">    
 
