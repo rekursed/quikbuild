@@ -75,4 +75,7 @@ favorite_item_delete:
 view_favorite_item:
     pattern:  /myaccount/favorite_item
     defaults: { _controller: "ZeteqMarketBundle:MyAccount:view_favorite_item" }    
-    
+   
+purchase_index:
+    pattern:  /myaccount/purchases
+    defaults: { _controller: "ZeteqMarketBundle:MyAccount:purchase_index" }

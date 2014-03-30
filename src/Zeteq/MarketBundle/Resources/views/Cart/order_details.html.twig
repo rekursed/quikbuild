@@ -1,0 +1,90 @@
+{%if admin is defined%}
+{%set var ='ZeteqMarketBundle:StoreAdmin:store_admin_layout.html.twig' %}
+
+{%else%}
+{% set var = 'ZeteqMarketBundle:Market:myaccount_layout.html.twig' %}
+{%endif%}
+{% extends  var %}
+
+{% block title %}
+Cart -- Halal Needs
+{% endblock %}
+{% block middle_container %}
+{{var}}
+{%if admin is defined%}
+{{var}}
+{%endif%}
+<div class="page-header">
+    <h1>Order confirmed</h1>
+    <h3> Order number {{sale.getOrderNumber()}}</h3>
+</div>
+<div class="row">
+    <div class="col-md-8 ">
+        <h3>Order Details</h3>
+    <table class="table table-bordered table-responsive table-striped table-hover">
+ {% for item in sale.getSaleItems()%}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{item.getProductName()}}</td>
+            <td>{{item.getPrice()}}</td>
+            <td>{{item.getQuantity()}}</td>
+            <td>Tk.{{item.getTotal()}}</td>    
+        
+        
+        </tr>
+    {% endfor%}
+
+       <tr><td colspan=4> Shipping cost</td><td>{{sale.getShippingCost()}}</td></tr>
+        <tr><td colspan=4>Total</td><td>{{sale.getTotal()}}</td></tr>      
+    </table>
+            
+            
+            <h4>Payment Method</h4>
+            <div class="well">
+        <h4>            {{sale.getPaymentMethod()}}</h4>
+
+            </div>
+ 
+    </div>
+    
+        
+        
+        <div class="col-md-3 col-md-offset-1">
+            <div class="row">
+                <h4>Bill to</h4>
+                <div class="">
+                    <table class="table  table-bordered table-responsive">
+                        <tr><td>{{sale.getBillingFirstName()}} {{sale.getBillingLastName()}}</td></tr>
+                      <tr><td>{{sale.getBillingAddress()}} </td></tr>
+                      <tr><td>{{sale.getBillingCity()}} {{sale.getBillingState()}} {{sale.getBillingPostalcode()}} {{sale.getBillingCountry()}} </td></tr>
+                                                 <tr><td>{{sale.getBillingEmail()}} {{sale.getBillingPhone()}}  </td></tr>
+                                   
+                    </table>
+                </div>
+            </div>
+                
+                            <div class="row">
+                <h4>Ship to</h4>
+                <div class="">
+                    <table class="table  table-bordered table-responsive">
+                        <tr><td>{{sale.getShippingFirstName()}} {{sale.getShippingLastName()}}</td></tr>
+                      <tr><td>{{sale.getShippingAddress()}} </td></tr>
+                      <tr><td>{{sale.getShippingCity()}} {{sale.getShippingState()}} {{sale.getShippingPostalcode()}} {{sale.getShippingCountry()}} </td></tr>
+                                                 <tr><td>{{sale.getShippingEmail()}} {{sale.getShippingPhone()}}  </td></tr>
+                                   
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>
+
+ 
+ 
+
+{% endblock %}
+
+
+
+
+
+

@@ -10,6 +10,7 @@ Cart -- Halal Needs
 </div>
 <div class="row">
     <div class="col-md-8 ">
+        <h4>Store <h3>{{cart.store}}</h3></h4>
         
         <h4>Products</h4>
     <table class="table table-bordered  table-responsive table-striped table-hover">
@@ -38,8 +39,8 @@ Cart -- Halal Needs
         <h4>            {{cart.getPaymentMethod()}}</h4>
             {{cart.getPaymentMethod().getDescription()}}
             </div>
-            <div class="well"><a class="btn btn-info" href="{{path('cart_checkout')}}">Go Back</a>
-<a class="btn btn-info" href="{{path('cart_confirm')}}">Confirm</a></div>
+            <div class="well"><a class="btn btn-info" href="{{path('cart_checkout',{'store_slug':cart.store.slug})}}">Go Back</a>
+<a class="btn btn-info" href="{{path('cart_confirm',{'store': cart.store.slug})}}">Confirm</a></div>
     </div>
     
         

@@ -38,3 +38,8 @@ store_admin_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "ZeteqMarketBundle:StoreAdmin:delete" }
     requirements: { _method: post|delete }
+
+
+store_admin_sale_index:
+    pattern:  /{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdmin:sale_index" }

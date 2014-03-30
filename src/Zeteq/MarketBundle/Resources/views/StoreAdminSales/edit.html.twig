@@ -1,0 +1,68 @@
+{% extends 'ZeteqMarketBundle:StoreAdmin:store_admin_layout.html.twig' %}
+
+
+{% block title %}
+Admin
+{% endblock %}
+{% block content %}
+
+
+<div style="" class="sa_index_header"><h2><a href="{{path('store_admin')}}">Stores </a>  <span class="fa fa-caret-right"></span> 
+
+{{store.getStoreName()}}
+    </h2>
+</div>
+
+
+
+<ul class="nav nav-tabs nav-justified" style="margin-bottom:40px;">
+    <li  class=""><a href="{{ path('store_admin_edit', { 'id': store.id }) }}"><i class="fa fa-pencil"></i> Edit</a> </li>
+    <li  class="">  <a href="{{ path('storeadmin_product', { 'store_id': store.id }) }}"><i class="fa fa-shopping-cart"></i> Products</a> </li>
+    <li class="active"><a href="{{ path('storeproductcategory', { 'store_id': store.id }) }}"><i class="fa fa-archive"></i> Categories</a> </li>
+    <li  class=""><a href="{{ path('storeadmin_page', { 'store_id': store.id }) }}"><i class="fa fa-file-o"></i> Pages</a> </li>
+</ul>
+
+
+
+<h1>Product Category edit</h1>
+
+{{ form_start(edit_form) }}
+
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+
+
+        <button class="btn btn-warning" type="submit">Save</button>
+        <a  class="btn btn-info navbar-btn"  href="{{ path('storeproductcategory',{'store_id':store_id} ) }}">
+            Back to the list
+        </a>
+        <a  class="btn btn-info navbar-btn"  href="{{ path('storeproductcategory_new',{'store_id':store_id} ) }}">
+            Add another
+        </a>
+
+
+        <a  class="btn btn-info  navbar-btn "  href="{{ path('store_show',{'slug':edit_form.vars.value.getStore.slug}) }}">
+            Go to store        </a>
+
+        <a onclick="return confirm('Do you really want to delete it?');" class="btn btn-danger navbar-btn pull-right"  href="{{ path('storeproductcategory_delete',{'id':edit_form.vars.value.getId()}) }}">
+            <span class="glyphicon glyphicon-remove"></span> Delete        </a>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+
+ {{ form_errors(edit_form) }}
+    {{ form_end(edit_form) }}
+
+{% endblock %}

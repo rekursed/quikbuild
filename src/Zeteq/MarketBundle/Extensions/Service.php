@@ -9,6 +9,7 @@ use Zeteq\MarketBundle\Entity\ProductSection;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\DependencyInjection\Container;
 
+
 class Service {
 
     protected $em;
@@ -69,7 +70,9 @@ class Service {
         } else {
             $store = $this->em->getRepository('ZeteqMarketBundle:Store')->findOneBySlug($store_slug);
             $c = New Cart();
+//            throw new \Symfony\Component\Security\Acl\Exception\Exception($store_slug);
             $c->setStore($store);
+             
             $this->em->persist($c);
             $this->em->flush();
             $session_cart[$store_slug] = $c->getId();

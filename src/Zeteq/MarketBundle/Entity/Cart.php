@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 
 namespace Zeteq\MarketBundle\Entity;
 
@@ -17,17 +16,17 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="cart")
  * @ORM\HasLifecycleCallbacks 
  */
-class Cart
-{
+class Cart {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-      * @GRID\Column(filterable=false)
+     * @GRID\Column(filterable=false)
      */
     protected $id;
-    
-        /**
+
+    /**
      * @ORM\Column(type="string", length=60, nullable=true)
      * @Assert\NotBlank(message = "Please provide your first name")
      */
@@ -52,7 +51,7 @@ class Cart
      * @ORM\Column(type="string", length=160, nullable=true)
      */
     private $billing_city;
-     
+
     /**
      * @ORM\Column(type="string", length=60, nullable=true)
      */
@@ -72,8 +71,6 @@ class Cart
      * @ORM\Column(type="string", length=60, nullable=true)
      */
     private $billing_phone;
-
-
 
     /**
      * @ORM\Column(type="string", length=60, nullable=true)
@@ -99,7 +96,7 @@ class Cart
      * @ORM\Column(type="string", length=160, nullable=true)
      */
     private $shipping_city;
-     
+
     /**
      * @ORM\Column(type="string", length=60, nullable=true)
      */
@@ -109,7 +106,6 @@ class Cart
      * @ORM\Column(type="string", length=60, nullable=true)
      */
     private $shipping_postalcode;
-
 
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
@@ -125,9 +121,8 @@ class Cart
      * @ORM\Column(type="boolean",nullable=true)
      */
     private $shipping_billing_same;
-    
-    
-         /**
+
+    /**
      * @var datetime $created
      *
      * @Gedmo\Timestampable(on="create")
@@ -148,63 +143,53 @@ class Cart
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
-    
-    
-         /**
+
+    /**
      * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart",cascade={"remove"})
      */
     protected $cart_items;
-    
-    
-            /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="Store", inversedBy="carts")
      * @ORM\JoinColumn(name="store_id", referencedColumnName="id",nullable=false)
      */
     protected $store;
-    
-    
-     
-     /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="PaymentMethod", inversedBy="carts")
      * @ORM\JoinColumn(name="payment_method_id", referencedColumnName="id",nullable=true)
-      * @Assert\NotBlank()
+     * @Assert\NotBlank()
      */
     protected $payment_method;
-    
-    
-     /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="ShippingMethod", inversedBy="carts")
      * @ORM\JoinColumn(name="shipping_method_id", referencedColumnName="id",nullable=true)
-      * @Assert\NotBlank()
+     * @Assert\NotBlank()
      */
     protected $shipping_method;
-    
-    public function getCount()
-    {
-        
+
+    public function getCount() {
+
         return $this->getCartItems()->count();
     }
-    
-    
-    public function getSubTotal(){
-        
+
+    public function getSubTotal() {
+
         $st = 0;
-        foreach($this->getCartItems() as $ci)
-        {
+        foreach ($this->getCartItems() as $ci) {
             $st += $ci->getTotal();
         }
         return $st;
     }
-    
-    public function getShippingCost()
-    {
-        
-return        $sm = $this->getShippingMethod()->getCost();
+
+    public function getShippingCost() {
+
+        return $sm = $this->getShippingMethod()->getCost();
     }
-    
-    public function getTotal()
-    {
-        
+
+    public function getTotal() {
+
         return $this->getShippingCost() + $this->getSubTotal();
     }
 
@@ -213,13 +198,12 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
-    
+
     public function __toString() {
-        return 'cart'.$this->getId();
+        return 'cart' . $this->getId();
     }
 
     /**
@@ -228,10 +212,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param \DateTime $created
      * @return Cart
      */
-    public function setCreated($created)
-    {
+    public function setCreated($created) {
         $this->created = $created;
-    
+
         return $this;
     }
 
@@ -240,8 +223,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return \DateTime 
      */
-    public function getCreated()
-    {
+    public function getCreated() {
         return $this->created;
     }
 
@@ -251,10 +233,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param \DateTime $updated
      * @return Cart
      */
-    public function setUpdated($updated)
-    {
+    public function setUpdated($updated) {
         $this->updated = $updated;
-    
+
         return $this;
     }
 
@@ -263,8 +244,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return \DateTime 
      */
-    public function getUpdated()
-    {
+    public function getUpdated() {
         return $this->updated;
     }
 
@@ -274,10 +254,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param \Zeteq\UserBundle\Entity\User $user
      * @return Cart
      */
-    public function setUser(\Zeteq\UserBundle\Entity\User $user = null)
-    {
+    public function setUser(\Zeteq\UserBundle\Entity\User $user = null) {
         $this->user = $user;
-    
+
         return $this;
     }
 
@@ -286,28 +265,26 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return \Zeteq\UserBundle\Entity\User 
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->cart_items = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Add cart_items
      *
      * @param \Zeteq\MarketBundle\Entity\CartItem $cartItems
      * @return Cart
      */
-    public function addCartItem(\Zeteq\MarketBundle\Entity\CartItem $cartItems)
-    {
+    public function addCartItem(\Zeteq\MarketBundle\Entity\CartItem $cartItems) {
         $this->cart_items[] = $cartItems;
-    
+
         return $this;
     }
 
@@ -316,8 +293,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @param \Zeteq\MarketBundle\Entity\CartItem $cartItems
      */
-    public function removeCartItem(\Zeteq\MarketBundle\Entity\CartItem $cartItems)
-    {
+    public function removeCartItem(\Zeteq\MarketBundle\Entity\CartItem $cartItems) {
         $this->cart_items->removeElement($cartItems);
     }
 
@@ -326,8 +302,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCartItems()
-    {
+    public function getCartItems() {
         return $this->cart_items;
     }
 
@@ -337,10 +312,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $billingFirstName
      * @return Cart
      */
-    public function setBillingFirstName($billingFirstName)
-    {
+    public function setBillingFirstName($billingFirstName) {
         $this->billing_first_name = $billingFirstName;
-    
+
         return $this;
     }
 
@@ -349,8 +323,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getBillingFirstName()
-    {
+    public function getBillingFirstName() {
         return $this->billing_first_name;
     }
 
@@ -360,10 +333,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $billingLastName
      * @return Cart
      */
-    public function setBillingLastName($billingLastName)
-    {
+    public function setBillingLastName($billingLastName) {
         $this->billing_last_name = $billingLastName;
-    
+
         return $this;
     }
 
@@ -372,8 +344,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getBillingLastName()
-    {
+    public function getBillingLastName() {
         return $this->billing_last_name;
     }
 
@@ -383,10 +354,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $billingEmail
      * @return Cart
      */
-    public function setBillingEmail($billingEmail)
-    {
+    public function setBillingEmail($billingEmail) {
         $this->billing_email = $billingEmail;
-    
+
         return $this;
     }
 
@@ -395,8 +365,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getBillingEmail()
-    {
+    public function getBillingEmail() {
         return $this->billing_email;
     }
 
@@ -406,10 +375,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $billingAddress
      * @return Cart
      */
-    public function setBillingAddress($billingAddress)
-    {
+    public function setBillingAddress($billingAddress) {
         $this->billing_address = $billingAddress;
-    
+
         return $this;
     }
 
@@ -418,8 +386,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getBillingAddress()
-    {
+    public function getBillingAddress() {
         return $this->billing_address;
     }
 
@@ -429,10 +396,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $billingCity
      * @return Cart
      */
-    public function setBillingCity($billingCity)
-    {
+    public function setBillingCity($billingCity) {
         $this->billing_city = $billingCity;
-    
+
         return $this;
     }
 
@@ -441,8 +407,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getBillingCity()
-    {
+    public function getBillingCity() {
         return $this->billing_city;
     }
 
@@ -452,10 +417,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $billingState
      * @return Cart
      */
-    public function setBillingState($billingState)
-    {
+    public function setBillingState($billingState) {
         $this->billing_state = $billingState;
-    
+
         return $this;
     }
 
@@ -464,8 +428,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getBillingState()
-    {
+    public function getBillingState() {
         return $this->billing_state;
     }
 
@@ -475,10 +438,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $billingPostalcode
      * @return Cart
      */
-    public function setBillingPostalcode($billingPostalcode)
-    {
+    public function setBillingPostalcode($billingPostalcode) {
         $this->billing_postalcode = $billingPostalcode;
-    
+
         return $this;
     }
 
@@ -487,8 +449,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getBillingPostalcode()
-    {
+    public function getBillingPostalcode() {
         return $this->billing_postalcode;
     }
 
@@ -498,10 +459,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $billingCountry
      * @return Cart
      */
-    public function setBillingCountry($billingCountry)
-    {
+    public function setBillingCountry($billingCountry) {
         $this->billing_country = $billingCountry;
-    
+
         return $this;
     }
 
@@ -510,8 +470,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getBillingCountry()
-    {
+    public function getBillingCountry() {
         return $this->billing_country;
     }
 
@@ -521,10 +480,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $billingPhone
      * @return Cart
      */
-    public function setBillingPhone($billingPhone)
-    {
+    public function setBillingPhone($billingPhone) {
         $this->billing_phone = $billingPhone;
-    
+
         return $this;
     }
 
@@ -533,8 +491,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getBillingPhone()
-    {
+    public function getBillingPhone() {
         return $this->billing_phone;
     }
 
@@ -544,11 +501,10 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $shippingFirstName
      * @return Cart
      */
-    public function setShippingFirstName($shippingFirstName)
-    {
+    public function setShippingFirstName($shippingFirstName) {
 
         $this->shipping_first_name = $shippingFirstName;
-    
+
         return $this;
     }
 
@@ -557,13 +513,12 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getShippingFirstName()
-    {
-                if($this->getShippingBillingSame()){
-            
+    public function getShippingFirstName() {
+        if ($this->getShippingBillingSame()) {
+
             return $this->getBillingFirstName();
         }
-        
+
         return $this->shipping_first_name;
     }
 
@@ -573,10 +528,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $shippingLastName
      * @return Cart
      */
-    public function setShippingLastName($shippingLastName)
-    {
+    public function setShippingLastName($shippingLastName) {
         $this->shipping_last_name = $shippingLastName;
-    
+
         return $this;
     }
 
@@ -585,11 +539,10 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getShippingLastName()
-    {
-        
-                if($this->getShippingBillingSame()){
-            
+    public function getShippingLastName() {
+
+        if ($this->getShippingBillingSame()) {
+
             return $this->getBillingLastName();
         }
         return $this->shipping_last_name;
@@ -601,10 +554,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $shippingEmail
      * @return Cart
      */
-    public function setShippingEmail($shippingEmail)
-    {
+    public function setShippingEmail($shippingEmail) {
         $this->shipping_email = $shippingEmail;
-    
+
         return $this;
     }
 
@@ -613,10 +565,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getShippingEmail()
-    {
-                        if($this->getShippingBillingSame()){
-            
+    public function getShippingEmail() {
+        if ($this->getShippingBillingSame()) {
+
             return $this->getBillingEmail();
         }
         return $this->shipping_email;
@@ -628,10 +579,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $shippingAddress
      * @return Cart
      */
-    public function setShippingAddress($shippingAddress)
-    {
+    public function setShippingAddress($shippingAddress) {
         $this->shipping_address = $shippingAddress;
-    
+
         return $this;
     }
 
@@ -640,10 +590,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getShippingAddress()
-    {
-                        if($this->getShippingBillingSame()){
-            
+    public function getShippingAddress() {
+        if ($this->getShippingBillingSame()) {
+
             return $this->getBillingAddress();
         }
         return $this->shipping_address;
@@ -655,10 +604,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $shippingCity
      * @return Cart
      */
-    public function setShippingCity($shippingCity)
-    {
+    public function setShippingCity($shippingCity) {
         $this->shipping_city = $shippingCity;
-    
+
         return $this;
     }
 
@@ -667,10 +615,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getShippingCity()
-    {
-                        if($this->getShippingBillingSame()){
-            
+    public function getShippingCity() {
+        if ($this->getShippingBillingSame()) {
+
             return $this->getBillingCity();
         }
         return $this->shipping_city;
@@ -682,10 +629,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $shippingState
      * @return Cart
      */
-    public function setShippingState($shippingState)
-    {
+    public function setShippingState($shippingState) {
         $this->shipping_state = $shippingState;
-    
+
         return $this;
     }
 
@@ -694,10 +640,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getShippingState()
-    {
-                        if($this->getShippingBillingSame()){
-            
+    public function getShippingState() {
+        if ($this->getShippingBillingSame()) {
+
             return $this->getBillingState();
         }
         return $this->shipping_state;
@@ -709,10 +654,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $shippingPostalcode
      * @return Cart
      */
-    public function setShippingPostalcode($shippingPostalcode)
-    {
+    public function setShippingPostalcode($shippingPostalcode) {
         $this->shipping_postalcode = $shippingPostalcode;
-    
+
         return $this;
     }
 
@@ -721,10 +665,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getShippingPostalcode()
-    {
-                        if($this->getShippingBillingSame()){
-            
+    public function getShippingPostalcode() {
+        if ($this->getShippingBillingSame()) {
+
             return $this->getBillingPostalcode();
         }
         return $this->shipping_postalcode;
@@ -736,10 +679,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $shippingCountry
      * @return Cart
      */
-    public function setShippingCountry($shippingCountry)
-    {
+    public function setShippingCountry($shippingCountry) {
         $this->shipping_country = $shippingCountry;
-    
+
         return $this;
     }
 
@@ -748,15 +690,14 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getShippingCountry()
-    {
-        
-       if($this->getShippingBillingSame()){
-            
+    public function getShippingCountry() {
+
+        if ($this->getShippingBillingSame()) {
+
             return $this->getBillingCountry();
         }
-        
-        
+
+
         return $this->shipping_country;
     }
 
@@ -766,10 +707,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param string $shippingPhone
      * @return Cart
      */
-    public function setShippingPhone($shippingPhone)
-    {
+    public function setShippingPhone($shippingPhone) {
         $this->shipping_phone = $shippingPhone;
-    
+
         return $this;
     }
 
@@ -778,10 +718,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return string 
      */
-    public function getShippingPhone()
-    {
-                        if($this->getShippingBillingSame()){
-            
+    public function getShippingPhone() {
+        if ($this->getShippingBillingSame()) {
+
             return $this->getBillingPhone();
         }
         return $this->shipping_phone;
@@ -793,10 +732,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param boolean $shippingBillingSame
      * @return Cart
      */
-    public function setShippingBillingSame($shippingBillingSame)
-    {
+    public function setShippingBillingSame($shippingBillingSame) {
         $this->shipping_billing_same = $shippingBillingSame;
-    
+
         return $this;
     }
 
@@ -805,14 +743,10 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return boolean 
      */
-    public function getShippingBillingSame()
-    {
-        
+    public function getShippingBillingSame() {
+
         return $this->shipping_billing_same;
     }
-
- 
- 
 
     /**
      * Set payment_method
@@ -820,10 +754,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param \Zeteq\MarketBundle\Entity\PaymentMethod $paymentMethod
      * @return Cart
      */
-    public function setPaymentMethod(\Zeteq\MarketBundle\Entity\PaymentMethod $paymentMethod = null)
-    {
+    public function setPaymentMethod(\Zeteq\MarketBundle\Entity\PaymentMethod $paymentMethod = null) {
         $this->payment_method = $paymentMethod;
-    
+
         return $this;
     }
 
@@ -832,8 +765,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return \Zeteq\MarketBundle\Entity\PaymentMethod 
      */
-    public function getPaymentMethod()
-    {
+    public function getPaymentMethod() {
         return $this->payment_method;
     }
 
@@ -843,10 +775,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param \Zeteq\MarketBundle\Entity\ShippingMethod $shippingMethod
      * @return Cart
      */
-    public function setShippingMethod(\Zeteq\MarketBundle\Entity\ShippingMethod $shippingMethod = null)
-    {
+    public function setShippingMethod(\Zeteq\MarketBundle\Entity\ShippingMethod $shippingMethod = null) {
         $this->shipping_method = $shippingMethod;
-    
+
         return $this;
     }
 
@@ -855,8 +786,7 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return \Zeteq\MarketBundle\Entity\ShippingMethod 
      */
-    public function getShippingMethod()
-    {
+    public function getShippingMethod() {
         return $this->shipping_method;
     }
 
@@ -866,10 +796,9 @@ return        $sm = $this->getShippingMethod()->getCost();
      * @param \Zeteq\MarketBundle\Entity\Store $store
      * @return Cart
      */
-    public function setStore(\Zeteq\MarketBundle\Entity\Store $store)
-    {
+    public function setStore(\Zeteq\MarketBundle\Entity\Store $store) {
         $this->store = $store;
-    
+
         return $this;
     }
 
@@ -878,8 +807,8 @@ return        $sm = $this->getShippingMethod()->getCost();
      *
      * @return \Zeteq\MarketBundle\Entity\Store 
      */
-    public function getStore()
-    {
+    public function getStore() {
         return $this->store;
     }
+
 }

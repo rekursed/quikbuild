@@ -106,13 +106,13 @@
         <div><h4>Price: TK. {{product.getPrice()}} </h4></div>
         <div>
             {%if product.getAverageRating()[0] is defined%}
-            {%for a in 1..product.getAverageRating()[0]%}
-            <span class="glyphicon glyphicon-star"></span>
-            {%endfor%}
-            {%for a in product.getAverageRating()[0]..4%}
-            <span class="glyphicon glyphicon-star-empty"></span>
-            {%endfor%}
-            ({{product.getAverageRating()[1]}})
+                {%for a in 1..product.getAverageRating()[0]%}
+                <span class="glyphicon glyphicon-star"></span>
+                {%endfor%}
+                {%for a in product.getAverageRating()[0]..4%}
+                <span class="glyphicon glyphicon-star-empty"></span>
+                {%endfor%}
+                ({{product.getAverageRating()[1]}})
             {%endif%}
         </div>
 

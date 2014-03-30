@@ -4,38 +4,54 @@ namespace Zeteq\MarketBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Zeteq\MarketBundle\Entity\Store;
 use Zeteq\MarketBundle\Form\StoreType;
 use Zeteq\UserBundle\Form\UserChangePasswordType;
+
 /**
  * Store controller.
  *
  */
-class StoreAdminController extends Controller
-{
+class StoreAdminController extends Controller {
 
-    
-  
-        public function my_accountAction()
-    {
+    /**
+     * Lists all StoreProductCategory entities.
+     *
+     */
+    public function sale_indexAction($store_id) {
         $em = $this->getDoctrine()->getManager();
-  $user = $this->get('security.context')->getToken()->getUser();
+
+        $store = $em->getRepository('ZeteqMarketBundle:Store')->find($store_id);
+
+        $repository = $em->getRepository('ZeteqMarketBundle:Sale');
+        $query = $repository->createQueryBuilder('p')
+                ->where('p.store =:store')
+                ->setParameter('store', $store)
+                ->getQuery();
+
+        $entities = $query->getResult();
+
+
+        return $this->render('ZeteqMarketBundle:StoreAdminSales:index.html.twig', array(
+                    'entities' => $entities,
+                    'store_id' => $store_id,
+                    'store' => $store
+        ));
+    }
+
+    public function my_accountAction() {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->get('security.context')->getToken()->getUser();
         $entities = $em->getRepository('ZeteqMarketBundle:Store')->findAll();
 
         return $this->render('ZeteqMarketBundle:StoreAdmin:my_account.html.twig', array(
-            'entities' => $entities,
+                    'entities' => $entities,
         ));
     }
-    
- 
-    
-        
-    
-            public function change_passwordAction()
-    {
+
+    public function change_passwordAction() {
         $em = $this->getDoctrine()->getManager();
-  $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->get('security.context')->getToken()->getUser();
         $entity = $em->getRepository('ZeteqUserBundle:User')->find($user->getId());
 
         if (!$entity) {
@@ -43,17 +59,15 @@ class StoreAdminController extends Controller
         }
 
         $editForm = $this->createChangePasswordForm($entity);
- 
+
 
         return $this->render('ZeteqMarketBundle:StoreAdmin:change_password.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-         
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
         ));
     }
-    
-        private function createChangePasswordForm($entity)
-    {
+
+    private function createChangePasswordForm($entity) {
         $form = $this->createForm(new UserChangePasswordType(), $entity, array(
             'action' => $this->generateUrl('store_admin_update_password', array('id' => $entity->getId())),
             'method' => 'PUT',
@@ -63,29 +77,27 @@ class StoreAdminController extends Controller
 
         return $form;
     }
-    
-    
-    public function update_passwordAction(Request $request)
-    {
+
+    public function update_passwordAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-  $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->get('security.context')->getToken()->getUser();
         $entity = $em->getRepository('ZeteqUserBundle:User')->find($user->getId());
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
-    
+
         $editForm = $this->createChangePasswordForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            
-            
-                $factory = $this->get('security.encoder_factory');
-$encoder = $factory->getEncoder($entity);
-$password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
-$entity->setPassword($password);
+
+
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($entity);
+            $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
+            $entity->setPassword($password);
             $em->persist($entity);
             $em->flush();
 
@@ -93,47 +105,46 @@ $entity->setPassword($password);
         }
 
         return $this->render('ZeteqMarketBundle:StoreAdmin:change_password.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-           
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
         ));
     }
+
     /**
      * Lists all Store entities.
      *
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
-          
+
         $user = $this->get('security.context')->getToken()->getUser();
 
         $repo = $em->getRepository('ZeteqMarketBundle:Store');
 
         $q = $repo->createQueryBuilder('q')
                 ->where('q.user=:user')
-                 ->setParameter('user',$user )
-            ->getQuery();
-        
+                ->setParameter('user', $user)
+                ->getQuery();
+
         $entities = $q->getResult();
 
         return $this->render('ZeteqMarketBundle:StoreAdmin:index.html.twig', array(
-            'entities' => $entities,
+                    'entities' => $entities,
         ));
     }
+
     /**
      * Creates a new Store entity.
      *
      */
-    public function createAction(Request $request)
-    {
+    public function createAction(Request $request) {
         $entity = new Store();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity->setUser( $this->get('security.context')->getToken()->getUser());
+            $entity->setUser($this->get('security.context')->getToken()->getUser());
             $em->persist($entity);
             $em->flush();
 
@@ -141,26 +152,25 @@ $entity->setPassword($password);
         }
 
         return $this->render('ZeteqMarketBundle:StoreAdmin:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
     /**
-    * Creates a form to create a Store entity.
-    *
-    * @param Store $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createCreateForm(Store $entity)
-    {
+     * Creates a form to create a Store entity.
+     *
+     * @param Store $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCreateForm(Store $entity) {
         $form = $this->createForm(new StoreType(), $entity, array(
             'action' => $this->generateUrl('store_admin_create'),
             'method' => 'POST',
         ));
 
-       
+
 
         return $form;
     }
@@ -169,14 +179,13 @@ $entity->setPassword($password);
      * Displays a form to create a new Store entity.
      *
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new Store();
-        $form   = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($entity);
 
         return $this->render('ZeteqMarketBundle:StoreAdmin:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+                    'entity' => $entity,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -184,8 +193,7 @@ $entity->setPassword($password);
      * Finds and displays a Store entity.
      *
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('ZeteqMarketBundle:Store')->find($id);
@@ -197,64 +205,61 @@ $entity->setPassword($password);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ZeteqMarketBundle:StoreAdmin:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),        ));
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),));
     }
 
     /**
      * Displays a form to edit an existing Store entity.
      *
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getManager();
-  $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->get('security.context')->getToken()->getUser();
         $entity = $em->getRepository('ZeteqMarketBundle:Store')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Store entity.');
         }
-        if($entity->getUser() != $user)
-        {
-              throw $this->createNotFoundException('Unable to find Store entity.');
+        if ($entity->getUser() != $user) {
+            throw $this->createNotFoundException('Unable to find Store entity.');
         }
-        
+
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ZeteqMarketBundle:StoreAdmin:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-            'store' =>$entity,
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                    'store' => $entity,
         ));
     }
 
     /**
-    * Creates a form to edit a Store entity.
-    *
-    * @param Store $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Store $entity)
-    {
+     * Creates a form to edit a Store entity.
+     *
+     * @param Store $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditForm(Store $entity) {
         $form = $this->createForm(new StoreType(), $entity, array(
             'action' => $this->generateUrl('store_admin_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-   
+
 
         return $form;
     }
+
     /**
      * Edits an existing Store entity.
      *
      */
-    public function updateAction(Request $request, $id)
-    {
+    public function updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('ZeteqMarketBundle:Store')->find($id);
@@ -274,17 +279,17 @@ $entity->setPassword($password);
         }
 
         return $this->render('ZeteqMarketBundle:StoreAdmin:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
+
     /**
      * Deletes a Store entity.
      *
      */
-    public function deleteAction(Request $request, $id)
-    {
+    public function deleteAction(Request $request, $id) {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -310,13 +315,13 @@ $entity->setPassword($password);
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('store_admin_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
+                        ->setAction($this->generateUrl('store_admin_delete', array('id' => $id)))
+                        ->setMethod('DELETE')
+                        ->add('submit', 'submit', array('label' => 'Delete'))
+                        ->getForm()
         ;
     }
+
 }

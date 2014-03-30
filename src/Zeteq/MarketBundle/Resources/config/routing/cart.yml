@@ -13,22 +13,26 @@ cart_add_item:
     defaults: { _controller: "ZeteqMarketBundle:Cart:add_item" }
     
 cart_checkout:
-    pattern:  /checkout
+    pattern:  /{store_slug}/checkout
     defaults: { _controller: "ZeteqMarketBundle:Cart:checkout" }
     
 cart_checkout_update:
     pattern:  /checkout/update
     defaults: { _controller: "ZeteqMarketBundle:Cart:checkout_update" }
 cart_preview:
-    pattern:  /checkout/preview
+    pattern:  /checkout/{store}/preview
     defaults: { _controller: "ZeteqMarketBundle:Cart:preview" }
     
 cart_confirm:
-    pattern:  /checkout/confirm
+    pattern:  /checkout/{store}/confirm
     defaults: { _controller: "ZeteqMarketBundle:Cart:confirm" }
 cart_clear:
     pattern:  /cart/clear
     defaults: { _controller: "ZeteqMarketBundle:Cart:clear" }
+    
+order_details:
+    pattern:  /{sale}/details
+    defaults: { _controller: "ZeteqMarketBundle:Cart:order_details" }
     
     
     

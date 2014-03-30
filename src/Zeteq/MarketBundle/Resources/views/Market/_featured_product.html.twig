@@ -23,7 +23,7 @@
 {%set var = ((((service.getEnabledProducts()|length)/4) +0.5)|number_format)%}
 
 
-<div style=" background:#fff; padding: 20px; height: 320px" class="carousel slide"  data-ride="carousel" id="carousel-div">
+<div style=" background:#bbb; padding: 20px;" class="carousel slide"  data-ride="carousel" id="product-car">
 
 
   {#  <ol class="carousel-indicators"  style="margin-bottom: -20px;"> 
@@ -49,19 +49,8 @@
             <div class="container ">
                 <div class="row">
                     {%endif%}
-                    {#<div class="col-md-3 ">
-                        <div class="col-md-6">
-                            <img class="img-responsive thumbnail"  src="{{asset(product.getFirstImage() ) }}"/>          
-                        </div>
-                        <div class="col-md-6">
-
-                            <h4>
-                                <a href="{{path('product_show',{'slug':product.slug})}}"> {{product.title}}</a>
-                            </h4>
-                            <p>{{product.overview|slice(0, 45)}}<p>
-                        </div>
-                    </div>#}
-                    <div class="col-md-3 top_blocks">          
+                    
+                   {# <div class="col-md-3 top_blocks">          
                         <div style="position:relative">
                             <a href="{{path('product_show',{'slug':product.slug})}}"> 
                                 <span class="carousel_title_a" style="display:block;width:100%;text-shadow: 1px 1px 1px black">
@@ -70,12 +59,7 @@
 
                         </div>
 
-                       {# <div class="top_stats">
-                            <span class="pull-left"><span class="glyphicon glyphicon-eye-open"> </span> {{product.viewed}}</span>
-                            <span class="pull-right">{{product.created|date("d M Y")}} </span>
-                            <br clear="all">
-                        </div>#}
-
+                      
 
                         <div class="top_news">
 
@@ -83,16 +67,11 @@
                                 {{product.name}}
                             </span>
                             </a>
-                            {#<a href="{{path('front_author_show',{'slug':product.author.slug})}}"> 
-                                <span  class="" style="display:block;font-size:10px;font-weight:bold;color:#A6A6A6;font-weight: 200">
-                                {{product.author}}
 
-                                </span>
-                            </a>
-#}
 
                         </div>  
-                    </div>
+                    </div>#}
+                    {{ include('ZeteqMarketBundle:Market:_product.html.twig',{'product': product})  }}
                     {%if loop.index%4 == 0 or loop.last == true%}
                 </div>
             </div>
@@ -101,11 +80,11 @@
         {% endfor %}
     </div>
 
-    {#<a class="left carousel-control" data-slide="prev" href="#carousel-div">
+    <a style="width:5%" class="left carousel-control" data-slide="prev" href="#product-car">
         <span class="glyphicon glyphicon-chevron-left"> &nbsp;</span>  &nbsp; </a>
 
-    <a class="right carousel-control" data-slide="next" href="#carousel-div"> <span class="glyphicon glyphicon-chevron-right"> &nbsp;			</span>  &nbsp; </a>
-#}
+    <a style="width:5%" class="right carousel-control" data-slide="next" href="#product-car"> <span class="glyphicon glyphicon-chevron-right"> &nbsp;			</span>  &nbsp; </a>
+
 </div>
 
 

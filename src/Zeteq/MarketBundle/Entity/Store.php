@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 
 namespace Zeteq\MarketBundle\Entity;
 
@@ -17,19 +16,18 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="store")
  * @ORM\HasLifecycleCallbacks 
  * @UniqueEntity(fields="store_name", message="Sorry, this name is already taken.")
-  */
-class Store
-{
+ */
+class Store {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-      * @GRID\Column(filterable=false)
+     * @GRID\Column(filterable=false)
      */
     protected $id;
 
-
-     /**
+    /**
      * @ORM\Column(type="string", length=150,  nullable=false,unique=true)
      * @Assert\Length(
      *      min = "5",
@@ -37,386 +35,326 @@ class Store
      *      minMessage = "Name  must be at least {{ limit }} characters length",
      *      maxMessage = "Name cannot be longer than {{ limit }} characters length"
      * )
-    *   @GRID\Column(operatorsVisible=false)
+     *   @GRID\Column(operatorsVisible=false)
      */
     protected $store_name;
-    
 
-    
-             /**
+    /**
      * @ORM\OneToMany(targetEntity="Cart", mappedBy="store",cascade={"remove"})
      */
     protected $carts;
-    
-       /**
+
+    /**
      * @Gedmo\Slug(fields={"store_name"})
      * @ORM\Column(length=128, unique=true, nullable=false)
-   */
-    private $slug;  
-    
-    
+     */
+    private $slug;
 
-         /**
+    /**
      * @ORM\Column(type="string", length=20,  nullable=true)
      */
     protected $web_address;
 
-    
-         /**
+    /**
      * @ORM\Column(type="string", length=20,  nullable=false)
      */
     protected $email;
-    
-    
-         /**
+
+    /**
      * @ORM\Column(type="string", length=20,  nullable=false)
      */
     protected $phone;
-    
-    
-         /**
+
+    /**
      * @ORM\Column(type="string", length=300,  nullable=true)
      */
     protected $address;
-    
-       /**
+
+    /**
      * @ORM\Column(type="string", length=150,  nullable=true)
      */
     protected $facebook_page;
-    
-    
-    
 
-           /**
+    /**
      * @ORM\Column(type="string", length=150,  nullable=true)
      */
     protected $twitter;
 
-               /**
+    /**
      * @ORM\Column(type="string", length=150,  nullable=true)
      */
     protected $google_plus;
-    
-    
-               /**
+
+    /**
      * @ORM\Column(type="string", length=150,  nullable=false)
      */
     protected $short_description;
-    
-     /**
+
+    /**
      * @ORM\Column(type="text",  nullable=true)
      */
     protected $description;
-    
-     /**
+
+    /**
      * @ORM\Column(type="text",  nullable=true)
      */
     protected $meta_key_words;
-    
 
-       
-   /**
+    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
     protected $use_store_layout;
-    
-       
-   /**
+
+    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
     protected $use_site_layout;
-    
-   /**
+
+    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
-    protected $approved;    
-   
-   /**
+    protected $approved;
+
+    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
     protected $enabled;
 
-       /**
+    /**
      * @ORM\Column(type="boolean",nullable=true)
      */
     protected $featured;
-    
-    
-       /**
+
+    /**
      * @ORM\Column(type="integer",nullable=true)
      */
     protected $viewed;
-    
-    
-     /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="StoreCategory", inversedBy="stores")
      * @ORM\JoinColumn(name="store_category_id", referencedColumnName="id",nullable=false)
      * 
      */
     protected $store_category;
-    
-    
-    
-     /**
+
+    /**
      * @ORM\OneToMany(targetEntity="Product", mappedBy="store",cascade={"remove"})
      */
     protected $products;
-    
-     /**
+
+    /**
      * @ORM\OneToMany(targetEntity="StoreProductCategory", mappedBy="store",cascade={"remove"})
      */
     protected $store_product_categories;
 
-
-
-     /**
+    /**
      * @ORM\OneToMany(targetEntity="Page", mappedBy="store",cascade={"remove"})
      */
     protected $pages;
-         /**
+
+    /**
      * @ORM\ManyToOne(targetEntity="Zeteq\UserBundle\Entity\User", inversedBy="stores")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id",nullable=true)
-    * @GRID\Column(field="user.email",filter="select", operatorsVisible=false, title="User")
+     * @GRID\Column(field="user.email",filter="select", operatorsVisible=false, title="User")
      */
     protected $user;
-    
-    
+
     /**
      * @ORM\OneToMany(targetEntity="FavoriteStore", mappedBy="store")
      */
     private $favorite_stores;
-    
-    
-    
-    
-    //////////image uploading begin
-    
-    
 
- /**
+    /**
+     * @ORM\OneToMany(targetEntity="Sale", mappedBy="sale")
+     */
+    private $sales;
+
+
+
+
+    //////////image uploading begin
+
+    /**
      * @ORM\Column(type="string", length=100,nullable=true)
      */
     protected $profile_image_path;
-    
+
     /**
      * @var string $image
      * @Assert\File( maxSize = "5024k", mimeTypesMessage = "Please upload a valid Image")
      * @ORM\Column(name="profile_image", type="string", length=255,nullable=true)
      */
     private $profile_image;
-    
-    
-public function getProfileImageWebPath() 
-{
-        return  'upload/store/images/'.$this->getId().'/'. $this->profile_image_path;
-}
-    
 
-public function getFullImagePath() 
-{
-return   $this->getUploadRootDir(). $this->profile_image_path;
-}
- 
-protected function getUploadRootDir() 
-{
+    public function getProfileImageWebPath() {
+        return 'upload/store/images/' . $this->getId() . '/' . $this->profile_image_path;
+    }
+
+    public function getFullImagePath() {
+        return $this->getUploadRootDir() . $this->profile_image_path;
+    }
+
+    protected function getUploadRootDir() {
         // the absolute directory path where uploaded documents should be saved
-        return __DIR__ . '/../../../../public_html/upload/store/images/'.$this->getId().'/';
-}
- 
+        return __DIR__ . '/../../../../public_html/upload/store/images/' . $this->getId() . '/';
+    }
 
-
-   /**
+    /**
      * @ORM\PrePersist()
      */
-    public function uploadpersistProfileImage() 
-{
+    public function uploadpersistProfileImage() {
         // the file property can be empty if the field is not required
         if (null === $this->profile_image) {
             return;
-		}
+        }
 
-        
-        $this->profile_image->move($this->getUploadRootDir(),$this->profile_image->getClientOriginalName());
+
+        $this->profile_image->move($this->getUploadRootDir(), $this->profile_image->getClientOriginalName());
 
         $this->setProfileImagePath($this->profile_image->getClientOriginalName());
-         $this->setProfileImage('');
+        $this->setProfileImage('');
     }
- 
-    
-       /**
+
+    /**
      * @ORM\PreUpdate()
      */
-    
     public function uploadupdateProfileImage() {
 
-            if (null === $this->profile_image) {
+        if (null === $this->profile_image) {
             return;
         }
-        
-       $this->profile_image->move($this->getUploadRootDir(), $this->profile_image->getClientOriginalName());
-       $this->setProfileImagePath($this->profile_image->getClientOriginalName());
-         $this->setProfileImage('');
-        
+
+        $this->profile_image->move($this->getUploadRootDir(), $this->profile_image->getClientOriginalName());
+        $this->setProfileImagePath($this->profile_image->getClientOriginalName());
+        $this->setProfileImage('');
     }
- 
+
     /**
      * @ORM\PreRemove()
      */
-    public function removeProfileImage()
-    {
-        try{
-       unlink($this->getFullImagePath());
-        }catch(\Exception $e){
+    public function removeProfileImage() {
+        try {
+            unlink($this->getFullImagePath());
+        } catch (\Exception $e) {
             
         }
     }
 
-
-
-    
     /////////image uploading end
-    
-    
-    
-    
     //////////image uploading begin
-    
-    
 
- /**
+    /**
      * @ORM\Column(type="string", length=100,nullable=true)
      */
     protected $coverphoto_path;
-    
+
     /**
      * @var string $image
      * @Assert\File( maxSize = "5024k", mimeTypesMessage = "Please upload a valid Image")
      * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $coverphoto_image;
-    
-    
-public function getcoverphotoWebPath() 
-{
-        return  'upload/store/images/'.$this->getId().'/'. $this->coverphoto_path;
-}
-    
 
-public function getCoverphotoFullImagePath() 
-{
-return   $this->getUploadRootDir(). $this->coverphoto_path;
-}
- 
- 
- 
+    public function getcoverphotoWebPath() {
+        return 'upload/store/images/' . $this->getId() . '/' . $this->coverphoto_path;
+    }
 
+    public function getCoverphotoFullImagePath() {
+        return $this->getUploadRootDir() . $this->coverphoto_path;
+    }
 
-   /**
+    /**
      * @ORM\PrePersist()
      */
-    public function uploadpersistCoverphotoImage() 
-{
+    public function uploadpersistCoverphotoImage() {
         // the file property can be empty if the field is not required
         if (null === $this->coverphoto_image) {
             return;
-		}
+        }
 
-        
-        $this->coverphoto_image->move($this->getUploadRootDir(),$this->coverphoto_image->getClientOriginalName());
+
+        $this->coverphoto_image->move($this->getUploadRootDir(), $this->coverphoto_image->getClientOriginalName());
 
         $this->setCoverphotoPath($this->coverphoto_image->getClientOriginalName());
-         $this->setProfileImage('');
+        $this->setProfileImage('');
     }
- 
-    
-       /**
+
+    /**
      * @ORM\PreUpdate()
      */
-    
     public function uploadupdateCoverImage() {
 
-            if (null === $this->coverphoto_image) {
+        if (null === $this->coverphoto_image) {
             return;
         }
-        
-       $this->coverphoto_image->move($this->getUploadRootDir(), $this->coverphoto_image->getClientOriginalName());
-       $this->setCoverphotoPath($this->coverphoto_image->getClientOriginalName());
-         $this->setProfileImage('');
-        
+
+        $this->coverphoto_image->move($this->getUploadRootDir(), $this->coverphoto_image->getClientOriginalName());
+        $this->setCoverphotoPath($this->coverphoto_image->getClientOriginalName());
+        $this->setProfileImage('');
     }
- 
+
     /**
      * @ORM\PreRemove()
      */
-    public function removeCoverImage()
-    {
-        try{
-       unlink($this->getCoverphotoFullImagePath());
-        }catch(\Exception $e){
+    public function removeCoverImage() {
+        try {
+            unlink($this->getCoverphotoFullImagePath());
+        } catch (\Exception $e) {
             
         }
     }
 
-
-
-    
     /////////image uploading end
-    
-    
-            public function getEnabledPages()
-    {
-        
-        
 
 
-$s = $this->getPages();
+    public function getEnabledPages() {
 
-$criteria = Criteria::create()
-    ->where(Criteria::expr()->eq("enabled", "1"))
-  //  ->orderBy(array("created" => Criteria::ASC))
- //   ->setFirstResult(0)
-  //  ->setMaxResults(20)
-;
 
-$enabled = $s->matching($criteria);
-return $enabled;
-        
-        
+
+
+        $s = $this->getPages();
+
+        $criteria = Criteria::create()
+                ->where(Criteria::expr()->eq("enabled", "1"))
+        //  ->orderBy(array("created" => Criteria::ASC))
+        //   ->setFirstResult(0)
+        //  ->setMaxResults(20)
+        ;
+
+        $enabled = $s->matching($criteria);
+        return $enabled;
     }
-    
+
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
+
     public function __toString() {
         return $this->store_name;
     }
 
-  
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
         $this->pages = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Set store_name
      *
      * @param string $storeName
      * @return Store
      */
-    public function setStoreName($storeName)
-    {
+    public function setStoreName($storeName) {
         $this->store_name = $storeName;
-    
+
         return $this;
     }
 
@@ -425,12 +363,9 @@ return $enabled;
      *
      * @return string 
      */
-    public function getStoreName()
-    {
+    public function getStoreName() {
         return $this->store_name;
     }
-
-  
 
     /**
      * Set facebook_page
@@ -438,10 +373,9 @@ return $enabled;
      * @param string $facebookPage
      * @return Store
      */
-    public function setFacebookPage($facebookPage)
-    {
+    public function setFacebookPage($facebookPage) {
         $this->facebook_page = $facebookPage;
-    
+
         return $this;
     }
 
@@ -450,8 +384,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getFacebookPage()
-    {
+    public function getFacebookPage() {
         return $this->facebook_page;
     }
 
@@ -461,10 +394,9 @@ return $enabled;
      * @param string $twitter
      * @return Store
      */
-    public function setTwitter($twitter)
-    {
+    public function setTwitter($twitter) {
         $this->twitter = $twitter;
-    
+
         return $this;
     }
 
@@ -473,8 +405,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getTwitter()
-    {
+    public function getTwitter() {
         return $this->twitter;
     }
 
@@ -484,10 +415,9 @@ return $enabled;
      * @param string $description
      * @return Store
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -496,8 +426,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
 
@@ -507,10 +436,9 @@ return $enabled;
      * @param string $deliveryDetails
      * @return Store
      */
-    public function setDeliveryDetails($deliveryDetails)
-    {
+    public function setDeliveryDetails($deliveryDetails) {
         $this->delivery_details = $deliveryDetails;
-    
+
         return $this;
     }
 
@@ -519,8 +447,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getDeliveryDetails()
-    {
+    public function getDeliveryDetails() {
         return $this->delivery_details;
     }
 
@@ -530,10 +457,9 @@ return $enabled;
      * @param string $aboutUs
      * @return Store
      */
-    public function setAboutUs($aboutUs)
-    {
+    public function setAboutUs($aboutUs) {
         $this->about_us = $aboutUs;
-    
+
         return $this;
     }
 
@@ -542,8 +468,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getAboutUs()
-    {
+    public function getAboutUs() {
         return $this->about_us;
     }
 
@@ -553,10 +478,9 @@ return $enabled;
      * @param string $contactUs
      * @return Store
      */
-    public function setContactUs($contactUs)
-    {
+    public function setContactUs($contactUs) {
         $this->contact_us = $contactUs;
-    
+
         return $this;
     }
 
@@ -565,8 +489,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getContactUs()
-    {
+    public function getContactUs() {
         return $this->contact_us;
     }
 
@@ -576,10 +499,9 @@ return $enabled;
      * @param boolean $enabled
      * @return Store
      */
-    public function setEnabled($enabled)
-    {
+    public function setEnabled($enabled) {
         $this->enabled = $enabled;
-    
+
         return $this;
     }
 
@@ -588,8 +510,7 @@ return $enabled;
      *
      * @return boolean 
      */
-    public function getEnabled()
-    {
+    public function getEnabled() {
         return $this->enabled;
     }
 
@@ -599,10 +520,9 @@ return $enabled;
      * @param string $profileImagePath
      * @return Store
      */
-    public function setProfileImagePath($profileImagePath)
-    {
+    public function setProfileImagePath($profileImagePath) {
         $this->profile_image_path = $profileImagePath;
-    
+
         return $this;
     }
 
@@ -611,8 +531,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getProfileImagePath()
-    {
+    public function getProfileImagePath() {
         return $this->profile_image_path;
     }
 
@@ -622,10 +541,9 @@ return $enabled;
      * @param string $profileImage
      * @return Store
      */
-    public function setProfileImage($profileImage)
-    {
+    public function setProfileImage($profileImage) {
         $this->profile_image = $profileImage;
-    
+
         return $this;
     }
 
@@ -634,8 +552,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getProfileImage()
-    {
+    public function getProfileImage() {
         return $this->profile_image;
     }
 
@@ -645,10 +562,9 @@ return $enabled;
      * @param \Zeteq\MarketBundle\Entity\StoreCategory $storeCategory
      * @return Store
      */
-    public function setStoreCategory(\Zeteq\MarketBundle\Entity\StoreCategory $storeCategory = null)
-    {
+    public function setStoreCategory(\Zeteq\MarketBundle\Entity\StoreCategory $storeCategory = null) {
         $this->store_category = $storeCategory;
-    
+
         return $this;
     }
 
@@ -657,8 +573,7 @@ return $enabled;
      *
      * @return \Zeteq\MarketBundle\Entity\StoreCategory 
      */
-    public function getStoreCategory()
-    {
+    public function getStoreCategory() {
         return $this->store_category;
     }
 
@@ -668,10 +583,9 @@ return $enabled;
      * @param \Zeteq\MarketBundle\Entity\Product $products
      * @return Store
      */
-    public function addProduct(\Zeteq\MarketBundle\Entity\Product $products)
-    {
+    public function addProduct(\Zeteq\MarketBundle\Entity\Product $products) {
         $this->products[] = $products;
-    
+
         return $this;
     }
 
@@ -680,8 +594,7 @@ return $enabled;
      *
      * @param \Zeteq\MarketBundle\Entity\Product $products
      */
-    public function removeProduct(\Zeteq\MarketBundle\Entity\Product $products)
-    {
+    public function removeProduct(\Zeteq\MarketBundle\Entity\Product $products) {
         $this->products->removeElement($products);
     }
 
@@ -690,51 +603,42 @@ return $enabled;
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getProducts()
-    {
+    public function getProducts() {
         return $this->products;
     }
-    
-    
-    public function getEnabledProducts()
-    {
-        
-        
+
+    public function getEnabledProducts() {
 
 
-$products = $this->getProducts();
 
-$criteria = Criteria::create()
-    ->where(Criteria::expr()->eq("enabled", "1"))
-    ->orderBy(array("created" => Criteria::ASC))
- //   ->setFirstResult(0)
-  //  ->setMaxResults(20)
-;
 
-$enabled_products = $products->matching($criteria);
-return $enabled_products;
-        
-        
+        $products = $this->getProducts();
+
+        $criteria = Criteria::create()
+                ->where(Criteria::expr()->eq("enabled", "1"))
+                ->orderBy(array("created" => Criteria::ASC))
+        //   ->setFirstResult(0)
+        //  ->setMaxResults(20)
+        ;
+
+        $enabled_products = $products->matching($criteria);
+        return $enabled_products;
     }
-    
-    
-        public function getEnabledStoreProductCategories()
-    {
-        
-        
+
+    public function getEnabledStoreProductCategories() {
 
 
-$p = $this->getStoreProductCategories();
 
-$criteria = Criteria::create()
-    ->where(Criteria::expr()->eq("enabled", "1"))
 
-;
+        $p = $this->getStoreProductCategories();
 
-$enabled = $p->matching($criteria);
-return $enabled;
-        
-        
+        $criteria = Criteria::create()
+                ->where(Criteria::expr()->eq("enabled", "1"))
+
+        ;
+
+        $enabled = $p->matching($criteria);
+        return $enabled;
     }
 
     /**
@@ -743,10 +647,9 @@ return $enabled;
      * @param \Zeteq\MarketBundle\Entity\Page $pages
      * @return Store
      */
-    public function addPage(\Zeteq\MarketBundle\Entity\Page $pages)
-    {
+    public function addPage(\Zeteq\MarketBundle\Entity\Page $pages) {
         $this->pages[] = $pages;
-    
+
         return $this;
     }
 
@@ -755,8 +658,7 @@ return $enabled;
      *
      * @param \Zeteq\MarketBundle\Entity\Page $pages
      */
-    public function removePage(\Zeteq\MarketBundle\Entity\Page $pages)
-    {
+    public function removePage(\Zeteq\MarketBundle\Entity\Page $pages) {
         $this->pages->removeElement($pages);
     }
 
@@ -765,8 +667,7 @@ return $enabled;
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getPages()
-    {
+    public function getPages() {
         return $this->pages;
     }
 
@@ -776,10 +677,9 @@ return $enabled;
      * @param \Zeteq\UserBundle\Entity\User $user
      * @return Store
      */
-    public function setUser(\Zeteq\UserBundle\Entity\User $user = null)
-    {
+    public function setUser(\Zeteq\UserBundle\Entity\User $user = null) {
         $this->user = $user;
-    
+
         return $this;
     }
 
@@ -788,8 +688,7 @@ return $enabled;
      *
      * @return \Zeteq\UserBundle\Entity\User 
      */
-    public function getUser()
-    {
+    public function getUser() {
         return $this->user;
     }
 
@@ -799,10 +698,9 @@ return $enabled;
      * @param string $coverphotoPath
      * @return Store
      */
-    public function setCoverphotoPath($coverphotoPath)
-    {
+    public function setCoverphotoPath($coverphotoPath) {
         $this->coverphoto_path = $coverphotoPath;
-    
+
         return $this;
     }
 
@@ -811,8 +709,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getCoverphotoPath()
-    {
+    public function getCoverphotoPath() {
         return $this->coverphoto_path;
     }
 
@@ -822,10 +719,9 @@ return $enabled;
      * @param string $coverphotoImage
      * @return Store
      */
-    public function setCoverphotoImage($coverphotoImage)
-    {
+    public function setCoverphotoImage($coverphotoImage) {
         $this->coverphoto_image = $coverphotoImage;
-    
+
         return $this;
     }
 
@@ -834,8 +730,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getCoverphotoImage()
-    {
+    public function getCoverphotoImage() {
         return $this->coverphoto_image;
     }
 
@@ -845,10 +740,9 @@ return $enabled;
      * @param string $webAddress
      * @return Store
      */
-    public function setWebAddress($webAddress)
-    {
+    public function setWebAddress($webAddress) {
         $this->web_address = $webAddress;
-    
+
         return $this;
     }
 
@@ -857,8 +751,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getWebAddress()
-    {
+    public function getWebAddress() {
         return $this->web_address;
     }
 
@@ -868,10 +761,9 @@ return $enabled;
      * @param string $shortDescription
      * @return Store
      */
-    public function setShortDescription($shortDescription)
-    {
+    public function setShortDescription($shortDescription) {
         $this->short_description = $shortDescription;
-    
+
         return $this;
     }
 
@@ -880,8 +772,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getShortDescription()
-    {
+    public function getShortDescription() {
         return $this->short_description;
     }
 
@@ -891,10 +782,9 @@ return $enabled;
      * @param \Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories
      * @return Store
      */
-    public function addStoreProductCategorie(\Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories)
-    {
+    public function addStoreProductCategorie(\Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories) {
         $this->store_product_categories[] = $storeProductCategories;
-    
+
         return $this;
     }
 
@@ -903,8 +793,7 @@ return $enabled;
      *
      * @param \Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories
      */
-    public function removeStoreProductCategorie(\Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories)
-    {
+    public function removeStoreProductCategorie(\Zeteq\MarketBundle\Entity\StoreProductCategory $storeProductCategories) {
         $this->store_product_categories->removeElement($storeProductCategories);
     }
 
@@ -913,8 +802,7 @@ return $enabled;
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getStoreProductCategories()
-    {
+    public function getStoreProductCategories() {
         return $this->store_product_categories;
     }
 
@@ -924,10 +812,9 @@ return $enabled;
      * @param boolean $useStoreLayout
      * @return Store
      */
-    public function setUseStoreLayout($useStoreLayout)
-    {
+    public function setUseStoreLayout($useStoreLayout) {
         $this->use_store_layout = $useStoreLayout;
-    
+
         return $this;
     }
 
@@ -936,8 +823,7 @@ return $enabled;
      *
      * @return boolean 
      */
-    public function getUseStoreLayout()
-    {
+    public function getUseStoreLayout() {
         return $this->use_store_layout;
     }
 
@@ -947,10 +833,9 @@ return $enabled;
      * @param boolean $useSiteLayout
      * @return Store
      */
-    public function setUseSiteLayout($useSiteLayout)
-    {
+    public function setUseSiteLayout($useSiteLayout) {
         $this->use_site_layout = $useSiteLayout;
-    
+
         return $this;
     }
 
@@ -959,8 +844,7 @@ return $enabled;
      *
      * @return boolean 
      */
-    public function getUseSiteLayout()
-    {
+    public function getUseSiteLayout() {
         return $this->use_site_layout;
     }
 
@@ -970,10 +854,9 @@ return $enabled;
      * @param string $slug
      * @return Store
      */
-    public function setSlug($slug)
-    {
+    public function setSlug($slug) {
         $this->slug = $slug;
-    
+
         return $this;
     }
 
@@ -982,12 +865,9 @@ return $enabled;
      *
      * @return string 
      */
-    public function getSlug()
-    {
+    public function getSlug() {
         return $this->slug;
     }
-
- 
 
     /**
      * Set phone
@@ -995,10 +875,9 @@ return $enabled;
      * @param string $phone
      * @return Store
      */
-    public function setPhone($phone)
-    {
+    public function setPhone($phone) {
         $this->phone = $phone;
-    
+
         return $this;
     }
 
@@ -1007,8 +886,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getPhone()
-    {
+    public function getPhone() {
         return $this->phone;
     }
 
@@ -1018,10 +896,9 @@ return $enabled;
      * @param string $address
      * @return Store
      */
-    public function setAddress($address)
-    {
+    public function setAddress($address) {
         $this->address = $address;
-    
+
         return $this;
     }
 
@@ -1030,8 +907,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getAddress()
-    {
+    public function getAddress() {
         return $this->address;
     }
 
@@ -1041,10 +917,9 @@ return $enabled;
      * @param string $email
      * @return Store
      */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
-    
+
         return $this;
     }
 
@@ -1053,8 +928,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -1064,10 +938,9 @@ return $enabled;
      * @param string $googlePlus
      * @return Store
      */
-    public function setGooglePlus($googlePlus)
-    {
+    public function setGooglePlus($googlePlus) {
         $this->google_plus = $googlePlus;
-    
+
         return $this;
     }
 
@@ -1076,8 +949,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getGooglePlus()
-    {
+    public function getGooglePlus() {
         return $this->google_plus;
     }
 
@@ -1087,10 +959,9 @@ return $enabled;
      * @param boolean $approved
      * @return Store
      */
-    public function setApproved($approved)
-    {
+    public function setApproved($approved) {
         $this->approved = $approved;
-    
+
         return $this;
     }
 
@@ -1099,8 +970,7 @@ return $enabled;
      *
      * @return boolean 
      */
-    public function getApproved()
-    {
+    public function getApproved() {
         return $this->approved;
     }
 
@@ -1110,10 +980,9 @@ return $enabled;
      * @param string $metaKeyWords
      * @return Store
      */
-    public function setMetaKeyWords($metaKeyWords)
-    {
+    public function setMetaKeyWords($metaKeyWords) {
         $this->meta_key_words = $metaKeyWords;
-    
+
         return $this;
     }
 
@@ -1122,8 +991,7 @@ return $enabled;
      *
      * @return string 
      */
-    public function getMetaKeyWords()
-    {
+    public function getMetaKeyWords() {
         return $this->meta_key_words;
     }
 
@@ -1133,10 +1001,9 @@ return $enabled;
      * @param boolean $featured
      * @return Store
      */
-    public function setFeatured($featured)
-    {
+    public function setFeatured($featured) {
         $this->featured = $featured;
-    
+
         return $this;
     }
 
@@ -1145,8 +1012,7 @@ return $enabled;
      *
      * @return boolean 
      */
-    public function getFeatured()
-    {
+    public function getFeatured() {
         return $this->featured;
     }
 
@@ -1156,10 +1022,9 @@ return $enabled;
      * @param integer $viewed
      * @return Store
      */
-    public function setViewed($viewed)
-    {
+    public function setViewed($viewed) {
         $this->viewed = $viewed;
-    
+
         return $this;
     }
 
@@ -1168,8 +1033,7 @@ return $enabled;
      *
      * @return integer 
      */
-    public function getViewed()
-    {
+    public function getViewed() {
         return $this->viewed;
     }
 
@@ -1179,10 +1043,9 @@ return $enabled;
      * @param \Zeteq\MarketBundle\Entity\Cart $carts
      * @return Store
      */
-    public function addCart(\Zeteq\MarketBundle\Entity\Cart $carts)
-    {
+    public function addCart(\Zeteq\MarketBundle\Entity\Cart $carts) {
         $this->carts[] = $carts;
-    
+
         return $this;
     }
 
@@ -1191,8 +1054,7 @@ return $enabled;
      *
      * @param \Zeteq\MarketBundle\Entity\Cart $carts
      */
-    public function removeCart(\Zeteq\MarketBundle\Entity\Cart $carts)
-    {
+    public function removeCart(\Zeteq\MarketBundle\Entity\Cart $carts) {
         $this->carts->removeElement($carts);
     }
 
@@ -1201,8 +1063,7 @@ return $enabled;
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCarts()
-    {
+    public function getCarts() {
         return $this->carts;
     }
 
@@ -1212,10 +1073,9 @@ return $enabled;
      * @param \Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores
      * @return Store
      */
-    public function addFavoriteStore(\Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores)
-    {
+    public function addFavoriteStore(\Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores) {
         $this->favorite_stores[] = $favoriteStores;
-    
+
         return $this;
     }
 
@@ -1224,8 +1084,7 @@ return $enabled;
      *
      * @param \Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores
      */
-    public function removeFavoriteStore(\Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores)
-    {
+    public function removeFavoriteStore(\Zeteq\MarketBundle\Entity\FavoriteStore $favoriteStores) {
         $this->favorite_stores->removeElement($favoriteStores);
     }
 
@@ -1234,8 +1093,41 @@ return $enabled;
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getFavoriteStores()
-    {
+    public function getFavoriteStores() {
         return $this->favorite_stores;
+    }
+
+
+    /**
+     * Add sales
+     *
+     * @param \Zeteq\MarketBundle\Entity\Sale $sales
+     * @return Store
+     */
+    public function addSale(\Zeteq\MarketBundle\Entity\Sale $sales)
+    {
+        $this->sales[] = $sales;
+    
+        return $this;
+    }
+
+    /**
+     * Remove sales
+     *
+     * @param \Zeteq\MarketBundle\Entity\Sale $sales
+     */
+    public function removeSale(\Zeteq\MarketBundle\Entity\Sale $sales)
+    {
+        $this->sales->removeElement($sales);
+    }
+
+    /**
+     * Get sales
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSales()
+    {
+        return $this->sales;
     }
 }

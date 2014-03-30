@@ -18,7 +18,19 @@ use Zeteq\MarketBundle\Entity\Product;
 use \Symfony\Component\HttpFoundation\JsonResponse;
 
 class MyAccountController extends Controller {
+    
+    public function purchase_indexAction(Request $request) {
 
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $wl = $user->getSales();
+
+
+        return $this->render('ZeteqMarketBundle:MyAccount:purchase_index.html.twig'
+                        , array('user' => $user, 'purchases' => $wl)
+        );
+    }
+    
     /**
      * Deletes a FavoriteStore entity.
      *

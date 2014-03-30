@@ -96,7 +96,12 @@ class User implements AdvancedUserInterface, \Serializable {
      * @ORM\OneToOne(targetEntity="Zeteq\MarketBundle\Entity\Customer", mappedBy="user")
      */
     private $customer;
-
+    
+     /**
+     * @ORM\OneToMany(targetEntity="Zeteq\MarketBundle\Entity\Sale", mappedBy="user")
+     */
+    private $sales;
+    
     /**
      * @ORM\OneToMany(targetEntity="Zeteq\MarketBundle\Entity\FavoriteItem", mappedBy="user")
      *
@@ -477,5 +482,40 @@ class User implements AdvancedUserInterface, \Serializable {
     public function getFavoriteStores()
     {
         return $this->favorite_stores;
+    }
+
+    
+
+    /**
+     * Add sales
+     *
+     * @param \Zeteq\MarketBundle\Entity\Sale $sales
+     * @return User
+     */
+    public function addSale(\Zeteq\MarketBundle\Entity\Sale $sales)
+    {
+        $this->sales[] = $sales;
+    
+        return $this;
+    }
+
+    /**
+     * Remove sales
+     *
+     * @param \Zeteq\MarketBundle\Entity\Sale $sales
+     */
+    public function removeSale(\Zeteq\MarketBundle\Entity\Sale $sales)
+    {
+        $this->sales->removeElement($sales);
+    }
+
+    /**
+     * Get sales
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSales()
+    {
+        return $this->sales;
     }
 }
