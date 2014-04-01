@@ -52,7 +52,7 @@ Cart -- Halal Needs
 </table>
 
 <a class="btn btn-info btn-lg" href="{{path('cart_checkout',{'store_slug':cart.store.slug })}}">Checkout</a>
-<a class="btn btn-danger btn-lg" href="{{path('cart_clear')}}">Clear Cart</a> 
+<a class="btn btn-danger btn-lg" href="{{path('cart_clear',{'store':cart.store.slug})}}">Clear Cart</a> 
 {%endif %}
 {%endfor%}
 {% else %}

@@ -151,9 +151,9 @@ class CartController extends Controller {
         return $this->render('ZeteqMarketBundle:Cart:preview.html.twig', array('cart' => $cart));
     }
 
-    public function clearAction(Request $request) {
+    public function clearAction(Request $request, $store) {
         $em = $this->getDoctrine()->getManager();
-        $cart = $this->get('service')->getCart();
+        $cart = $this->get('service')->getCart($store);
 
         foreach ($cart->getCartItems() as $ci) {
 

@@ -27,7 +27,7 @@ cart_confirm:
     pattern:  /checkout/{store}/confirm
     defaults: { _controller: "ZeteqMarketBundle:Cart:confirm" }
 cart_clear:
-    pattern:  /cart/clear
+    pattern:  /cart/{store}/clear
     defaults: { _controller: "ZeteqMarketBundle:Cart:clear" }
     
 order_details:
