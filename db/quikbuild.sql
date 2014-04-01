@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 20, 2014 at 06:26 AM
--- Server version: 5.5.24-log
--- PHP Version: 5.3.13
+-- Generation Time: Apr 01, 2014 at 09:30 AM
+-- Server version: 5.5.35-0ubuntu0.12.04.2
+-- PHP Version: 5.3.10-1ubuntu3.10
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `marketplace`
+-- Database: `quikbuild`
 --
 
 -- --------------------------------------------------------
@@ -75,50 +75,30 @@ CREATE TABLE IF NOT EXISTS `cart` (
   `shipping_billing_same` tinyint(1) DEFAULT NULL,
   `payment_method_id` int(11) DEFAULT NULL,
   `shipping_method_id` int(11) DEFAULT NULL,
+  `store_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_BA388B7A76ED395` (`user_id`),
   KEY `IDX_BA388B75AA1164F` (`payment_method_id`),
-  KEY `IDX_BA388B75F7D6850` (`shipping_method_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=208 ;
+  KEY `IDX_BA388B75F7D6850` (`shipping_method_id`),
+  KEY `IDX_BA388B7B092A811` (`store_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=223 ;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`id`, `user_id`, `created`, `updated`, `billing_first_name`, `billing_last_name`, `billing_email`, `billing_address`, `billing_city`, `billing_state`, `billing_postalcode`, `billing_country`, `billing_phone`, `shipping_first_name`, `shipping_last_name`, `shipping_email`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_postalcode`, `shipping_country`, `shipping_phone`, `shipping_billing_same`, `payment_method_id`, `shipping_method_id`) VALUES
-(175, NULL, '2013-12-23 15:48:00', '2013-12-23 15:48:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(176, NULL, '2013-12-23 16:00:03', '2013-12-23 16:00:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(177, NULL, '2013-12-23 16:02:23', '2013-12-23 16:02:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(178, NULL, '2013-12-23 16:06:49', '2013-12-23 16:06:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(179, NULL, '2013-12-23 17:03:53', '2013-12-23 17:03:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(180, NULL, '2013-12-23 18:06:47', '2013-12-23 18:06:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(181, NULL, '2013-12-24 11:46:07', '2013-12-24 11:46:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(182, NULL, '2013-12-24 11:54:06', '2013-12-24 11:54:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(183, NULL, '2013-12-24 12:01:57', '2013-12-24 12:01:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(184, NULL, '2013-12-24 12:19:18', '2013-12-24 12:19:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(185, NULL, '2013-12-24 13:56:37', '2013-12-24 13:56:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(186, NULL, '2013-12-24 14:07:53', '2013-12-24 14:07:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(187, NULL, '2013-12-24 15:49:00', '2013-12-24 15:49:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(188, NULL, '2013-12-24 16:44:14', '2013-12-24 16:44:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(189, NULL, '2013-12-24 23:08:21', '2013-12-24 23:08:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(190, NULL, '2013-12-25 13:23:22', '2013-12-25 13:23:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(191, NULL, '2013-12-26 13:54:55', '2013-12-26 13:54:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(192, NULL, '2013-12-26 18:08:34', '2013-12-26 18:08:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(193, NULL, '2013-12-29 14:19:03', '2013-12-29 14:19:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(194, NULL, '2014-01-01 17:02:58', '2014-01-01 17:02:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(195, NULL, '2014-01-04 17:09:46', '2014-01-04 17:09:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(196, NULL, '2014-01-08 19:12:48', '2014-01-08 19:12:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(197, NULL, '2014-01-16 22:33:13', '2014-01-16 22:33:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(198, NULL, '2014-02-17 13:46:26', '2014-02-17 13:46:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(199, NULL, '2014-02-18 09:15:01', '2014-02-18 09:15:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(200, NULL, '2014-02-18 09:15:09', '2014-02-18 09:15:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(201, NULL, '2014-02-19 04:49:57', '2014-02-19 04:49:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(202, NULL, '2014-02-19 07:49:59', '2014-02-19 07:49:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(203, NULL, '2014-02-19 07:55:08', '2014-02-19 07:55:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(204, NULL, '2014-02-19 07:57:50', '2014-02-19 07:57:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(205, NULL, '2014-02-19 07:58:04', '2014-02-19 07:58:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(206, NULL, '2014-02-19 08:10:36', '2014-02-19 08:10:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(207, NULL, '2014-02-19 08:38:02', '2014-02-19 08:38:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `cart` (`id`, `user_id`, `created`, `updated`, `billing_first_name`, `billing_last_name`, `billing_email`, `billing_address`, `billing_city`, `billing_state`, `billing_postalcode`, `billing_country`, `billing_phone`, `shipping_first_name`, `shipping_last_name`, `shipping_email`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_postalcode`, `shipping_country`, `shipping_phone`, `shipping_billing_same`, `payment_method_id`, `shipping_method_id`, `store_id`) VALUES
+(212, NULL, '2014-03-25 01:25:29', '2014-03-25 01:25:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 8),
+(213, NULL, '2014-03-25 01:26:20', '2014-03-25 01:26:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6),
+(214, NULL, '2014-03-25 10:42:17', '2014-03-25 10:42:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6),
+(215, NULL, '2014-03-25 12:59:47', '2014-03-25 12:59:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6),
+(216, NULL, '2014-03-25 14:54:06', '2014-03-25 14:54:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6),
+(217, NULL, '2014-03-25 15:45:35', '2014-03-25 15:45:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5),
+(218, NULL, '2014-03-25 17:40:45', '2014-03-25 17:40:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 29),
+(219, NULL, '2014-03-26 11:12:39', '2014-03-26 11:12:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 6),
+(220, NULL, '2014-03-26 12:21:56', '2014-03-30 11:12:23', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 6),
+(221, NULL, '2014-03-26 13:05:21', '2014-03-30 14:56:17', 'mmmmd', 'mmmmd', 'mmmmd@mmmmd.mmmmd', 'mmmmd', 'mmmmd', 'mmmmd', '111', NULL, '22223', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 5),
+(222, NULL, '2014-03-30 15:32:05', '2014-03-30 15:32:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -136,16 +116,18 @@ CREATE TABLE IF NOT EXISTS `cart_item` (
   PRIMARY KEY (`id`),
   KEY `IDX_F0FE25271AD5CDBF` (`cart_id`),
   KEY `IDX_F0FE25274584665A` (`product_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=72 ;
 
 --
 -- Dumping data for table `cart_item`
 --
 
 INSERT INTO `cart_item` (`id`, `cart_id`, `product_id`, `created`, `updated`, `quantity`) VALUES
-(61, 180, 45, '2013-12-23 19:37:48', '2013-12-23 19:37:48', 1),
-(62, 180, 17, '2013-12-23 20:23:59', '2013-12-23 20:23:59', 1),
-(63, 204, 53, '2014-02-19 08:06:14', '2014-02-19 08:06:16', 2);
+(67, 213, 17, '2014-03-25 01:26:20', '2014-03-25 01:33:36', 20),
+(68, 213, 20, '2014-03-25 01:34:11', '2014-03-25 01:43:06', 3),
+(69, 212, 48, '2014-03-25 01:44:19', '2014-03-25 01:44:19', 1),
+(70, 214, 18, '2014-03-25 10:42:18', '2014-03-25 10:42:18', 1),
+(71, 214, 25, '2014-03-25 10:42:25', '2014-03-25 10:42:25', 1);
 
 -- --------------------------------------------------------
 
@@ -179,14 +161,15 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `shipping_billing_same` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_81398E09A76ED395` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `customer`
 --
 
 INSERT INTO `customer` (`id`, `user_id`, `created`, `updated`, `billing_first_name`, `billing_last_name`, `billing_email`, `billing_address`, `billing_city`, `billing_state`, `billing_postalcode`, `billing_country`, `billing_phone`, `shipping_first_name`, `shipping_last_name`, `shipping_email`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_postalcode`, `shipping_country`, `shipping_phone`, `shipping_billing_same`) VALUES
-(2, 22, '2013-12-23 16:00:03', '2013-12-23 16:00:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(2, 22, '2013-12-23 16:00:03', '2013-12-23 16:00:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 24, '2014-03-26 14:34:34', '2014-03-26 16:53:08', 'abc', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -231,6 +214,149 @@ CREATE TABLE IF NOT EXISTS `ext_translations` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `favorite_item`
+--
+
+CREATE TABLE IF NOT EXISTS `favorite_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_F11D3C21A76ED395` (`user_id`),
+  KEY `IDX_F11D3C214584665A` (`product_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `favorite_item`
+--
+
+INSERT INTO `favorite_item` (`id`, `user_id`, `product_id`) VALUES
+(1, 15, 26),
+(2, 15, 26),
+(3, 15, 26),
+(6, 24, 19),
+(7, 24, 20),
+(8, 24, 18);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorite_stores`
+--
+
+CREATE TABLE IF NOT EXISTS `favorite_stores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_E9251036A76ED395` (`user_id`),
+  KEY `IDX_E9251036B092A811` (`store_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `favorite_stores`
+--
+
+INSERT INTO `favorite_stores` (`id`, `user_id`, `store_id`) VALUES
+(1, 15, 6),
+(2, 15, 6),
+(4, 24, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `homeslidegallery_homeslideimage`
+--
+
+CREATE TABLE IF NOT EXISTS `homeslidegallery_homeslideimage` (
+  `homeslidegallery_id` int(11) NOT NULL,
+  `homeslideimage_id` int(11) NOT NULL,
+  PRIMARY KEY (`homeslidegallery_id`,`homeslideimage_id`),
+  KEY `IDX_E62C36AC5E0752F0` (`homeslidegallery_id`),
+  KEY `IDX_E62C36ACCA7FD6A0` (`homeslideimage_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `homeslide_gallery`
+--
+
+CREATE TABLE IF NOT EXISTS `homeslide_gallery` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `slug` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `home_slide` tinyint(1) DEFAULT NULL,
+  `enabled` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_C4B96A8A989D9B62` (`slug`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `homeslide_gallery`
+--
+
+INSERT INTO `homeslide_gallery` (`id`, `name`, `slug`, `home_slide`, `enabled`) VALUES
+(1, 'Home', 'home', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `homeslide_image`
+--
+
+CREATE TABLE IF NOT EXISTS `homeslide_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `enabled` tinyint(1) DEFAULT NULL,
+  `body` longtext COLLATE utf8_unicode_ci,
+  `image_path` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `homeslide_image`
+--
+
+INSERT INTO `homeslide_image` (`id`, `name`, `sort`, `enabled`, `body`, `image_path`, `image`) VALUES
+(1, 'Image', 1, 1, '<div class="whitebox" style="max-width:53%;">\r\n<h2 class="hof-custom-font-open-sans" style="text-align: center;">Lets Build</h2>\r\n\r\n<div style="text-align: center;"><span class="CTA_text">Build your fantasy</span></div>\r\n</div>', 'builder-hat-and-drill5.jpg', ''),
+(2, 'Image', 1, 1, '<div class="whitebox" style="max-width:53%;">\r\n<h2 class="hof-custom-font-open-sans" style="text-align: center;">Lets Build</h2>\r\n\r\n<div style="text-align: center;"><span class="CTA_text">Build your fantasy</span></div>\r\n</div>', 'building_wallpaper1930.jpg', ''),
+(3, 'Image', 1, 1, '<div class="whitebox" style="max-width:53%;">\r\n<h2 class="hof-custom-font-open-sans" style="text-align: center;">Start Exploring</h2>\r\n\r\n<div style="text-align: center;"><span class="CTA_text">Go out and make something new</span></div>\r\n</div>', '81g-c1yDvPL.jpg', ''),
+(4, 'Image', 1, 1, '<div class="whitebox" style="max-width:53%;">\r\n<h2 class="hof-custom-font-open-sans" style="text-align: center;">Live your Design</h2>\r\n\r\n<div style="text-align: center;"><span class="CTA_text">Implement your design with pin point precision. </span></div>\r\n</div>', 'building_wallpaper1924.jpg', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `home_image`
+--
+
+CREATE TABLE IF NOT EXISTS `home_image` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `enabled` tinyint(1) DEFAULT NULL,
+  `body` longtext COLLATE utf8_unicode_ci,
+  `image_path` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `home_image`
+--
+
+INSERT INTO `home_image` (`id`, `name`, `sort`, `enabled`, `body`, `image_path`, `image`) VALUES
+(1, 'hero', 1, 1, '<div style=" width: 100%; background: none repeat scroll 0% 0% rgba(240, 240, 240, 0.4); border: 1px solid rgb(204, 204, 204) text-align: center;">\r\n<h3 style="text-align: center;"><em>simply dummy</em></h3>\r\n\r\n<div style="text-align: center;"><q><em><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry.</em></q></div>\r\n</div>', 'travisperkins_hero.jpg', NULL),
+(2, 'link', 1, 1, '<div style="background:rgba(240,240,240,0.4);border:1px solid #ccc;padding:5px 10px;"><q><em><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</em></q></div>', 'b.jpg', NULL),
+(3, 'stick', 1, 1, '<div style="background:rgba(240,240,240,0.4);border:1px solid #ccc;padding:5px 10px;"><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a.</div>', 'iStock_000000041737XSmall.jpg', NULL),
+(4, 'tool', 1, 1, '<div style="text-align: center;"><q><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</q></div>', 'tool.jpg', NULL),
+(5, 'builder', NULL, 1, 'Builder', 'builder.jpg', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migration_versions`
 --
 
@@ -244,26 +370,13 @@ CREATE TABLE IF NOT EXISTS `migration_versions` (
 --
 
 INSERT INTO `migration_versions` (`version`) VALUES
-('20131215155123'),
-('20131215164427'),
-('20131215165712'),
-('20131215175659'),
-('20131216215507'),
-('20131216215612'),
-('20131217122913'),
-('20131217130109'),
-('20131217145633'),
-('20131217164256'),
-('20131219204254'),
-('20131220173054'),
-('20131221040327'),
-('20131221215044'),
-('20131221223430'),
-('20131221223702'),
-('20131222160411'),
-('20131222161829'),
-('20131222214052'),
-('20131222220002');
+('20140325104140'),
+('20140325125125'),
+('20140325132122'),
+('20140326105028'),
+('20140326113517'),
+('20140326141726'),
+('20140330100126');
 
 -- --------------------------------------------------------
 
@@ -323,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `store_id` int(11) NOT NULL,
   `name` varchar(130) COLLATE utf8_unicode_ci NOT NULL,
   `enabled` tinyint(1) DEFAULT NULL,
-  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci,
   `image_path` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created` datetime NOT NULL,
@@ -336,73 +449,76 @@ CREATE TABLE IF NOT EXISTS `product` (
   `approved` tinyint(1) DEFAULT NULL,
   `out_of_stock` tinyint(1) DEFAULT NULL,
   `meta_description` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `meta_keywords` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `meta_keywords` longtext COLLATE utf8_unicode_ci,
+  `parent_id` int(11) DEFAULT NULL,
+  `additional_info` longtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_D34A04AD989D9B62` (`slug`),
-  KEY `IDX_D34A04ADB092A811` (`store_id`)
+  KEY `IDX_D34A04ADB092A811` (`store_id`),
+  KEY `IDX_D34A04AD727ACA70` (`parent_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=77 ;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`id`, `store_id`, `name`, `enabled`, `description`, `image_path`, `image`, `created`, `updated`, `featured`, `clearance`, `price`, `clearance_price`, `slug`, `approved`, `out_of_stock`, `meta_description`, `meta_keywords`) VALUES
-(17, 6, 'The World of Noble Angels', 1, 'From the moment an individual is conceived in his mother&#39;s womb, until his death and beyond, angels play a part in human life. Angels bring forth the soul of the dying and they bring comfort or inflict torment in the grave. An angel will sound the Trumpet on the Last Day, and angels will be present on the Day of Judgment until they accompany people to their ultimate destination in Paradise or Hell. Almost all human cultures, ancient and modern, have some kind of belief about angels. The pre-Islamic Arabs believed them to be daughters of the Almighty. Some philosophers thought that angels were the stars in the sky. In modern times, there has been a resurgence of interest in angels, and they feature prominently in movies and other forms of popular western culture.', 'Noble Angels.jpg', NULL, '2013-12-07 23:30:59', '2014-01-04 17:11:27', 1, NULL, 205, NULL, 'the-world-of-noble-angels', 1, NULL, 'Almost all human cultures, ancient and modern, have some kind of belief about angels.', 'islamic, muslim, character,guidance'),
-(18, 6, 'Family Leadership', 1, 'In his latest important contribution to literature on family matters in Islam, Dr. Mohamed Rida Beshir addresses the challenging topic of Family Leadership (Qawamah) a concept which is often misunderstood and which is a source of much family strife. Dr. Beshir provides a two-pronged approach in dealing with the issue, first by providing academic explanations relating to it, and then by following with his trademark use of practical examples to illustrate the proper and improper use of this concept. Dr. Beshir starts by providing the meaning of Qawamah as described in various Arabic dictionaries, as well as the way the word is used within a Quranic context. Next, he offers a summary of the various translations of the famous Quranic verse referring to Qawamah, as well as thorough interpretations of the verse by the different Islamic scholars. Finally, he presents several key issues relating to the proper understanding of the concept of Qawamah, including Qawamah as an obligation and responsibility, being aware of Allah SWT in its application, and the difficult issue of domestic violence. The entire second half of the book is devoted to practical examples of both the proper and improper use of Qawamah, including the author s explanations of why a person s behavior in a particular situation is appropriate or inappropriate.', 'FL.jpg', '', '2013-12-07 23:48:26', '2013-12-07 23:48:39', NULL, NULL, 346, NULL, 'family-leadership', 1, NULL, '', ''),
-(19, 6, 'Prophet Muhammad (S) - The Best of All Husbands', 1, 'In marriage, it often happens that we come across a situation in which things seem to be going haywire, and we wonder what would have been the ideal stance and the best way to handle this problem. For Muslims, the best stance and the best way is that of the Prophet Muhammed (PBUH). Allah has taught that this is how we should seek to resolve our conflicts:\r\n\r\n{If you differ in anything among yourselves, refer it to Allah and His Messenger if you do believe in Allah and the Last Day: that is best and most suitable for final determination.} (Qur''an 4:59)\r\n\r\nOur prophet was a husband with eleven women, each of whom has revealed to us her personal impressions of some or the other aspect of his exemplary personality.\r\n\r\nThis book is a must-read for all married couples-and for any Muslim man or woman who is contemplating marriage-who wish to achieve satisfaction in their personal wives.', 'BOAH.jpg', '', '2013-12-07 23:54:36', '2013-12-07 23:54:36', NULL, NULL, 212, NULL, 'prophet-muhammad-s-the-best-of-all-husbands', 1, NULL, '', ''),
-(20, 6, 'Jesus, Prophet of Islam', 1, 'First published in 1977, Muhammad ''Ata ur-Rahim''s classic text examines Jesus as a prophet teaching the Unity of God, and the historical collapse of Christianity as it abandoned his teaching. Now revised by coauthor Ahmad Thomson, the book sketches the dramatic picture of the original followers of Jesus who affirmed Unity, showing how ''Christianity'' became the fiction that replaced their truth. A wide-ranging study that covers the Gospel of Barnabas, the Gospel of Hermes, the shepherd, early and later Unitarian Christians, and Jesus in the gospels and in the Qur''an and hadith, Jesus: Prophet of Islam argues persuasively that the idea of Jesus as part of a trinity was a Greek pagan concept adopted by early Christian missionaries to gain converts among the Greeks, and did not become a widely accepted Christian doctrine until after the Council of Nicea in 325 A.D', 'POTS.jpg', '', '2013-12-07 23:59:07', '2013-12-07 23:59:07', NULL, NULL, 325, NULL, 'jesus-prophet-of-islam', 1, NULL, '', ''),
-(25, 6, 'Head Scarf A', 1, 'A beautiful Head Scarf you can wear with your Abaya', 'sc1.jpg', '', '2013-12-08 01:23:43', '2013-12-08 01:23:43', NULL, NULL, 289, NULL, 'head-scarf-a', 1, NULL, '', ''),
-(26, 6, 'Head Scarf B', 1, 'A beautiful Head Scarf you can wear with your Abaya', 'sc2.jpg', '', '2013-12-08 01:24:18', '2013-12-08 01:24:18', NULL, NULL, 323, NULL, 'head-scarf-b', 1, NULL, '', ''),
-(27, 6, 'Head Scarf C', 1, 'A beautiful Head Scarf you can wear with your Abaya', 'sc3.jpg', '', '2013-12-08 01:24:54', '2013-12-08 01:24:54', NULL, NULL, 244, NULL, 'head-scarf-c', 1, NULL, '', ''),
-(28, 6, 'Head Scarf D', 1, 'A beautiful Head Scarf you can wear with your Abaya', 'sc4.jpg', '', '2013-12-08 01:25:11', '2013-12-08 01:25:11', NULL, NULL, 153, NULL, 'head-scarf-d', 1, NULL, '', ''),
-(29, 6, 'Gift Item A', 1, 'Wonderful gifts and souvenirs for your family and friends!', 'gf1.jpg', '', '2013-12-08 01:33:59', '2013-12-08 01:33:59', NULL, NULL, 335, NULL, 'gift-item-a', 1, NULL, '', ''),
-(30, 6, 'Gift Item B', 1, 'Wonderful gifts and souvenirs for your family and friends!', 'gf2.jpg', '', '2013-12-08 01:34:31', '2013-12-08 01:34:31', NULL, NULL, 316, NULL, 'gift-item-b', 1, NULL, '', ''),
-(31, 6, 'Gift Item C', 1, 'Wonderful gifts and souvenirs for your family and friends!', 'gf3.jpg', '', '2013-12-08 01:34:44', '2013-12-08 01:34:44', NULL, NULL, 474, NULL, 'gift-item-c', 1, NULL, '', ''),
-(32, 6, 'Gift Item D', 1, 'Wonderful gifts and souvenirs for your family and friends!', 'gf4.jpg', '', '2013-12-08 01:35:01', '2013-12-08 01:35:01', NULL, NULL, 120, NULL, 'gift-item-d', 1, NULL, '', ''),
-(33, 7, 'Mustard Oil', 1, 'Pure Mustard Oil', 'mo1.jpg', NULL, '2013-12-08 03:13:16', '2013-12-13 02:21:07', NULL, 0, 281, NULL, 'mustard-oil', 1, NULL, '', ''),
-(34, 7, 'Flour', 1, 'Flour (Brown)', 'brown.jpg', '', '2013-12-08 03:21:06', '2013-12-08 03:21:06', NULL, NULL, 145, NULL, 'flour', 1, NULL, '', ''),
-(35, 7, 'Red Chili Powder', 1, 'Red Chili Powder', 'chili.jpg', '', '2013-12-08 03:21:52', '2013-12-08 03:21:52', NULL, NULL, 184, NULL, 'red-chili-powder', 1, NULL, '', ''),
-(36, 7, 'Parsley Seeds', 1, 'Parsley Seeds', 'dhania.jpg', '', '2013-12-08 03:22:13', '2013-12-08 03:22:13', NULL, NULL, 384, NULL, 'parsley-seeds', 1, NULL, '', ''),
-(37, 7, 'Ghee', 1, 'Pure Ghee', 'ghee.jpg', '', '2013-12-08 03:22:49', '2013-12-08 03:22:49', NULL, NULL, 467, NULL, 'ghee', 1, NULL, '', ''),
-(38, 7, 'Honey', 1, 'Pure Honey', 'honey.jpg', '', '2013-12-08 03:23:24', '2013-12-08 03:23:24', NULL, NULL, 283, NULL, 'honey', 1, NULL, '', ''),
-(39, 7, 'Black Seed Oil', 1, 'Black Seed Oil', 'kala.jpg', '', '2013-12-08 03:23:46', '2013-12-08 03:23:46', NULL, NULL, 314, NULL, 'black-seed-oil', 1, NULL, '', ''),
-(40, 7, 'Masur Pulses', 1, 'Masur Pulses', 'masur.jpg', '', '2013-12-08 03:24:14', '2013-12-08 03:24:14', NULL, NULL, 222, NULL, 'masur-pulses', 1, NULL, '', ''),
-(41, 7, 'Dheki Chhata Rice', 1, 'Dheki Chhata Rice', 'rice.jpg', '', '2013-12-08 03:24:27', '2013-12-08 03:26:11', NULL, NULL, 468, NULL, 'dheki-chhata-rice', 1, NULL, '', ''),
-(42, 7, 'Brown Sugar', 1, 'Brown Sugar', 'sugar.jpg', '', '2013-12-08 03:27:06', '2013-12-08 03:27:06', NULL, NULL, 373, NULL, 'brown-sugar', 1, NULL, '', ''),
-(43, 7, 'Turmeric Powder', 1, 'Turmeric Powder', 'turmeric.jpg', '', '2013-12-08 03:27:56', '2013-12-08 03:27:56', NULL, NULL, 363, NULL, 'turmeric-powder', 1, NULL, '', ''),
-(44, 8, 'Face Towel B', 1, 'Face Towel B', 'Set-Of-2-Plain-Hand-Towel-Sky-Blue-CJHT311.jpg', '', '2013-12-10 02:03:15', '2013-12-10 02:03:15', NULL, NULL, 192, NULL, 'face-towel-b', 1, NULL, '', ''),
-(45, 8, 'Face Towel W', 1, 'Face Towel W', 'Set-Of-2-Plain-Hand-Towel-White-CJHT308.jpg', '', '2013-12-10 02:04:02', '2013-12-10 02:04:02', NULL, NULL, 173, NULL, 'face-towel-w', 1, NULL, '', ''),
-(46, 8, 'Face Towel Br', 1, 'Face Towel Br', 'Set-Of-2-Plain-Hand-Towel-Camel-CJHT309.jpg', '', '2013-12-10 02:04:28', '2013-12-10 02:04:28', NULL, NULL, 192, NULL, 'face-towel-br', 1, NULL, '', ''),
-(47, 8, 'Face Towel R', 1, 'Face Towel R', 'Set-Of-2-Plain-Hand-Towel--Burgandy-CJHT307.jpg', '', '2013-12-10 02:04:45', '2013-12-10 02:04:45', NULL, NULL, 338, NULL, 'face-towel-r', 1, NULL, '', ''),
-(48, 8, 'Belt A', 1, 'Ihram A', 'ihram.jpg', NULL, '2013-12-10 02:12:26', '2014-02-19 06:43:47', NULL, 0, 216, NULL, 'belt-a', 1, NULL, '', ''),
-(49, 8, 'Coat B', 1, 'Ihram B', 'mens-ihram-860x800.jpg', NULL, '2013-12-10 02:12:45', '2014-02-19 06:43:53', NULL, 0, 365, NULL, 'coat-b', 1, NULL, '', ''),
-(50, 8, 'Khimar', 1, 'Khimar', 'hajj-ihram-women.jpg', '', '2013-12-10 02:13:22', '2013-12-10 02:13:22', NULL, NULL, 278, NULL, 'khimar', 1, NULL, '', ''),
-(51, 8, 'Hand Towels', 1, 'Hand Towels', 'hand towels-500x500.JPG', '', '2013-12-10 02:42:19', '2013-12-10 02:42:19', NULL, NULL, 194, NULL, 'hand-towels', 1, NULL, '', ''),
-(52, 8, 'Bath Towels', 1, 'Bath Towels', 'Bathroom-Towel.jpg', '', '2013-12-10 02:42:39', '2013-12-10 02:42:39', NULL, NULL, 438, NULL, 'bath-towels', 1, NULL, '', ''),
-(53, 5, 'Marriage – The Making & Living of It', 1, 'Marriage, such a boon, can turn into a tormenting bane if it is not properly made and lived. Marriage, if tailored according to the Quran and Sunnah, showers blessing of Allah not only on the couple but also on the society. This book touches on main issues to render a marriage a source of joy and fulfillment in this life.', 'Marriage-MYB.jpg', '', '2013-12-10 04:58:28', '2013-12-10 04:58:28', NULL, NULL, 304, NULL, 'marriage-the-making-living-of-it', 1, NULL, '', ''),
-(54, 5, 'Leadership Lessons From The Life Of Rasoolullah', 1, 'Muslims already have a peerless leader, Messenger of Allah (pbuh), who displays unique leadership qualities. His diverse and artless leadership transformed a messy community into the best generation of the earth. Not only was he himself a leader, but he created leaders by inspiring to connect with Allah (swt) and the example of moulding leaders out of a number of subdued slaves is simply countless in his blessed life.', 'Leadership-MYB.jpg', NULL, '2013-12-10 04:59:04', '2013-12-10 04:59:17', NULL, NULL, 109, NULL, 'leadership-lessons-from-the-life-of-rasoolullah', 1, NULL, '', ''),
-(55, 5, 'বিয়ে - স্বপ্ন থেকে অষ্ট প্রহর', 1, 'বাস্তবাদের নিবির চর্চাতে বাস্ত পশ্চিমা দর্শন বর্তমানে পরিবারকে পেছনে ফেলে কর্মক্ষেত্র এগিয়ে গেছে। স্ত্রীর সাথে না বনলে তাকে ছেড়ে দেয়া চলে কিন্তু চাকরি গেলে মানিস খাবে কী? সুতরাং চাকরিতে নিজেকে মানিয়ে নিতে হবে, সবাইকে সমঝে চলতে হবে। পরিনিতি? তাদের সমাজে ভাঙনে খ্যানখ্যান বাজনাটা খুব স্পষ্টই শোনা যায়। বাড়ছে অর্সহীন বিবাহ বিচ্ছেদ। বাবা-মায়ের কোন্দল দেখে ক্লান্ত শিশুরা-শিখছে শুধুই সংঘাত। অবৈধ, অনৈতিক সব সম্পর্ক ভেঙ্গে দিছে বৈধ, পবিত্র পারিবারিক বন্ধনগুলো।', 'Biye-MYB.jpg', '', '2013-12-10 05:11:38', '2013-12-10 05:11:38', NULL, NULL, 334, NULL, 'marriage-bengali', 1, NULL, '', ''),
-(56, 5, 'স্রষ্টা ধর্ম জীবন', 1, 'বর্তমান পৃথিবীতে বৈধ, খ্রিষ্টান, হিন্দু বা মুসলিম ন বরং সংখ্যাগরিষ্ঠ ধর্মহীনেরা। ধর্মহীনেরা সঙ্গ সংশয়াতীত নো। সাংস্কৃতিকভাবে নাস্তিকেরাও নিজেকে একটি ধর্ম সংলগ্নতা রক্ষা করেন। এই যুগ্শুত্রতা ভাষা কিংবা অত্তিয়তার বত তা নেহায়েত জন্মসুত্রে পাব। সংখ্যাগরিষ্ঠ মানুষ কোনো নির্দিষ্ট ধর্মের অনুশাসনের প্রতি বিদ্রোহ হয়ত করে না, তবে সুলুকসন্ধানেও করে না।', 'Srosta-AABP.jpg', '', '2013-12-10 05:22:18', '2013-12-10 05:22:18', NULL, NULL, 442, NULL, 'srosta-aabp', 1, NULL, '', ''),
-(57, 5, 'তথ্য ছেড়ে জীবনে', 1, 'পৃথিবী কান এলাম? কাকে ভালবাসব? ধর্মপালনের বাহ্যিক প্রকাশের দরকার কি? মানুষ অসত পথে কেন যায়? বিদেশ না বাবা-বা? জীবন পথের বাঁকে বাঁকে নানা ঘটনা ঘটে। ধর্মগ্রন্থে পড়া নীতিকথাগুলো কি সেখানেই থেকে যাবে না জীবনে প্রতিফলিত হবে? কতটুকু হবে? যতটুকুর প্রতিফলনে বিলাসী জীবনযাত্রার কোনো সমস্যা না হয়? নাকি আত্মত্যাগ করতে হবে?', 'Tothho-SAH.jpg', '', '2013-12-10 05:29:34', '2013-12-10 05:29:34', NULL, NULL, 308, NULL, 'ththosah', 1, NULL, '', ''),
-(58, 9, 'Shoe A', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS&reg;, and you&#39;ll definitely feel like a winner with this awesome style jogger. Synthetic upper with molded quarter detailing. Rugged and stylish nylon loop lace-up closure. Padded heel collar and tongue for extra comfort. Compression-molded EVA midsole. Textile lining and insole. Lug rubber outsole for excellent traction. Imported. Measurements: Weight: 1 lb Product measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (1).jpg', NULL, '2013-12-16 23:06:46', '2014-02-19 07:04:19', NULL, 0, 100, NULL, 'shoe-a', 1, NULL, '', ''),
-(59, 9, 'Shoe B', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (2).jpg', '', '2013-12-17 00:43:11', '2013-12-17 00:43:11', NULL, NULL, 200, NULL, 'shoe-b', 1, NULL, '', ''),
-(60, 9, 'Shoe C', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (3).jpg', '', '2013-12-17 00:44:00', '2013-12-17 00:44:00', NULL, NULL, 300, NULL, 'shoe-c', 1, NULL, '', ''),
-(61, 9, 'Shoe D', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (4).jpg', '', '2013-12-17 00:44:30', '2013-12-17 00:44:30', NULL, NULL, 400, NULL, 'shoe-d', 1, NULL, '', ''),
-(62, 9, 'Shoe E', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (5).jpg', '', '2013-12-17 00:45:03', '2013-12-17 00:45:03', NULL, NULL, 500, NULL, 'shoe-e', 1, NULL, '', ''),
-(63, 9, 'Shoe F', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (6).jpg', '', '2013-12-17 00:45:36', '2013-12-17 00:45:36', NULL, NULL, 500, NULL, 'shoe-f', 1, NULL, '', ''),
-(64, 9, 'Shoe G', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (7).jpg', '', '2013-12-17 00:45:56', '2013-12-17 00:45:56', NULL, NULL, 500, NULL, 'shoe-g', 1, NULL, '', ''),
-(65, 9, 'Shoe H', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (8).jpg', '', '2013-12-17 00:46:33', '2013-12-17 00:46:33', NULL, NULL, 400, NULL, 'shoe-h', 1, NULL, '', ''),
-(66, 9, 'Shoe EYE', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (9).jpg', '', '2013-12-17 00:47:16', '2013-12-17 00:47:16', NULL, NULL, 300, NULL, 'shoe-eye', 1, NULL, '', ''),
-(67, 9, 'Shoe J', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (10).jpg', '', '2013-12-17 00:47:38', '2013-12-17 00:47:38', NULL, NULL, 900, NULL, 'shoe-j', 1, NULL, '', ''),
-(68, 10, 'Luxury B', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'lux (2).jpg', '', '2013-12-17 02:51:47', '2013-12-17 02:59:34', NULL, NULL, 1000000, NULL, 'luxury-b', 1, NULL, '', ''),
-(69, 10, 'Luxury A', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'lux (1).jpg', '', '2013-12-17 02:53:58', '2013-12-17 02:53:58', NULL, NULL, 2000000, NULL, 'luxury-a', 1, NULL, '', ''),
-(70, 10, 'Luxury C', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'lux (3).jpg', '', '2013-12-17 02:54:38', '2013-12-17 02:54:38', NULL, NULL, 1000000, NULL, 'luxury-c', 1, NULL, '', ''),
-(71, 10, 'Sports A', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'sport (1).jpg', '', '2013-12-17 02:55:39', '2013-12-17 02:55:39', NULL, NULL, 3000000, NULL, 'sports-a', 1, NULL, '', ''),
-(72, 10, 'Sports B', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'sport (2).jpg', '', '2013-12-17 02:57:52', '2013-12-17 02:57:52', NULL, NULL, 5000000, NULL, 'sports-b', 1, NULL, '', ''),
-(73, 10, 'Sports C', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'sport (3).jpg', '', '2013-12-17 02:58:54', '2013-12-17 02:58:54', NULL, NULL, 5000000, NULL, 'sports-c', 1, NULL, '', ''),
-(74, 10, 'Roadster A', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'road (1).jpg', '', '2013-12-17 03:00:28', '2013-12-17 03:00:28', NULL, NULL, 1000000, NULL, 'roadster-a', 1, NULL, '', ''),
-(75, 10, 'Roadster B', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'road (2).jpg', '', '2013-12-17 03:00:47', '2013-12-17 03:00:47', NULL, NULL, 1000000, NULL, 'roadster-b', 1, NULL, '', ''),
-(76, 10, 'Roadster C', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'road (3).jpg', '', '2013-12-17 03:01:09', '2013-12-17 03:01:09', NULL, NULL, 1000000, NULL, 'roadster-c', 1, NULL, '', '');
+INSERT INTO `product` (`id`, `store_id`, `name`, `enabled`, `description`, `image_path`, `image`, `created`, `updated`, `featured`, `clearance`, `price`, `clearance_price`, `slug`, `approved`, `out_of_stock`, `meta_description`, `meta_keywords`, `parent_id`, `additional_info`) VALUES
+(17, 6, 'The World of Noble Angels', 1, 'From the moment an individual is conceived in his mother&#39;s womb, until his death and beyond, angels play a part in human life. Angels bring forth the soul of the dying and they bring comfort or inflict torment in the grave. An angel will sound the Trumpet on the Last Day, and angels will be present on the Day of Judgment until they accompany people to their ultimate destination in Paradise or Hell. Almost all human cultures, ancient and modern, have some kind of belief about angels. The pre-Islamic Arabs believed them to be daughters of the Almighty. Some philosophers thought that angels were the stars in the sky. In modern times, there has been a resurgence of interest in angels, and they feature prominently in movies and other forms of popular western culture.', 'Noble Angels.jpg', NULL, '2013-12-07 23:30:59', '2014-01-04 17:11:27', 1, NULL, 205, NULL, 'the-world-of-noble-angels', 1, NULL, 'Almost all human cultures, ancient and modern, have some kind of belief about angels.', 'islamic, muslim, character,guidance', NULL, NULL),
+(18, 6, 'Family Leadership', 1, 'In his latest important contribution to literature on family matters in Islam, Dr. Mohamed Rida Beshir addresses the challenging topic of Family Leadership (Qawamah) a concept which is often misunderstood and which is a source of much family strife. Dr. Beshir provides a two-pronged approach in dealing with the issue, first by providing academic explanations relating to it, and then by following with his trademark use of practical examples to illustrate the proper and improper use of this concept. Dr. Beshir starts by providing the meaning of Qawamah as described in various Arabic dictionaries, as well as the way the word is used within a Quranic context. Next, he offers a summary of the various translations of the famous Quranic verse referring to Qawamah, as well as thorough interpretations of the verse by the different Islamic scholars. Finally, he presents several key issues relating to the proper understanding of the concept of Qawamah, including Qawamah as an obligation and responsibility, being aware of Allah SWT in its application, and the difficult issue of domestic violence. The entire second half of the book is devoted to practical examples of both the proper and improper use of Qawamah, including the author s explanations of why a person s behavior in a particular situation is appropriate or inappropriate.', 'FL.jpg', NULL, '2013-12-07 23:48:26', '2014-03-25 15:11:06', NULL, 0, 346, NULL, 'family-leadership', 1, NULL, '', '', NULL, 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using &#39;Content here, content here&#39;, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for &#39;lorem ipsum&#39; will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'),
+(19, 6, 'Prophet Muhammad (S) - The Best of All Husbands', 1, 'In marriage, it often happens that we come across a situation in which things seem to be going haywire, and we wonder what would have been the ideal stance and the best way to handle this problem. For Muslims, the best stance and the best way is that of the Prophet Muhammed (PBUH). Allah has taught that this is how we should seek to resolve our conflicts:\r\n\r\n{If you differ in anything among yourselves, refer it to Allah and His Messenger if you do believe in Allah and the Last Day: that is best and most suitable for final determination.} (Qur''an 4:59)\r\n\r\nOur prophet was a husband with eleven women, each of whom has revealed to us her personal impressions of some or the other aspect of his exemplary personality.\r\n\r\nThis book is a must-read for all married couples-and for any Muslim man or woman who is contemplating marriage-who wish to achieve satisfaction in their personal wives.', 'BOAH.jpg', '', '2013-12-07 23:54:36', '2013-12-07 23:54:36', NULL, NULL, 212, NULL, 'prophet-muhammad-s-the-best-of-all-husbands', 1, NULL, '', '', NULL, NULL),
+(20, 6, 'Jesus, Prophet of Islam', 1, 'First published in 1977, Muhammad ''Ata ur-Rahim''s classic text examines Jesus as a prophet teaching the Unity of God, and the historical collapse of Christianity as it abandoned his teaching. Now revised by coauthor Ahmad Thomson, the book sketches the dramatic picture of the original followers of Jesus who affirmed Unity, showing how ''Christianity'' became the fiction that replaced their truth. A wide-ranging study that covers the Gospel of Barnabas, the Gospel of Hermes, the shepherd, early and later Unitarian Christians, and Jesus in the gospels and in the Qur''an and hadith, Jesus: Prophet of Islam argues persuasively that the idea of Jesus as part of a trinity was a Greek pagan concept adopted by early Christian missionaries to gain converts among the Greeks, and did not become a widely accepted Christian doctrine until after the Council of Nicea in 325 A.D', 'POTS.jpg', '', '2013-12-07 23:59:07', '2013-12-07 23:59:07', NULL, NULL, 325, NULL, 'jesus-prophet-of-islam', 1, NULL, '', '', NULL, NULL),
+(25, 6, 'Head Scarf A', 1, 'A beautiful Head Scarf you can wear with your Abaya', 'sc1.jpg', '', '2013-12-08 01:23:43', '2013-12-08 01:23:43', NULL, NULL, 289, NULL, 'head-scarf-a', 1, NULL, '', '', NULL, NULL),
+(26, 6, 'Head Scarf B', 1, 'A beautiful Head Scarf you can wear with your Abaya', 'sc2.jpg', '', '2013-12-08 01:24:18', '2013-12-08 01:24:18', NULL, NULL, 323, NULL, 'head-scarf-b', 1, NULL, '', '', NULL, NULL),
+(27, 6, 'Head Scarf C', 1, 'A beautiful Head Scarf you can wear with your Abaya', 'sc3.jpg', '', '2013-12-08 01:24:54', '2013-12-08 01:24:54', NULL, NULL, 244, NULL, 'head-scarf-c', 1, NULL, '', '', NULL, NULL),
+(28, 6, 'Head Scarf D', 1, 'A beautiful Head Scarf you can wear with your Abaya', 'sc4.jpg', '', '2013-12-08 01:25:11', '2013-12-08 01:25:11', NULL, NULL, 153, NULL, 'head-scarf-d', 1, NULL, '', '', NULL, NULL),
+(29, 6, 'Gift Item A', 1, 'Wonderful gifts and souvenirs for your family and friends!', 'gf1.jpg', '', '2013-12-08 01:33:59', '2013-12-08 01:33:59', NULL, NULL, 335, NULL, 'gift-item-a', 1, NULL, '', '', NULL, NULL),
+(30, 6, 'Gift Item B', 1, 'Wonderful gifts and souvenirs for your family and friends!', 'gf2.jpg', '', '2013-12-08 01:34:31', '2013-12-08 01:34:31', NULL, NULL, 316, NULL, 'gift-item-b', 1, NULL, '', '', NULL, NULL),
+(31, 6, 'Gift Item C', 1, 'Wonderful gifts and souvenirs for your family and friends!', 'gf3.jpg', '', '2013-12-08 01:34:44', '2013-12-08 01:34:44', NULL, NULL, 474, NULL, 'gift-item-c', 1, NULL, '', '', NULL, NULL),
+(32, 6, 'Gift Item D', 1, 'Wonderful gifts and souvenirs for your family and friends!', 'gf4.jpg', '', '2013-12-08 01:35:01', '2013-12-08 01:35:01', NULL, NULL, 120, NULL, 'gift-item-d', 1, NULL, '', '', NULL, NULL),
+(33, 7, 'Mustard Oil', 1, 'Pure Mustard Oil', 'mo1.jpg', NULL, '2013-12-08 03:13:16', '2013-12-13 02:21:07', NULL, 0, 281, NULL, 'mustard-oil', 1, NULL, '', '', NULL, NULL),
+(34, 7, 'Flour', 1, 'Flour (Brown)', 'brown.jpg', '', '2013-12-08 03:21:06', '2013-12-08 03:21:06', NULL, NULL, 145, NULL, 'flour', 1, NULL, '', '', NULL, NULL),
+(35, 7, 'Red Chili Powder', 1, 'Red Chili Powder', 'chili.jpg', '', '2013-12-08 03:21:52', '2013-12-08 03:21:52', NULL, NULL, 184, NULL, 'red-chili-powder', 1, NULL, '', '', NULL, NULL),
+(36, 7, 'Parsley Seeds', 1, 'Parsley Seeds', 'dhania.jpg', '', '2013-12-08 03:22:13', '2013-12-08 03:22:13', NULL, NULL, 384, NULL, 'parsley-seeds', 1, NULL, '', '', NULL, NULL),
+(37, 7, 'Ghee', 1, 'Pure Ghee', 'ghee.jpg', '', '2013-12-08 03:22:49', '2013-12-08 03:22:49', NULL, NULL, 467, NULL, 'ghee', 1, NULL, '', '', NULL, NULL),
+(38, 7, 'Honey', 1, 'Pure Honey', 'honey.jpg', '', '2013-12-08 03:23:24', '2013-12-08 03:23:24', NULL, NULL, 283, NULL, 'honey', 1, NULL, '', '', NULL, NULL),
+(39, 7, 'Black Seed Oil', 1, 'Black Seed Oil', 'kala.jpg', '', '2013-12-08 03:23:46', '2013-12-08 03:23:46', NULL, NULL, 314, NULL, 'black-seed-oil', 1, NULL, '', '', NULL, NULL),
+(40, 7, 'Masur Pulses', 1, 'Masur Pulses', 'masur.jpg', '', '2013-12-08 03:24:14', '2013-12-08 03:24:14', NULL, NULL, 222, NULL, 'masur-pulses', 1, NULL, '', '', NULL, NULL),
+(41, 7, 'Dheki Chhata Rice', 1, 'Dheki Chhata Rice', 'rice.jpg', '', '2013-12-08 03:24:27', '2013-12-08 03:26:11', NULL, NULL, 468, NULL, 'dheki-chhata-rice', 1, NULL, '', '', NULL, NULL),
+(42, 7, 'Brown Sugar', 1, 'Brown Sugar', 'sugar.jpg', '', '2013-12-08 03:27:06', '2013-12-08 03:27:06', NULL, NULL, 373, NULL, 'brown-sugar', 1, NULL, '', '', NULL, NULL),
+(43, 7, 'Turmeric Powder', 1, 'Turmeric Powder', 'turmeric.jpg', '', '2013-12-08 03:27:56', '2013-12-08 03:27:56', NULL, NULL, 363, NULL, 'turmeric-powder', 1, NULL, '', '', NULL, NULL),
+(44, 8, 'Face Towel B', 1, 'Face Towel B', 'Set-Of-2-Plain-Hand-Towel-Sky-Blue-CJHT311.jpg', '', '2013-12-10 02:03:15', '2013-12-10 02:03:15', NULL, NULL, 192, NULL, 'face-towel-b', 1, NULL, '', '', NULL, NULL),
+(45, 8, 'Face Towel W', 1, 'Face Towel W', 'Set-Of-2-Plain-Hand-Towel-White-CJHT308.jpg', '', '2013-12-10 02:04:02', '2013-12-10 02:04:02', NULL, NULL, 173, NULL, 'face-towel-w', 1, NULL, '', '', NULL, NULL),
+(46, 8, 'Face Towel Br', 1, 'Face Towel Br', 'Set-Of-2-Plain-Hand-Towel-Camel-CJHT309.jpg', '', '2013-12-10 02:04:28', '2013-12-10 02:04:28', NULL, NULL, 192, NULL, 'face-towel-br', 1, NULL, '', '', NULL, NULL),
+(47, 8, 'Face Towel R', 1, 'Face Towel R', 'Set-Of-2-Plain-Hand-Towel--Burgandy-CJHT307.jpg', '', '2013-12-10 02:04:45', '2013-12-10 02:04:45', NULL, NULL, 338, NULL, 'face-towel-r', 1, NULL, '', '', NULL, NULL),
+(48, 8, 'Belt A', 1, 'Ihram A', 'ihram.jpg', NULL, '2013-12-10 02:12:26', '2014-02-19 06:43:47', NULL, 0, 216, NULL, 'belt-a', 1, NULL, '', '', NULL, NULL),
+(49, 8, 'Coat B', 1, 'Ihram B', 'mens-ihram-860x800.jpg', NULL, '2013-12-10 02:12:45', '2014-02-19 06:43:53', NULL, 0, 365, NULL, 'coat-b', 1, NULL, '', '', NULL, NULL),
+(50, 8, 'Khimar', 1, 'Khimar', 'hajj-ihram-women.jpg', '', '2013-12-10 02:13:22', '2013-12-10 02:13:22', NULL, NULL, 278, NULL, 'khimar', 1, NULL, '', '', NULL, NULL),
+(51, 8, 'Hand Towels', 1, 'Hand Towels', 'hand towels-500x500.JPG', '', '2013-12-10 02:42:19', '2013-12-10 02:42:19', NULL, NULL, 194, NULL, 'hand-towels', 1, NULL, '', '', NULL, NULL),
+(52, 8, 'Bath Towels', 1, 'Bath Towels', 'Bathroom-Towel.jpg', '', '2013-12-10 02:42:39', '2013-12-10 02:42:39', NULL, NULL, 438, NULL, 'bath-towels', 1, NULL, '', '', NULL, NULL),
+(53, 5, 'Marriage – The Making & Living of It', 1, 'Marriage, such a boon, can turn into a tormenting bane if it is not properly made and lived. Marriage, if tailored according to the Quran and Sunnah, showers blessing of Allah not only on the couple but also on the society. This book touches on main issues to render a marriage a source of joy and fulfillment in this life.', 'Marriage-MYB.jpg', NULL, '2013-12-10 04:58:28', '2014-03-25 14:50:07', NULL, NULL, 304, NULL, 'marriage-the-making-living-of-it', 1, NULL, 'abcd', NULL, NULL, NULL),
+(54, 5, 'Leadership Lessons From The Life Of Rasoolullah', 1, 'Muslims already have a peerless leader, Messenger of Allah (pbuh), who displays unique leadership qualities. His diverse and artless leadership transformed a messy community into the best generation of the earth. Not only was he himself a leader, but he created leaders by inspiring to connect with Allah (swt) and the example of moulding leaders out of a number of subdued slaves is simply countless in his blessed life.', 'Leadership-MYB.jpg', NULL, '2013-12-10 04:59:04', '2013-12-10 04:59:17', NULL, NULL, 109, NULL, 'leadership-lessons-from-the-life-of-rasoolullah', 1, NULL, '', '', NULL, NULL),
+(55, 5, 'বিয়ে - স্বপ্ন থেকে অষ্ট প্রহর', 1, 'বাস্তবাদের নিবির চর্চাতে বাস্ত পশ্চিমা দর্শন বর্তমানে পরিবারকে পেছনে ফেলে কর্মক্ষেত্র এগিয়ে গেছে। স্ত্রীর সাথে না বনলে তাকে ছেড়ে দেয়া চলে কিন্তু চাকরি গেলে মানিস খাবে কী? সুতরাং চাকরিতে নিজেকে মানিয়ে নিতে হবে, সবাইকে সমঝে চলতে হবে। পরিনিতি? তাদের সমাজে ভাঙনে খ্যানখ্যান বাজনাটা খুব স্পষ্টই শোনা যায়। বাড়ছে অর্সহীন বিবাহ বিচ্ছেদ। বাবা-মায়ের কোন্দল দেখে ক্লান্ত শিশুরা-শিখছে শুধুই সংঘাত। অবৈধ, অনৈতিক সব সম্পর্ক ভেঙ্গে দিছে বৈধ, পবিত্র পারিবারিক বন্ধনগুলো।', 'Biye-MYB.jpg', '', '2013-12-10 05:11:38', '2013-12-10 05:11:38', NULL, NULL, 334, NULL, 'marriage-bengali', 1, NULL, '', '', NULL, NULL),
+(56, 5, 'স্রষ্টা ধর্ম জীবন', 1, 'বর্তমান পৃথিবীতে বৈধ, খ্রিষ্টান, হিন্দু বা মুসলিম ন বরং সংখ্যাগরিষ্ঠ ধর্মহীনেরা। ধর্মহীনেরা সঙ্গ সংশয়াতীত নো। সাংস্কৃতিকভাবে নাস্তিকেরাও নিজেকে একটি ধর্ম সংলগ্নতা রক্ষা করেন। এই যুগ্শুত্রতা ভাষা কিংবা অত্তিয়তার বত তা নেহায়েত জন্মসুত্রে পাব। সংখ্যাগরিষ্ঠ মানুষ কোনো নির্দিষ্ট ধর্মের অনুশাসনের প্রতি বিদ্রোহ হয়ত করে না, তবে সুলুকসন্ধানেও করে না।', 'Srosta-AABP.jpg', '', '2013-12-10 05:22:18', '2013-12-10 05:22:18', NULL, NULL, 442, NULL, 'srosta-aabp', 1, NULL, '', '', NULL, NULL),
+(57, 5, 'তথ্য ছেড়ে জীবনে', 1, 'পৃথিবী কান এলাম? কাকে ভালবাসব? ধর্মপালনের বাহ্যিক প্রকাশের দরকার কি? মানুষ অসত পথে কেন যায়? বিদেশ না বাবা-বা? জীবন পথের বাঁকে বাঁকে নানা ঘটনা ঘটে। ধর্মগ্রন্থে পড়া নীতিকথাগুলো কি সেখানেই থেকে যাবে না জীবনে প্রতিফলিত হবে? কতটুকু হবে? যতটুকুর প্রতিফলনে বিলাসী জীবনযাত্রার কোনো সমস্যা না হয়? নাকি আত্মত্যাগ করতে হবে?', 'Tothho-SAH.jpg', '', '2013-12-10 05:29:34', '2013-12-10 05:29:34', NULL, NULL, 308, NULL, 'ththosah', 1, NULL, '', '', NULL, NULL),
+(58, 9, 'Shoe A', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS&reg;, and you&#39;ll definitely feel like a winner with this awesome style jogger. Synthetic upper with molded quarter detailing. Rugged and stylish nylon loop lace-up closure. Padded heel collar and tongue for extra comfort. Compression-molded EVA midsole. Textile lining and insole. Lug rubber outsole for excellent traction. Imported. Measurements: Weight: 1 lb Product measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (1).jpg', NULL, '2013-12-16 23:06:46', '2014-02-19 07:04:19', NULL, 0, 100, NULL, 'shoe-a', 1, NULL, '', '', NULL, NULL),
+(59, 9, 'Shoe B', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (2).jpg', '', '2013-12-17 00:43:11', '2013-12-17 00:43:11', NULL, NULL, 200, NULL, 'shoe-b', 1, NULL, '', '', NULL, NULL),
+(60, 9, 'Shoe C', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (3).jpg', '', '2013-12-17 00:44:00', '2013-12-17 00:44:00', NULL, NULL, 300, NULL, 'shoe-c', 1, NULL, '', '', NULL, NULL),
+(61, 9, 'Shoe D', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (4).jpg', '', '2013-12-17 00:44:30', '2013-12-17 00:44:30', NULL, NULL, 400, NULL, 'shoe-d', 1, NULL, '', '', NULL, NULL),
+(62, 9, 'Shoe E', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (5).jpg', '', '2013-12-17 00:45:03', '2013-12-17 00:45:03', NULL, NULL, 500, NULL, 'shoe-e', 1, NULL, '', '', NULL, NULL),
+(63, 9, 'Shoe F', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (6).jpg', '', '2013-12-17 00:45:36', '2013-12-17 00:45:36', NULL, NULL, 500, NULL, 'shoe-f', 1, NULL, '', '', NULL, NULL),
+(64, 9, 'Shoe G', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (7).jpg', '', '2013-12-17 00:45:56', '2013-12-17 00:45:56', NULL, NULL, 500, NULL, 'shoe-g', 1, NULL, '', '', NULL, NULL),
+(65, 9, 'Shoe H', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (8).jpg', '', '2013-12-17 00:46:33', '2013-12-17 00:46:33', NULL, NULL, 400, NULL, 'shoe-h', 1, NULL, '', '', NULL, NULL),
+(66, 9, 'Shoe EYE', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (9).jpg', '', '2013-12-17 00:47:16', '2013-12-17 00:47:16', NULL, NULL, 300, NULL, 'shoe-eye', 1, NULL, '', '', NULL, NULL),
+(67, 9, 'Shoe J', 1, 'Get ready for the races with the Afterburn M. Fit by SKECHERS®, and you''ll definitely feel like a winner with this awesome style jogger.\r\nSynthetic upper with molded quarter detailing.\r\nRugged and stylish nylon loop lace-up closure.\r\nPadded heel collar and tongue for extra comfort.\r\nCompression-molded EVA midsole.\r\nTextile lining and insole.\r\nLug rubber outsole for excellent traction.\r\nImported.\r\nMeasurements:\r\nWeight: 1 lb\r\nProduct measurements were taken using size 12, width D - Medium. Please note that measurements may vary by size.', 'Shoe (10).jpg', '', '2013-12-17 00:47:38', '2013-12-17 00:47:38', NULL, NULL, 900, NULL, 'shoe-j', 1, NULL, '', '', NULL, NULL),
+(68, 10, 'Luxury B', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'lux (2).jpg', '', '2013-12-17 02:51:47', '2013-12-17 02:59:34', NULL, NULL, 1000000, NULL, 'luxury-b', 1, NULL, '', '', NULL, NULL),
+(69, 10, 'Luxury A', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'lux (1).jpg', '', '2013-12-17 02:53:58', '2013-12-17 02:53:58', NULL, NULL, 2000000, NULL, 'luxury-a', 1, NULL, '', '', NULL, NULL),
+(70, 10, 'Luxury C', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'lux (3).jpg', '', '2013-12-17 02:54:38', '2013-12-17 02:54:38', NULL, NULL, 1000000, NULL, 'luxury-c', 1, NULL, '', '', NULL, NULL),
+(71, 10, 'Sports A', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'sport (1).jpg', '', '2013-12-17 02:55:39', '2013-12-17 02:55:39', NULL, NULL, 3000000, NULL, 'sports-a', 1, NULL, '', '', NULL, NULL),
+(72, 10, 'Sports B', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'sport (2).jpg', '', '2013-12-17 02:57:52', '2013-12-17 02:57:52', NULL, NULL, 5000000, NULL, 'sports-b', 1, NULL, '', '', NULL, NULL),
+(73, 10, 'Sports C', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'sport (3).jpg', '', '2013-12-17 02:58:54', '2013-12-17 02:58:54', NULL, NULL, 5000000, NULL, 'sports-c', 1, NULL, '', '', NULL, NULL),
+(74, 10, 'Roadster A', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'road (1).jpg', '', '2013-12-17 03:00:28', '2013-12-17 03:00:28', NULL, NULL, 1000000, NULL, 'roadster-a', 1, NULL, '', '', NULL, NULL),
+(75, 10, 'Roadster B', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'road (2).jpg', '', '2013-12-17 03:00:47', '2013-12-17 03:00:47', NULL, NULL, 1000000, NULL, 'roadster-b', 1, NULL, '', '', NULL, NULL),
+(76, 10, 'Roadster C', 1, 'Cars, a tribute to this ongoing love affair with automobiles, is a spectacular collection that features various stages of their mechanical lifespans, from the assembly line to the junkyard.', 'road (3).jpg', '', '2013-12-17 03:01:09', '2013-12-17 03:01:09', NULL, NULL, 1000000, NULL, 'roadster-c', 1, NULL, '', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -417,49 +533,54 @@ CREATE TABLE IF NOT EXISTS `product_category` (
   `enabled` tinyint(1) DEFAULT NULL,
   `description` longtext COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `is_parent` tinyint(1) DEFAULT NULL,
+  `image_path` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_CDFC7356989D9B62` (`slug`),
-  KEY `IDX_CDFC73564B44BC51` (`product_section_id`)
+  KEY `IDX_CDFC73564B44BC51` (`product_section_id`),
+  KEY `IDX_CDFC7356727ACA70` (`parent_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `product_category`
 --
 
-INSERT INTO `product_category` (`id`, `product_section_id`, `name`, `enabled`, `description`, `slug`) VALUES
-(2, 1, 'Men', 0, 'some description', 'men'),
-(3, 1, 'Women', 0, 'some description', 'women'),
-(4, 1, 'Children', 0, 'some description', 'children'),
-(5, 1, 'Accessories', 0, 'some description', 'accessories'),
-(6, 2, 'Television', 0, 'some description', 'tv'),
-(7, 2, 'Mobile', 0, 'some description', 'mobile'),
-(8, 2, 'Computer', 0, 'some description', 'computer'),
-(9, 2, 'Desktop', 0, 'some description', 'desktop'),
-(10, 2, 'Laptop', 0, 'some description', 'laptop'),
-(11, 2, 'Air Conditioner', 0, 'some description', 'ac'),
-(12, 2, 'Oven', 0, 'some description', 'oven'),
-(13, 2, 'Toaster', 0, 'some description', 'toaster'),
-(14, 3, 'Website Design', 0, 'some description', 'webdesign'),
-(15, 3, 'Programming', 0, 'some description', 'programming'),
-(16, 3, 'Medical Transcription', 0, 'some description', 'mdeical'),
-(17, 3, 'Graphics Design', 0, 'some description', 'graphics'),
-(18, 4, 'Cakes', 0, 'some description', 'cakes'),
-(19, 4, 'Beverages', 0, 'some description', 'beverages'),
-(20, 4, 'Coffee', 0, 'some description', 'coffee'),
-(21, 6, 'Reconditioned Car', 0, 'some description', 'conditionedcar'),
-(22, 6, 'Motorcycle', 0, 'some description', 'motorcycle'),
-(23, 6, 'Commercial', 0, 'some description', 'commercial'),
-(24, 6, 'Auto Parts', 0, 'some description', 'autoparts'),
-(25, 6, 'CNG', 0, 'some description', 'cng'),
-(26, 7, 'Newspaper', 0, 'some description', 'newspaper'),
-(27, 7, 'Horror', 0, 'some description', 'horror'),
-(28, 7, 'Fiction', 0, 'some description', 'fiction'),
-(29, 7, 'History', 0, 'some description', 'history'),
-(30, 9, 'Furniture', 0, 'some description', 'furniture'),
-(31, 7, 'Religion', 0, 'Religious books, CDs', 'religion'),
-(33, 9, 'Gifts', 0, 'Desc', 'gifts'),
-(34, 3, 'Groceries', 1, 'Groceries Product Category', 'groceriespc'),
-(36, 6, 'Brand New', 1, 'Brand new vehicles', 'brand-new');
+INSERT INTO `product_category` (`id`, `product_section_id`, `name`, `enabled`, `description`, `slug`, `parent_id`, `is_parent`, `image_path`, `image`) VALUES
+(2, 1, 'Men', 1, 'some description', 'men', NULL, 1, 'people-man-symbol-clip-art_431260.jpg', ''),
+(3, 1, 'Women', 1, 'some description', 'women', NULL, 1, 'women.png', ''),
+(4, 1, 'Children', 1, 'some description', 'children', NULL, 1, NULL, NULL),
+(5, 1, 'Accessories', 1, 'some description', 'accessories', NULL, 1, NULL, NULL),
+(6, 2, 'Television', 1, 'some description', 'tv', NULL, 1, NULL, NULL),
+(7, 2, 'Mobile', 1, 'some description', 'mobile', 2, NULL, NULL, NULL),
+(8, 2, 'Computer', 1, 'some description', 'computer', 2, NULL, NULL, NULL),
+(9, 2, 'Desktop', 1, 'some description', 'desktop', 2, NULL, NULL, NULL),
+(10, 2, 'Laptop', 1, 'some description', 'laptop', NULL, 1, NULL, NULL),
+(11, 2, 'Air Conditioner', 1, 'some description', 'ac', 2, NULL, NULL, NULL),
+(12, 2, 'Oven', 1, 'some description', 'oven', NULL, 1, NULL, NULL),
+(13, 2, 'Toaster', 1, 'some description', 'toaster', NULL, 1, NULL, NULL),
+(14, 3, 'Website Design', 1, 'some description', 'webdesign', 2, NULL, NULL, NULL),
+(15, 3, 'Programming', 1, 'some description', 'programming', 2, NULL, NULL, NULL),
+(16, 3, 'Medical Transcription', 1, 'some description', 'mdeical', NULL, 1, NULL, NULL),
+(17, 3, 'Graphics Design', 1, 'some description', 'graphics', 2, NULL, NULL, NULL),
+(18, 4, 'Cakes', 1, 'some description', 'cakes', 2, NULL, NULL, NULL),
+(19, 4, 'Beverages', 1, 'some description', 'beverages', 7, NULL, NULL, NULL),
+(20, 4, 'Coffee', 1, 'some description', 'coffee', 7, NULL, NULL, NULL),
+(21, 6, 'Reconditioned Car', 1, 'some description', 'conditionedcar', 7, NULL, NULL, NULL),
+(22, 6, 'Motorcycle', 1, 'some description', 'motorcycle', 7, NULL, NULL, NULL),
+(23, 6, 'Commercial', 1, 'some description', 'commercial', 7, NULL, NULL, NULL),
+(24, 6, 'Auto Parts', 1, 'some description', 'autoparts', 7, NULL, NULL, NULL),
+(25, 6, 'CNG', 1, 'some description', 'cng', 7, NULL, NULL, NULL),
+(26, 7, 'Newspaper', 1, 'some description', 'newspaper', 7, NULL, NULL, NULL),
+(27, 7, 'Horror', 1, 'some description', 'horror', NULL, NULL, NULL, NULL),
+(28, 7, 'Fiction', 1, 'some description', 'fiction', NULL, NULL, NULL, NULL),
+(29, 7, 'History', 1, 'some description', 'history', NULL, NULL, NULL, NULL),
+(30, 9, 'Furniture', 1, 'some description', 'furniture', NULL, NULL, NULL, NULL),
+(31, 7, 'Religion', 1, 'Religious books, CDs', 'religion', NULL, NULL, NULL, NULL),
+(33, 9, 'Gifts', 1, 'Desc', 'gifts', NULL, NULL, NULL, NULL),
+(34, 3, 'Groceries', 1, 'Groceries Product Category', 'groceriespc', NULL, NULL, NULL, NULL),
+(36, 6, 'Brand New', 1, 'Brand new vehicles', 'brand-new', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -613,6 +734,44 @@ INSERT INTO `product_productimage` (`product_id`, `productimage_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `product_rating`
+--
+
+CREATE TABLE IF NOT EXISTS `product_rating` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rating` double NOT NULL,
+  `enabled` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_BAF567864584665A` (`product_id`),
+  KEY `IDX_BAF56786A76ED395` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
+
+--
+-- Dumping data for table `product_rating`
+--
+
+INSERT INTO `product_rating` (`id`, `product_id`, `user_id`, `created`, `comment`, `rating`, `enabled`) VALUES
+(1, 18, 15, '2014-03-25 14:29:50', 'nice', 4, 1),
+(2, 18, 15, '2014-03-25 14:30:11', 'nice', 4, 1),
+(3, 18, 15, '2014-03-25 14:40:43', '', 4, 1),
+(4, 55, 15, '2014-03-25 15:48:04', 'asdasfasf', 4, 1),
+(6, 55, 15, '2014-03-25 17:20:47', 'asfasagdgsagadfsg', 3, NULL),
+(7, 55, 15, '2014-03-25 17:20:48', '', 3, NULL),
+(8, 55, 15, '2014-03-25 17:20:49', '', 3, NULL),
+(9, 55, 15, '2014-03-25 17:20:49', '', 3, NULL),
+(10, 55, 15, '2014-03-25 17:20:49', '', 3, NULL),
+(11, 55, 15, '2014-03-25 17:20:50', '', 3, NULL),
+(12, 55, 15, '2014-03-25 17:20:50', '', 3, NULL),
+(13, 55, 15, '2014-03-25 17:22:32', 'asfasfasf', 3, NULL),
+(14, 26, 15, '2014-03-26 11:25:43', 'asdsd', 3, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product_section`
 --
 
@@ -745,6 +904,11 @@ CREATE TABLE IF NOT EXISTS `related_prods` (
 
 INSERT INTO `related_prods` (`product_id`, `related_product_id`) VALUES
 (17, 18),
+(18, 17),
+(18, 18),
+(18, 19),
+(18, 20),
+(18, 55),
 (34, 39),
 (34, 40),
 (34, 41),
@@ -752,8 +916,11 @@ INSERT INTO `related_prods` (`product_id`, `related_product_id`) VALUES
 (39, 39),
 (44, 45),
 (45, 44),
-(53, 25),
-(53, 26);
+(53, 53),
+(53, 54),
+(53, 55),
+(53, 56),
+(53, 57);
 
 -- --------------------------------------------------------
 
@@ -792,26 +959,39 @@ CREATE TABLE IF NOT EXISTS `sale` (
   `total` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   `is_shipped` tinyint(1) DEFAULT NULL,
   `is_viewed` tinyint(1) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_E54BC005A76ED395` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
+  KEY `IDX_E54BC005A76ED395` (`user_id`),
+  KEY `IDX_E54BC005B092A811` (`store_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `sale`
 --
 
-INSERT INTO `sale` (`id`, `user_id`, `created`, `updated`, `billing_first_name`, `billing_last_name`, `billing_email`, `billing_address`, `billing_city`, `billing_state`, `billing_postalcode`, `billing_country`, `billing_phone`, `shipping_first_name`, `shipping_last_name`, `shipping_email`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_postalcode`, `shipping_country`, `shipping_phone`, `shipping_billing_same`, `order_number`, `payment_method`, `shipping_method`, `shipping_cost`, `total`, `is_shipped`, `is_viewed`) VALUES
-(1, NULL, '2008-01-01 00:00:00', '2008-01-01 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, NULL, '2008-01-01 00:00:00', '2008-01-01 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, NULL, '2013-12-22 02:08:51', '2013-12-22 02:08:51', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', NULL, '1387656531', 'Cash On Delivery', 'Delivery In Dhaka', '0', '2940', NULL, NULL),
-(7, NULL, '2013-12-22 02:09:35', '2013-12-22 02:09:35', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', NULL, '1387656575', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL),
-(8, NULL, '2013-12-22 02:10:15', '2013-12-22 02:10:15', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', NULL, '1387656615', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL),
-(9, NULL, '2013-12-22 02:10:43', '2013-12-22 02:10:43', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', NULL, '1387656642', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL),
-(10, NULL, '2013-12-23 14:32:32', '2013-12-23 14:32:32', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', NULL, '1387787552', 'Cash On Delivery', 'Delivery In Dhaka', '0', '216', NULL, NULL),
-(11, NULL, '2013-12-23 14:36:19', '2013-12-23 14:36:19', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', NULL, '1387787779', 'Cash On Delivery', 'Delivery In Dhaka', '0', '876', NULL, NULL),
-(12, NULL, '2013-12-23 14:41:02', '2013-12-23 14:41:02', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', NULL, '1387788062', 'Cash On Delivery', 'Delivery In Dhaka', '0', '205', NULL, NULL),
-(13, NULL, '2013-12-23 14:49:51', '2013-12-23 14:49:51', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', NULL, '1387788590', 'Cash On Delivery', 'Delivery In Dhaka', '0', '205', NULL, NULL),
-(14, NULL, '2013-12-23 14:55:50', '2013-12-23 14:55:50', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', NULL, '1387788950', 'Cash On Delivery', 'Delivery In Dhaka', '0', '876', NULL, NULL);
+INSERT INTO `sale` (`id`, `user_id`, `created`, `updated`, `billing_first_name`, `billing_last_name`, `billing_email`, `billing_address`, `billing_city`, `billing_state`, `billing_postalcode`, `billing_country`, `billing_phone`, `shipping_first_name`, `shipping_last_name`, `shipping_email`, `shipping_address`, `shipping_city`, `shipping_state`, `shipping_postalcode`, `shipping_country`, `shipping_phone`, `shipping_billing_same`, `order_number`, `payment_method`, `shipping_method`, `shipping_cost`, `total`, `is_shipped`, `is_viewed`, `store_id`) VALUES
+(1, NULL, '2008-01-01 00:00:00', '2008-01-01 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(5, NULL, '2008-01-01 00:00:00', '2008-01-01 00:00:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(6, NULL, '2013-12-22 02:08:51', '2013-12-22 02:08:51', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', NULL, '1387656531', 'Cash On Delivery', 'Delivery In Dhaka', '0', '2940', NULL, NULL, NULL),
+(7, NULL, '2013-12-22 02:09:35', '2013-12-22 02:09:35', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', NULL, '1387656575', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, NULL),
+(8, NULL, '2013-12-22 02:10:15', '2013-12-22 02:10:15', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', NULL, '1387656615', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, NULL),
+(9, NULL, '2013-12-22 02:10:43', '2013-12-22 02:10:43', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', 'o', 'o', 'ze@ze.com', 'o', 'o', 'o', 'o', NULL, 'o', NULL, '1387656642', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, NULL),
+(10, NULL, '2013-12-23 14:32:32', '2013-12-23 14:32:32', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', NULL, '1387787552', 'Cash On Delivery', 'Delivery In Dhaka', '0', '216', NULL, NULL, NULL),
+(11, NULL, '2013-12-23 14:36:19', '2013-12-23 14:36:19', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', NULL, '1387787779', 'Cash On Delivery', 'Delivery In Dhaka', '0', '876', NULL, NULL, NULL),
+(12, NULL, '2013-12-23 14:41:02', '2013-12-23 14:41:02', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', NULL, '1387788062', 'Cash On Delivery', 'Delivery In Dhaka', '0', '205', NULL, NULL, NULL),
+(13, NULL, '2013-12-23 14:49:51', '2013-12-23 14:49:51', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', NULL, '1387788590', 'Cash On Delivery', 'Delivery In Dhaka', '0', '205', NULL, NULL, NULL),
+(14, NULL, '2013-12-23 14:55:50', '2013-12-23 14:55:50', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', 'zahid', 'eshaque', 'zeshaq@gmail.com', 'house 33 road 22', 'dhaka', 'dhaka', '1212', NULL, '4234234324234', NULL, '1387788950', 'Cash On Delivery', 'Delivery In Dhaka', '0', '876', NULL, NULL, NULL),
+(15, NULL, '2014-03-30 13:23:18', '2014-03-30 13:23:18', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', NULL, '1396164198', 'Cash On Delivery', 'Delivery In Dhaka', '0', '1553', NULL, NULL, NULL),
+(16, 24, '2014-03-30 13:28:21', '2014-03-30 13:28:21', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', NULL, '1396164501', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, 6),
+(17, 24, '2014-03-30 14:29:04', '2014-03-30 14:29:04', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', NULL, '1396168144', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, 6),
+(18, 24, '2014-03-30 14:29:19', '2014-03-30 14:29:19', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', NULL, '1396168159', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, 6),
+(19, 24, '2014-03-30 14:29:43', '2014-03-30 14:29:43', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', NULL, '1396168183', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, 6),
+(20, 24, '2014-03-30 14:29:52', '2014-03-30 14:29:52', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', NULL, '1396168192', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, 6),
+(21, 24, '2014-03-30 14:29:55', '2014-03-30 14:29:55', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', 'abcd', 'abcd', 'abcd@abcd.abcd', 'abcd', 'abcd', 'abcd', '22', NULL, '1111223', NULL, '1396168195', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, 6),
+(22, 24, '2014-03-30 14:56:00', '2014-03-30 14:56:00', 'mmmmd', 'mmmmd', 'mmmmd@mmmmd.mmmmd', 'mmmmd', 'mmmmd', 'mmmmd', '111', NULL, '22223', 'mmmmd', 'mmmmd', 'mmmmd@mmmmd.mmmmd', 'mmmmd', 'mmmmd', 'mmmmd', '111', NULL, '22223', 1, '1396169780', 'Cash On Delivery', 'Delivery In Dhaka', '0', '747', NULL, NULL, 5),
+(23, 24, '2014-03-30 15:02:34', '2014-03-30 15:02:34', 'mmmmd', 'mmmmd', 'mmmmd@mmmmd.mmmmd', 'mmmmd', 'mmmmd', 'mmmmd', '111', NULL, '22223', 'mmmmd', 'mmmmd', 'mmmmd@mmmmd.mmmmd', 'mmmmd', 'mmmmd', 'mmmmd', '111', NULL, '22223', NULL, '1396170154', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, 5),
+(24, 24, '2014-03-30 16:25:20', '2014-03-30 16:25:20', 'mmmmd', 'mmmmd', 'mmmmd@mmmmd.mmmmd', 'mmmmd', 'mmmmd', 'mmmmd', '111', NULL, '22223', 'mmmmd', 'mmmmd', 'mmmmd@mmmmd.mmmmd', 'mmmmd', 'mmmmd', 'mmmmd', '111', NULL, '22223', NULL, '1396175120', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, 5),
+(25, 24, '2014-03-30 16:25:22', '2014-03-30 16:25:22', 'mmmmd', 'mmmmd', 'mmmmd@mmmmd.mmmmd', 'mmmmd', 'mmmmd', 'mmmmd', '111', NULL, '22223', 'mmmmd', 'mmmmd', 'mmmmd@mmmmd.mmmmd', 'mmmmd', 'mmmmd', 'mmmmd', '111', NULL, '22223', NULL, '1396175122', 'Cash On Delivery', 'Delivery In Dhaka', '0', '0', NULL, NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -829,7 +1009,7 @@ CREATE TABLE IF NOT EXISTS `sale_item` (
   `quantity` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `IDX_A35551FB4A7E4868` (`sale_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `sale_item`
@@ -845,7 +1025,12 @@ INSERT INTO `sale_item` (`id`, `sale_id`, `created`, `updated`, `product_name`, 
 (7, 13, '2013-12-23 14:49:51', '2013-12-23 14:49:51', 'The World of Noble Angels', '205', 1),
 (8, 14, '2013-12-23 14:55:50', '2013-12-23 14:55:50', 'The World of Noble Angels', '205', 1),
 (9, 14, '2013-12-23 14:55:50', '2013-12-23 14:55:50', 'Family Leadership', '346', 1),
-(10, 14, '2013-12-23 14:55:51', '2013-12-23 14:55:51', 'Jesus, Prophet of Islam', '325', 1);
+(10, 14, '2013-12-23 14:55:51', '2013-12-23 14:55:51', 'Jesus, Prophet of Islam', '325', 1),
+(11, 15, '2014-03-30 13:23:18', '2014-03-30 13:23:18', 'The World of Noble Angels', '205', 6),
+(12, 15, '2014-03-30 13:23:19', '2014-03-30 13:23:19', 'Head Scarf B', '323', 1),
+(13, 22, '2014-03-30 14:56:21', '2014-03-30 14:56:21', 'Marriage – The Making & Living of It', '304', 1),
+(14, 22, '2014-03-30 14:56:21', '2014-03-30 14:56:21', 'বিয়ে - স্বপ্ন থেকে অষ্ট প্রহর', '334', 1),
+(15, 22, '2014-03-30 14:56:21', '2014-03-30 14:56:21', 'Leadership Lessons From The Life Of Rasoolullah', '109', 1);
 
 -- --------------------------------------------------------
 
@@ -1083,37 +1268,39 @@ CREATE TABLE IF NOT EXISTS `store_product_category` (
   `enabled` tinyint(1) DEFAULT NULL,
   `description` longtext COLLATE utf8_unicode_ci NOT NULL,
   `slug` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_B141E088989D9B62` (`slug`),
-  KEY `IDX_B141E088B092A811` (`store_id`)
+  KEY `IDX_B141E088B092A811` (`store_id`),
+  KEY `IDX_B141E088727ACA70` (`parent_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `store_product_category`
 --
 
-INSERT INTO `store_product_category` (`id`, `store_id`, `name`, `enabled`, `description`, `slug`) VALUES
-(4, 5, 'Religious Books', 1, 'Desc', 'religious-books'),
-(5, 5, 'Marriage', 1, 'Desc', 'marriage'),
-(6, 6, 'Books and CDs', 1, 'Islamic Books, Mushaf, Lectures', 'books-and-cds'),
-(7, 6, 'Hijabs', 1, 'Hijabs and Abayas', 'hijabs'),
-(8, 6, 'Scarves', 1, 'Selections of great Scarves', 'scarves'),
-(9, 6, 'Gift Items', 1, 'Gifts and Souvenirs', 'gift-items'),
-(10, 7, 'Spices', 1, 'Spices', 'spices'),
-(11, 7, 'Dairy', 1, 'Dairy', 'dairy'),
-(12, 7, 'Pulses', 1, 'Pulses', 'pulses'),
-(13, 7, 'Seeds', 1, 'Seeds', 'seeds'),
-(14, 7, 'Natural', 1, 'Natural', 'natural'),
-(16, 7, 'Oil', 1, 'Oil', 'oil'),
-(17, 7, 'Rice', 1, 'Rice', 'rice'),
-(18, 8, 'Towels', 1, 'All purpose towels', 'towels'),
-(19, 8, 'Ihram Clothing', 1, 'Ihram clothing for men and women', 'ihram'),
-(20, 9, 'Casual', 1, 'Casual', 'casual'),
-(21, 9, 'Golf', 1, 'Golf', 'golf'),
-(22, 9, 'Runners', 1, 'Runners', 'runners'),
-(23, 10, 'Sports', 1, 'Sports', 'sports'),
-(24, 10, 'Luxury', 1, 'Luxury', 'luxury'),
-(25, 10, 'Roadsters', 1, 'Roadsters', 'roadsters');
+INSERT INTO `store_product_category` (`id`, `store_id`, `name`, `enabled`, `description`, `slug`, `parent_id`) VALUES
+(4, 5, 'Religious Books', 1, 'Desc', 'religious-books', NULL),
+(5, 5, 'Marriage', 1, 'Desc', 'marriage', NULL),
+(6, 6, 'Books and CDs', 1, 'Islamic Books, Mushaf, Lectures', 'books-and-cds', NULL),
+(7, 6, 'Hijabs', 1, 'Hijabs and Abayas', 'hijabs', NULL),
+(8, 6, 'Scarves', 1, 'Selections of great Scarves', 'scarves', NULL),
+(9, 6, 'Gift Items', 1, 'Gifts and Souvenirs', 'gift-items', NULL),
+(10, 7, 'Spices', 1, 'Spices', 'spices', NULL),
+(11, 7, 'Dairy', 1, 'Dairy', 'dairy', NULL),
+(12, 7, 'Pulses', 1, 'Pulses', 'pulses', NULL),
+(13, 7, 'Seeds', 1, 'Seeds', 'seeds', NULL),
+(14, 7, 'Natural', 1, 'Natural', 'natural', NULL),
+(16, 7, 'Oil', 1, 'Oil', 'oil', NULL),
+(17, 7, 'Rice', 1, 'Rice', 'rice', NULL),
+(18, 8, 'Towels', 1, 'All purpose towels', 'towels', NULL),
+(19, 8, 'Ihram Clothing', 1, 'Ihram clothing for men and women', 'ihram', NULL),
+(20, 9, 'Casual', 1, 'Casual', 'casual', NULL),
+(21, 9, 'Golf', 1, 'Golf', 'golf', NULL),
+(22, 9, 'Runners', 1, 'Runners', 'runners', NULL),
+(23, 10, 'Sports', 1, 'Sports', 'sports', NULL),
+(24, 10, 'Luxury', 1, 'Luxury', 'luxury', NULL),
+(25, 10, 'Roadsters', 1, 'Roadsters', 'roadsters', NULL);
 
 -- --------------------------------------------------------
 
@@ -1162,18 +1349,21 @@ CREATE TABLE IF NOT EXISTS `user` (
   `is_active` tinyint(1) NOT NULL,
   `activation_code` varchar(225) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `my_store_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `salt`, `password`, `is_active`, `activation_code`, `email`) VALUES
-(15, NULL, '484d9733c2ffcbda0c9ef2f48f38111f', 'ac2570244cc3b4212a20bfd3ba888a549b468883', 1, '77cqgYIVdyhqrlG', 'zeshaq@gmail.com'),
-(21, NULL, 'a3670cc6dd054839a1fea5de06c50aa6', '182248bdbcd8752f553e4332beb4ddcf0ea90c1d', 1, NULL, 'linkon666@gmail.com'),
-(22, NULL, 'a065779dbfcdb2d375b0d1b24892d14b', 'f54999d939e655393d1bcc20dc62d87f76bd7f47', 1, 't6G5C5uAwe3xpfDi1dMNwLqW2', 'shomokalin@gmail.com');
+INSERT INTO `user` (`id`, `username`, `salt`, `password`, `is_active`, `activation_code`, `email`, `my_store_id`) VALUES
+(15, 'ze', '484d9733c2ffcbda0c9ef2f48f38111f', 'ac2570244cc3b4212a20bfd3ba888a549b468883', 1, '77cqgYIVdyhqrlG', 'zeshaq@gmail.com', 5),
+(21, NULL, 'a3670cc6dd054839a1fea5de06c50aa6', '182248bdbcd8752f553e4332beb4ddcf0ea90c1d', 1, NULL, 'linkon666@gmail.com', 0),
+(22, NULL, 'a065779dbfcdb2d375b0d1b24892d14b', 'f54999d939e655393d1bcc20dc62d87f76bd7f47', 1, 't6G5C5uAwe3xpfDi1dMNwLqW2', 'shomokalin@gmail.com', 0),
+(23, NULL, '2711118a7363fbe532e8030325b9392d', 'afb737e4f675dfacc1dd4791116f2d4fa9313073', 1, 'goLZn7q25wy9sWZ', 'customer@zeteq.com', 0),
+(24, NULL, '74f6ba3d211e7490e01adbb04c0fe227', '1769e3a699e3e2d95ec81a792eb22965dd13bdde', 1, 'oO8bZMs0wI2sMZn', 'rakib@ze.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -1198,7 +1388,9 @@ INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
 (15, 2),
 (21, 1),
 (21, 2),
-(22, 3);
+(22, 3),
+(23, 3),
+(24, 3);
 
 --
 -- Constraints for dumped tables
@@ -1210,7 +1402,8 @@ INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
 ALTER TABLE `cart`
   ADD CONSTRAINT `FK_BA388B75AA1164F` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_method` (`id`),
   ADD CONSTRAINT `FK_BA388B75F7D6850` FOREIGN KEY (`shipping_method_id`) REFERENCES `shipping_method` (`id`),
-  ADD CONSTRAINT `FK_BA388B7A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `FK_BA388B7A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FK_BA388B7B092A811` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`);
 
 --
 -- Constraints for table `cart_item`
@@ -1226,6 +1419,27 @@ ALTER TABLE `customer`
   ADD CONSTRAINT `FK_81398E09A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `favorite_item`
+--
+ALTER TABLE `favorite_item`
+  ADD CONSTRAINT `FK_F11D3C214584665A` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `FK_F11D3C21A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `favorite_stores`
+--
+ALTER TABLE `favorite_stores`
+  ADD CONSTRAINT `FK_E9251036A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FK_E9251036B092A811` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`);
+
+--
+-- Constraints for table `homeslidegallery_homeslideimage`
+--
+ALTER TABLE `homeslidegallery_homeslideimage`
+  ADD CONSTRAINT `FK_E62C36AC5E0752F0` FOREIGN KEY (`homeslidegallery_id`) REFERENCES `homeslide_gallery` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_E62C36ACCA7FD6A0` FOREIGN KEY (`homeslideimage_id`) REFERENCES `homeslide_image` (`id`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `page`
 --
 ALTER TABLE `page`
@@ -1235,13 +1449,15 @@ ALTER TABLE `page`
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
+  ADD CONSTRAINT `FK_D34A04AD727ACA70` FOREIGN KEY (`parent_id`) REFERENCES `product` (`id`),
   ADD CONSTRAINT `FK_D34A04ADB092A811` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`);
 
 --
 -- Constraints for table `product_category`
 --
 ALTER TABLE `product_category`
-  ADD CONSTRAINT `FK_CDFC73564B44BC51` FOREIGN KEY (`product_section_id`) REFERENCES `product_section` (`id`);
+  ADD CONSTRAINT `FK_CDFC73564B44BC51` FOREIGN KEY (`product_section_id`) REFERENCES `product_section` (`id`),
+  ADD CONSTRAINT `FK_CDFC7356727ACA70` FOREIGN KEY (`parent_id`) REFERENCES `product_category` (`id`);
 
 --
 -- Constraints for table `product_productcategory`
@@ -1256,6 +1472,13 @@ ALTER TABLE `product_productcategory`
 ALTER TABLE `product_productimage`
   ADD CONSTRAINT `FK_9854748E4584665A` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_9854748E9834DFA0` FOREIGN KEY (`productimage_id`) REFERENCES `product_image` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_rating`
+--
+ALTER TABLE `product_rating`
+  ADD CONSTRAINT `FK_BAF567864584665A` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `FK_BAF56786A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `product_storeproductcategory`
@@ -1275,7 +1498,8 @@ ALTER TABLE `related_prods`
 -- Constraints for table `sale`
 --
 ALTER TABLE `sale`
-  ADD CONSTRAINT `FK_E54BC005A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `FK_E54BC005A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FK_E54BC005B092A811` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`);
 
 --
 -- Constraints for table `sale_item`
@@ -1300,6 +1524,7 @@ ALTER TABLE `store_category`
 -- Constraints for table `store_product_category`
 --
 ALTER TABLE `store_product_category`
+  ADD CONSTRAINT `FK_B141E088727ACA70` FOREIGN KEY (`parent_id`) REFERENCES `store_product_category` (`id`),
   ADD CONSTRAINT `FK_B141E088B092A811` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`);
 
 --
