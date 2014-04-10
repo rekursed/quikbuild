@@ -14,13 +14,15 @@ use Zeteq\MarketBundle\Entity\Product;
 use Zeteq\MarketBundle\Form\CartAddressType;
 
 class CartController extends Controller {
-    
+
     public function pop_indexAction() {
         $em = $this->getDoctrine()->getManager();
         $carts = $this->get('service')->getCarts();
         $mycarts = array();
-        foreach ($carts as $cart) {
-            $mycarts[] = $em->getRepository('ZeteqMarketBundle:Cart')->findOneById($cart);
+        if (count($carts)>0) {
+            foreach ($carts as $cart) {
+                $mycarts[] = $em->getRepository('ZeteqMarketBundle:Cart')->findOneById($cart);
+            }
         }
         return $this->render('ZeteqMarketBundle:Cart:pop_index.html.twig', array('mycarts' => $mycarts));
     }
@@ -112,7 +114,7 @@ class CartController extends Controller {
             $mycarts[] = $em->getRepository('ZeteqMarketBundle:Cart')->findOneById($cart);
         }
 
-       return new \Symfony\Component\HttpFoundation\JsonResponse (array('val'=> $product.' is Added to you cart'));
+        return new \Symfony\Component\HttpFoundation\JsonResponse(array('val' => $product . ' is Added to you cart'));
 //        return $this->render('ZeteqMarketBundle:Cart:index.html.twig', array('mycarts' => $mycarts, 'cart' => $cart));
     }
 
@@ -260,11 +262,11 @@ class CartController extends Controller {
 
     public function order_detailsAction($sale) {
         $em = $this->getDoctrine()->getManager();
-        
+
         $sale = $em->getRepository('ZeteqMarketBundle:Sale')->findOneById($sale);
         return $this->render('ZeteqMarketBundle:Cart:order_details.html.twig', array(
                     'sale' => $sale,
         ));
     }
+
 }
-    

@@ -1,0 +1,120 @@
+<ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a href="#home" data-toggle="tab">Login</a></li>
+    <li><a href="#profile" data-toggle="tab">Register</a></li>
+
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="home">
+        <style type="text/css">
+
+
+            .form-signin {
+                max-width: 300px;
+                padding: 19px 29px 29px;
+                margin: 0 auto 20px;
+                background-color: #fff;
+                border: 1px solid #e5e5e5;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            }
+            .form-signin .form-signin-heading,
+            .form-signin .checkbox {
+                margin-bottom: 10px;
+            }
+            .form-signin input[type="text"],
+            .form-signin input[type="password"] {
+                font-size: 16px;
+                height: auto;
+                margin-bottom: 15px;
+                padding: 7px 9px;
+            }
+
+        </style>
+
+
+
+        <div class="row">
+           
+            <div class="col-md-12">
+                <div style="text-align:center">
+{% if error %}
+                    <div style="font-weight:bold;padding:10px;color:red">{{ error.message }}</div>
+{% endif %}
+                    <h2>Sign in</h2>
+                </div>
+                <form class="form-signin" action="{{ path('login_check') }}" method="post">
+                    <h2 class="form-signin-heading"></h2>
+
+                    <input type="text" id="username" name="_username" value="{{ last_username }}"  class="form-control" placeholder="Username" required autofocus/>
+
+                    <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required/>
+                    <label class="checkbox">
+                        <input type="checkbox" value="remember_me"> Remember me
+                    </label>
+    {#
+        If you want to control the URL the user is redirected to on success (more details below)
+        <input type="hidden" name="_target_path" value="/account" />
+    #}
+
+                    <button  class="btn btn-lg btn-primary btn-block" type="submit">login <i class="fa fa-sign-in"></i></button>
+                    <div style="text-align: center;margin-top:10px;">  <a href="{{path('forgot_password')}}">Forgot your password?</a></div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane" id="profile">
+        <div class="">
+            <div class="page-header" >
+                <h4>Having a myaccount allows you to checkout faster, view purchase records and many other benefits.</h4>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <form role="form" id="register-form" class="form-horizontal form-signin" action="{{ path('myaccount_registersave') }}" method="post" {{ form_enctype(form) }}>
+
+
+                   {{ form_errors(form) }}
+
+
+
+
+                <div class="form-group">
+                    <label class="control-label" for="Zeteq_userbundle_registerusertype_email">Your email</label>
+                    <div class="controls">
+                          {{ form_errors(form.email) }}
+                          {{ form_widget(form.email, { 'attr': {'class': 'form-control'} } ) }}    
+                    </div>
+                </div>                 
+
+
+
+                <div class="form-group">
+                    <label class="control-label" for="Zeteq_userbundle_registerusertype_password">Pick a password</label>
+                    <div class="controls">
+                          {{ form_errors(form.password) }}
+                          {{ form_widget(form.password, { 'attr': {'class': 'form-control'} } ) }}    
+                    </div>
+                </div> 
+
+
+
+
+    {{ form_rest(form) }}   
+
+
+
+                <div class="form-group">
+
+                    <button type="submit" class="btn btn-primary btn">Register</button>
+                </div>
+
+            </form></div>
+
+
+    </div>   

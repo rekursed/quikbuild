@@ -16,9 +16,37 @@ use Zeteq\MarketBundle\Form\CustomerShippingAddressType;
 use Zeteq\MarketBundle\Form\CustomerBillingAddressType;
 use Zeteq\MarketBundle\Entity\Product;
 use \Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class MyAccountController extends Controller {
-    
+
+    public function register_loginAction(Request $request) {
+
+        $entity = new User();
+        $form = $this->createForm(new RegisterUserType(), $entity);
+        $request = $this->getRequest();
+        $session = $request->getSession();
+
+        // get the login error if there is one
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(
+                    SecurityContext::AUTHENTICATION_ERROR
+            );
+        } else {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        }       
+
+
+        return $this->render('ZeteqMarketBundle:MyAccount:register_login.html.twig', array(
+                    'entity' => $entity,
+                    'form' => $form->createView(),
+                    'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+                    'error' => $error,
+                        )
+        );
+    }
+
     public function purchase_indexAction(Request $request) {
 
         $user = $this->get('security.context')->getToken()->getUser();
@@ -30,7 +58,7 @@ class MyAccountController extends Controller {
                         , array('user' => $user, 'purchases' => $wl)
         );
     }
-    
+
     /**
      * Deletes a FavoriteStore entity.
      *
@@ -168,8 +196,8 @@ class MyAccountController extends Controller {
                     'edit_form' => $editForm->createView(),
         ));
     }
-    
-     /**
+
+    /**
      * Edits an existing Customer entity.
      *
      */
