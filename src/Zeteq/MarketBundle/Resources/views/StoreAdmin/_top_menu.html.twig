@@ -1,0 +1,26 @@
+<nav id="sa_second_menu" style="margin-top:55px;" role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+    <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+    <div class="container">
+        <div class="row">
+
+
+            {%if store is defined%}
+            <ul class="nav navbar-nav sm_ul">
+                <li id="dash" ><a class="sa_sm_a" style="text-align:center" href="#"><i style="font-size:16px;display:block" class="fa fa-home"></i>Dashboard</a></li>
+                <li id="edit"  class=""><a href="{{ path('store_admin_edit', { 'id': store.id }) }}"><i class="fa fa-pencil"></i> Edit</a> </li>
+                <li id="product" class="">  <a href="{{ path('storeadmin_product', { 'store_id': store.id }) }}"><i class="fa fa-tag"></i> Products</a> </li>
+                <li id="category" class=""><a href="{{ path('storeproductcategory', { 'store_id': store.id }) }}"><i class="fa fa-bars"></i> Categories</a> </li>
+                <li id="page" class=""><a href="{{ path('storeadmin_page', { 'store_id': store.id }) }}"><i class="fa fa-file-o"></i> Pages</a> </li>
+                <li id="sale" class=""><a href="{{ path('store_admin_sale_index', { 'store_id': store.id }) }}"><i class="fa fa-shopping-cart"></i> Sales</a> </li>
+                <li id="rating" class=""><a href="{{ path('storeadmin_product_rating', { 'store_id': store.id }) }}"><i class="fa fa-star"></i> Ratings</a> </li>
+            </ul>
+            {%endif%}
+        </div>
+    </div>
+</nav>
+<script>
+    {%if active is defined%}
+    $('#' +'{{active}}').addClass('active');
+    {%endif%}
+
+</script>

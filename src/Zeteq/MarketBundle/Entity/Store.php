@@ -131,6 +131,31 @@ class Store {
     protected $viewed;
 
     /**
+     * @ORM\Column(type="text",nullable=true)
+     */
+    protected $about_us;
+
+    /**
+     * @ORM\Column(type="text",nullable=true)
+     */
+    protected $payments;
+
+    /**
+     * @ORM\Column(type="text",nullable=true)
+     */
+    protected $shipping;
+
+    /**
+     * @ORM\Column(type="text",nullable=true)
+     */
+    protected $returns_refunds;
+
+    /**
+     * @ORM\Column(type="text",nullable=true)
+     */
+    protected $additional_policies;
+
+    /**
      * @ORM\ManyToOne(targetEntity="StoreCategory", inversedBy="stores")
      * @ORM\JoinColumn(name="store_category_id", referencedColumnName="id",nullable=false)
      * 
@@ -1097,17 +1122,15 @@ class Store {
         return $this->favorite_stores;
     }
 
-
     /**
      * Add sales
      *
      * @param \Zeteq\MarketBundle\Entity\Sale $sales
      * @return Store
      */
-    public function addSale(\Zeteq\MarketBundle\Entity\Sale $sales)
-    {
+    public function addSale(\Zeteq\MarketBundle\Entity\Sale $sales) {
         $this->sales[] = $sales;
-    
+
         return $this;
     }
 
@@ -1116,8 +1139,7 @@ class Store {
      *
      * @param \Zeteq\MarketBundle\Entity\Sale $sales
      */
-    public function removeSale(\Zeteq\MarketBundle\Entity\Sale $sales)
-    {
+    public function removeSale(\Zeteq\MarketBundle\Entity\Sale $sales) {
         $this->sales->removeElement($sales);
     }
 
@@ -1126,8 +1148,100 @@ class Store {
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getSales()
-    {
+    public function getSales() {
         return $this->sales;
+    }
+
+
+    /**
+     * Set payments
+     *
+     * @param string $payments
+     * @return Store
+     */
+    public function setPayments($payments)
+    {
+        $this->payments = $payments;
+    
+        return $this;
+    }
+
+    /**
+     * Get payments
+     *
+     * @return string 
+     */
+    public function getPayments()
+    {
+        return $this->payments;
+    }
+
+    /**
+     * Set shipping
+     *
+     * @param string $shipping
+     * @return Store
+     */
+    public function setShipping($shipping)
+    {
+        $this->shipping = $shipping;
+    
+        return $this;
+    }
+
+    /**
+     * Get shipping
+     *
+     * @return string 
+     */
+    public function getShipping()
+    {
+        return $this->shipping;
+    }
+
+    /**
+     * Set returns_refunds
+     *
+     * @param string $returnsRefunds
+     * @return Store
+     */
+    public function setReturnsRefunds($returnsRefunds)
+    {
+        $this->returns_refunds = $returnsRefunds;
+    
+        return $this;
+    }
+
+    /**
+     * Get returns_refunds
+     *
+     * @return string 
+     */
+    public function getReturnsRefunds()
+    {
+        return $this->returns_refunds;
+    }
+
+    /**
+     * Set additional_policies
+     *
+     * @param string $additionalPolicies
+     * @return Store
+     */
+    public function setAdditionalPolicies($additionalPolicies)
+    {
+        $this->additional_policies = $additionalPolicies;
+    
+        return $this;
+    }
+
+    /**
+     * Get additional_policies
+     *
+     * @return string 
+     */
+    public function getAdditionalPolicies()
+    {
+        return $this->additional_policies;
     }
 }

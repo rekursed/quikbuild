@@ -2,22 +2,13 @@
 {% block content -%}
   
 
-<div style="" class="sa_index_header"><h2><a href="{{path('store_admin')}}">Stores </a>  <span class="fa fa-caret-right"></span> 
+ {%set active = 'page'%}
+<script>
+    {%if active is defined%}
+    $('#' +'{{active}}').addClass('active');
+    {%endif%}
 
-{{store.getStoreName()}}
-   </h2>
-  </div>
-
-
-
-<ul class="nav nav-tabs nav-justified" style="margin-bottom:40px;">
-    
-    <li  class=""><a href="{{ path('store_admin_edit', { 'id': store.id }) }}"><i class="fa fa-pencil"></i> Edit</a> </li>
-<li  class="">  <a href="{{ path('storeadmin_product', { 'store_id': store.id }) }}"><i class="fa fa-shopping-cart"></i> Products</a> </li>
-<li><a href="{{ path('storeproductcategory', { 'store_id': store.id }) }}"><i class="fa fa-archive"></i> Categories</a> </li>
-<li  class="active"><a href="{{ path('storeadmin_page', { 'store_id': store.id }) }}"><i class="fa fa-file-o"></i> Pages</a> </li>
-</ul>
-    
+</script>
     <nav class="navbar navbar-default" role="navigation">
     <a class="navbar-brand" href="#">Pages</a>
  

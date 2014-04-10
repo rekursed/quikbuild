@@ -3,21 +3,13 @@
 
 {% block content -%}
 
-<div style="" class="sa_index_header"><h2><a href="{{path('store_admin')}}">Stores </a>  <span class="fa fa-caret-right"></span> 
+ {%set active = 'rating'%}
+<script>
+    {%if active is defined%}
+    $('#' +'{{active}}').addClass('active');
+    {%endif%}
 
-{{store.getStoreName()}}
-    </h2>
-</div>
-
-
-
-<ul class="nav nav-tabs nav-justified" style="margin-bottom:40px;">
-    <li  class=""><a href="{{ path('store_admin_edit', { 'id': store.id }) }}"><i class="fa fa-pencil"></i> Edit</a> </li>
-    <li  class="active">  <a href="{{ path('storeadmin_product', { 'store_id': store.id }) }}"><i class="fa fa-shopping-cart"></i> Products</a> </li>
-    <li><a href="{{ path('storeproductcategory', { 'store_id': store.id }) }}"><i class="fa fa-archive"></i> Categories</a> </li>
-    <li  class=""><a href="{{ path('storeadmin_page', { 'store_id': store.id }) }}"><i class="fa fa-file-o"></i> Pages</a> </li>
-</ul>
-
+</script>
 
 <nav class="navbar navbar-default">
 
@@ -71,7 +63,7 @@
         <tbody>
 
         {% for var in ratings  %}
-            <tr>
+            <tr id='tr{{loop.index}}' >
                 <td>{{var.id}}</td>
                 <td>{{var.product.name}}</td>
                 <td>{{var.comment}}</td>
@@ -80,10 +72,10 @@
                 <td style="text-align:center">{% if var.enabled %}<i class="fa fa-check"></i>{% else%}<i class="fa fa-minus-circle"></i>{%endif%}</td>
                 <td style="text-align:right">
                     <div class="btn-group">
-                        <a class="btn btn-success btn-sm" href="{{ path('storeadmin_product_rating_approve', { 'id': var.id }) }}"><i class="fa fa-check"></i> Approve</a>
+                        <a class="btn btn-success btn-sm ajax_link" href="{{ path('storeadmin_product_rating_approve', { 'id': var.id }) }}"><i class="fa fa-check"></i> Approve</a>
 
-                        <a onclick="return confirm('are you sure?')"  class="btn btn-danger btn-sm"  href="{{ path('storeadmin_product_rating_delete',{'id': var.getId()}) }}">
-                            <span class="glyphicon glyphicon-remove"></span>   Delete
+                        <a id='{{loop.index}}' onclick="return confirm('are you sure?')"  class="btn btn-danger btn-sm ajax_link_cart_del"  href="{{ path('storeadmin_product_rating_delete',{'id': var.getId()}) }}">
+                            <span class="glyphicon glyphicon-remove "></span>   Delete
                         </a>
                         <a class="btn btn-default btn-sm" href="{{ path('product_show', { 'slug': var.product.slug }) }}"><i class="fa fa-desktop"></i> Show Product</a>
 

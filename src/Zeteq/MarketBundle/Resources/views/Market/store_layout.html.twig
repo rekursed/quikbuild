@@ -34,26 +34,20 @@
     <meta name="twitter:image" content="{% block twitter_image %}http://{{web}}{{asset(store.getProfileImageWebPath()  )  }}  {% endblock %}" />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        {% block javascripts %}
+{% block javascripts %}
     <script src="{{ asset('js/jquery-1.9.1.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('bootstrap-3.0.0/dist/js/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery.form.js') }}"  type="text/javascript"></script>
+    <script src="{{ asset('bootstrap-3.0.0/js/tooltip.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/select2-3.4.5/select2.min.js') }}"></script>
+    <link href="{{ asset('js/select2-3.4.5/select2.css') }}" type="text/css" rel="stylesheet" /> 
 
-
-
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap-wysihtml5.css')}}"></link>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css')}}"></link>
+    <script src="{{ asset('js/wysihtml5-0.3.0.js')}}"></script>
+    <script src="{{ asset('js/jquery-1.7.2.min.js')}}"></script>
+    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('js/bootstrap-wysihtml5.js')}}"></script>
 
 
 
@@ -69,9 +63,31 @@
 <![endif]-->
 
     <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" /> 
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/yamm.css') }}">  
+
+      {% endblock %}
+
+       {# {% block javascripts %}
+    <script src="{{ asset('js/jquery-1.9.1.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap-3.0.0/dist/js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/jquery.form.js') }}"  type="text/javascript"></script>
+
+        {% endblock %}
+
+        {% block stylesheets %}
+
+    <link href="{{ asset('bootstrap-3.0.0/dist/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+
+<script src="{{ asset('bootstrap-3.0.0/assets/js/respond.min.js') }}"></script>
+<![endif]-->
+
+    <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
     <link href="{{ asset('/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />   
     <link rel="stylesheet" type="text/css" href="styles/styles.css">
-        {% endblock %}
+        {% endblock %}#}
 
 
 
@@ -101,6 +117,7 @@
 
 
 <body id="store_layout_body">
+    
     <div id="fb-root"></div>
 
     <script>
@@ -155,8 +172,11 @@
 
                 <ul id="tn_right_menu" class="nav navbar-nav pull-right">
 
-                    <li><a href="{{path('cart_index')}}"><span class="glyphicon glyphicon-shopping-cart"></span>Cart({{service.getCart(store.getSlug()).getCount()}})</a></li>
-
+                    <li>  <a href='#' type="button" data-title="Cart" data-html="true" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" 
+                             data-content="{% render controller('ZeteqMarketBundle:Cart:pop_index') %}">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                        </a> 
+                    </li>
 {% if is_granted('ROLE_CUSTOMER') %}    <li><a href="{{path('myaccount')}}">My Account</a></li>{% endif %}
 
       {% if is_granted('ROLE_STORE') %}    <li><a href="{{path('store_admin')}}">Store Admin</a></li>{% endif %}
@@ -274,7 +294,7 @@
                         <h4 style="font-size: 16px;"> email: {{store.getEmail()}} </h4>
                         <h4 style="font-size: 16px;"> phone: {{store.getPhone()}} </h4>
 
-                         <a class="btn btn-success ajax_link" href="{{path('add_to_favorite_store',{'slug':store.slug})}}">Add Store to Favorite</a>
+                        <a class="btn btn-success ajax_link" href="{{path('add_to_favorite_store',{'slug':store.slug})}}">Add Store to Favorite</a>
        {%if store.getFacebookPage() != "" %}<a href="{{store.getFacebookPage()}}"><i class="icon-facebook"></i></a>{% endif %}
        {%if store.getTwitter() != "" %}<a href="{{store.getTwitter()}}"><i class="icon-twitter"></i></a>{% endif %}
        {%if store.getGooglePlus() != "" %}<a href="{{store.getGooglePlus()}}"><i class="icon-google-plus-sign"></i></a>{% endif %}
@@ -308,7 +328,7 @@
 
 
 
-
+{{include('ZeteqMarketBundle:Market:_load.html.twig')}}
 
 
     <script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>

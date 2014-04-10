@@ -1,0 +1,65 @@
+
+<div>
+{% if mycarts %}
+{% for cart in mycarts %}
+{% if cart.getCount() >0%}
+    <table class='table table-bordered table-responsive table-striped table-hover'>
+        <tr>
+            <th>sl</th>
+            <th colspan=2>Product</th>
+            <th style='text-align:right'>Price</th>
+            <th>Quantity</th>
+            <th style='text-align:right'>Total</th>
+        </tr>
+ {% for item in cart.getCartItems()%}
+        <tr id='tr{{loop.index}}'>
+            <td>{{loop.index}}</td>
+
+            <td>
+                <img style=' max-width: 50px; max-height: 50px;' src='{{asset(item.getProduct().getWebPath())}}'/>
+            </td>
+
+            <td>
+                <h4><a href='{{path('product_show',{'slug':item.getProduct().getSlug()})}}'>{{item.getProduct().getName()}}</a></h4>
+                <a href='{{path('store_show',{'slug':item.getProduct().getStore().getSlug()})}}'><h6>{{item.getProduct().getStore()}}</a></h6>
+            </td>
+
+
+            <td  style='text-align:right' >{{service.getCurrencySymbol()}}{{item.getProduct().getPrice()}}</td>
+            <td>
+                <div class='row' style=' margin-left: 5px'>
+                    <form method='post' action='{{path('cart_update_quantity',{'id':item.getId()})}}'>
+                        <div class='row'>
+                            <div class='col-md-3'> 
+                                <input style='text-align:center' class='form-control'  placeholder='' type='text' name='quantity' value='{{item.getQuantity()}}'/>
+                                <input hidden='text' name='id' value='{{item.getId()}}'/>  
+                            </div>
+
+                            <div class='col-md-6'>
+                                <button class='btn btn-sm btn-default ajax_link_cart_add'><i class='fa fa-refresh'></i> </button>
+                                <a id='{{loop.index}}' class='btn btn-danger btn-sm ajax_link_cart_del' href='{{path('cart_remove_item',{'id':item.getId()})}}' ><i class='fa fa-trash-o'></i></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </td>
+            <td  style='text-align:right' >{{service.getCurrencySymbol()}} {{item.getTotal()}}</td>
+        </tr>
+    {% endfor%}
+    </table>
+    <a class='btn btn-info btn-lg ' href='{{path('cart_checkout',{'store_slug':cart.store.slug })}}'>Checkout</a>
+    <a class='btn btn-danger btn-lg' href='{{path('cart_clear',{'store':cart.store.slug})}}'>Clear Cart</a> 
+{%endif %}
+    <hr/>
+{%endfor%}
+{% else %}
+    <div class='alert alert-warning'>Your shopping cart is empty</div>
+{%endif %}
+</div>
+{{include('ZeteqMarketBundle:Market:_load.html.twig')}}
+
+
+
+
+
+

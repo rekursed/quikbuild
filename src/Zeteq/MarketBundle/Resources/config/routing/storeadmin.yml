@@ -41,5 +41,13 @@ store_admin_delete:
 
 
 store_admin_sale_index:
-    pattern:  /{store_id}
+    pattern:  /sale/{store_id}
     defaults: { _controller: "ZeteqMarketBundle:StoreAdmin:sale_index" }
+    
+store_admin_sale_edit:
+    pattern:  /sale/edit/{order}{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdmin:sale_edit" }
+    
+store_admin_sale_update:
+    pattern:  /sales/update/{id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdmin:sale_update" }

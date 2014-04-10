@@ -1,0 +1,79 @@
+<div class='loading' id='loading' >
+    <div class='row'>
+        <div class='col-md-3'>
+            <i style='padding:18px' class='fa fa-spinner fa-spin fa-3x'></i>
+        </div>
+        <div class='col-md-9' style='top: 50%; vertical-align: middle'>
+            <h5 id='load_text' class='load_text'></h5>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script>
+    
+    $('.ajax_link_cart_del').click(function(e) {
+
+
+        e.preventDefault();
+        $('#loading').fadeIn();
+        $(this).fadeOut();
+        var id = $(this).attr('id');
+        {#var alt = $(this).attr('alt');        
+        var str1 = $(this).attr('data-alt-title');
+        var str2 = $(this).attr('data-original-title');#}
+        var href = $(this).attr('href');
+        //alert(text);
+        $.ajax({
+            type: 'POST', // or GET
+            url: href,
+            data: 'someData=someThing&someMore=somethingElse',
+            success: function(data) {
+                $('#load_text').html(data['val']);
+                
+                $('#tr'+id).hide();
+                $('#loading').fadeOut(3000);
+
+            }
+        });
+        return false; // stop the browser following the link
+    });
+    
+    $('.ajax_link').click(function(e) {
+
+
+        e.preventDefault();
+        $('#loading').fadeIn();
+
+        var id = $(this).attr('id');
+        {#var alt = $(this).attr('alt');        
+        var str1 = $(this).attr('data-alt-title');
+        var str2 = $(this).attr('data-original-title');#}
+        var href = $(this).attr('href');
+        //alert(text);
+        $.ajax({
+            type: 'POST', // or GET
+            url: href,
+            data: 'someData=someThing&someMore=somethingElse',
+            success: function(data) {
+                $('#load_text').html(data['val']);
+               {# $(this).attr('href',alt);
+                $(this).attr('alt',href);
+                $(this).attr('data-alt-title',str2);
+                $(this).attr('data-original-title',str1);
+                $(this).html('a');#}
+                
+                {#alert( $(this).attr('href'));#}
+                {#$('.grp').html({{include('ZeteqMarriageBundle:Default:_profile_buttons.html.twig')}});#}
+                $('#loading').fadeOut(3000);
+
+            }
+        });
+        return false; // stop the browser following the link
+    });
+    
+    
+    
+</script>

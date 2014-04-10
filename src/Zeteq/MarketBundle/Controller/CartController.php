@@ -14,6 +14,16 @@ use Zeteq\MarketBundle\Entity\Product;
 use Zeteq\MarketBundle\Form\CartAddressType;
 
 class CartController extends Controller {
+    
+    public function pop_indexAction() {
+        $em = $this->getDoctrine()->getManager();
+        $carts = $this->get('service')->getCarts();
+        $mycarts = array();
+        foreach ($carts as $cart) {
+            $mycarts[] = $em->getRepository('ZeteqMarketBundle:Cart')->findOneById($cart);
+        }
+        return $this->render('ZeteqMarketBundle:Cart:pop_index.html.twig', array('mycarts' => $mycarts));
+    }
 
     public function indexAction() {
         $em = $this->getDoctrine()->getManager();
@@ -102,8 +112,8 @@ class CartController extends Controller {
             $mycarts[] = $em->getRepository('ZeteqMarketBundle:Cart')->findOneById($cart);
         }
 
-
-        return $this->render('ZeteqMarketBundle:Cart:index.html.twig', array('mycarts' => $mycarts, 'cart' => $cart));
+       return new \Symfony\Component\HttpFoundation\JsonResponse (array('val'=> $product.' is Added to you cart'));
+//        return $this->render('ZeteqMarketBundle:Cart:index.html.twig', array('mycarts' => $mycarts, 'cart' => $cart));
     }
 
     public function update_quantityAction(Request $request) {

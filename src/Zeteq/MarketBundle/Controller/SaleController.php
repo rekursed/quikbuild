@@ -9,6 +9,7 @@ use APY\DataGridBundle\Grid\Export\ExcelExport;
 use APY\DataGridBundle\Grid\Action\RowAction;
 use APY\DataGridBundle\Grid\Action\MassAction;
 use APY\DataGridBundle\Grid\Action\DeleteMassAction;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -21,6 +22,27 @@ use Zeteq\MarketBundle\Form\SaleType;
  */
 class SaleController extends Controller
 {
+    
+    /**
+     * Deletes a Sale entity.
+     *
+     */
+    public function saleitem_deleteAction(Request $request, $id)
+    {
+ 
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('ZeteqMarketBundle:SaleItem')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Sale entity.');
+            }
+
+            $em->remove($entity);
+            $em->flush();
+  
+
+        return new JsonResponse (array('val'=> $entity->getProductName().' is removed') );
+    }
 
     /**
      * Lists all Sale entities.

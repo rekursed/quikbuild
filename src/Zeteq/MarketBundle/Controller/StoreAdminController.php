@@ -7,12 +7,71 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Zeteq\MarketBundle\Entity\Store;
 use Zeteq\MarketBundle\Form\StoreType;
 use Zeteq\UserBundle\Form\UserChangePasswordType;
+use Zeteq\MarketBundle\Form\StoreAdminSaleType;
 
 /**
  * Store controller.
  *
  */
 class StoreAdminController extends Controller {
+
+    /**
+     * Edits an existing Sale entity.
+     *
+     */
+    public function sale_updateAction(Request $request, $id) {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ZeteqMarketBundle:Sale')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Sale entity.');
+        }
+        
+
+        $editForm = $this->createForm(new StoreAdminSaleType(), $entity, array(
+            'action' => $this->generateUrl('store_admin_sale_update', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+//        throw $this->createNotFoundException('Unable to find User entity.');
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('store_admin_sale_edit', array('store_id' => $entity->getStore()->getId(), 'order' => $entity->getOrderNumber())));
+        }
+        
+        return $this->render('ZeteqMarketBundle:StoreAdminSales:edit.html.twig', array(
+                    'edit_form' => $editForm->createView(),
+                    'store_id' => $entity->getStore()->getId(),
+                    'sale' => $entity,
+                    'store' => $entity->getStore()
+        ));
+    }
+
+    public function sale_editAction($store_id, $order) {
+        $em = $this->getDoctrine()->getManager();
+
+        $store = $em->getRepository('ZeteqMarketBundle:Store')->find($store_id);
+
+
+        $sale = $em->getRepository('ZeteqMarketBundle:Sale')->findOneBy(array('order_number' => $order));
+
+        //throw $this->createNotFoundException('Unable to find User entity.');
+
+        $form = $this->createForm(new StoreAdminSaleType(), $sale, array(
+            'action' => $this->generateUrl('store_admin_sale_update', array('id' => $sale->getId())),
+            'method' => 'PUT',
+        ));
+
+        return $this->render('ZeteqMarketBundle:StoreAdminSales:edit.html.twig', array(
+                    'edit_form' => $form->createView(),
+                    'store_id' => $store_id,
+                    'sale' => $sale,
+                    'store' => $store
+        ));
+    }
 
     /**
      * Lists all StoreProductCategory entities.

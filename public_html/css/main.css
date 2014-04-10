@@ -1,4 +1,44 @@
+.popover {
+    background-clip: padding-box;
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    max-width: 100%;
+    max-height: 500px;
+    padding: 1px;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    white-space: normal;
+    z-index: 10010;
+    position: fixed;
+    overflow-y:scroll;
+}
 
+
+.loading {
+    background-color: #404040;
+    border-radius: 10px;
+    bottom: 7%;
+    color: #aacd4e;
+    display: none;
+    height: 75px;
+    left: 2%;
+    opacity: 0.9;
+    position: fixed;
+    text-align: center;
+    vertical-align: middle;
+    width: 180px;
+    z-index: 2000000;
+}
+
+.pop-div .popover-content {
+    position: fixed;
+    
+}
 @font-face {
     font-family: "EX";
     src: url("../font/Exo2-Regular.ttf");

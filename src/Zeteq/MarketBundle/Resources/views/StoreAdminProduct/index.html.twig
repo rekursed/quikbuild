@@ -3,7 +3,7 @@
 
 {% block content -%}
 
-<div style="" class="sa_index_header"><h2><a href="{{path('store_admin')}}">Stores </a>  <span class="fa fa-caret-right"></span> 
+{#<div style="" class="sa_index_header"><h2><a href="{{path('store_admin')}}">Stores </a>  <span class="fa fa-caret-right"></span> 
 
 {{store.getStoreName()}}
    </h2>
@@ -17,8 +17,14 @@
 <li><a href="{{ path('storeproductcategory', { 'store_id': store.id }) }}"><i class="fa fa-archive"></i> Categories</a> </li>
 <li  class=""><a href="{{ path('storeadmin_page', { 'store_id': store.id }) }}"><i class="fa fa-file-o"></i> Pages</a> </li>
 </ul>
+#}
+ {%set active = 'product'%}
+<script>
+    {%if active is defined%}
+    $('#' +'{{active}}').addClass('active');
+    {%endif%}
 
-
+</script>
     <nav class="navbar navbar-default">
         
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -70,7 +76,7 @@
         <tbody>
  
         {% for entity in entities %}
-            <tr>
+            <tr id='tr{{loop.index}}'>
                 <td><a href="{{ path('product_edit', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td><input type="checkbox" name="prod[]" value="{{entity.getId()}}" class="chk"></td>
                 <td><img style="height:40px;" src="{{asset(entity.getWebPath())}}"/></td>
@@ -83,7 +89,7 @@
                     <div class="btn-group">
                         <a class="btn btn-default btn-sm" href="{{ path('product_show', { 'slug': entity.slug }) }}"><i class="fa fa-desktop"></i> show</a>
                         <a class="btn btn-default btn-sm"  href="{{ path('storeadmin_product_edit', { 'id': entity.id,'store_id':entity.getStore().getId() }) }}"><span class="glyphicon glyphicon-edit"></span> edit</a>
-                       <a onclick="return confirm('are you sure?')"  class="btn btn-danger btn-sm"  href="{{ path('storeadmin_product_delete',{'id': entity.getId()}) }}">
+                       <a id='{{loop.index}}' onclick="return confirm('are you sure?')"  class="btn btn-danger btn-sm ajax_link_cart_del"  href="{{ path('storeadmin_product_delete',{'id': entity.getId()}) }}">
                            <span class="glyphicon glyphicon-remove"></span>   Delete
         </a>
                     

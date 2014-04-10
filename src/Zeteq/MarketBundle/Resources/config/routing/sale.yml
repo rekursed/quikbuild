@@ -28,3 +28,8 @@ sale_delete:
     pattern:  /{id}/delete
     defaults: { _controller: "ZeteqMarketBundle:Sale:delete" }
 
+
+saleitem_delete:
+    pattern:  /saleitem/{id}/delete
+    defaults: { _controller: "ZeteqMarketBundle:Sale:saleitem_delete" }
+

@@ -47,7 +47,12 @@
     <script src="{{ asset('js/select2-3.4.5/select2.min.js') }}"></script>
     <link href="{{ asset('js/select2-3.4.5/select2.css') }}" type="text/css" rel="stylesheet" /> 
 
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap-wysihtml5.css')}}"></link>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css')}}"></link>
+    <script src="{{ asset('js/wysihtml5-0.3.0.js')}}"></script>
+    <script src="{{ asset('js/jquery-1.7.2.min.js')}}"></script>
+    <script src="{{ asset('js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('js/bootstrap-wysihtml5.js')}}"></script>
 
 
 
@@ -74,6 +79,7 @@
     <script type="text/javascript">
         $(function() {
             $("[rel='tooltip']").tooltip();
+            $("[rel='popover']").popover();
         });
     </script>
 </head>
@@ -81,6 +87,7 @@
 
 
 <body>
+    
     <script>
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -133,7 +140,15 @@
 
 
                 <ul id="tn_right_menu" class="nav navbar-nav pull-right" style=" margin-top: 5px;">
-
+                   {# <li><a href="{{path('cart_index')}}"><span class="glyphicon glyphicon-shopping-cart"></span>Cart({{service.getCarts()|length}})</a></li>
+#}
+                    
+                    <li>  <a type="button" data-title="Cart" data-html="true" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" 
+                             data-content="{% render controller('ZeteqMarketBundle:Cart:pop_index') %}">
+                            <i class="fa fa-shopping-cart fa-2x"></i>
+                        </a> 
+                    </li>
+                    
     {% if is_granted('ROLE_CUSTOMER') %} 
                     <li><a href="{{path('myaccount')}}"><i class="fa fa-dashboard"></i> My Account</a></li>
                    {# <div class="btn-group">
@@ -298,7 +313,7 @@
         </div>
     </div>
 
-
+{{include('ZeteqMarketBundle:Market:_load.html.twig')}}
 </body>
 </html>
 

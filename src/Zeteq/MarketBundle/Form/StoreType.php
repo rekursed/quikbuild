@@ -25,7 +25,12 @@ class StoreType extends AbstractType {
                 ->add('google_plus')
                 ->add('address')
                 
-                ->add('enabled')
+                ->add('about_us')
+                ->add('payments', 'ckeditor')
+                ->add('shipping', 'ckeditor')
+                ->add('returns_refunds', 'ckeditor')
+                ->add('additional_policies', 'ckeditor')
+                
                 ->add('profile_image', 'file', array(
                     'required' => false,
                     'data_class' => null

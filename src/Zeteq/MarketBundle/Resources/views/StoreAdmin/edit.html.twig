@@ -1,10 +1,10 @@
 {% extends 'ZeteqMarketBundle:StoreAdmin:store_admin_layout.html.twig' %}
 
- 
+
 
 {% block content -%}
 
-<div style="" class="sa_index_header"><h2><a href="{{path('store_admin')}}">Stores </a>  <span class="fa fa-caret-right"></span> 
+{#<div style="" class="sa_index_header"><h2><a href="{{path('store_admin')}}">Stores </a>  <span class="fa fa-caret-right"></span> 
 
 {{store.getStoreName()}}
    </h2>
@@ -19,51 +19,86 @@
 <li><a href="{{ path('storeproductcategory', { 'store_id': store.id }) }}"><i class="fa fa-archive"></i> Categories</a> </li>
 <li  class=""><a href="{{ path('storeadmin_page', { 'store_id': store.id }) }}"><i class="fa fa-file-o"></i> Pages</a> </li>
 </ul>
+#}
+ {%set active = 'edit'%}
+<script>
+    {%if active is defined%}
+    $('#' + '{{active}}').addClass('active');
+    {%endif%}
 
-
+</script>
 {{ form_start(edit_form) }}
-    
-    <nav class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
- 
-        </div>
+        </button>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse">
-
- 
-               <button class="btn btn-danger" type="submit">Save</button>
-                       <a  class="btn btn-success navbar-btn"  href="{{ path('store_admin') }}">
-            Back to the list
-        </a>
-    <a  class="btn btn-info navbar-btn"  href="{{ path('store_show',{'slug':store.slug}) }}">
-Go to store        </a>
-               
-        </div><!-- /.navbar-collapse -->
-      </nav>
-    
-    {{ form_errors(edit_form) }}
-    <div class="well">
-        <h4 >Profile Image</h4>    
-    <img style="height:150px;" src="{{ asset(edit_form.vars.value.getProfileImageWebPath()) }}"/>
-    
-    {{ form_widget(edit_form.profile_image) }}
     </div>
 
-   <div class="well">
-       <h4>Cover Photo</h4>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+
+
+        <button class="btn btn-danger" type="submit">Save</button>
+        <a  class="btn btn-success navbar-btn"  href="{{ path('store_admin') }}">
+            Back to the list
+        </a>
+        <a  class="btn btn-info navbar-btn"  href="{{ path('store_show',{'slug':store.slug}) }}">
+            Go to store        </a>
+
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+    {{ form_errors(edit_form) }}
+<div class="well">
+    <h4 >Profile Image</h4>    
+    <img style="height:150px;" src="{{ asset(edit_form.vars.value.getProfileImageWebPath()) }}"/>
+
+    {{ form_widget(edit_form.profile_image) }}
+</div>
+
+<div class="well">
+    <h4>Cover Photo</h4>
     <img style="height:150px;" src="{{ asset(edit_form.vars.value.getCoverphotoWebPath()) }}"/>
-    
+
     {{ form_widget(edit_form.coverphoto_image) }}
 
 </div>
+<div class="row">
+    <div class="col-md-9">
+ {{ form_row(edit_form.about_us) }}
+        {{ form_row(edit_form.payments) }}
+        {{ form_row(edit_form.shipping) }}
+        {{ form_row(edit_form.returns_refunds) }}    
+        {{ form_row(edit_form.additional_policies) }}
+    {#</div
+    <div class="col-md-3">#}
+
+
+         {{ form_row(edit_form.store_name) }}
+        {{ form_row(edit_form.store_category) }}
+        {{ form_row(edit_form.short_description) }}
+        {{ form_row(edit_form.email) }}
+        {{ form_row(edit_form.phone) }}
+        {{ form_row(edit_form.web_address) }}
+        {{ form_row(edit_form.facebook_page) }}
+        {{ form_row(edit_form.phone) }}
+        {{ form_row(edit_form.twitter) }}
+        {{ form_row(edit_form.google_plus) }}
+        {{ form_row(edit_form.address) }}
+
+    </div>
+</div
 {{ form_end(edit_form) }}
- 
+{#
+<script>
+    $('#zeteq_marketbundle_store_about_us').wysihtml5();
+</script>#}
+
 {% endblock %}

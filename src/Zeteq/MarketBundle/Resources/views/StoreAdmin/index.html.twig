@@ -6,54 +6,54 @@ Store Admin
 {% endblock %}
 {% block content %}
 
- 
-    <div class="col-md-12" style="border-bottom:solid 1px silver;margin-bottom: 20px;padding-bottom:20px;">
- <div class="row">     <div class="col-md-6"><span style="font-size:32px;" class="">Store list</span></div>
-<div class="col-md-6"><a class="btn btn-success btn-lg pull-right " href="{{path('store_admin_new')}}">Create a new store</a></div>
+
+<div class="col-md-12" style="border-bottom:solid 1px silver;margin-bottom: 20px;padding-bottom:20px;">
+    <div class="row">     <div class="col-md-6"><span style="font-size:32px;" class="">Store list</span></div>
+        <div class="col-md-6"><a class="btn btn-success btn-lg pull-right " href="{{path('store_admin_new')}}">Create a new store</a></div>
     </div>   </div>
- 
+
 <br/>
 
 <div class="row">
- 
-        {% for entity in entities %}
-         <div class="col-md-3">   <div class="well" style="text-align: center">
 
- 
-                        <a href="{{ path('store_show', { 'slug': entity.slug }) }}">
-                            <img style="height:150px" src="{{asset(entity.getProfileImageWebPath())}}"/>
-                            <h4>{{entity.getStoreName()}}</h4>
-                        </a>
-                 <div class="btn-group">
-                     <a rel="tooltip" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="edit information" href="{{ path('store_admin_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
-             
-                     <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="manage pages"  class="btn btn-default btn-sm"  href="{{ path('storeadmin_page', { 'store_id': entity.id }) }}"><i class="fa fa-file-o"></i></a>
-             
-                        <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="create and edit products"   class="btn btn-default btn-sm" href="{{ path('storeadmin_product', { 'store_id': entity.id }) }}"><i class="fa fa-shopping-cart"></i></a>
-             
-                        <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="display products in categories"   class="btn btn-default btn-sm"  href="{{ path('storeproductcategory', { 'store_id': entity.id }) }}"><i class="fa fa-archive"></i></a>
+        {% for entity in entities %}
+    <div class="col-md-3">   <div class="well" style="text-align: center">
+
+
+            <a href="{{ path('store_show', { 'slug': entity.slug }) }}">
+                <img style="height:150px" src="{{asset(entity.getProfileImageWebPath())}}"/>
+                <h4>{{entity.getStoreName()}}</h4>
+            </a>
+            <div class="btn-group">
+                <a rel="tooltip" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" data-original-title="edit information" href="{{ path('store_admin_edit', { 'id': entity.id }) }}"><span class="glyphicon glyphicon-edit"></span></a>
+
+                <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="manage pages"  class="btn btn-default btn-sm"  href="{{ path('storeadmin_page', { 'store_id': entity.id }) }}"><i class="fa fa-file-o"></i></a>
+
+                <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="create and edit products"   class="btn btn-default btn-sm" href="{{ path('storeadmin_product', { 'store_id': entity.id }) }}"><i class="fa fa-shopping-cart"></i></a>
+
+                <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="display products in categories"   class="btn btn-default btn-sm"  href="{{ path('storeproductcategory', { 'store_id': entity.id }) }}"><i class="fa fa-archive"></i></a>
                      {% if entity.getApproved()%}             
-                        <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="this store is approved and showing in marketplace "   class="btn btn-default btn-sm" href="{{ path('storeadmin_product', { 'store_id': entity.id }) }}"><i class="fa fa-check"></i></a>
+                <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="this store is approved and showing in marketplace "   class="btn btn-default btn-sm" href="{{ path('storeadmin_product', { 'store_id': entity.id }) }}"><i class="fa fa-check"></i></a>
 {%else%}
-                                       <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="this store is not approved yet"   class="btn btn-default btn-sm" href="{{ path('storeadmin_product', { 'store_id': entity.id }) }}"><i class="fa fa-ban"></i></a>
-             
+                <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="this store is not approved yet"   class="btn btn-default btn-sm" href="{{ path('storeadmin_product', { 'store_id': entity.id }) }}"><i class="fa fa-ban"></i></a>
+
 {% endif %}   
-                                       
+
                                                             {% if entity.getEnabled()%}             
-                        <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="this store is enabled "   class="btn btn-default btn-sm" href="{{ path('storeadmin_product', { 'store_id': entity.id }) }}"><i class="fa fa-play-circle"></i></a>
+                <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="this store is enabled "   class="btn btn-default btn-sm" href="{{ path('storeadmin_product', { 'store_id': entity.id }) }}"><i class="fa fa-play-circle"></i></a>
 {%else%}
-                                       <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="this store is disabled"   class="btn btn-default btn-sm" href="{{ path('storeadmin_product', { 'store_id': entity.id }) }}"><i class="fa fa-pause"></i></a>
-             
+                <a  rel="tooltip"  data-toggle="tooltip" data-placement="top" data-original-title="this store is disabled"   class="btn btn-default btn-sm" href="{{ path('storeadmin_product', { 'store_id': entity.id }) }}"><i class="fa fa-pause"></i></a>
+
 {% endif %}   
- </div></div>
-</div>
-                
+            </div></div>
+    </div>
+
                    {%if loop.index%4 == 0%}
-              </div><div class="row">
+</div><div class="row">
               {% endif %}
         {% endfor %} 
 
-                      
- </div>
+
+</div>
 
     {% endblock %}
