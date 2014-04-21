@@ -16,7 +16,10 @@ class StoreProductCategoryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('parent')
+            ->add('parent', 'genemu_jqueryselect2_entity', array(
+                    'class' => 'ZeteqMarketBundle:StoreProductCategory',
+                    'property' => 'name',
+                    'multiple' => false,))
             ->add('enabled')
             ->add('description')
 

@@ -79,6 +79,7 @@
     <script type="text/javascript">
         $(function() {
             $("[rel='tooltip']").tooltip();
+            $("#cart").popover();
             $("[rel='popover']").popover();
         });
     </script>
@@ -87,7 +88,11 @@
 
 
 <body>
-    
+    <script>
+        $(document).ready(function() {
+            alert({{dump(service.getCarts()|first) }});
+        });
+    </script>
     <script>
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -130,7 +135,7 @@
                 </button>
 
 
-                <a class="navbar-link" id="logo" href="{{path('home')}}"> <span class="glyphicon glyphicon-tree-deciduous"></span> Marketplace</a>
+                <a class="navbar-link" id="logo" href="{{path('home')}}"> <i class="fa fa-ticket"></i> QuikBuild</a>
 
             </div>
 
@@ -142,13 +147,17 @@
                 <ul id="tn_right_menu" class="nav navbar-nav pull-right" style=" margin-top: 5px;">
                    {# <li><a href="{{path('cart_index')}}"><span class="glyphicon glyphicon-shopping-cart"></span>Cart({{service.getCarts()|length}})</a></li>
 #}
-                    
-                    <li>  <a type="button" data-title="Cart" data-html="true" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" 
-                             data-content="{% render controller('ZeteqMarketBundle:Cart:pop_index') %}">
+
+                    <li>  
+                        <a id="cart" type="button" data-title="Cart" data-html="true" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" 
+                           data-content="{% render controller('ZeteqMarketBundle:Cart:pop_index') %}">
                             <i class="fa fa-shopping-cart fa-2x"></i>
+                            <span class="badge " style=" background-color: #bd362f">
+                                {{service.getCartItemCount()}}
+                            </span>
                         </a> 
                     </li>
-                    
+
     {% if is_granted('ROLE_CUSTOMER') %} 
                     <li><a href="{{path('myaccount')}}"><i class="fa fa-dashboard"></i> My Account</a></li>
                    {# <div class="btn-group">
@@ -178,80 +187,80 @@
  {% else %}
                     <li><a href="{{path('myaccount_register')}}"><i class="fa fa-user"></i> Customer Registration</a></li>
                     <li><a href="{{path('register')}}"><i class="fa fa-users"></i> Sellers Register</a></li>
-                    <li><a href="{{path('login')}}"><i class="fa fa-sign-in"></i> Login</a></li>
+                       <li><a href="{{path('login')}}"><i class="fa fa-sign-in"></i> Login</a></li>
  {% endif %}
 
-                </ul>
+                      </ul>
 
 
-            </nav>
-        </div>
+                    </nav>
+                </div>
 
 
 
 
-    </header>
+            </header>
 
 
          {% block mainmenu %}
             {% block navbar %}
-    <div id="navbar_container" class="">
+            <div id="navbar_container" class="">
 
-        <nav role="navigation" class="yamm navbar navbar-inverse " id="cat_nav">
-            <div class="container"><div class="row">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+                  <nav role="navigation" class="yamm navbar navbar-inverse " id="cat_nav">
+                      <div class="container"><div class="row">
+                              <!-- Brand and toggle get grouped for better mobile display -->
+                              <div class="navbar-header">
+                                  <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle" type="button">
+                                      <span class="sr-only">Toggle navigation</span>
+                                      <span class="icon-bar"></span>
+                                      <span class="icon-bar"></span>
+                                      <span class="icon-bar"></span>
+                                  </button>
 
-                    </div>
+                              </div>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
+                              <!-- Collect the nav links, forms, and other content for toggling -->
+                              <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
+                                  <ul class="nav navbar-nav">
           {% for parent in service.getParentCategories() %}
-                            <li class="dropdown">
-                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">{{parent.getName()}} <b class="caret"></b></a>
-                                <ul role="menu" class="dropdown-menu">
-                                    <li>
-                                        <div class="yamm-content">
+                                      <li class="dropdown">
+                                          <a data-toggle="dropdown" class="dropdown-toggle" href="#">{{parent.getName()}} <b class="caret"></b></a>
+                                          <ul role="menu" class="dropdown-menu">
+                                              <li>
+                                                  <div class="yamm-content">
 
-                                            <div class="row">
+                                                      <div class="row">
                                                     {% for child in parent.getChildren() %}
-                                                <div class="col-md-4">
-                                                    <a href="{{path('productcategory_show',{'slug':child.getSlug()})}}">{{ child.getName() }}</a>
-                                                    <ul>
+                                                          <div class="col-md-4">
+                                                              <a href="{{path('productcategory_show',{'slug':child.getSlug()})}}">{{ child.getName() }}</a>
+                                                              <ul>
                                                          {% for child1 in child.getChildren() %}
-                                                        <li>
-                                                            <a href="{{path('productcategory_show',{'slug':child1.getSlug()})}}">{{ child1.getName() }}</a>
-                                                        </li>
+                                                                  <li>
+                                                                      <a href="{{path('productcategory_show',{'slug':child1.getSlug()})}}">{{ child1.getName() }}</a>
+                                                                  </li>
                                                  {% endfor %}
-                                                    </ul>
-                                                </div>
+                                                              </ul>
+                                                          </div>
                                                  {% endfor %}
 
 
-                                            </div>
-                                        </div>
+                                                      </div>
+                                                  </div>
 
-                                    </li>                               
-                                </ul>
-                            </li>
+                                              </li>                               
+                                          </ul>
+                                      </li>
                {% endfor %}
-                        </ul>
+                                  </ul>
 
 
-                    </div><!-- /.navbar-collapse -->
-                </div>
-            </div> 
+                              </div><!-- /.navbar-collapse -->
+                          </div>
+                      </div> 
 
-        </nav>
+                  </nav>
 
-    </div> <!-- end of navbar_container -->
+              </div> <!-- end of navbar_container -->
             {% endblock navbar %}
 
     {% endblock mainmenu %}
@@ -260,15 +269,14 @@
 {%block slider%}
 {%endblock%}
 
-    <div id="main_container" class="container" style="" >
-
-        <div id="middle_container" style="min-height: 600px; ">
+              <div id="main_container" class="container" style="" >        
+                         <div id="middle_container" style="min-height: 600px; ">
                        {% block middle_container %}
 
-            <div class="row">
+                             <div class="row">
 
 
-                <div class="col-md-12"> 
+                                 <div class="col-md-12"> 
 
 
 
@@ -278,12 +286,12 @@
 
 {% endblock %}
 {%endblock%}
-                </div>
+                                 </div>
 
 
-            </div>
+                             </div>
                         {% endblock %}
-        </div>
+                         </div>
 
 {% endblock %}
 
@@ -297,7 +305,7 @@
 
 
 
-    </div>
+                     </div>
 
 
 
@@ -305,16 +313,16 @@
 
 
 
-    <div style="border-top:solid 2px #ccc;padding-top:20px">
-        <div class="container">
+                     <div style="border-top:solid 2px #ccc;padding-top:20px">
+                         <div class="container">
 
 
 
-        </div>
-    </div>
+                         </div>
+                     </div>
 
 {{include('ZeteqMarketBundle:Market:_load.html.twig')}}
-</body>
-</html>
+              </body>
+            </html>
 
 

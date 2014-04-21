@@ -9,7 +9,6 @@ use Zeteq\MarketBundle\Entity\ProductSection;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\DependencyInjection\Container;
 
-
 class Service {
 
     protected $em;
@@ -53,6 +52,26 @@ class Service {
         return $session_cart;
     }
 
+    public function getCartItems() {
+        $carts = $this->getCarts();
+        $var = array();
+        if (count($carts) > 0) {
+            foreach ($carts as $c) {
+                $var[] = $this->em->getRepository('ZeteqMarketBundle:Cart')->findOneById($c);
+            }
+        }
+        return $var;
+    }
+    
+    public function getCartItemCount(){
+        $carts = $this->getCartItems();
+        $sum = 0;
+        foreach ($carts as $cart) {
+            $sum += count($cart->getCartItems());            
+        }
+        return $sum ;
+    } 
+
     public function getCart($store_slug) {
 
 
@@ -72,7 +91,7 @@ class Service {
             $c = New Cart();
 //            throw new \Symfony\Component\Security\Acl\Exception\Exception($store_slug);
             $c->setStore($store);
-             
+
             $this->em->persist($c);
             $this->em->flush();
             $session_cart[$store_slug] = $c->getId();

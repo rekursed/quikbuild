@@ -70,28 +70,68 @@
     {{ form_widget(edit_form.coverphoto_image) }}
 
 </div>
+
+<div class="tabbable tabs">        
+    <ul class="nav nav-tabs-justified nav-pills">         
+        <li class="active">
+            <a data-toggle="tab" href="#1">Description</a>
+        </li>      
+        <li>
+            <a data-toggle="tab" href="#2">More Details and Payments</a>
+        </li>        
+        <li>
+            <a data-toggle="tab" href="#3">Contracts</a>
+        </li>   
+        <li>
+            <a data-toggle="tab" href="#4">Social Network</a>
+        </li>  
+    </ul>       
+    <div class="tab-content">    
+
+        <div id="1" class="tab-pane active">
+            {{ form_row(edit_form.store_name) }}
+            {{ form_row(edit_form.store_category) }}
+            {{ form_row(edit_form.short_description) }}
+            {{ form_row(edit_form.email) }}
+            {{ form_row(edit_form.phone) }}
+            {{ form_row(edit_form.web_address) }}
+
+        </div>
+        <div id="2" class="tab-pane ">
+           {{ form_row(edit_form.about_us) }}
+            {{ form_row(edit_form.payments) }}
+            {{ form_row(edit_form.shipping) }}
+            {{ form_row(edit_form.returns_refunds) }}    
+            {{ form_row(edit_form.additional_policies) }}
+             {{ form_row(edit_form.company_reg_no) }}
+            {{ form_row(edit_form.vat_reg_no) }}
+        </div> 
+        <div id="3" class="tab-pane">
+            {{ form_row(edit_form.address) }}
+            {{ form_row(edit_form.town) }}
+            {{ form_row(edit_form.city) }}
+            {{ form_row(edit_form.postcode) }}            
+            {{ form_row(edit_form.contract_name) }}
+        </div>  
+        <div id="4" class="tab-pane">
+            {{ form_row(edit_form.facebook_page) }}
+            {{ form_row(edit_form.twitter) }}
+            {{ form_row(edit_form.google_plus) }}
+            {{form_rest(edit_form)}}
+        </div>        
+    </div>     
+</div>
+
 <div class="row">
     <div class="col-md-9">
- {{ form_row(edit_form.about_us) }}
-        {{ form_row(edit_form.payments) }}
-        {{ form_row(edit_form.shipping) }}
-        {{ form_row(edit_form.returns_refunds) }}    
-        {{ form_row(edit_form.additional_policies) }}
+
     {#</div
     <div class="col-md-3">#}
 
 
-         {{ form_row(edit_form.store_name) }}
-        {{ form_row(edit_form.store_category) }}
-        {{ form_row(edit_form.short_description) }}
-        {{ form_row(edit_form.email) }}
-        {{ form_row(edit_form.phone) }}
-        {{ form_row(edit_form.web_address) }}
-        {{ form_row(edit_form.facebook_page) }}
-        {{ form_row(edit_form.phone) }}
-        {{ form_row(edit_form.twitter) }}
-        {{ form_row(edit_form.google_plus) }}
-        {{ form_row(edit_form.address) }}
+
+
+
 
     </div>
 </div

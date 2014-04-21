@@ -114,7 +114,7 @@ class CartController extends Controller {
             $mycarts[] = $em->getRepository('ZeteqMarketBundle:Cart')->findOneById($cart);
         }
 
-        return new \Symfony\Component\HttpFoundation\JsonResponse(array('val' => $product . ' is Added to you cart'));
+        return new \Symfony\Component\HttpFoundation\JsonResponse(array('val' => $product . ' is Added to you cart', 'count'=> $this->get('service')->getCartItemCount()));
 //        return $this->render('ZeteqMarketBundle:Cart:index.html.twig', array('mycarts' => $mycarts, 'cart' => $cart));
     }
 

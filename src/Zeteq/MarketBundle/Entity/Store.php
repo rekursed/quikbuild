@@ -69,7 +69,56 @@ class Store {
      * @ORM\Column(type="string", length=300,  nullable=true)
      */
     protected $address;
-
+    
+    
+    /**
+     * @ORM\Column(type="string", length=300,  nullable=true)
+     */
+    protected $town;
+    
+    
+    /**
+     * @ORM\Column(type="string", length=300,  nullable=true)
+     */
+    protected $city;
+    
+    
+    /**
+     * @ORM\Column(type="string", length=20,  nullable=true)
+     */
+    protected $postcode;
+    
+    
+    /**
+     * @ORM\Column(type="string", length=300,  nullable=true)
+     */
+    protected $contract_name;
+    
+    
+    /**
+     * @ORM\Column(type="string", length=300,  nullable=true)
+     */
+    protected $contract_number;
+    
+    
+    /**
+     * @ORM\Column(type="string", length=300,  nullable=true)
+     */
+    protected $contract_email;
+    
+    
+    /**
+     * @ORM\Column(type="string", length=300,  nullable=true)
+     */
+    protected $company_reg_no;
+    
+    
+    /**
+     * @ORM\Column(type="string", length=300,  nullable=true)
+     */
+    protected $vat_reg_no;
+    
+    
     /**
      * @ORM\Column(type="string", length=150,  nullable=true)
      */
@@ -1243,5 +1292,189 @@ class Store {
     public function getAdditionalPolicies()
     {
         return $this->additional_policies;
+    }
+
+    /**
+     * Set town
+     *
+     * @param string $town
+     * @return Store
+     */
+    public function setTown($town)
+    {
+        $this->town = $town;
+    
+        return $this;
+    }
+
+    /**
+     * Get town
+     *
+     * @return string 
+     */
+    public function getTown()
+    {
+        return $this->town;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Store
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set postcode
+     *
+     * @param string $postcode
+     * @return Store
+     */
+    public function setPostcode($postcode)
+    {
+        $this->postcode = $postcode;
+    
+        return $this;
+    }
+
+    /**
+     * Get postcode
+     *
+     * @return string 
+     */
+    public function getPostcode()
+    {
+        return $this->postcode;
+    }
+
+    /**
+     * Set contract_name
+     *
+     * @param string $contractName
+     * @return Store
+     */
+    public function setContractName($contractName)
+    {
+        $this->contract_name = $contractName;
+    
+        return $this;
+    }
+
+    /**
+     * Get contract_name
+     *
+     * @return string 
+     */
+    public function getContractName()
+    {
+        return $this->contract_name;
+    }
+
+    /**
+     * Set contract_number
+     *
+     * @param string $contractNumber
+     * @return Store
+     */
+    public function setContractNumber($contractNumber)
+    {
+        $this->contract_number = $contractNumber;
+    
+        return $this;
+    }
+
+    /**
+     * Get contract_number
+     *
+     * @return string 
+     */
+    public function getContractNumber()
+    {
+        return $this->contract_number;
+    }
+
+    /**
+     * Set contract_email
+     *
+     * @param string $contractEmail
+     * @return Store
+     */
+    public function setContractEmail($contractEmail)
+    {
+        $this->contract_email = $contractEmail;
+    
+        return $this;
+    }
+
+    /**
+     * Get contract_email
+     *
+     * @return string 
+     */
+    public function getContractEmail()
+    {
+        return $this->contract_email;
+    }
+
+    /**
+     * Set company_reg_no
+     *
+     * @param string $companyRegNo
+     * @return Store
+     */
+    public function setCompanyRegNo($companyRegNo)
+    {
+        $this->company_reg_no = $companyRegNo;
+    
+        return $this;
+    }
+
+    /**
+     * Get company_reg_no
+     *
+     * @return string 
+     */
+    public function getCompanyRegNo()
+    {
+        return $this->company_reg_no;
+    }
+
+    /**
+     * Set vat_reg_no
+     *
+     * @param string $vatRegNo
+     * @return Store
+     */
+    public function setVatRegNo($vatRegNo)
+    {
+        $this->vat_reg_no = $vatRegNo;
+    
+        return $this;
+    }
+
+    /**
+     * Get vat_reg_no
+     *
+     * @return string 
+     */
+    public function getVatRegNo()
+    {
+        return $this->vat_reg_no;
     }
 }

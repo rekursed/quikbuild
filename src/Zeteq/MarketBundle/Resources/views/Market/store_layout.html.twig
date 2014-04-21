@@ -40,7 +40,6 @@
     <script src="{{ asset('js/jquery.form.js') }}"  type="text/javascript"></script>
     <script src="{{ asset('bootstrap-3.0.0/js/tooltip.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/select2-3.4.5/select2.min.js') }}"></script>
-    <link href="{{ asset('js/select2-3.4.5/select2.css') }}" type="text/css" rel="stylesheet" /> 
 
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap-wysihtml5.css')}}"></link>
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/bootstrap.min.css')}}"></link>
@@ -61,7 +60,7 @@
 
 <script src="{{ asset('bootstrap-3.0.0/assets/js/respond.min.js') }}"></script>
 <![endif]-->
-
+    <link href="{{ asset('js/select2-3.4.5/select2.css') }}" type="text/css" rel="stylesheet" /> 
     <link href="{{ asset('css/main.css') }}" type="text/css" rel="stylesheet" />
     <link href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" /> 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
@@ -95,10 +94,12 @@
         $(function() {
             $("[rel='tooltip']").tooltip();
         });
+
     </script>
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $('select').select2();
             $("#store_profile_image").hover(
                     function() {
 
@@ -117,7 +118,7 @@
 
 
 <body id="store_layout_body">
-    
+
     <div id="fb-root"></div>
 
     <script>
@@ -135,6 +136,7 @@
 
         ga('create', 'UA-46664329-1', 'halalneeds.com');
         ga('send', 'pageview');
+
 
     </script>    
 
@@ -172,9 +174,12 @@
 
                 <ul id="tn_right_menu" class="nav navbar-nav pull-right">
 
-                    <li>  <a href='#' type="button" data-title="Cart" data-html="true" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" 
+                    <li>  <a id="cart" type="button" data-title="Cart" data-html="true" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" 
                              data-content="{% render controller('ZeteqMarketBundle:Cart:pop_index') %}">
-                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <i class="fa fa-shopping-cart fa-2x"></i>
+                            <span id="cart_count" class="badge " style=" background-color: #bd362f">
+                                {{service.getCartItemCount()}}
+                            </span>
                         </a> 
                     </li>
 {% if is_granted('ROLE_CUSTOMER') %}    <li><a href="{{path('myaccount')}}">My Account</a></li>{% endif %}
@@ -229,8 +234,8 @@
                 <div class="col-md-6">
 
                     <ul class="pull-right">
-                        <li> Email: {{store.getEmail()}} </li>
-                        <li> Phone: {{store.getPhone()}} </li>
+                        {#<li> Email: {{store.getEmail()}} </li>
+                        <li> Phone: {{store.getPhone()}} </li>#}
                         <li>
 
        {%if store.getFacebookPage() != "" %}<a href="{{store.getFacebookPage()}}"><i class="icon-facebook"></i></a>{% endif %}
@@ -325,7 +330,12 @@
 
 
 
+    <script>
+        $(document).ready(function() {
+            $('#cart').popover();
+        });
 
+    </script>
 
 
 {{include('ZeteqMarketBundle:Market:_load.html.twig')}}

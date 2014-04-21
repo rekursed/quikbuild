@@ -41,33 +41,6 @@
         return false; // stop the browser following the link
     });
     
-    $('.ajax_link_cart_add').click(function(e) {
-
-
-        e.preventDefault();
-        $('#loading').fadeIn();
-
-        var id = $(this).attr('id');        
-        var href = $(this).attr('href');
-        
-        
-        //alert(text);
-        $.ajax({
-            type: 'POST', // or GET
-            url: href,
-            data: 'someData=someThing&someMore=somethingElse',
-            success: function(data) {
-                $('#load_text').html(data['val']);                
-                $('#cart_count').html(data['count']);
-               
-                $('#cart').popover('show');
-                $('#loading').fadeOut(3000);
-
-            }
-        });
-        return false; // stop the browser following the link
-    });
-    
     $('.ajax_link').click(function(e) {
 
 

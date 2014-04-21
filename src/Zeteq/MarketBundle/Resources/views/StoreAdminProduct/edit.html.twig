@@ -16,62 +16,54 @@ Admin
 {% endblock %}
 {% block content %}
 
-<div style="" class="sa_index_header"><h2><a href="{{path('store_admin')}}">Stores </a>  <span class="fa fa-caret-right"></span> 
+ {%set active = 'product'%}
+<script>
+    {%if active is defined%}
+    $('#' + '{{active}}').addClass('active');
+    {%endif%}
 
-{{store.getStoreName()}}
-   </h2>
-  </div>
-
-
-
-<ul class="nav nav-tabs nav-justified" style="margin-bottom:40px;">
-    <li  class=""><a href="{{ path('store_admin_edit', { 'id': store.id }) }}"><i class="fa fa-pencil"></i> Edit</a> </li>
-<li  class="active">  <a href="{{ path('storeadmin_product', { 'store_id': store.id }) }}"><i class="fa fa-shopping-cart"></i> Products</a> </li>
-<li><a href="{{ path('storeproductcategory', { 'store_id': store.id }) }}"><i class="fa fa-archive"></i> Categories</a> </li>
-<li  class=""><a href="{{ path('storeadmin_page', { 'store_id': store.id }) }}"><i class="fa fa-file-o"></i> Pages</a> </li>
-</ul>
-
-    <h1>Product edit</h1>
+</script>
+<h1>Product edit</h1>
 
 {{ form_start(edit_form) }}
-    
-        <nav class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
- 
-        </div>
+        </button>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse">
+    </div>
 
- 
-               <button class="btn btn-danger" type="submit">Save</button>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
 
-                                      <a  class="btn btn-info navbar-btn"  href="{{ path('storeadmin_product_new',{'store_id': store_id}) }}">
-            Add another product
+
+        <button class="btn btn-success" type="submit"><i class="fa fa-floppy-o"></i> Save</button>
+
+        <a  class="btn btn-warning navbar-btn"  href="{{ path('storeadmin_product_new',{'store_id': store_id}) }}">
+           <i class="fa fa-plus-circle"></i> Add another product
         </a>
-               <a  class="btn btn-info navbar-btn"  href="{{ path('storeadmin_product',{'store_id': store_id}) }}">
-            Back to the list
+        <a  class="btn btn-default navbar-btn"  href="{{ path('storeadmin_product',{'store_id': store_id}) }}">
+           <i class="fa fa-undo"></i> Back to the list
         </a>
-                       <a  class="btn btn-info navbar-btn"  href="{{ path('product_show',{'slug': edit_form.vars.value.slug}) }}">
-            Show product
+        <a  class="btn btn-primary navbar-btn"  href="{{ path('product_show',{'slug': edit_form.vars.value.slug}) }}">
+           <i class="fa fa-laptop"></i> Show product
         </a>
-                   <a  class="btn btn-info navbar-btn"  href="{{ path('store_show',{'slug':edit_form.vars.value.getStore.slug}) }}">
-Go to store        </a>
-               
-                       <a onclick="return confirm('are you sure?')"  class="btn btn-danger navbar-btn pull-right"  href="{{ path('storeadmin_product_delete',{'id': edit_form.vars.value.getId()}) }}">
-                           <span class="glyphicon glyphicon-remove"></span>   Delete
+        <a  class="btn btn-default navbar-btn"  href="{{ path('store_show',{'slug':edit_form.vars.value.getStore.slug}) }}">
+           <i class="fa fa-share-square-o"></i> Go to store        </a>
+
+        <a onclick="return confirm('are you sure?')"  class="btn btn-danger navbar-btn pull-right"  href="{{ path('storeadmin_product_delete',{'id': edit_form.vars.value.getId()}) }}">
+            <span class="glyphicon glyphicon-remove"></span>   Delete
         </a>
-        </div><!-- /.navbar-collapse -->
-      </nav>
-    
-    
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+
  {{ form_errors(edit_form) }}
    {{ form_row(edit_form.name) }} 
    {{ form_row(edit_form.price) }}
@@ -82,109 +74,108 @@ Go to store        </a>
       {{ form_row(edit_form.meta_keywords) }}
        {{ form_row(edit_form.meta_description) }}
      {{ form_row(edit_form.description) }}
-        
-          <h2>Main Image</h2>
-    <div class="well">
-        <img style="height:150px;" src="{{asset(edit_form.vars.value.getWebPath())}}"/>
-     {{ form_widget(edit_form.image) }} 
-    </div>
-    
- 
-      <h2>Additional Images</h2>
-    <div class="well">
- 
-                    <ul  style="padding:0px;margin:0px" class="ul_route_params" data-prototype="{{ form_widget(edit_form.product_images.vars.prototype)|e }}">
-    {% for pi in edit_form.product_images %}
-                        <li class="" style="">
 
-<img style="" src="{{asset(pi.vars.value.getWebPath())}}"/>
+<h2>Main Image</h2>
+<div class="well">
+    <img style="height:150px;" src="{{asset(edit_form.vars.value.getWebPath())}}"/>
+     {{ form_widget(edit_form.image) }} 
+</div>
+
+
+<h2>Additional Images</h2>
+<div class="well">
+
+    <ul  style="padding:0px;margin:0px" class="ul_route_params" data-prototype="{{ form_widget(edit_form.product_images.vars.prototype)|e }}">
+    {% for pi in edit_form.product_images %}
+        <li class="" style="">
+
+            <img style="" src="{{asset(pi.vars.value.getWebPath())}}"/>
 {{ form_widget(pi.image) }}
-                        
-                        </li>
+
+        </li>
 
         {% endfor %}
-                    </ul>
+    </ul>
     <br clear="all"/>
-    </div>
+</div>
         {{ form_end(edit_form) }}
-        
-    
 
 
-  
-      
-      <script>
-                // Get the ul that holds the collection of ul_route_params
-                var collectionHolder = $('ul.ul_route_params');
-
-                // setup an "add a tag" link
-                var $addTagLink = $('<a  href="#" class="btn btn-info add_tag_link"><i class="icon-plus"></i>Add Image</a>');
-                var $newLinkLi = $('<li    style="list-style:none"></li>').append($addTagLink);
-
-                jQuery(document).ready(function() {
 
 
-                    // add a delete link to all of the existing tag form li elements
-                    collectionHolder.find('li').each(function() {
-                        addTagFormDeleteLink($(this));
-                    });
-                    // add the "add a tag" anchor and li to the tags ul
-                    collectionHolder.append($newLinkLi);
-
-                    // count the current form inputs we have (e.g. 2), use that as the new
-                    // index when inserting a new item (e.g. 2)
-                    collectionHolder.data('index', collectionHolder.find(':input').length);
-
-                    $addTagLink.on('click', function(e) {
-                        // prevent the link from creating a "#" on the URL
-                        e.preventDefault();
-
-                        // add a new tag form (see next code block)
-                        addTagForm(collectionHolder, $newLinkLi);
-                    });
-                });
 
 
-                function addTagForm(collectionHolder, $newLinkLi) {
-                    // Get the data-prototype explained earlier
-                    var prototype = collectionHolder.data('prototype');
+<script>
+    // Get the ul that holds the collection of ul_route_params
+    var collectionHolder = $('ul.ul_route_params');
 
-                    // get the new index
-                    var index = collectionHolder.data('index');
+    // setup an "add a tag" link
+    var $addTagLink = $('<a  href="#" class="btn btn-info add_tag_link"><i class="icon-plus"></i>Add Image</a>');
+    var $newLinkLi = $('<li    style="list-style:none"></li>').append($addTagLink);
 
-                    // Replace '__name__' in the prototype's HTML to
-                    // instead be a number based on how many items we have
-                    var newForm = prototype.replace(/__name__/g, index);
+    jQuery(document).ready(function() {
 
-                    // increase the index with one for the next item
-                    collectionHolder.data('index', index + 1);
 
-                    // Display the form in the page in an li, before the "Add a tag" link li
-                    var $newFormLi = $('<li ></li>').append(newForm);
-                    $newLinkLi.before($newFormLi);
+        // add a delete link to all of the existing tag form li elements
+        collectionHolder.find('li').each(function() {
+            addTagFormDeleteLink($(this));
+        });
+        // add the "add a tag" anchor and li to the tags ul
+        collectionHolder.append($newLinkLi);
 
-                    // add a delete link to the new form
-                    addTagFormDeleteLink($newFormLi);
-                }
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        collectionHolder.data('index', collectionHolder.find(':input').length);
 
-                function addTagFormDeleteLink($tagFormLi) {
-                    var $removeFormA = $('<a class="btn btn-danger" href="#"><i class="fa fa-remove"></i>delete </a>');
-                    $tagFormLi.append($removeFormA);
+        $addTagLink.on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
 
-                    $removeFormA.on('click', function(e) {
-                        // prevent the link from creating a "#" on the URL
-                        e.preventDefault();
+            // add a new tag form (see next code block)
+            addTagForm(collectionHolder, $newLinkLi);
+        });
+    });
 
-                        // remove the li for the tag form
-                        $tagFormLi.remove();
-                    });
-                }
-                </script>
+
+    function addTagForm(collectionHolder, $newLinkLi) {
+        // Get the data-prototype explained earlier
+        var prototype = collectionHolder.data('prototype');
+
+        // get the new index
+        var index = collectionHolder.data('index');
+
+        // Replace '__name__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        var newForm = prototype.replace(/__name__/g, index);
+
+        // increase the index with one for the next item
+        collectionHolder.data('index', index + 1);
+
+        // Display the form in the page in an li, before the "Add a tag" link li
+        var $newFormLi = $('<li ></li>').append(newForm);
+        $newLinkLi.before($newFormLi);
+
+        // add a delete link to the new form
+        addTagFormDeleteLink($newFormLi);
+    }
+
+    function addTagFormDeleteLink($tagFormLi) {
+        var $removeFormA = $('<a class="btn btn-danger" href="#"><i class="fa fa-remove"></i>delete </a>');
+        $tagFormLi.append($removeFormA);
+
+        $removeFormA.on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // remove the li for the tag form
+            $tagFormLi.remove();
+        });
+    }
+</script>
 {% endblock %}
 
- 
 
 
 
 
-   
+

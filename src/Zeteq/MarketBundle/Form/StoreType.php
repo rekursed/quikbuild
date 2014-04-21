@@ -15,22 +15,31 @@ class StoreType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('store_name')
-                ->add('store_category')
+                ->add('store_category', 'genemu_jqueryselect2_entity', array(
+                    'class' => 'ZeteqMarketBundle:StoreCategory',
+                    'property' => 'name',
+                    'multiple' => false,)
+                )
                 ->add('short_description')
-                ->add('email','email')
+                ->add('email', 'email')
                 ->add('phone')
                 ->add('web_address')
                 ->add('facebook_page')
                 ->add('twitter')
                 ->add('google_plus')
                 ->add('address')
+                ->add('town')
+                ->add('city')
+                ->add('postcode')
+                ->add('contract_name')
                 
+                ->add('company_reg_no')
+                ->add('vat_reg_no')
                 ->add('about_us')
                 ->add('payments', 'ckeditor')
                 ->add('shipping', 'ckeditor')
                 ->add('returns_refunds', 'ckeditor')
                 ->add('additional_policies', 'ckeditor')
-                
                 ->add('profile_image', 'file', array(
                     'required' => false,
                     'data_class' => null
