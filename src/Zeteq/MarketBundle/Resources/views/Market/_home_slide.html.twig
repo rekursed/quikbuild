@@ -9,7 +9,7 @@
             {%for image  in service.getHomeSlideImage()%}
             <div class="item {%if loop.index==1%} active {%endif%}">
                 <img alt="900x500" style="width:100%; height: 500px"  data-src="holder.js/100%x500/auto/#777:#777" src="{{asset(image.getWebPath())}}">
-                <div class="carousel-caption">
+                <div class="carousel-caption" style="top: 0; left: 0; margin-top: 70px">
                     {{image.body |raw}}
                 </div>
             </div>

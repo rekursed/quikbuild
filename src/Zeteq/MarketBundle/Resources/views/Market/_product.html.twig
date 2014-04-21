@@ -20,7 +20,7 @@
             {%endif%}
         </div>
         <div style="text-align:center">
-            <a  href="{{path('cart_add_item',{'store_slug':product.getStore().getSlug(),'product_slug':product.getSlug(),'quantity':1})}}" class="btn btn-primary ajax_link" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a> 
+            <a  href="{{path('cart_add_item',{'store_slug':product.getStore().getSlug(),'product_slug':product.getSlug(),'quantity':1})}}" class="btn btn-primary ajax_link_cart_add" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a> 
             {%if fav is defined%}
                 <a href="{{path('favorite_item_delete',{'id':fav})}}" class="btn btn-danger ajax_link" role="button"><i class="fa fa-chain-broken"></i>Unfavorite</a> 
             {%endif%}

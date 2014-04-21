@@ -20,10 +20,10 @@
 
 
 
-{%set var = ((((service.getFeaturedStores()|length)/4) +0.5)|number_format)%}
+{%set var = ((((service.getFeaturedStores()|length)/6) +0.5)|number_format)%}
 
 
-<div style=" background:#000; padding: 20px; height: 320px" class="carousel slide"  data-ride="carousel" id="carousel-div">
+<div style="  padding: 20px; height: 320px" class="carousel slide"  data-ride="carousel" id="carousel-div">
 
 
   {#  <ol class="carousel-indicators"  style="margin-bottom: -20px;"> 
@@ -44,7 +44,7 @@
 
     <div class="carousel-inner">
         {% for store in service.getFeaturedStores() %}
-        {%if  (loop.index-1)%4 == 0%}
+        {%if  (loop.index-1)%6 == 0%}
         <div class="item {% if loop.index ==1 %} active {% endif %} ">
             <div class="container ">
                 <div class="row">
@@ -61,7 +61,7 @@
                             <p>{{store.overview|slice(0, 45)}}<p>
                         </div>
                     </div>#}
-                    <div class="col-md-3 top_blocks">          
+                    <div class="col-md-2 top_blocks">          
                         <div style="position:relative">
                             <a href="{{path('store_show',{'slug':store.slug})}}"> 
                                 <span class="carousel_title_a" style="display:block;width:100%;text-shadow: 1px 1px 1px black">
@@ -93,7 +93,7 @@
 
                         </div>  
                     </div>
-                    {%if loop.index%4 == 0 or loop.last == true%}
+                    {%if loop.index%6 == 0 or loop.last == true%}
                 </div>
             </div>
         </div>
@@ -101,10 +101,10 @@
         {% endfor %}
     </div>
 
-    <a class="left carousel-control" data-slide="prev" href="#carousel-div">
+    <a style="width:5%" class="left carousel-control"  data-slide="prev" href="#carousel-div">
         <span class="glyphicon glyphicon-chevron-left"> &nbsp;</span>  &nbsp; </a>
 
-    <a class="right carousel-control" data-slide="next" href="#carousel-div"> <span class="glyphicon glyphicon-chevron-right"> &nbsp;			</span>  &nbsp; </a>
+    <a style="width:5%" class="right carousel-control" data-slide="next" href="#carousel-div"> <span class="glyphicon glyphicon-chevron-right"> &nbsp;			</span>  &nbsp; </a>
 
 </div>
 
