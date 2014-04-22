@@ -18,19 +18,33 @@ class MarketController extends Controller {
 
         $search = $request->query->get('search');
         $searchby = $request->query->get('searchby');
-        
+
         $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('ZeteqMarketBundle:Product');
-        $q = $repo->createQueryBuilder('p')
-                ->where('p.name like :search')
-                ->setParameter('search', '%' . $search . '%')
-                ->getQuery();
+        if ($searchby == 'product') {
+            $repo = $em->getRepository('ZeteqMarketBundle:Product');
+            $q = $repo->createQueryBuilder('p')
+                    ->where('p.name like :search')
+                    ->setParameter('search', '%' . $search . '%')
+                    ->getQuery();
 
-        $products = $q->getResult();
+            $products = $q->getResult();
 
-        return $this->render('ZeteqMarketBundle:Market:search_result.html.twig', array(
-                    'products' => $products
-        ));
+            return $this->render('ZeteqMarketBundle:Market:search_result.html.twig', array(
+                        'products' => $products
+            ));
+        } else {
+            $repo = $em->getRepository('ZeteqMarketBundle:Store');
+            $q = $repo->createQueryBuilder('p')
+                    ->where('p.name like :search')
+                    ->setParameter('search', '%' . $search . '%')
+                    ->getQuery();
+
+            $products = $q->getResult();
+
+            return $this->render('ZeteqMarketBundle:Market:store_search_result.html.twig', array(
+                        'store' => $products
+            ));
+        }
     }
 
     public function product_rating_submitAction(Request $request) {
