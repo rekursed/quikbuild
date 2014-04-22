@@ -41,7 +41,7 @@
     </div>
     <div class="col-sm-6">
         <div style="position: relative">
-            <img class="img-responsive " style='height:400px' src="{{asset(service.getHomeImage(6)[0].getWebPath())}}">
+            <img class="img-responsive " style='height:400px; width: 100%' src="{{asset(service.getHomeImage(6)[0].getWebPath())}}">
         </div>
         <div id='overlay' >
             <p  style="opacity: 50%">{{service.getHomeImage(6)[0].getBody()|raw}}</p>
@@ -58,6 +58,9 @@
 
     </div>
 </div>
+{#<script>
+    $('img').addClass("img");
+</script>#}
 <style>
     img {
         height:100%;
