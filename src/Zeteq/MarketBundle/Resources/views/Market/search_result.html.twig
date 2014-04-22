@@ -1,0 +1,32 @@
+{% extends 'ZeteqMarketBundle:Market:layout.html.twig' %}
+ {% block title %}
+Search Result
+{% endblock %}
+
+
+{% block content -%}
+
+
+<h1>Search Result</h1>
+
+
+<div class="table">
+    <div class="row">
+    {%for p in products%}
+    
+
+  {{ include('ZeteqMarketBundle:Market:_product.html.twig',{'product': p})  }}
+
+
+              {%if loop.index%4 == 0 or loop.last %}
+    </div><div class="row">
+              {% endif %}
+    {%endfor%}
+    </div>
+
+
+
+
+
+
+{% endblock %}

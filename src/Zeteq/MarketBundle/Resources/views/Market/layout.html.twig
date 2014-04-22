@@ -142,12 +142,12 @@
                 <ul id="tn_right_menu" class="nav navbar-nav pull-right" style=" margin-top: 5px;">
                    {# <li><a href="{{path('cart_index')}}"><span class="glyphicon glyphicon-shopping-cart"></span>Cart({{service.getCarts()|length}})</a></li>
 #}
-                    <li> 
-                        <form>
+                    <li style="margin-right:40px"> 
+                        <form role="search" method="get" action="{{path('search')}}">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
-                                        <input name="search" type="text" class="form-control">
+                                        <input name="search" type="text" class="form-control" placeholder="What are you looking for?">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="submit"> <i class='fa fa-search'></i> </button>
                                         </span>
@@ -164,52 +164,55 @@
 
                     <li>
                     <li>  
-                        <a id="cart" type="button" data-title="Cart" data-html="true" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" 
-                           data-content="{% render controller('ZeteqMarketBundle:Cart:pop_index') %}">
-                            <i class="fa fa-shopping-cart fa-2x"></i>
-                            <span class="badge " style=" background-color: #bd362f">
-                                {{service.getCartItemCount()}}
-                            </span>
-                        </a> 
-                    </li>
 
+                        <div class="row">
+                            <div class="col-md-12" id="top_log">
     {% if is_granted('ROLE_CUSTOMER') %} 
-                    <li><a href="{{path('myaccount')}}"><i class="fa fa-dashboard"></i> My Account</a></li>
-                   {# <div class="btn-group">
-                        <button  href="{{path('myaccount')}}" class="btn btn-default" type="button">My Account</button>
-                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul role="menu" class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
-                    </div>#}
+                                <a href="{{path('myaccount')}}"><i class="fa fa-dashboard"></i> My Account</a> |
+
 
 {% endif %}
-      {% if is_granted('ROLE_STORE') %}    <li><a href="{{path('store_admin_edit',{'id':app.user.getMyStoreId()})}}"><i class="fa fa-gear"></i> Store Admin</a></li>
+      {% if is_granted('ROLE_STORE') %}    <a href="{{path('store_admin_edit',{'id':app.user.getMyStoreId()})}}"><i class="fa fa-gear"></i> Store Admin</a> |
 
         {% endif %}
-        {% if is_granted('ROLE_ADMIN') %}   <li><a href="{{path('admin')}}"><i class="fa fa-gears"></i> Main Admin</a></li>{% endif %}
+        {% if is_granted('ROLE_ADMIN') %}   <a href="{{path('admin')}}"><i class="fa fa-gears"></i> Main Admin</a> | {% endif %}
 
 
            {% if app.user %}
-                    <li><a href="{{path('logout')}}"><i class="fa fa-sign-out"></i> logout</a></li>
+                                <a class="  " href="{{path('logout')}}"><i class="fa fa-sign-out"></i> logout</a>
  {% else %}
-                    <li><a href="{{path('myaccount_register')}}"><i class="fa fa-user"></i> Customer Registration</a></li>
-                    <li><a href="{{path('register')}}"><i class="fa fa-users"></i> Sellers Register</a></li>
-                    <li><a href="{{path('login')}}"><i class="fa fa-sign-in"></i> Login</a></li>
+                                <a href="{{path('myaccount_register')}}"><i class="fa fa-user"></i> Customer Registration</a> |
+                                <a href="{{path('register')}}"><i class="fa fa-users"></i> Sellers Register</a> |
+                                <a href="{{path('login')}}"><i class="fa fa-sign-in"></i> Sign in</a>
  {% endif %}
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px">
+                            <div class="col-md-6" id="top_log">
 
+                            </div>
+                            <div class="col-md-4" id="top_log">
+                                <a class="pull-left" id="cart" type="button" data-title="Cart" data-html="true" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" 
+                                   data-content="{% render controller('ZeteqMarketBundle:Cart:pop_index') %}">
+                                    <i class="fa fa-shopping-cart fa-2x"></i> Cart 
+                                    <span class="badge " style=" background-color: #bd362f">
+                                {{service.getCartItemCount()}}
+                                    </span>
+                                </a> 
+                            </div>
+                        </div>
+
+                    </li>
                 </ul>
 
 
             </nav>
         </div>
+        <style>
+            #top_log a {
+                color: #000;
+            }
+        </style>
 
 
 

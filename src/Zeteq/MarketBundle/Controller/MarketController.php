@@ -14,6 +14,25 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class MarketController extends Controller {
 
+    public function searchAction(Request $request) {
+
+        $search = $request->query->get('search');
+        $searchby = $request->query->get('searchby');
+        
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('ZeteqMarketBundle:Product');
+        $q = $repo->createQueryBuilder('p')
+                ->where('p.name like :search')
+                ->setParameter('search', '%' . $search . '%')
+                ->getQuery();
+
+        $products = $q->getResult();
+
+        return $this->render('ZeteqMarketBundle:Market:search_result.html.twig', array(
+                    'products' => $products
+        ));
+    }
+
     public function product_rating_submitAction(Request $request) {
 
         $user = $this->get('security.context')->getToken()->getUser();
