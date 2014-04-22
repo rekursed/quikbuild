@@ -51,3 +51,7 @@ store_admin_sale_edit:
 store_admin_sale_update:
     pattern:  /sales/update/{id}
     defaults: { _controller: "ZeteqMarketBundle:StoreAdmin:sale_update" }
+    
+store_admin_sale_refund:
+    pattern:  /sale/refund/{order}{store_id}
+    defaults: { _controller: "ZeteqMarketBundle:StoreAdmin:sale_refund" }

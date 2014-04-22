@@ -74,15 +74,14 @@ Orders List
 
                 <td  style="text-align:right">
                     <div class="btn-group">
+                        <a class="btn btn-warning btn-sm " href="{{ path('store_admin_sale_refund', { 'order': entity.getOrderNumber(),'store_id':store_id  }) }}"><i class="fa fa-pencil"></i> refund</a>
                         <a class="btn btn-default btn-sm " href="{{ path('order_details', { 'sale': entity.id, 'admin':'true'  }) }}"><i class="fa fa-square"></i> show</a>
 
                         <a class="btn btn-default btn-sm " href="{{ path('store_admin_sale_edit', { 'order': entity.getOrderNumber(),'store_id':store_id  }) }}"><i class="fa fa-pencil"></i> edit</a>
+                        <a id='{{loop.index}}' onclick="return confirm('Do you really want to delete it?');" class="btn btn-sm btn-danger ajax_link_cart_del"  href="{{ path('sale_delete',{'id':entity.getId()}) }}">
+                            <span class="glyphicon glyphicon-remove"></span> Delete        </a>       
 
                     </div>
-                    <a id='{{loop.index}}' onclick="return confirm('Do you really want to delete it?');" class="btn btn-sm btn-danger ajax_link_cart_del"  href="{{ path('sale_delete',{'id':entity.getId()}) }}">
-                        <span class="glyphicon glyphicon-remove"></span> Delete        </a>       
-
-
 
                 </td>
             </tr>

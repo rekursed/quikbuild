@@ -1,0 +1,28 @@
+<div class="btn-group ">
+    <button class="btn btn-primary" type="button">
+        <span class="glyphicon glyphicon-shopping-cart"></span> Cart (<span class="badge" id="cart_count" style=" background-color: #bd362f">{{service.getCartItemCount()}}</span>)
+    </button>
+    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul role="menu" class="dropdown-menu pull-right">
+        <li>
+            <div style="padding:20px; width: 800px">
+                <div id="top_cart_summary">
+
+                {#{{include('ZeteqFrontBundle:Cart:_cart_summary_top.html.twig',{'cart': service.getCart()})}}#}
+                    {% render controller('ZeteqMarketBundle:Cart:pop_index') %}
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $('.dropdown-menu input, .dropdown-menu label').click(function(e) {
+        e.stopPropagation();
+    });
+    $('html').off('click.dropdown');
+</script>

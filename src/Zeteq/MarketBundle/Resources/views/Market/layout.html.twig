@@ -81,6 +81,16 @@
             $("[rel='tooltip']").tooltip();
             $("#cart").popover();
             $("[rel='popover']").popover();
+
+            $('body').on('click', function(e) {
+                $("[rel='popover']").each(function() {
+                    //the 'is' for buttons that trigger popups
+                    //the 'has' for icons within a button that triggers a popup
+                    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                        $(this).popover('hide');
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -179,11 +189,11 @@
 
 
            {% if app.user %}
-                                <a class="  " href="{{path('logout')}}"><i class="fa fa-sign-out"></i> logout</a>
+                                <a class="  " href="{{path('logout')}}">{#<i class="fa fa-sign-out"></i>#} logout</a>
  {% else %}
-                                <a href="{{path('myaccount_register')}}"><i class="fa fa-user"></i> Customer Registration</a> |
-                                <a href="{{path('register')}}"><i class="fa fa-users"></i> Sellers Register</a> |
-                                <a href="{{path('login')}}"><i class="fa fa-sign-in"></i> Sign in</a>
+                                <a href="{{path('myaccount_register')}}">{#<i class="fa fa-user"></i>#} Customer Registration</a> |
+                                <a href="{{path('register')}}">{#<i class="fa fa-users"></i>#} Sellers Register</a> |
+                                <a href="{{path('login')}}">{#<i class="fa fa-sign-in"></i>#} Sign in</a>
  {% endif %}
                             </div>
                         </div>
@@ -191,11 +201,13 @@
                             <div class="col-md-6" id="top_log">
 
                             </div>
-                            <div class="col-md-4" id="top_log">
+                            <div class="col-md-6" id="top_log">
+                                {#{{ include('ZeteqMarketBundle:Cart:_cart_button.html.twig')  }}#}
+
                                 <a class="pull-left" id="cart" type="button" data-title="Cart" data-html="true" rel="popover" data-container="body" data-toggle="popover" data-placement="bottom" 
                                    data-content="{% render controller('ZeteqMarketBundle:Cart:pop_index') %}">
                                     <i class="fa fa-shopping-cart fa-2x"></i> Cart 
-                                    <span class="badge " style=" background-color: #bd362f">
+                                    <span class="badge" id="cart_count" style=" background-color: #bd362f">
                                 {{service.getCartItemCount()}}
                                     </span>
                                 </a> 
@@ -209,9 +221,7 @@
             </nav>
         </div>
         <style>
-            #top_log a {
-                color: #000;
-            }
+
         </style>
 
 

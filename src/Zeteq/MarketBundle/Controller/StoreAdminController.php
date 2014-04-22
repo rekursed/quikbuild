@@ -19,6 +19,30 @@ class StoreAdminController extends Controller {
      * Edits an existing Sale entity.
      *
      */
+    
+     public function sale_refundAction($store_id, $order) {
+        $em = $this->getDoctrine()->getManager();
+
+        $store = $em->getRepository('ZeteqMarketBundle:Store')->find($store_id);
+
+
+        $sale = $em->getRepository('ZeteqMarketBundle:Sale')->findOneBy(array('order_number' => $order));
+
+        //throw $this->createNotFoundException('Unable to find User entity.');
+
+        $form = $this->createForm(new StoreAdminSaleType(), $sale, array(
+            'action' => $this->generateUrl('store_admin_sale_update', array('id' => $sale->getId())),
+            'method' => 'PUT',
+        ));
+
+        return $this->render('ZeteqMarketBundle:StoreAdminSales:refund.html.twig', array(
+                    'edit_form' => $form->createView(),
+                    'store_id' => $store_id,
+                    'sale' => $sale,
+                    'store' => $store
+        ));
+    }
+    
     public function sale_updateAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
 

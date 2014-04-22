@@ -35,14 +35,14 @@ class MarketController extends Controller {
         } else {
             $repo = $em->getRepository('ZeteqMarketBundle:Store');
             $q = $repo->createQueryBuilder('p')
-                    ->where('p.name like :search')
+                    ->where('p.store_name like :search')
                     ->setParameter('search', '%' . $search . '%')
                     ->getQuery();
 
             $products = $q->getResult();
 
             return $this->render('ZeteqMarketBundle:Market:store_search_result.html.twig', array(
-                        'store' => $products
+                        'stores' => $products
             ));
         }
     }

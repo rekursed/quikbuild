@@ -1,0 +1,125 @@
+{% extends 'ZeteqMarketBundle:StoreAdmin:store_admin_layout.html.twig' %}
+
+
+{% block title %}
+Admin
+{% endblock %}
+{% block content %}
+ {%set active = 'sale'%}
+{{ form_start(edit_form) }}
+
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+
+
+        <button class="btn  btn-warning " type="submit">Save</button>
+        <a class="btn btn-primary" href="{{ path('store_admin_sale_index', { 'store_id': store.id }) }}">
+            Back to the list
+        </a>
+        {#<a  class="btn btn-info navbar-btn"  href="{{ path('storeproductcategory_new',{'store_id':store_id} ) }}">
+            Add another
+        </a>#}
+
+
+        <a  class="btn btn-info  navbar-btn "  href="{{ path('store_show',{'slug':edit_form.vars.value.getStore.slug}) }}">
+            Go to store        </a>
+
+        <a onclick="return confirm('Do you really want to delete it?');" class="btn btn-danger navbar-btn pull-right"  href="{{ path('storeproductcategory_delete',{'id':edit_form.vars.value.getId()}) }}">
+            <span class="glyphicon glyphicon-remove"></span> Delete        </a>
+    </div><!-- /.navbar-collapse -->
+</nav>
+
+
+
+<table class="table table-bordered table-hover table-responsive table-striped records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            {#<th></th>#}
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entity in sale.getSaleItems() %}
+        <tr id='tr{{loop.index}}'>
+            <td>{{entity.id}}</td>
+            {#<td><a href="{{ path('sale_edit', { 'id': entity.id,'store_id':store_id }) }}">{{ entity.id }}</a></td>#}
+            {#<td><input type="checkbox" name="prod[]" value="{{entity.getId()}}" class="chk"></td>#}
+            <td>{{ entity.getProductName()}}</td>
+            <td>{{ entity.price }}</td>
+            <td>{{ entity.quantity }}</td>
+
+            <td></td>
+
+            <td  style="text-align:right">
+                <div class="btn-group">
+                   {# <a class="btn btn-default btn-sm " href="{{ path('product_show', { 'slug': entityslug  }) }}"><i class="fa fa-square"></i> View Product</a>
+
+                   #}
+
+                </div>
+                <a id='{{loop.index}}' onclick="return confirm('Do you really want to delete it?');" class="btn btn-sm btn-danger ajax_link_cart_del"  href="{{ path('saleitem_delete',{'id':entity.getId()}) }}">
+                    <span class="glyphicon glyphicon-remove"></span> Delete        </a>       
+
+
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-md-4">
+            {{ form_row(edit_form.order_number) }}
+            {{ form_row(edit_form.payment_method) }} 
+            {{ form_row(edit_form.shipping_method)}} 
+            {{ form_row(edit_form.shipping_cost)}} 
+            {{ form_row(edit_form.total)}}
+    </div>
+    <div class="col-md-4">
+            {{ form_row(edit_form.billing_first_name)}} 
+            {{ form_row(edit_form.billing_last_name)}} 
+            {{ form_row(edit_form.billing_email)}} 
+            {{ form_row(edit_form.billing_address)}} 
+            {{ form_row(edit_form.billing_city)}} 
+            {{ form_row(edit_form.billing_state)}} 
+            {{ form_row(edit_form.billing_postalcode)}} 
+            {{ form_row(edit_form.billing_country)}} 
+            {{ form_row(edit_form.billing_phone)}}
+    </div>
+    <div class="col-md-4">
+        {{ form_row(edit_form.shipping_billing_same)}} 
+            {{ form_row(edit_form.shipping_first_name)}} 
+            {{ form_row(edit_form.shipping_last_name)}} 
+            {{ form_row(edit_form.shipping_email)}} 
+            {{ form_row(edit_form.shipping_address)}} 
+            {{ form_row(edit_form.shipping_city)}} 
+            {{ form_row(edit_form.shipping_state)}} 
+            {{ form_row(edit_form.shipping_postalcode)}} 
+            {{ form_row(edit_form.shipping_country)}} 
+            {{ form_row(edit_form.shipping_phone)}} 
+
+
+    </div>
+{{ form_row(edit_form.user)}}
+</div>  
+{{ form_errors(edit_form) }}
+    {{ form_end(edit_form) }}
+{% endblock %}

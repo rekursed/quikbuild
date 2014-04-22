@@ -7,9 +7,9 @@
         <tr>
             <th>sl</th>
             <th colspan=2>Product</th>
-            <th style='text-align:right'>Price</th>
+            <th style='text-align:right'>Price ({{service.getCurrencySymbol()}})</th>
             <th>Quantity</th>
-            <th style='text-align:right'>Total</th>
+            <th style='text-align:right'>Total ({{service.getCurrencySymbol()}})</th>
         </tr>
  {% for item in cart.getCartItems()%}
         <tr id='tr{{loop.index}}'>
@@ -25,7 +25,7 @@
             </td>
 
 
-            <td  style='text-align:right' >{{service.getCurrencySymbol()}}{{item.getProduct().getPrice()}}</td>
+            <td  style='text-align:right' >{{item.getProduct().getPrice()}}</td>
             <td>
                 <div class='row' style=' margin-left: 5px'>
                     <form method='post' action='{{path('cart_update_quantity',{'id':item.getId()})}}'>
@@ -43,7 +43,7 @@
                     </form>
                 </div>
             </td>
-            <td  style='text-align:right' >{{service.getCurrencySymbol()}} {{item.getTotal()}}</td>
+            <td  style='text-align:right' > {{item.getTotal()}}</td>
         </tr>
     {% endfor%}
     </table>

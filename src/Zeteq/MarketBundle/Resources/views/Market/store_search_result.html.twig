@@ -12,21 +12,46 @@ Search Result
 
 <div class="table">
     <div class="row">
-    {%for p in products%}
+    {%for p in stores%}
     
 
-  {{ include('ZeteqMarketBundle:Market:_product.html.twig',{'product': p})  }}
+  {{ include('ZeteqMarketBundle:Market:_store.html.twig',{'store': p})  }}
+
+
+         {#     {%if loop.index%4 == 0 or loop.last %}
+    </div><div class="row">
+              {% endif %}#}
+    {%endfor%}
+    </div>
+
+
+{# {%for store in stores%}
+
+
+        <div class="col-md-3 top_blocks">          
+            <div style="position:relative">
+                <a href="{{path('store_show',{'slug':store.slug})}}"> 
+                    <span class="carousel_title_a" style="display:block;width:100%;text-shadow: 1px 1px 1px black">
+                        <img class="img-responsive " style="height:200px"  src="/upload/store/images/{{store.id}}{{asset(store.getProfileImagePath() ) }}"/> 
+                    </span>
+
+            </div>
+            <div class="top_news">
+
+                <span href="{{path('store_show',{'slug':store.slug})}}" class="" style="font-weight:600;letter-spacing: 0px;color:#ddd;font-size:16px;"> 
+                                {{store.getStoreName()}}
+                </span>
+                </a>
+
+            </div>  
+        </div>
 
 
               {%if loop.index%4 == 0 or loop.last %}
     </div><div class="row">
               {% endif %}
     {%endfor%}
-    </div>
-
-
-
-
+#}
 
 
 {% endblock %}

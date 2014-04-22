@@ -13,7 +13,7 @@
 
 
 <script>
-    
+
     $('.ajax_link_cart_del').click(function(e) {
 
 
@@ -32,34 +32,33 @@
             data: 'someData=someThing&someMore=somethingElse',
             success: function(data) {
                 $('#load_text').html(data['val']);
-                
-                $('#tr'+id).hide();
+
+                $('#tr' + id).hide();
                 $('#loading').fadeOut(3000);
 
             }
         });
         return false; // stop the browser following the link
     });
-    
+
     $('.ajax_link_cart_add').click(function(e) {
 
 
         e.preventDefault();
         $('#loading').fadeIn();
 
-        var id = $(this).attr('id');        
+        var id = $(this).attr('id');
         var href = $(this).attr('href');
-        
-        
-        //alert(text);
+        //alert($('#cart_count').html());
         $.ajax({
             type: 'POST', // or GET
             url: href,
             data: 'someData=someThing&someMore=somethingElse',
             success: function(data) {
-                $('#load_text').html(data['val']);                
+                $('#load_text').html(data['val']);
                 $('#cart_count').html(data['count']);
-               
+                $("#top_cart_summary").html(data['cart_summary']);
+                $('#cart').attr('data-content', data['cart_summary']);
                 $('#cart').popover('show');
                 $('#loading').fadeOut(3000);
 
@@ -67,7 +66,7 @@
         });
         return false; // stop the browser following the link
     });
-    
+
     $('.ajax_link').click(function(e) {
 
 
@@ -91,7 +90,7 @@
                 $(this).attr('data-alt-title',str2);
                 $(this).attr('data-original-title',str1);
                 $(this).html('a');#}
-                
+
                 {#alert( $(this).attr('href'));#}
                 {#$('.grp').html({{include('ZeteqMarriageBundle:Default:_profile_buttons.html.twig')}});#}
                 $('#loading').fadeOut(3000);
@@ -100,7 +99,7 @@
         });
         return false; // stop the browser following the link
     });
-    
-    
-    
+
+
+
 </script>
