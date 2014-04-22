@@ -1,17 +1,17 @@
 <div class="row">
     <div class="col-sm-6">
         <div style="position: relative">
-            <img class="img-responsive " src="{{asset(service.getHomeImage(1)[0].getWebPath())}}">
+            <img class="img-responsive " style='height:500px; width: 100%' src="{{asset(service.getHomeImage(1)[0].getWebPath())}}">
         </div>
-        <div style=" width: 100%; margin: auto; position: absolute; bottom:  0; opacity: 50%; background-color: #222; color: #ffffff"  >
+        <div id='overlay' class='col-md-9' >
             <p  style="opacity: 50%">{{service.getHomeImage(1)[0].getBody()|raw}}</p>
         </div>
     </div>
     <div class="col-sm-6">
         <div style="position: relative">
-            <img class="img-responsive" style="height:100%" src="{{asset(service.getHomeImage(2)[0].getWebPath())}}">
+            <img class="img-responsive" style='height:500px' src="{{asset(service.getHomeImage(2)[0].getWebPath())}}">
         </div>
-        <div style="position: absolute; bottom:  0; opacity: 50%; width: 100%; margin: auto; background-color: #222; color: #ffffff ">
+        <div  id='overlay'>
             <p  style="opacity: 50%">{{service.getHomeImage(2)[0].getBody()|raw}}</p>
 
         </div>
@@ -22,18 +22,18 @@
     <div class="col-sm-3">
         <div class="row">
             <div style="position: relative">
-                <img class="img-responsive " src="{{asset(service.getHomeImage(3)[0].getWebPath())}}">
+                <img class="img-responsive " style='height:200px' src="{{asset(service.getHomeImage(3)[0].getWebPath())}}">
             </div>
-            <div style="position: absolute; bottom:  0; opacity: 50%; width: 100%; margin: auto;background-color: #222; color: #ffffff;">
+            <div id='overlay' >
                 <p  style="opacity: 50%">{{service.getHomeImage(3)[0].getBody()|raw}}</p>
 
             </div>
         </div>
         <div class="row">
             <div style="position: relative">
-                <img class="img-responsive " src="{{asset(service.getHomeImage(4)[0].getWebPath())}}">
+                <img class="img-responsive " style='height:200px' src="{{asset(service.getHomeImage(4)[0].getWebPath())}}">
             </div>
-            <div style="position: absolute; bottom:  0; opacity: 50%; width: 100%; margin: auto; background-color: #222; color: #ffffff;">
+            <div id='overlay'>
                 <p  style="opacity: 50%">{{service.getHomeImage(4)[0].getBody()|raw}}</p>
 
             </div>
@@ -41,18 +41,18 @@
     </div>
     <div class="col-sm-6">
         <div style="position: relative">
-            <img class="img-responsive " src="{{asset(service.getHomeImage(6)[0].getWebPath())}}">
+            <img class="img-responsive " style='height:400px' src="{{asset(service.getHomeImage(6)[0].getWebPath())}}">
         </div>
-        <div style="position: absolute; bottom:  0; opacity: 50%; width: 100%; margin: auto; background-color: #222; color: #ffffff;">
+        <div id='overlay' >
             <p  style="opacity: 50%">{{service.getHomeImage(6)[0].getBody()|raw}}</p>
 
         </div>
     </div>
     <div class="col-sm-3">
         <div style="position: relative">
-            <img class="img-responsive " src="{{asset(service.getHomeImage(5)[0].getWebPath())}}">
+            <img class="img-responsive " style='height:400px' src="{{asset(service.getHomeImage(5)[0].getWebPath())}}">
         </div>
-        <div style="position: absolute; bottom:  0; opacity: 50%; width: 100%; margin: auto; background-color: #222; color: #ffffff;">
+        <div id='overlay' style="">
             <p  style="opacity: 50%">{{service.getHomeImage(5)[0].getBody()|raw}}</p>
         </div>
 
@@ -62,4 +62,24 @@
     img {
         height:100%;
     }
+    #overlay {
+        height:100px; 
+        padding:20px;
+        position:absolute;
+        bottom:0px;
+        background:#191919;
+        color:white;
+        margin: auto;
+        width: 95%;
+       
+        {#position: absolute; 
+        bottom:  0; 
+        opacity: 50%; 
+        width: 100%;
+        margin: auto; #}
+        {#background-color: #222; #}
+       {# color: #ffffff;#}
+        
+    }
 </style>
+
