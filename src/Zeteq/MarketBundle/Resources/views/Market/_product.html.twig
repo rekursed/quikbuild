@@ -7,22 +7,12 @@
             <h6><a href="{{path('store_show',{'slug':product.getStore().getSlug()})}}"><i class="fa fa-angle-right"></i> {{product.getStore().getStoreName()}}</a></h6>
         </div>
         <div style="text-align:center">
-            {%if product.getAverageRating()[0] is defined%}
-                {%for a in 1..product.getAverageRating()[0]%}
-                <span class="glyphicon glyphicon-star"></span>
-                {%endfor%}
-                {%for a in product.getAverageRating()[0]..4%}
-                <span class="glyphicon glyphicon-star-empty"></span>
-                {%endfor%}
-                ({{product.getAverageRating()[1]}})
-                {%else%}
-                [<i class="fa fa-star-o"></i> not rated yet]
-            {%endif%}
+        {% include 'ZeteqMarketBundle:Market:_rating.html.twig' %}
         </div>
         <div style="text-align:center">
             <a  href="{{path('cart_add_item',{'store_slug':product.getStore().getSlug(),'product_slug':product.getSlug(),'quantity':1})}}" class="btn btn-primary ajax_link_cart_add" role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a> 
             {%if fav is defined%}
-                <a href="{{path('favorite_item_delete',{'id':fav})}}" class="btn btn-danger ajax_link" role="button"><i class="fa fa-chain-broken"></i>Unfavorite</a> 
+            <a href="{{path('favorite_item_delete',{'id':fav})}}" class="btn btn-danger ajax_link" role="button"><i class="fa fa-chain-broken"></i>Unfavorite</a> 
             {%endif%}
         </div>
 

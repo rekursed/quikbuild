@@ -129,7 +129,7 @@ body{
 
 a {
     /*    color: #DF7070;*/
-    color: #FF4B4B;
+    color: #000;
     text-decoration: none;
     transition: all .1s ease-in-out 0s;
 }

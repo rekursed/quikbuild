@@ -1,0 +1,15 @@
+
+            {%if product.getAverageRating()[1] > 0%}
+                      {%for a in 0..product.getAverageRating()[0]-1%}
+<span class="glyphicon glyphicon-star"></span>
+                        {%endfor%}
+{%if product.hasHalfStar() != 0%}
+<i class="fa fa-star-half-empty"></i>
+{%endif%}
+                        {%for a in product.getCeilRating()..4%}
+<span class="glyphicon glyphicon-star-empty"></span>
+                        {%endfor%}
+({{product.getAverageRating()[1]}})
+                        {%else%}
+<span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span> (0)
+                {%endif%}

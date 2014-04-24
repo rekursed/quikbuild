@@ -258,7 +258,7 @@
             <br/>
             <div class="row">        
 
-                <div class="col-md-3">
+                {#<div class="col-md-3">
          {%if is_admin%} 
                     <ul class="list-group">
                         <li class="list-group-item active">Store Administration </li>
@@ -284,38 +284,20 @@
                     <ul class="list-group">
                         <li class="list-group-item active"> Pages  {%if is_admin%} <a style="margin-bottom:4px;" class="pull-right badge " href="{{path('storeadmin_page_new',{'store_id':store.getId()})}}"><i class="fa fa-plus"></i>add new</a>  {% endif%} </li>
     {% for page in store.getEnabledPages()%}
-
-
+                        
                         <li class="list-group-item">            <a href="{{path('page_show',{'slug':page.getSlug(),'store_slug':store.slug})}}">{{page.getName()}}</a>    </li>
 
         {%endfor%}
                     </ul>
 
-                    <div class="well well-cstm">
-             {%if is_admin%} <a style="margin-bottom:4px;" class="pull-right badge " href="{{path('store_admin_edit',{'id':store.getId()})}}"><i class="fa fa-plus"></i>update info</a> <br clear="all"/> {% endif%} 
-                        <h3>{{store.getStoreName()}}</h3>
-                        <div>{% if store.getAddress() != ""%}{{store.getAddress}}{% endif %}</div>
-
-                        <h4 style="font-size: 16px;"> email: {{store.getEmail()}} </h4>
-                        <h4 style="font-size: 16px;"> phone: {{store.getPhone()}} </h4>
-
-                        <a class="btn btn-success ajax_link" href="{{path('add_to_favorite_store',{'slug':store.slug})}}">Add Store to Favorite</a>
-       {%if store.getFacebookPage() != "" %}<a href="{{store.getFacebookPage()}}"><i class="icon-facebook"></i></a>{% endif %}
-       {%if store.getTwitter() != "" %}<a href="{{store.getTwitter()}}"><i class="icon-twitter"></i></a>{% endif %}
-       {%if store.getGooglePlus() != "" %}<a href="{{store.getGooglePlus()}}"><i class="icon-google-plus-sign"></i></a>{% endif %}
-       {%if store.getWebAddress() != "" %}<a href="{{store.getWebAddress()}}"><i class="icon-globe"></i></a>{% endif %}
-
-
-                        </li>
-                        </ul>
-                    </div>
+                    
 
                 </div>            
+#}
 
 
 
-
-                <div class="col-md-9"> {% block content %}{% endblock %} </div>
+                <div class="col-md-12"> {% block content %}{% endblock %} </div>
             </div>
 
         </div>

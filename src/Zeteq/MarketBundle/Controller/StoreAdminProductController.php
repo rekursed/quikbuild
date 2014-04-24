@@ -34,7 +34,7 @@ class StoreAdminProductController extends Controller {
         $em->flush();
 
 
-        return new JsonResponse(array('val' => 1));
+        return new JsonResponse(array('val' => 'Rating Deleted'));
     }
     
     /**
@@ -53,7 +53,7 @@ class StoreAdminProductController extends Controller {
         $entity->setEnabled(true);
        $em->flush();
 
-      return new JsonResponse(array('val' => 1));
+      return new JsonResponse(array('val' => 'Rating Approved'));
     }
 
     /**

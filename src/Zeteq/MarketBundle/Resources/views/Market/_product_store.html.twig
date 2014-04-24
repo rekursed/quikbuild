@@ -5,18 +5,8 @@
             <h5 style="font-size:12px">        {{product.getName()}}</h5>
             <h6>{{service.getCurrencySymbol()}} {{product.getPrice()}}</h6>
         </div>
-         <div style="text-align:center">
-            {%if product.getAverageRating()[0] is defined%}
-                {%for a in 1..product.getAverageRating()[0]%}
-                <span class="glyphicon glyphicon-star"></span>
-                {%endfor%}
-                {%for a in product.getAverageRating()[0]..4%}
-                <span class="glyphicon glyphicon-star-empty"></span>
-                {%endfor%}
-                ({{product.getAverageRating()[1]}})
-                {%else%}
-                [<span class="glyphicon glyphicon-star-empty"></span> not rated yet]
-            {%endif%}
+        <div style="text-align:center">
+         {% include 'ZeteqMarketBundle:Market:_rating.html.twig' %}
         </div>
         <div style="text-align:center"><a href="{{path('cart_add_item',{'product_slug':product.getSlug(),'quantity':1,'store_slug':product.store.slug})}}" class="btn btn-primary ajax_link_cart_add" role="button">Buy</a> 
         </div>

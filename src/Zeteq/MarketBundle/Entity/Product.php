@@ -252,26 +252,33 @@ class Product {
     /////////image uploading end
 
     public function getAverageRating() {
+        $avg= array();
         if ($this->getProductRatings()->count() == 0) {
-            return 0;
+            $avg[0] = $avg[1]=0;
+            return $avg;
         }
         $var = 0;
         $count = 0;
         foreach ($this->getProductRatings() as $value) {
-            if ($value->getEnabled() == TRUE) {
+            if ($value->getEnabled() == true) {
                 $var = $var + $value->getRating();
                 $count++;
             }
         }
-        if ($count < 0) {
+        if ($count > 0) {
             $avg[0] = $var / $count;
             $avg[1] = $count;
             return $avg;
         } else {
-            return 0;
+            $avg[0] = $avg[1]=0;
+            return $avg;
         }
     }
 
+    public function getCeilRating() {
+       $var = $this->getAverageRating();
+        return ceil($var[0]);
+    }
     public function hasHalfStar() {
         $var = $this->getAverageRating();
         if (ceil($var[0]) != $var[0]) {

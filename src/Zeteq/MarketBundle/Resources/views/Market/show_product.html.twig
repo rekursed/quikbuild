@@ -44,7 +44,6 @@
             </a>
         </div>
         <div>
-            <a class="btn btn-danger ajax_link" href="{{path('add_to_favorite_item',{'slug':product.slug})}}">Add to Favorite</a>
         </div>
         <div class=""><h5>More Images</h5></div>
         <div class="row">    
@@ -68,58 +67,81 @@
 
 
     <div class="col-md-8"><h2>{{ product.name }}</h2>
-        <div class="well well-sm">
 
-            <div class="fb-like" data-href="http://{{web}}/product/{{product.getSlug()}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-
-            <a href="//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.flickr.com%2Fphotos%2Fkentbrew%2F6851755809%2F&media=http%3A%2F%2Ffarm8.staticflickr.com%2F7027%2F6851755809_df5b2051c9_z.jpg&description={{product.getName() | url_encode() }}" data-pin-do="buttonPin" data-pin-config="beside"><img src="http://{{web}}{{asset(product.getWebPath() )  }}" /></a>
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-            <script>!function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-                    if (!d.getElementById(id)) {
-                        js = d.createElement(s);
-                        js.id = id;
-                        js.src = p + '://platform.twitter.com/widgets.js';
-                        fjs.parentNode.insertBefore(js, fjs);
-                    }
-                }(document, 'script', 'twitter-wjs');</script>   
+{% include 'ZeteqMarketBundle:Market:_rating.html.twig' %}
+        <a id="review" data-toggle="tab" href="#rating"> Read all {{product.getAverageRating()[1]}} reviews 
+        </a>
+        |
+        <a id="review-write" data-toggle="tab" href="#rating"> Write a review 
+        </a>
+        <hr/>
 
 
-            <!-- Place this tag where you want the +1 button to render. -->
-            <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div>
-
-            <!-- Place this tag after the last +1 button tag. -->
-            <script type="text/javascript">
-                (function() {
-                    var po = document.createElement('script');
-                    po.type = 'text/javascript';
-                    po.async = true;
-                    po.src = 'https://apis.google.com/js/platform.js';
-                    var s = document.getElementsByTagName('script')[0];
-                    s.parentNode.insertBefore(po, s);
-                })();
-            </script>
-
-        </div>     
         <div>{{product.getDescription()}}</div>
-        <div><h4>Price: TK. {{product.getPrice()}} </h4></div>
-        <div>
-            {%if product.getAverageRating()[0] is defined%}
-                {%for a in 1..product.getAverageRating()[0]%}
-                <span class="glyphicon glyphicon-star"></span>
-                {%endfor%}
-                {%for a in product.getAverageRating()[0]..4%}
-                <span class="glyphicon glyphicon-star-empty"></span>
-                {%endfor%}
-                ({{product.getAverageRating()[1]}})
-            {%endif%}
+        <div class="row">
+            <div class=" col-md-8">
+
+            </div>
+            <div class=" col-md-1">
+
+            </div>
+            <div class=" col-md-3">
+                <div class="row">
+                    <h2>{{service.getCurrencySymbol()}} {{product.getPrice()}} </h2>
+                </div>
+                <div class="row">
+                    {#<div class="col-md-6">Quantity: </div> 
+                    <div class="col-md-6" > <input class="form-control" value="1" type="text"> </div>#}
+
+                    {#{%if fav is defined%}
+                    <a href="{{path('favorite_item_delete',{'id':fav})}}" class="btn btn-danger ajax_link" role="button"><i class="fa fa-chain-broken"></i>Unfavorite</a> 
+                    {%endif%}#}
+                </div>
+                <div class="row">
+                    <a class="btn btn-warning ajax_link_cart_add pull-right"  href="{{path('cart_add_item',{'store_slug':product.getStore().getSlug(),'product_slug':product.getSlug(),'quantity':1})}}"  role="button"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a> 
+                </div>
+            </div>
         </div>
+        <hr/>
+        <div class="row">
+            <div class=" col-md-12">
+                <div class="">
+                    <a class="btn btn-sm btn-primary ajax_link pull-right" href="{{path('add_to_favorite_item',{'slug':product.slug})}}"><i class=" fa fa-heart"></i> Add to Favorite</a>
 
 
+                    <div class="fb-like" data-href="http://{{web}}/product/{{product.getSlug()}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
 
 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                    <script>!function(d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                            if (!d.getElementById(id)) {
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = p + '://platform.twitter.com/widgets.js';
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }
+                        }(document, 'script', 'twitter-wjs');</script>   
 
+
+                    <!-- Place this tag where you want the +1 button to render. -->
+                    <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div>
+
+                    <!-- Place this tag after the last +1 button tag. -->
+                    <script type="text/javascript">
+                        (function() {
+                            var po = document.createElement('script');
+                            po.type = 'text/javascript';
+                            po.async = true;
+                            po.src = 'https://apis.google.com/js/platform.js';
+                            var s = document.getElementsByTagName('script')[0];
+                            s.parentNode.insertBefore(po, s);
+                        })();
+                    </script>
+
+                </div>     
+            </div>            
+        </div>
     </div>
 </div>
 <div class="row">
@@ -127,20 +149,10 @@
         <div class="bs-example bs-example-tabs">
             <ul class="nav nav-tabs" id="myTab">
                 <li class="active"><a data-toggle="tab" href="#info">Additional info</a></li>
-                <li><a data-toggle="tab" href="#rating">
-                    {%if product.getAverageRating()[0] is defined%}
-                      {%for a in 1..product.getAverageRating()[0]%}
-                        <span class="glyphicon glyphicon-star"></span>
-                        {%endfor%}
-                        {%for a in product.getAverageRating()[0]..4%}
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                        {%endfor%}
-                        ({{product.getAverageRating()[1]}})
-                        {%else%}
-                        <span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span>
-                {%endif%}
+                <li><a data-toggle="tab" href="#rating">                       
+                    {% include 'ZeteqMarketBundle:Market:_rating.html.twig' %}
                     </a></li>
-                <li class="active"><a data-toggle="tab" href="#ship">Shipping & policies</a></li>
+                <li class=""><a data-toggle="tab" href="#ship">Shipping & policies</a></li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div id="info" class="tab-pane fade in active">
@@ -216,7 +228,7 @@
                             <input class='btn btn-default' type="submit" value="Submit"/>
                         </form>
                     </div>
-                    <div>
+                    <div id="all-rating">
                             {%for rating in product.getEnabledProductRatings()%}
                         <div class="row">
 
@@ -275,94 +287,142 @@
         </div>
     </div>
     <div class="col-sm-6">
-        <div class="bs-example bs-example-tabs">
-            <ul class="nav nav-tabs" id="myTab">
-                <li class="active"><a data-toggle="tab" href="#home">Related Products</a></li>
+        <div class="well well-cstm">
+            <div class="media">
+                <a class="pull-left" href="#">                    
+                    <img id="store_profile_image" class="img-responsive  img-thumbnail media-object" style=" max-height: 90px"  src="{{asset(store.getProfileImageWebPath()  )  }}"/>
+                </a>
+                <div class="media-body">
+                {%if is_admin%} 
+                    <a style="margin-bottom:4px;" class="pull-right badge " href="{{path('store_admin_edit',{'id':store.getId()})}}"><i class="fa fa-plus"></i>update info</a> <br clear="all"/> 
+                {% endif%} 
+                    <h4 class="media-heading">{{store.getStoreName()}}</h4>
+                    <div>{% if store.getAddress() != ""%}{{store.getAddress}}{% endif %}</div>
 
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div id="home" class="tab-pane fade in active"> 
-                    <div class="row">
+                    {% if store.getEmail() != ""%}<h4 style="font-size: 16px;"> email: {{store.getEmail()}} </h4>{% endif %}
+                    {% if store.getPhone() != ""%}<h4 style="font-size: 16px;"> phone: {{store.getPhone()}} </h4> {% endif %}
+
+                    {%if store.getFacebookPage() != "" %}<a href="{{store.getFacebookPage()}}"><i class="icon-facebook"></i></a>{% endif %}
+                    {%if store.getTwitter() != "" %}<a href="{{store.getTwitter()}}"><i class="icon-twitter"></i></a>{% endif %}
+                    {%if store.getGooglePlus() != "" %}<a href="{{store.getGooglePlus()}}"><i class="icon-google-plus-sign"></i></a>{% endif %}
+                    {%if store.getWebAddress() != "" %}<a href="{{store.getWebAddress()}}"><i class="icon-globe"></i></a>{% endif %}
+
+
+                    </li>
+                    </ul>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <a class="btn btn-primary ajax_link" href="{{path('add_to_favorite_store',{'slug':store.slug})}}"><i class=" fa fa-heart"></i> Favorite Store</a>
+
+            </div>
+            <hr/>
+            <div class="bs-example bs-example-tabs">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a data-toggle="tab" href="#home">Related Products</a></li>
+
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div id="home" class="tab-pane fade in active"> 
+                        <div class="row">
                     {%for var in product.getRelatedProducts()%}
 
-                        <div class="col-sm-6 ">
-                            <a href="{{path('product_show',{'slug':var.slug})}}">
-                                <div class="thumbnail">
-                                    <img data-src="holder.js/300x200" alt="..." src="{{asset(var.getWebPath())}}">
-                                    <div class="caption">
-                                        <h3>{{var.name}}</h3>
-                                        <p><div>
-                                            <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span> (45) [rating is commented here]
-                                        {#{%for a in 1..var.getAverageRating()[0]%}
-                                        <span class="glyphicon glyphicon-star"></span>
-                                        {%endfor%}
-                                        {%for a in var.getAverageRating()[0]..4%}
-                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                        {%endfor%}
-                                        ({{var.getAverageRating()[1]}})#}
-                                        </div></p>
+                            <div class="col-sm-6 ">
+                                <a href="{{path('product_show',{'slug':var.slug})}}">
+                                    <div class="thumbnail">
+                                        <img data-src="holder.js/300x200" alt="..." src="{{asset(var.getWebPath())}}">
+                                        <div class="caption">
+                                            <h3>{{var.name}}</h3>
+                                            <p><div>
+                                            {%if product.getAverageRating()[1] > 0%}
+                                                  {%for a in 0..product.getAverageRating()[0]-1%}
+                                                <span class="glyphicon glyphicon-star"></span>
+                                                    {%endfor%}
+                                                    {%for a in product.getAverageRating()[0]-1..4%}
+                                                <span class="glyphicon glyphicon-star-empty"></span>
+                                                    {%endfor%}
+                                                ({{product.getAverageRating()[1]}})
+                                                    {%else%}
+                                                <span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span><span class="glyphicon glyphicon-star-empty"></span> (0)
+                                            {%endif%}
+                                            </div></p>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
 
                         {%if loop.index %2 == 0 or loop.last%}
-                    </div><div class="row">
+                        </div><div class="row">
                         {%endif%}
 
                     {%endfor%}
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Product Images</h4>
-            </div>
-            <div class="modal-body">
-
-                <div data-ride="carousel" class="carousel slide" id="carousel-example-generic">
-                    <ol class="carousel-indicators">
-                        <li class="" data-slide-to="0" data-target="#carousel-example-generic"></li>
-                        <li data-slide-to="1" data-target="#carousel-example-generic" class=""></li>
-                        <li data-slide-to="2" data-target="#carousel-example-generic" class="active"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img style="max-width:80%;max-height: 400px;margin:auto;"  class="img-responsive"  src="{{asset(product.getWebPath() )  }}"/>
-                        </div>
-                {%for ai in product.getProductImages()%}
-                        <div class="item ">
-                            <img  class="img-responsive" style="max-width:80%;max-height: 400px;margin:auto;"  src="{{asset(ai.getWebPath() )  }}"/>
-                        </div>
-                 {% endfor%}
-                    </div>
-                    <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
-                        <i class="fa fa-chevron-circle-left"></i> 
-                    </a>
-                    <a data-slide="next" href="#carousel-example-generic" class="right carousel-control">
-                        <i class="fa fa-chevron-circle-right"></i> 
-                    </a>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Product Images</h4>
                 </div>
+                <div class="modal-body">
+
+                    <div data-ride="carousel" class="carousel slide" id="carousel-example-generic">
+                        <ol class="carousel-indicators">
+                            <li class="" data-slide-to="0" data-target="#carousel-example-generic"></li>
+                            <li data-slide-to="1" data-target="#carousel-example-generic" class=""></li>
+                            <li data-slide-to="2" data-target="#carousel-example-generic" class="active"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img style="max-width:80%;max-height: 400px;margin:auto;"  class="img-responsive"  src="{{asset(product.getWebPath() )  }}"/>
+                            </div>
+                {%for ai in product.getProductImages()%}
+                            <div class="item ">
+                                <img  class="img-responsive" style="max-width:80%;max-height: 400px;margin:auto;"  src="{{asset(ai.getWebPath() )  }}"/>
+                            </div>
+                 {% endfor%}
+                        </div>
+                        <a data-slide="prev" href="#carousel-example-generic" class="left carousel-control">
+                            <i class="fa fa-chevron-circle-left"></i> 
+                        </a>
+                        <a data-slide="next" href="#carousel-example-generic" class="right carousel-control">
+                            <i class="fa fa-chevron-circle-right"></i> 
+                        </a>
+                    </div>
 
 
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>               
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>               
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
 
 
+    <script>
+        $('#review-write').click(function() {
+            var scrollPos = $('#prForm').offset().top;
+            $(window).scrollTop(scrollPos);
+            $('#prForm').foucs();
+            $('[href="#rating"]').addClass('active');
 
+        });
+        $('#review').click(function() {
+            var scrollPos = $('#all-rating').offset().top;
+            $(window).scrollTop(scrollPos);
+            $('#all-rating').foucs();
+
+        });
+    </script>
 
 
 
