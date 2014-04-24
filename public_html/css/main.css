@@ -83,7 +83,7 @@ body{
 }
 
 #cat_nav {
-    margin-top: 0px;
+    margin-top: 12px;
 }
 
 #top_nav{
@@ -569,10 +569,23 @@ end override bootstrap*/
 }
 
 .carousel-control.left {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 100%);
-  background-repeat: repeat-x;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.2) 0px, rgba(0, 0, 0, 0) 20%);
+    background-repeat: repeat-x;
 }
 .carousel-control.right {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0) 100%);
-  background-repeat: repeat-x;
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.2) 0px, rgba(0, 0, 0, 0) 20%);
+    background-repeat: repeat-x;
+}
+
+#overlay {
+    height:100px; 
+    padding:20px;
+    position:absolute;
+    bottom:0px;
+    background:#191919;
+    color:white;
+    margin: auto;
+    width: 100%;
+    text-overflow: hidden;
+
 }

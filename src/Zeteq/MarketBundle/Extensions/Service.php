@@ -37,7 +37,7 @@ class Service {
 
     public function getCurrencySymbol() {
 
-        return 'Tk.';
+        return '£';
     }
 
     public function getCarts() {

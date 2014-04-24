@@ -152,22 +152,28 @@
                 <ul id="tn_right_menu" class="nav navbar-nav pull-right" style=" margin-top: 5px;">
                    {# <li><a href="{{path('cart_index')}}"><span class="glyphicon glyphicon-shopping-cart"></span>Cart({{service.getCarts()|length}})</a></li>
 #}
-                    <li style="margin-right:40px"> 
-                        <form role="search" method="get" action="{{path('search')}}">
+                    <li style="margin-right:40px; width: 400px"> 
+                        <form  role="search" method="get" action="{{path('search')}}">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="input-group">
                                         <input name="search" type="text" class="form-control" placeholder="What are you looking for?">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" type="submit"> <i class='fa fa-search'></i> </button>
+                                            <button  class="form-control" class="btn btn-default" type="submit"> <i class='fa fa-search'></i> </button>
                                         </span>
                                     </div><!-- /input-group -->
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <input checked="checked" type="radio" name="searchby" value="product">Products
-                                    <input type="radio" name="searchby" value="store">Stores
+                                <div class="col-md-12" style=" margin: auto;">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <input class="form-control" checked="checked" type="radio" name="searchby" value="product"> Products
+                                        </span>
+                                        <span class="input-group-addon">
+                                            <input  class="form-control"  type="radio" name="searchby" value="store"> Stores
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -220,9 +226,7 @@
 
             </nav>
         </div>
-        <style>
 
-        </style>
 
 
 
