@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-md-10">   
+        <div style="padding-top:10px;width: 100%;margin: 0 auto">
+            <a  data-slide-to="0" data-toggle="modal" data-target="#myModal" href="#">   
+                <img id="main_img" class="img-responsive img-thumbnail"  src="{{asset(product.getWebPath() )  }}"/>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-2">    
+        <div class="row">
+            <a class="side-thumb"  data-slide-to="0" data-toggle="modal" data-target="#myModal" href="#">   
+                <img id class="img-responsive img-thumbnail" style="width:100%" src="{{asset(product.getWebPath() )  }}"/>
+            </a>
+        </div>
+{%for ai in product.getProductImages()%}
+
+        <div class="row">
+            <a class="side-thumb"  data-slide-to="{{loop.index}}" data-toggle="modal" data-target="#myModal" href="#">   
+                <img class="img-responsive img-thumbnail" style="width:100%"  src="{{asset(ai.getWebPath() )  }}"/>
+            </a>
+        </div>
+
+ {% endfor%}
+    </div> 
+</div>
+
+<script>
+    $('.side-thumb').hover( function(){
+       var src= $(this).children('img').attr('src');
+       $('#main_img').attr('src',src);
+    });
+
+</script>
