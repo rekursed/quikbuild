@@ -1,0 +1,101 @@
+<div class="col-md-3">
+    {%if is_admin%} 
+    <ul class="list-group">
+        <li class="list-group-item active">Store Administration </li>
+        <li class="list-group-item">   <a style="margin-bottom:4px;" class=" " href="{{path('storeadmin_page_new',{'store_id':store.getId()})}}"><i class="fa fa-plus"></i>new page</a></li>   
+        <li class="list-group-item">   <a style="margin-bottom:4px;" class=" " href="{{path('storeproductcategory_new',{'store_id':store.getId()})}}"><i class="fa fa-plus"></i>new category</a></li>
+        <li class="list-group-item">   <a style="margin-bottom:4px;" class=" " href="{{path('storeadmin_product_new',{'store_id':store.getId()})}}"><i class="fa fa-plus"></i>new product</a></li>
+        <li class="list-group-item">   <a style="margin-bottom:4px;" class=" " href="{{path('store_admin_edit',{'id':store.id, 'store_id':store.getId()})}}"><i class="fa fa-plus"></i>edit store info</a></li>
+    </ul>  
+    {% endif%}
+
+
+    <ul class="list-group">
+        <li class="list-group-item active"> Categories {%if is_admin%} <a style="margin-bottom:4px;" class="pull-right badge " href="{{path('storeproductcategory',{'store_id':store.getId()})}}"><i class="fa fa-plus"></i>add new</a>  {% endif%}</li>
+    {% for spc in store.getEnabledStoreProductCategories()%}
+        <li class="list-group-item">            
+            <a href="{{path('storeproductcategory_show',{'slug':spc.getSlug(),'store_id':store.id})}}">{{spc.getName()}}</a>  
+            <small class=" pull-right">{{spc.products | length}} </small>
+        </li>
+
+    {%endfor%}
+    </ul>
+
+
+    {#<ul class="list-group">
+        <li class="list-group-item active"> Pages  {%if is_admin%} <a style="margin-bottom:4px;" class="pull-right badge " href="{{path('storeadmin_page_new',{'store_id':store.getId()})}}"><i class="fa fa-plus"></i>add new</a>  {% endif%} </li>
+    {% for page in store.getEnabledPages()%}
+
+        <li class="list-group-item">            <a href="{{path('page_show',{'slug':page.getSlug(),'store_slug':store.slug})}}">{{page.getName()}}</a>    </li>
+
+        {%endfor%}
+    </ul>#}
+
+    <ul class="list-group">
+        <li class="list-group-item active"> Store Information  {%if is_admin%} <a style="margin-bottom:4px;" class="pull-right badge " href="{{ path('store_admin_edit', { 'id': store.id })}}"><i class="fa fa-edit"></i>Edit</a>  {% endif%} </li>
+
+
+        <li class="list-group-item">            
+            <a href="{{path('store_info_show',{'slug':store.slug})}}">About Us</a>   
+        </li>
+        <li class="list-group-item">            
+            <a href="{{path('store_info_show',{'slug':store.slug})}}">Payments</a>   
+        </li>
+        <li class="list-group-item">            
+            <a href="{{path('store_info_show',{'slug':store.slug})}}">Shipping</a>   
+        </li>
+        <li class="list-group-item">            
+            <a href="{{path('store_info_show',{'slug':store.slug})}}">Returnss & Refunds</a>   
+        </li>
+        <li class="list-group-item">            
+            <a href="{{path('store_info_show',{'slug':store.slug})}}">FAQ's</a>   
+        </li>
+
+    </ul>
+
+    <ul class="list-group">
+        <li class="list-group-item active"> Actions </li>
+
+
+        <li class="list-group-item">            
+            <a class="btn btn-primary ajax_link" href="{{path('add_to_favorite_store',{'slug':store.slug})}}"><i class=" fa fa-heart"></i> Favorite Store</a>
+        </li>
+        <li class="list-group-item">
+            <div class="fb-like" data-href="{{web}}{{app.request.getRequestURI()}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+            <script>!function(d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = p + '://platform.twitter.com/widgets.js';
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, 'script', 'twitter-wjs');</script>
+        </li>
+        <li class="list-group-item">            
+            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>  
+        </li>        
+
+
+    </ul>
+
+    <ul class="list-group">
+        <li class="list-group-item active"> Connect With Us </li>
+
+
+        <li class="list-group-item">
+
+            {%if store.getFacebookPage() != "" %} <a href="{{store.getFacebookPage()}}"><i class="fa fa-facebook-square fa-2x"></i></a> {% endif %}
+
+                    {%if store.getTwitter() != "" %}<a href="{{store.getTwitter()}}"><i class="fa fa-twitter-square fa-2x"></i></a>{% endif %}
+                    {%if store.getGooglePlus() != "" %}<a href="{{store.getGooglePlus()}}"><i class="fa fa-google-plus-square fa-2x"></i></a>{% endif %}
+                    {%if store.getWebAddress() != "" %}<a href="{{store.getWebAddress()}}"><i class="fa fa-globe fa-2x"></i></a>{% endif %}
+        </li>
+
+
+
+    </ul>
+
+
+
+</div> 

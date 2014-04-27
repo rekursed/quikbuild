@@ -1,0 +1,73 @@
+{% extends 'ZeteqMarketBundle:Market:store_layout.html.twig' %}
+
+
+{% block title %}
+{{store.getStoreName()}} -- QuikBuild
+{% endblock %}
+{% block content %}
+
+<div class=" ">
+
+
+    <div class="row">   
+        <div class="" >
+            <h4>About Us</h4>
+            <p>{{store.getAboutUs()}}</p>
+
+        </div>
+    </div>
+    <hr/>
+
+
+    <div class="row">   
+        <div class="">
+            <h4>Payments</h4>
+            <p>{{store.getPayments()}}</p>
+
+        </div>
+    </div> 
+    <hr/>
+
+    <div class="row">   
+        <div class="">
+            <h4>Shipping</h4>
+            <p>{{store.getShipping()}}</p>
+
+        </div>
+    </div> 
+    <hr/>
+
+    <div class="row">   
+        <div class="">
+            <h4>Returns & Refunds</h4>
+            <p>{{store.getReturnsRefunds()}}</p>
+
+        </div>
+    </div> 
+    <hr/>
+
+    <div class="row">   
+        <div class="">
+            <h4>About Us</h4>
+            <p>{{store.getAboutUs()}}</p>
+
+        </div>
+    </div> 
+
+    <hr/>
+    <div class="row">   
+        <div class="">
+            <h4>Additional Policies</h4>
+            <p>{{store.getAdditionalPolicies()}}</p>
+
+        </div>
+    </div> 
+    <hr/>
+</div> 
+
+
+
+
+
+
+{% endblock %}

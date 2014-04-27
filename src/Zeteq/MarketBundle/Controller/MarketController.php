@@ -194,6 +194,28 @@ class MarketController extends Controller {
                     'is_admin' => $is_admin,
         ));
     }
+    
+    public function show_store_infoAction($slug) {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('ZeteqMarketBundle:Store')->findOneBySlug($slug);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Store entity.');
+        }
+
+        $is_admin = false;
+        $user = $this->get('security.context')->getToken()->getUser();
+        if ($entity->getUser() == $user) {
+            $is_admin = true;
+        }
+
+
+        return $this->render('ZeteqMarketBundle:Market:show_store_info.html.twig', array(
+                    'store' => $entity,
+                    'is_admin' => $is_admin,
+        ));
+    }
 
     public function show_storeAction($slug) {
         $em = $this->getDoctrine()->getManager();

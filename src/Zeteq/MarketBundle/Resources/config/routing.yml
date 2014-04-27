@@ -7,6 +7,10 @@ admin:
 store_show:
     pattern:  /store/{slug}
     defaults: { _controller: "ZeteqMarketBundle:Market:show_store" }
+
+store_info_show:
+    pattern:  /store/info/{slug}
+    defaults: { _controller: "ZeteqMarketBundle:Market:show_store_info" }
 product_show:
     pattern:  /product/{slug}
     defaults: { _controller: "ZeteqMarketBundle:Market:show_product" }

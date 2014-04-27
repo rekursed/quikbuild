@@ -17,7 +17,8 @@
 {% block twitter_description %} {{product.getMetaDescription()}}   {% endblock %} 
 {% block twitter_image %} http://{{web}}{{asset(product.getWebPath() )  }} {% endblock %} 
 
-
+{% block store_content %}
+<div class="col-md-12">
 {% block content %}
               {% set cp =  path(app.request.attributes.get('_route'), 
         app.request.attributes.get('_route_params')) %}   
@@ -91,7 +92,7 @@
                     <div class="fb-like" data-href="http://{{web}}/product/{{product.getSlug()}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
 
 
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                    &nbsp;&nbsp;  <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
                     <script>!function(d, s, id) {
                             var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
                             if (!d.getElementById(id)) {
@@ -407,3 +408,5 @@
 
 
 {% endblock %}
+    </div>
+{%endblock%}
